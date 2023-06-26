@@ -63,25 +63,25 @@
     <div class="col-lg-8 container">
         <div class="row row-cols-4 d-flex justify-content-center align-items-center h-100">
             <div class="col mt-4 mb-4">
-                <a class="text-decoration-none" href="https://github.com/enfyna">
+                <a class="text-decoration-none" id="link_1">
                     <div class="card p-2 bg-primary">
                         <div class="card-header">
-                            <img class="card-img-top p-2" src="images/github.png" alt="">
+                            <img class="card-img-top p-2" id="img_1">
                         </div>
-                        <h7 class="card-title text-center text-white fw-bold text-nowrap ">
-                            GitHub
+                        <h7 class="card-title text-center text-white fw-bold text-nowrap" id="name_1">
+                            -
                         </h7>
                     </div>
                 </a>
             </div>
             <div class="col mt-4 mb-4">
-                <a class="text-decoration-none" href="https://chat.openai.com/">
+                <a class="text-decoration-none" id="link_2">
                     <div class="card p-2 bg-success">
                         <div class="card-header">
-                            <img class="card-img-top rounded-circle p-2" src="images/chatgpt.png" alt="">
+                            <img class="card-img-top rounded-circle p-2" id="img_2">
                         </div>
-                        <h7 class="card-title text-center text-white fw-bold text-nowrap">
-                            ChatGPT
+                        <h7 class="card-title text-center text-white fw-bold text-nowrap" id="name_2">
+                            -
                         </h7>
                     </div>
                 </a>
@@ -173,7 +173,170 @@
         </svg> Settings
     </h1>
 
-    <div class="container-fluid px-4">
+    <div class="container-fluid">
+        
+        <hr class="border-2 border-primary">
+        <div class="row justify-content-between">
+            <div class="col-lg-5 bg-primary rounded p-1 m-1">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-4">
+                        <div class="input-group">
+                            <span class="input-group-text" id="input-group">Link</span>
+                            <input type="text" class="form-control" id="select_link_1">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group">
+                            <span class="input-group-text" id="input-group">Name</span>
+                            <input type="text" class="form-control" id="select_name_1">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <input class="form-control" type="file" id="select_img_1"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 bg-success rounded p-1 m-1">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-4">
+                        <div class="input-group">
+                            <span class="input-group-text" id="input-group">Link</span>
+                            <input type="text" class="form-control" id="select_link_2">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group">
+                            <span class="input-group-text" id="input-group">Name</span>
+                            <input type="text" class="form-control" id="select_name_2">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <input class="form-control" type="file" id="select_img_2"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-between">
+            <div class="col-lg-5 bg-danger rounded p-1 m-1">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-4">
+                        <div class="input-group">
+                            <span class="input-group-text" id="input-group">Link</span>
+                            <input type="text" class="form-control" id="select_link_3">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group">
+                            <span class="input-group-text" id="input-group">Name</span>
+                            <input type="text" class="form-control" id="select_name_3">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <input class="form-control" type="file" id="select_img_3"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 bg-warning rounded p-1 m-1">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-4">
+                        <div class="input-group">
+                            <span class="input-group-text" id="input-group">Link</span>
+                            <input type="text" class="form-control" id="select_link_4">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group">
+                            <span class="input-group-text" id="input-group">Name</span>
+                            <input type="text" class="form-control" id="select_name_4">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <input class="form-control" type="file" id="select_img_4"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-between">
+            <div class="col-lg-5 bg-warning rounded p-1 m-1">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-4">
+                        <div class="input-group">
+                            <span class="input-group-text" id="input-group">Link</span>
+                            <input type="text" class="form-control" id="select_link_5">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group">
+                            <span class="input-group-text" id="input-group">Name</span>
+                            <input type="text" class="form-control" id="select_name_5">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <input class="form-control" type="file" id="select_img_5"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 bg-danger rounded p-1 m-1">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-4">
+                        <div class="input-group">
+                            <span class="input-group-text" id="input-group">Link</span>
+                            <input type="text" class="form-control" id="select_link_6">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group">
+                            <span class="input-group-text" id="input-group">Name</span>
+                            <input type="text" class="form-control" id="select_name_6">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <input class="form-control" type="file" id="select_img_6"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-between">
+            <div class="col-lg-5 bg-success rounded p-1 m-1">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-4">
+                        <div class="input-group">
+                            <span class="input-group-text" id="input-group">Link</span>
+                            <input type="text" class="form-control" id="select_link_7">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group">
+                            <span class="input-group-text" id="input-group">Name</span>
+                            <input type="text" class="form-control" id="select_name_7">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <input class="form-control" type="file" id="select_img_7"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 bg-primary rounded p-1 m-1">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-4">
+                        <div class="input-group">
+                            <span class="input-group-text" id="input-group">Link</span>
+                            <input type="text" class="form-control" id="select_link_8">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group">
+                            <span class="input-group-text" id="input-group">Name</span>
+                            <input type="text" class="form-control" id="select_name_8">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <input class="form-control" type="file" id="select_img_8"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="border-2 border-primary">
         <div class="row bg-primary rounded mt-4 mb-1">
             <div class="col">
                 <div class="row d-flex justify-content-center align-items-center">
@@ -237,148 +400,11 @@
             </div>
         </div>
         <hr class="border-2 border-primary">
-        <div class="row justify-content-between">
-            <div class="col-lg-5 bg-primary rounded p-1 m-1">
-                <div class="row d-flex justify-content-center align-items-center">
-                    <div class="col-7">
-                        <div class="input-group">
-                            <span class="input-group-text" id="input-group">Link</span>
-                            <input type="text" class="form-control" aria-label="Link_1">
-                        </div>
-                    </div>
-                    <div class="col-5">
-                        <div class="input-group">
-                            <span class="input-group-text" id="input-group">Name</span>
-                            <input type="text" class="form-control" aria-label="Link_1">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-5 bg-success rounded p-1 m-1">
-                <div class="row d-flex justify-content-center align-items-center">
-                    <div class="col-7">
-                        <div class="input-group">
-                            <span class="input-group-text" id="input-group">Link</span>
-                            <input type="text" class="form-control" aria-label="Link_1">
-                        </div>
-                    </div>
-                    <div class="col-5">
-                        <div class="input-group">
-                            <span class="input-group-text" id="input-group">Name</span>
-                            <input type="text" class="form-control" aria-label="Link_1">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-between">
-            <div class="col-lg-5 bg-danger rounded p-1 m-1">
-                <div class="row d-flex justify-content-center align-items-center">
-                    <div class="col-7">
-                        <div class="input-group">
-                            <span class="input-group-text" id="input-group">Link</span>
-                            <input type="text" class="form-control" aria-label="Link_1">
-                        </div>
-                    </div>
-                    <div class="col-5">
-                        <div class="input-group">
-                            <span class="input-group-text" id="input-group">Name</span>
-                            <input type="text" class="form-control" aria-label="Link_1">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-5 bg-warning rounded p-1 m-1">
-                <div class="row d-flex justify-content-center align-items-center">
-                    <div class="col-7">
-                        <div class="input-group">
-                            <span class="input-group-text" id="input-group">Link</span>
-                            <input type="text" class="form-control" aria-label="Link_1">
-                        </div>
-                    </div>
-                    <div class="col-5">
-                        <div class="input-group">
-                            <span class="input-group-text" id="input-group">Name</span>
-                            <input type="text" class="form-control" aria-label="Link_1">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-between">
-            <div class="col-lg-5 bg-warning rounded p-1 m-1">
-                <div class="row d-flex justify-content-center align-items-center">
-                    <div class="col-7">
-                        <div class="input-group">
-                            <span class="input-group-text" id="input-group">Link</span>
-                            <input type="text" class="form-control" aria-label="Link_1">
-                        </div>
-                    </div>
-                    <div class="col-5">
-                        <div class="input-group">
-                            <span class="input-group-text" id="input-group">Name</span>
-                            <input type="text" class="form-control" aria-label="Link_1">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-5 bg-danger rounded p-1 m-1">
-                <div class="row d-flex justify-content-center align-items-center">
-                    <div class="col-7">
-                        <div class="input-group">
-                            <span class="input-group-text" id="input-group">Link</span>
-                            <input type="text" class="form-control" aria-label="Link_1">
-                        </div>
-                    </div>
-                    <div class="col-5">
-                        <div class="input-group">
-                            <span class="input-group-text" id="input-group">Name</span>
-                            <input type="text" class="form-control" aria-label="Link_1">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-between">
-            <div class="col-lg-5 bg-success rounded p-1 m-1">
-                <div class="row d-flex justify-content-center align-items-center">
-                    <div class="col-7">
-                        <div class="input-group">
-                            <span class="input-group-text" id="input-group">Link</span>
-                            <input type="text" class="form-control" aria-label="Link_1">
-                        </div>
-                    </div>
-                    <div class="col-5">
-                        <div class="input-group">
-                            <span class="input-group-text" id="input-group">Name</span>
-                            <input type="text" class="form-control" aria-label="Link_1">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-5 bg-primary rounded p-1 m-1">
-                <div class="row d-flex justify-content-center align-items-center">
-                    <div class="col-7">
-                        <div class="input-group">
-                            <span class="input-group-text" id="input-group">Link</span>
-                            <input type="text" class="form-control" aria-label="Link_1">
-                        </div>
-                    </div>
-                    <div class="col-5">
-                        <div class="input-group">
-                            <span class="input-group-text" id="input-group">Name</span>
-                            <input type="text" class="form-control" aria-label="Link_1">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr class="border-2 border-primary">
         <button type="submit" class="btn btn-primary" onclick="save()">Save</button>
     </div>
-
-    </div>
-    </div>
+    
+</div>
+</div>
 </div>
 
 <nav class="navbar fixed-bottom navbar-dark">

@@ -11,11 +11,12 @@ const twelve_hours_in_ms = 43200000;
 var did_12hours_pass = false;
 
 function ready(){
+    configure_links();
     load_variables();
-    if(did_12hours_pass){
+    if(did_12hours_pass && API_KEY != null){
         get_updated_rates();
     }
-    else{
+    else if (API_KEY != null){
         update_currency_html_elements();
     };
     config_settings_page();
@@ -65,6 +66,9 @@ function load_variables(){
 }
 
 function get_updated_rates(){
+    if(API_KEY == null){
+        return;
+    }
     var oReq = new XMLHttpRequest();
     oReq.addEventListener("load", update_rates);
     oReq.open("GET", currency_api+"?"+param1+base_currency+"&"+param2+currencies);
@@ -88,6 +92,9 @@ function update_rates(){
 }
 
 function update_currency_html_elements(){
+    if(API_KEY == null){
+        return;
+    }
     var cur_name = "cur_name_";
     var cur_value = "cur_";
     for (let idx = 0; idx < currencies.length; idx++) {
@@ -131,7 +138,7 @@ function save(){
     };
     localStorage.setItem("currencies",JSON.stringify(currencies));
 
-    if(API_KEY != ""){
+    if(API_KEY != null){
         hide_currency_elements(false);
         get_updated_rates();
     }else{
@@ -151,6 +158,50 @@ function config_settings_page(){
 
     var api_key_select = document.getElementById("api_key_select");
     api_key_select.value = API_KEY;
+
+    var links = JSON.parse(localStorage.getItem("link"));
+    var l = "select_link_";
+    var n = "select_name_";
+    var im = "select_img_";
+    for (let i = 1; i <= 2; i++) {
+        var name = links[i]["name"];
+        var link = links[i]["link"]; 
+        var img = links[i]["img"];
+        document.getElementById(l+i).value = link;
+        document.getElementById(n+i).value = name;
+    };
+}
+
+function configure_links(){
+    var links = localStorage.getItem("link");
+    if(links == null){
+        links = {
+            1:{"name":"GitHub","link":"https://github.com/enfyna","img":"images/github.png"},
+            2:{"name":"ChatGPT","link":"https://chat.openai.com/","img":"images/chatgpt.png"},
+            3:{"name":"GitHub","link":"","img":""},
+            4:{"name":"GitHub","link":"","img":""},
+            5:{"name":"GitHub","link":"","img":""},
+            6:{"name":"GitHub","link":"","img":""},
+            7:{"name":"GitHub","link":"","img":""},
+            8:{"name":"GitHub","link":"","img":""},
+        };
+        localStorage.setItem("link",JSON.stringify(links));
+    }
+    else{
+        links = JSON.parse(links);
+    }
+
+    var l = "link_";
+    var n = "name_";
+    var im = "img_";
+    for (let i = 1; i <= 2; i++) {
+        var name = links[i]["name"];
+        var link = links[i]["link"]; 
+        var img = links[i]["img"];
+        document.getElementById(l+i).href = link;
+        document.getElementById(n+i).innerHTML = name;
+        document.getElementById(im+i).src = img;
+    };
 }
 
 function print(foo){
