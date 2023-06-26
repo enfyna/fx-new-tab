@@ -162,12 +162,72 @@
     </div>
 </div>
 
+</div>
+
 <div class="collapse fixed-bottom" id="navbarToggleExternalContent">
     <div class="bg-dark p-4 vh-100">
-        <h5 class="text-white h1">Settings</h5>
-        <span class="bi-search"></span>
+
+    <h1 class="text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+            <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+        </svg> Settings
+    </h1>
+
+    <div class="container-fluid">
+        <div class="row bg-warning rounded mt-4 mb-4">
+            <div class="col">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-lg-5">
+                        <div class="input-group mb-1 mt-1">
+                            <span class="input-group-text" id="input-group">API key</span>
+                            <input type="text" class="form-control" aria-label="API key">
+                        </div>
+                    </div>
+                    <div class="col fw-bold text-center">
+                        Base currency
+                    </div>
+                    <div class="col">
+                        <select class="form-select" aria-label="Select base currency">
+                            <option selected>TRY</option>
+                            <option value="EUR">EUR</option>
+                            <option value="USD">USD</option>
+                            <option value="GBP">GBP</option>
+                            </select>
+                    </div>
+                    <div class="col fw-bold text-center">
+                        Currencies
+                    </div>
+                    <div class="col">
+                        <select class="form-select" aria-label="Select base currency">
+                            <option selected>USD</option>
+                            <option value="EUR">EUR</option>
+                            <option value="USD">TRY</option>
+                            <option value="GBP">GBP</option>
+                            </select>
+                    </div>
+                    <div class="col">
+                        <select class="form-select" aria-label="Select base currency">
+                            <option selected>EUR</option>
+                            <option value="EUR">TRY</option>
+                            <option value="USD">USD</option>
+                            <option value="GBP">GBP</option>
+                            </select>
+                    </div>
+                    <div class="col">
+                        <select class="form-select" aria-label="Select base currency">
+                            <option selected>GBP</option>
+                            <option value="EUR">EUR</option>
+                            <option value="USD">USD</option>
+                            <option value="GBP">TRY</option>
+                            </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
     </div>
 </div>
+
 <nav class="navbar fixed-bottom navbar-dark">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -176,7 +236,6 @@
     </div>
 </nav>
 
-    
 </body>
 
 <!-- Bootstrap JS -->
