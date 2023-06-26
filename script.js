@@ -2,7 +2,7 @@ const usd = document.getElementById("usd");
 const eur = document.getElementById("eur");
 const gbp = document.getElementById("gbp");
 
-var usd_current = 25;
+var usd_current = 40;
 var eur_current = 27;
 var gbp_current = 30;
 
@@ -12,7 +12,7 @@ const param2 = "currencies=USD,EUR,GBP";
 
 function ready(){
     // setInterval(get_rates,60 * 1000);
-    get_rates();
+    // get_rates();
 }
 
 function get_rates(){
@@ -42,12 +42,12 @@ function update_rates(){
     gbp_current = gbp_new;
 }
 
-const card_class = "card text-center text-white fw-bold text-nowrap"
+const card_class = "card p-2 text-center text-white fw-bold text-nowrap"
 function update_color(element, change){
     if(change >= 0){
-        element.parentElement.parentElement.className = card_class + " " + "bg-success";
+        element.parentElement.className = card_class + " " + "bg-success";
     }
     else{
-        element.parentElement.parentElement.className = card_class + " " + "bg-danger";
+        element.parentElement.className = card_class + " " + "bg-danger";
     };
 }

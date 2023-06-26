@@ -1,25 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dark New Tab Page</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-</head>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dark New Tab Page</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    </head>
 
-<body onload="ready()">
+    <body class="bg-dark" onload="ready()">
 
-<div class="container-fluid vh-100 bg-dark">
+    <div class="container-fluid">
 
-<div class="row h-50">
-    <div class="col-lg-4 container">
-        <div class="row row-cols-3 g-20 gy-5 d-flex justify-content-center align-items-center">
-            <div class="col w-100"></div>
-            <div class="col">
-                <div class="card text-center text-white fw-bold text-nowrap bg-primary">
-                    <div class="card-body">
-                        <h5 class="card-title">
+    <div class="row vh-100">
+        <div class="col-lg-4 container">
+            <div class="row row-cols-3 d-flex justify-content-center align-items-center">
+                <div class="col mt-4 mb-4">
+                    <div class="card p-2 text-center text-white fw-bold text-nowrap bg-primary">
+                        <h5 class="card-header">
                             USD
                         </h5>
                         <p class="card-text" id="usd">
@@ -27,11 +25,9 @@
                         </p>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card text-center text-white fw-bold text-nowrap bg-primary">
-                    <div class="card-body">
-                        <h5 class="card-title">
+                <div class="col mt-4 mb-4">
+                    <div class="card p-2 text-center text-white fw-bold text-nowrap bg-primary">
+                        <h5 class="card-header">
                             EUR
                         </h5>
                         <p class="card-text" id="eur">
@@ -39,11 +35,9 @@
                         </p>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card text-center text-white fw-bold text-nowrap bg-primary">
-                    <div class="card-body">
-                        <h5 class="card-title">
+                <div class="col mt-4 mb-4">
+                    <div class="card p-2 text-center text-white fw-bold text-nowrap bg-primary">
+                        <h5 class="card-header">
                             GBP
                         </h5>
                         <p class="card-text" id="gbp"> 
@@ -51,39 +45,129 @@
                         </p>
                     </div>
                 </div>
+                <div class="col w-100 h-auto mt-4 mb-4">
+                    <div class="card p-2 text-center text-white bg-dark">
+                        <div class="card-header">
+                            <h1 class="card-title">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            </h1>
+                        </div>
+                        <div class="card-body">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8 container">
+            <div class="row row-cols-4 d-flex justify-content-center align-items-center h-100">
+                <div class="col mt-4 mb-4">
+                    <a class="text-decoration-none" href="https://github.com/enfyna">
+                        <div class="card p-2 bg-primary">
+                            <div class="card-header">
+                                <img class="card-img-top p-2" src="images/github.png" alt="">
+                            </div>
+                            <h7 class="card-title text-center text-white fw-bold text-nowrap ">
+                                GitHub
+                            </h7>
+                        </div>
+                    </a>
+                </div>
+                <div class="col mt-4 mb-4">
+                    <a class="text-decoration-none" href="https://chat.openai.com/">
+                        <div class="card p-2 bg-success">
+                            <div class="card-header">
+                                <img class="card-img-top p-2" src="images/chatgpt.png" alt="">
+                            </div>
+                            <h7 class="card-title text-center text-white fw-bold text-nowrap">
+                                ChatGPT
+                            </h7>
+                        </div>
+                    </a>
+                </div>
+                <div class="col mt-4 mb-4">
+                    <a class="text-decoration-none" href="http://ekampus.btu.edu.tr">
+                        <div class="card p-2 bg-danger">
+                            <div class="card-header">
+                                <img class="card-img-top p-2" src="images/btu.png" alt="">
+                            </div>
+                            <h7 class="card-title text-center text-white fw-bold text-nowrap ">
+                                Ekampüs
+                            </h7>
+                        </div>
+                    </a>
+                </div>
+                <div class="col mt-4 mb-4">
+                    <a class="text-decoration-none"  href="https://obs.btu.edu.tr/">
+                        <div class="card p-2 bg-warning">
+                            <div class="card-header">
+                                <img class="card-img-top p-2" src="images/btu.png" alt="">
+                            </div>
+                            <h7 class="card-title text-center text-white fw-bold text-nowrap ">
+                                OBS
+                            </h7>
+                        </div>
+                    </a>
+                </div>
+                <div class="col mt-4 mb-4">
+                    <a class="text-decoration-none" href="https://mail.google.com/mail/u/0/#inbox">
+                        <div class="card p-2 bg-warning">
+                            <div class="card-header">
+                                <img class="card-img-top p-2" src="images/gmail.png" alt="">
+                            </div>
+                            <h7 class="card-title text-center text-white fw-bold text-nowrap ">
+                                Gmail
+                            </h7>
+                        </div>
+                    </a>
+                </div>
+                <div class="col mt-4 mb-4">
+                    <a class="text-decoration-none"  href="https://ask.godotengine.org/questions">
+                        <div class="card p-2 bg-danger">
+                            <div class="card-header">
+                                <img class="card-img-top p-2" src="images/godot.png" alt="">
+                            </div>
+                            <h7 class="card-title text-center text-white fw-bold text-nowrap ">
+                                GodotQ&A
+                            </h7>
+                        </div>
+                    </a>
+                </div>
+                <div class="col mt-4 mb-4">
+                    <a class="text-decoration-none" href="https://web.whatsapp.com/">
+                        <div class="card p-2 bg-success">
+                            <div class="card-header">
+                                <img class="card-img-top p-2" src="images/whatsapp.png" alt="">
+                            </div>
+                            <h7 class="card-title text-center text-white fw-bold text-nowrap ">
+                                Whatsapp
+                            </h7>
+                        </div>
+                    </a>
+                </div>
+                <div class="col mt-4 mb-4">
+                    <a class="text-decoration-none"  href="https://www.doviz.com/">
+                        <div class="card p-2 bg-primary">
+                            <div class="card-header">
+                                <img class="card-img-top p-2" src="images/doviz.png" alt="">
+                            </div>
+                            <h7 class="card-title text-center text-white fw-bold text-nowrap ">
+                                Doviz
+                            </h7>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="col-lg-8 container bg-danger">
-        2
     </div>
-</div>
 
-<div class="row h-50">
-    <div class="col-lg-4 container d-flex justify-content-center align-items-center bg-success">
-        3
-    </div>
-    <div class="col-lg-8 container d-flex justify-content-center align-items-center">
-        <div class="card text-center text-white bg-dark">
-            <div class="card-body">
-                <div class="card-title">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </div>
-                <div class="card-body">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    </body>
 
-</div>
-
-</body>
-
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-<!--  -->
-<script src="script.js"></script>
-</html>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <!--  -->
+    <script src="script.js"></script>
+    </html>
