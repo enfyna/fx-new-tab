@@ -1,53 +1,102 @@
-const usd = document.getElementById("usd");
-const eur = document.getElementById("eur");
-const gbp = document.getElementById("gbp");
-
-var usd_current = 40;
-var eur_current = 27;
-var gbp_current = 30;
-
 const currency_api = "https://api.freecurrencyapi.com/v1/latest";
-const param1 = "base_currency=TRY";
-const param2 = "currencies=USD,EUR,GBP";
+const param1 = "base_currency=";
+const param2 = "currencies=";
+var base_currency
+var currencies
+
+var currency_rates = {}
+
+const twelve_hours_in_ms = 43200000
+var did_12hours_pass = false
 
 function ready(){
-    // setInterval(get_rates,60 * 1000);
-    // get_rates();
+    calculate_date();
+    load_variables();
+    if(did_12hours_pass){
+        get_updated_rates();
+    }
+    else{
+        update_currency_html_elements();
+    };
 }
 
-function get_rates(){
+function calculate_date(){
+    var date = localStorage.getItem("date");
+    if (date == null){
+        date = new Date();
+        localStorage.setItem("date", date.getTime());
+        did_12hours_pass = true;
+    }
+    else{
+        date = new Date(parseInt(date));
+    };
+    var now = new Date();
+    if(now.getTime() - date.getTime() > twelve_hours_in_ms){
+        did_12hours_pass = true;
+    }
+}
+
+function load_variables(){
+    base_currency = localStorage.getItem("base_currency");
+    if (base_currency == null){
+        base_currency = "TRY"; // Default Value
+        localStorage.setItem("base_currency",base_currency);
+    }
+    currencies = JSON.parse(localStorage.getItem("currencies"));
+    if (currencies == null){
+        currencies = ["USD","EUR","GBP"]; // Default Value
+        localStorage.setItem("currencies",JSON.stringify(currencies));
+    }
+    currencies.forEach(element => {
+        if (localStorage.getItem(element) != null){
+            currency_rates[element] = Number.parseFloat(localStorage.getItem(element));
+        }
+    });
+}
+
+function get_updated_rates(){
     var oReq = new XMLHttpRequest();
     oReq.addEventListener("load", update_rates);
-    oReq.open("GET", currency_api + "?" + param1 + "&" +param2);
+    oReq.open("GET", currency_api+"?"+param1+base_currency+"&"+param2+currencies);
     oReq.setRequestHeader("apikey", "UbPNzJJTJyNpDedslXMu7Nfo41o36QiNtCijASu3");
     oReq.send();
 }
 
 function update_rates(){
     var res = JSON.parse(this.responseText); 
+    
+    var cur_node = "cur_";
+    for (let idx = 0; idx < currencies.length; idx++) {
+        var updated_rate = 1.0 / parseFloat(res["data"][currencies[idx]]);
+        update_color(cur_node+(idx+1), updated_rate - currency_rates[currencies[idx]]);
 
-    var usd_new = 1.0 / parseFloat(res["data"]["USD"]);
-    update_color(usd, usd_new - usd_current);
-    var eur_new = 1.0 / parseFloat(res["data"]["EUR"]);
-    update_color(eur, eur_new - eur_current);
-    var gbp_new = 1.0 / parseFloat(res["data"]["GBP"]);
-    update_color(gbp, gbp_new - gbp_current);
+        currency_rates[currencies[idx]] = updated_rate;
 
-    usd.innerHTML = usd_new.toFixed(2);
-    eur.innerHTML = eur_new.toFixed(2);
-    gbp.innerHTML = gbp_new.toFixed(2);
+        localStorage.setItem(currencies[idx], updated_rate.toString());
+    };
+    update_currency_html_elements();
+}
 
-    usd_current = usd_new;
-    eur_current = eur_new;
-    gbp_current = gbp_new;
+function update_currency_html_elements(){
+    var cur_name = "cur_name_";
+    var cur_value = "cur_";
+    for (let idx = 0; idx < currencies.length; idx++) {
+        var currency = currencies[idx];
+        document.getElementById(cur_name+(idx+1)).innerHTML = currency;
+        document.getElementById(cur_value+(idx+1)).innerHTML = currency_rates[currency].toFixed(2);
+    };
 }
 
 const card_class = "card p-2 text-center text-white fw-bold text-nowrap"
-function update_color(element, change){
+function update_color(element_name, change){
     if(change >= 0){
-        element.parentElement.className = card_class + " " + "bg-success";
+        document.getElementById(element_name).parentElement.className = card_class + " " + "bg-success";
     }
     else{
-        element.parentElement.className = card_class + " " + "bg-danger";
+        document.getElementById(element_name).parentElement.className = card_class + " " + "bg-danger";
     };
+}
+
+function print(foo){
+    console.log(foo);
 }
