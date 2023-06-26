@@ -16,7 +16,7 @@
     <div class="col-lg-4 container">
         <div class="row row-cols-3 d-flex justify-content-center align-items-center">
             <div class="col mt-4 mb-4">
-                <div class="card p-2 text-center text-white fw-bold text-nowrap bg-primary">
+                <div class="card p-2 text-center text-white fw-bold text-nowrap bg-primary" hidden="true">
                     <h5 class="card-header" id="cur_name_1">
                         -
                     </h5>
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="col mt-4 mb-4">
-                <div class="card p-2 text-center text-white fw-bold text-nowrap bg-primary">
+                <div class="card p-2 text-center text-white fw-bold text-nowrap bg-primary" hidden="true">
                     <h5 class="card-header" id="cur_name_2">
                         -
                     </h5>
@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="col mt-4 mb-4">
-                <div class="card p-2 text-center text-white fw-bold text-nowrap bg-primary">
+                <div class="card p-2 text-center text-white fw-bold text-nowrap bg-primary" hidden="true">
                     <h5 class="card-header" id="cur_name_3">
                         -
                     </h5>
@@ -181,44 +181,56 @@
                         Base currency
                     </div>
                     <div class="col">
-                        <select class="form-select" aria-label="Select base currency">
-                            <option selected>TRY</option>
-                            <option value="EUR">EUR</option>
+                        <select class="form-select" id="base_currency">
                             <option value="USD">USD</option>
+                            <option value="EUR">EUR</option>
+                            <option value="TRY">TRY</option>
                             <option value="GBP">GBP</option>
+                            <option value="AUD">AUD</option>
+                            <option value="JPY">JPY</option>
+                            <option value="CNY">CNY</option>
                         </select>
                     </div>
                     <div class="col fw-bold text-center">
                         Currencies
                     </div>
                     <div class="col">
-                        <select class="form-select" aria-label="Select base currency">
-                            <option selected>USD</option>
+                        <select class="form-select" id="cur_select_1">
+                            <option value="USD">USD</option>
                             <option value="EUR">EUR</option>
-                            <option value="USD">TRY</option>
+                            <option value="TRY">TRY</option>
                             <option value="GBP">GBP</option>
+                            <option value="AUD">AUD</option>
+                            <option value="JPY">JPY</option>
+                            <option value="CNY">CNY</option>
                         </select>
                     </div>
                     <div class="col">
-                        <select class="form-select" aria-label="Select base currency">
-                            <option selected>EUR</option>
-                            <option value="EUR">TRY</option>
+                        <select class="form-select" id="cur_select_2">
                             <option value="USD">USD</option>
+                            <option value="EUR">EUR</option>
+                            <option value="TRY">TRY</option>
                             <option value="GBP">GBP</option>
+                            <option value="AUD">AUD</option>
+                            <option value="JPY">JPY</option>
+                            <option value="CNY">CNY</option>
                         </select>
                     </div>
                     <div class="col">
-                        <select class="form-select" aria-label="Select base currency">
-                            <option selected>GBP</option>
-                            <option value="EUR">EUR</option>
+                        <select class="form-select" id="cur_select_3">
                             <option value="USD">USD</option>
-                            <option value="GBP">TRY</option>
+                            <option value="EUR">EUR</option>
+                            <option value="TRY">TRY</option>
+                            <option value="GBP">GBP</option>
+                            <option value="AUD">AUD</option>
+                            <option value="JPY">JPY</option>
+                            <option value="CNY">CNY</option>
                         </select>
                     </div>
                     <div class="col-lg-5">
                         <div class="input-group mb-1 mt-1">
                             <span class="input-group-text" id="input-group">API key</span>
-                            <input type="text" class="form-control" aria-label="API key">
+                            <input type="text" class="form-control" id="api_key_select">
                         </div>
                     </div>
                 </div>
@@ -228,13 +240,13 @@
         <div class="row justify-content-between">
             <div class="col-lg-5 bg-primary rounded p-1 m-1">
                 <div class="row d-flex justify-content-center align-items-center">
-                    <div class="col-lg-7">
+                    <div class="col-7">
                         <div class="input-group">
                             <span class="input-group-text" id="input-group">Link</span>
                             <input type="text" class="form-control" aria-label="Link_1">
                         </div>
                     </div>
-                    <div class="col-lg-5">
+                    <div class="col-5">
                         <div class="input-group">
                             <span class="input-group-text" id="input-group">Name</span>
                             <input type="text" class="form-control" aria-label="Link_1">
@@ -244,13 +256,13 @@
             </div>
             <div class="col-lg-5 bg-success rounded p-1 m-1">
                 <div class="row d-flex justify-content-center align-items-center">
-                    <div class="col-lg-7">
+                    <div class="col-7">
                         <div class="input-group">
                             <span class="input-group-text" id="input-group">Link</span>
                             <input type="text" class="form-control" aria-label="Link_1">
                         </div>
                     </div>
-                    <div class="col-lg-5">
+                    <div class="col-5">
                         <div class="input-group">
                             <span class="input-group-text" id="input-group">Name</span>
                             <input type="text" class="form-control" aria-label="Link_1">
@@ -262,13 +274,13 @@
         <div class="row justify-content-between">
             <div class="col-lg-5 bg-danger rounded p-1 m-1">
                 <div class="row d-flex justify-content-center align-items-center">
-                    <div class="col-lg-7">
+                    <div class="col-7">
                         <div class="input-group">
                             <span class="input-group-text" id="input-group">Link</span>
                             <input type="text" class="form-control" aria-label="Link_1">
                         </div>
                     </div>
-                    <div class="col-lg-5">
+                    <div class="col-5">
                         <div class="input-group">
                             <span class="input-group-text" id="input-group">Name</span>
                             <input type="text" class="form-control" aria-label="Link_1">
@@ -278,13 +290,13 @@
             </div>
             <div class="col-lg-5 bg-warning rounded p-1 m-1">
                 <div class="row d-flex justify-content-center align-items-center">
-                    <div class="col-lg-7">
+                    <div class="col-7">
                         <div class="input-group">
                             <span class="input-group-text" id="input-group">Link</span>
                             <input type="text" class="form-control" aria-label="Link_1">
                         </div>
                     </div>
-                    <div class="col-lg-5">
+                    <div class="col-5">
                         <div class="input-group">
                             <span class="input-group-text" id="input-group">Name</span>
                             <input type="text" class="form-control" aria-label="Link_1">
@@ -296,13 +308,13 @@
         <div class="row justify-content-between">
             <div class="col-lg-5 bg-warning rounded p-1 m-1">
                 <div class="row d-flex justify-content-center align-items-center">
-                    <div class="col-lg-7">
+                    <div class="col-7">
                         <div class="input-group">
                             <span class="input-group-text" id="input-group">Link</span>
                             <input type="text" class="form-control" aria-label="Link_1">
                         </div>
                     </div>
-                    <div class="col-lg-5">
+                    <div class="col-5">
                         <div class="input-group">
                             <span class="input-group-text" id="input-group">Name</span>
                             <input type="text" class="form-control" aria-label="Link_1">
@@ -312,13 +324,13 @@
             </div>
             <div class="col-lg-5 bg-danger rounded p-1 m-1">
                 <div class="row d-flex justify-content-center align-items-center">
-                    <div class="col-lg-7">
+                    <div class="col-7">
                         <div class="input-group">
                             <span class="input-group-text" id="input-group">Link</span>
                             <input type="text" class="form-control" aria-label="Link_1">
                         </div>
                     </div>
-                    <div class="col-lg-5">
+                    <div class="col-5">
                         <div class="input-group">
                             <span class="input-group-text" id="input-group">Name</span>
                             <input type="text" class="form-control" aria-label="Link_1">
@@ -330,13 +342,13 @@
         <div class="row justify-content-between">
             <div class="col-lg-5 bg-success rounded p-1 m-1">
                 <div class="row d-flex justify-content-center align-items-center">
-                    <div class="col-lg-7">
+                    <div class="col-7">
                         <div class="input-group">
                             <span class="input-group-text" id="input-group">Link</span>
                             <input type="text" class="form-control" aria-label="Link_1">
                         </div>
                     </div>
-                    <div class="col-lg-5">
+                    <div class="col-5">
                         <div class="input-group">
                             <span class="input-group-text" id="input-group">Name</span>
                             <input type="text" class="form-control" aria-label="Link_1">
@@ -346,13 +358,13 @@
             </div>
             <div class="col-lg-5 bg-primary rounded p-1 m-1">
                 <div class="row d-flex justify-content-center align-items-center">
-                    <div class="col-lg-7">
+                    <div class="col-7">
                         <div class="input-group">
                             <span class="input-group-text" id="input-group">Link</span>
                             <input type="text" class="form-control" aria-label="Link_1">
                         </div>
                     </div>
-                    <div class="col-lg-5">
+                    <div class="col-5">
                         <div class="input-group">
                             <span class="input-group-text" id="input-group">Name</span>
                             <input type="text" class="form-control" aria-label="Link_1">
@@ -362,7 +374,7 @@
             </div>
         </div>
         <hr class="border-2 border-primary">
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary" onclick="save()">Save</button>
     </div>
 
     </div>
