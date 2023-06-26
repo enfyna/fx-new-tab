@@ -20,8 +20,6 @@ function get_rates(){
     oReq.addEventListener("load", update_rates);
     oReq.open("GET", currency_api + "?" + param1 + "&" +param2);
     oReq.setRequestHeader("apikey", "UbPNzJJTJyNpDedslXMu7Nfo41o36QiNtCijASu3");
-    oReq.setRequestHeader("base_currency", "TRY");
-    oReq.setRequestHeader("currencies", "USD,EUR,GBP");
     oReq.send();
 }
 
@@ -35,9 +33,9 @@ function update_rates(){
     var gbp_new = 1.0 / parseFloat(res["data"]["GBP"]);
     update_color(gbp, gbp_new - gbp_current);
 
-    usd.innerHTML = (usd_new).toFixed(2);
-    eur.innerHTML = (eur_new).toFixed(2);
-    gbp.innerHTML = (gbp_new).toFixed(2);
+    usd.innerHTML = usd_new.toFixed(2);
+    eur.innerHTML = eur_new.toFixed(2);
+    gbp.innerHTML = gbp_new.toFixed(2);
 
     usd_current = usd_new;
     eur_current = eur_new;
@@ -47,9 +45,9 @@ function update_rates(){
 const card_class = "card text-center text-white fw-bold text-nowrap"
 function update_color(element, change){
     if(change >= 0){
-        element.parentElement.parentElement.className = card_class + " bg-success";
+        element.parentElement.parentElement.className = card_class + " " + "bg-success";
     }
     else{
-        element.parentElement.parentElement.className = card_class + " bg-danger";
+        element.parentElement.parentElement.className = card_class + " " + "bg-danger";
     };
 }
