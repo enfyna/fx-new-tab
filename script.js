@@ -40,7 +40,8 @@ function calculate_date(){
 
 function load_variables(){
     API_KEY = localStorage.getItem("API_KEY");
-    if(API_KEY == null){
+    if(API_KEY == null || API_KEY == ""){
+        API_KEY = null;
         hide_currency_elements(true);
     }
     else{
@@ -124,8 +125,10 @@ function update_color(element_name, change){
 function save(){
     console.log("saving...");
     var apikey = document.getElementById("api_key_select");
-    API_KEY = apikey.value;
-    localStorage.setItem("API_KEY",API_KEY);
+    if(apikey.value != ""){
+        API_KEY = apikey.value;
+        localStorage.setItem("API_KEY",API_KEY);
+    };
 
     var base_currency_selector = document.getElementById("base_currency");
     base_currency = base_currency_selector.value;
@@ -144,6 +147,19 @@ function save(){
     }else{
         hide_currency_elements(true);
     };
+
+    var links = JSON.parse(localStorage.getItem("link"));
+    var l = "select_link_";
+    var n = "select_name_";
+    //var im = "select_img_";
+    for (let i = 1; i <= 8; i++) {
+        links[i]["name"] = document.getElementById(n+i).value;
+        links[i]["link"] = document.getElementById(l+i).value; 
+        //var img = links[i]["img"];
+    };
+    localStorage.setItem("link",JSON.stringify(links));
+
+    configure_links();
 }
 
 function config_settings_page(){
@@ -163,7 +179,7 @@ function config_settings_page(){
     var l = "select_link_";
     var n = "select_name_";
     var im = "select_img_";
-    for (let i = 1; i <= 2; i++) {
+    for (let i = 1; i <= 8; i++) {
         var name = links[i]["name"];
         var link = links[i]["link"]; 
         var img = links[i]["img"];
@@ -175,15 +191,15 @@ function config_settings_page(){
 function configure_links(){
     var links = localStorage.getItem("link");
     if(links == null){
-        links = {
+        links = { // Default links
             1:{"name":"GitHub","link":"https://github.com/enfyna","img":"images/github.png"},
             2:{"name":"ChatGPT","link":"https://chat.openai.com/","img":"images/chatgpt.png"},
-            3:{"name":"GitHub","link":"","img":""},
-            4:{"name":"GitHub","link":"","img":""},
-            5:{"name":"GitHub","link":"","img":""},
-            6:{"name":"GitHub","link":"","img":""},
-            7:{"name":"GitHub","link":"","img":""},
-            8:{"name":"GitHub","link":"","img":""},
+            3:{"name":"Ekampüs","link":"http://ekampus.btu.edu.tr","img":"images/btu.png"},
+            4:{"name":"OBS","link":"https://obs.btu.edu.tr/","img":"images/btu.png"},
+            5:{"name":"Gmail","link":"https://mail.google.com/mail/u/0/#inbox","img":"images/gmail.png"},
+            6:{"name":"GodotQ&A","link":"https://ask.godotengine.org/questions","img":"images/godot.png"},
+            7:{"name":"Whatsapp","link":"https://web.whatsapp.com/","img":"images/whatsapp.png"},
+            8:{"name":"Doviz","link":"https://www.doviz.com/","img":"images/doviz.png"},
         };
         localStorage.setItem("link",JSON.stringify(links));
     }
@@ -194,8 +210,13 @@ function configure_links(){
     var l = "link_";
     var n = "name_";
     var im = "img_";
-    for (let i = 1; i <= 2; i++) {
+    for (let i = 1; i <= 8; i++) {
         var name = links[i]["name"];
+        if(name == ""){
+            document.getElementById(l+i).parentElement.hidden = true;
+            continue;
+        };
+        document.getElementById(l+i).parentElement.hidden = false;
         var link = links[i]["link"]; 
         var img = links[i]["img"];
         document.getElementById(l+i).href = link;
