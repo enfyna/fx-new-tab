@@ -1,0 +1,8 @@
+{
+  "manifest_version": 2,
+  "name": "New Tab",
+  "version": "1.0",
+  "permissions": ["storage"],
+  "chrome_url_overrides": { "newtab": "index.html" },
+  "chrome_settings_overrides" : {"homepage": "index.html"}
+}

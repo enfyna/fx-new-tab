@@ -1,3 +1,18 @@
+interface shortcut_dict {
+	name:string;
+	link:string;
+	img:string;
+}
+interface shortcut_arr {
+    [index:number]:shortcut_dict;
+}
+interface currencies_dict {
+	name:string;
+	rate:string;
+}
+interface currencies_arr {
+	[index:number]:currencies_dict;
+}
 const currency_api = "https://api.freecurrencyapi.com/v1/latest";
 const img_api = "https://icon.horse/icon/";
 const elm_id = [
@@ -26,56 +41,47 @@ function ready(){
 	config_settings_page();
 }
 
-function get_shortcuts(){
+function get_shortcuts() : shortcut_arr{
 	let shortcuts = localStorage.getItem("shortcuts");
 	if(shortcuts != null){
 		return JSON.parse(shortcuts);
 	};
-	let temp = [
-		{"link":"https://github.com/enfyna"},
-		{"link":"https://chat.openai.com/"},
-		{"link":"http://ekampus.btu.edu.tr"},
-		{"link":"https://obs.btu.edu.tr/"},
-		{"link":"https://mail.google.com/mail/u/0/#inbox"},
-		{"link":"https://ask.godotengine.org/questions"},
-		{"link":"https://web.whatsapp.com/"},
-		{"link":"https://www.doviz.com/"},
-	];
-	temp.forEach(dict => {
-		dict["name"] = "";
-		dict["img"] = "";
-	});
+	let temp : shortcut_arr = [
+		{name:"",img:"",link:"https://github.com/enfyna"},
+		{name:"",img:"",link:"https://chat.openai.com/"},
+		{name:"",img:"",link:"http://ekampus.btu.edu.tr"},
+		{name:"",img:"",link:"https://obs.btu.edu.tr/"},
+		{name:"",img:"",link:"https://mail.google.com/mail/u/0/#inbox"},
+		{name:"",img:"",link:"https://ask.godotengine.org/questions"},
+		{name:"",img:"",link:"https://web.whatsapp.com/"},
+		{name:"",img:"",link:"https://www.doviz.com/"},
+   	];
 	localStorage.setItem("shortcuts",JSON.stringify(temp));
 	return temp;
 }
 
 function configure_shortcuts(){
-	let shortcut = get_shortcuts();
+	let shortcuts : shortcut_arr = get_shortcuts();
 	for (let i = 0; i < 8; i++){
-		var link = shortcut[i]["link"];
-		var name = shortcut[i]["name"];
-		var a_node = document.getElementById(elm_id[6].concat(i.toString())) as HTMLAnchorElement | null;
-		if(a_node === null)continue;
+		var shortcut : shortcut_dict = shortcuts[i]
+		var a_node = document.getElementById(elm_id[6]+i) as HTMLAnchorElement;
 		if(a_node.parentElement === null)continue;
 
-		if(link == ""){
-			// if shortcut has no link hide it from main menu
+		if(shortcut.link == ""){
 			a_node.parentElement.hidden = true;
 			continue;
 		};
-		if(name == ""){
-			// if shortcut has no name write the link
-			name = link.replace("https://","").replace("http://","").split("/")[0];
+		if(shortcut.name == ""){
+			shortcut.name = shortcut.link.replace("https://","").replace("http://","").split("/")[0];
 		};
 		a_node.parentElement.hidden = false;
-		a_node.href = link;
+		a_node.href = shortcut.link;
 		var name_node = (document.getElementById(elm_id[7]+i)) as HTMLHeadingElement;
 		var img_node = (document.getElementById(elm_id[8]+i)) as HTMLImageElement;
-		name_node.innerHTML = name;
-		img_node.src = shortcut[i]["img"];
-		if(shortcut[i]["img"] == null || shortcut[i]["img"] == ""){
-			// if link has no icon try to get it
-			get_favicon_from_url(link,i);
+		name_node.innerHTML = shortcut.name;
+		img_node.src = shortcut.img;
+		if(shortcut.img == ""){
+			get_favicon_from_url(shortcut.link,i);
 			continue;
 		};
 	};
@@ -104,13 +110,13 @@ function get_favicon_from_url(url : string, idx : Number){
 		var image = canvas.toDataURL();
 		var img_node = document.getElementById(elm_id[8]+idx) as HTMLImageElement;
 		img_node.src = image;
-		let shortcut = get_shortcuts();
-		shortcut[idx.toString()]["img"] = image;
-		localStorage.setItem("shortcuts",JSON.stringify(shortcut));
+		let shortcuts = get_shortcuts();
+		shortcuts[idx.toString()]["img"] = image;
+		localStorage.setItem("shortcuts",JSON.stringify(shortcuts));
 	}
 }
 
-function did_a_day_pass(){
+function did_a_day_pass() : boolean{
 	let date = localStorage.getItem("date");
 	localStorage.setItem("date", new Date().getTime().toString());
 	if (date == null){
@@ -124,8 +130,8 @@ function did_a_day_pass(){
 }
 
 function get_api_key() : string{
-	let key = localStorage.getItem("API_KEY") as string;
-	if(key == ""){
+	let key = localStorage.getItem("API_KEY");
+	if(key == null || key == ""){
 		hide_currency_elements(true);
 		return "";
 	}
@@ -133,37 +139,27 @@ function get_api_key() : string{
 	return key;
 }
 
-function get_base_currency(){
+function get_base_currency() : string{
 	let currency = localStorage.getItem("base_currency");
 	if (currency == null){
-		currency = "TRY"; // Default Value
+		currency = "TRY";
 		localStorage.setItem("base_currency",currency);
 	};
 	return currency;
 }
 
-function get_currencies() : string[] {
+function get_currencies() : currencies_arr {
 	let currencies = localStorage.getItem("currencies");
 	if (currencies == null){
-		let def = ["USD","EUR","GBP"]; // Default Value
+		let def : currencies_arr = [
+			{name:"USD",rate:"0.0"},
+			{name:"EUR",rate:"0.0"},
+			{name:"GBP",rate:"0.0"}
+		];
 		localStorage.setItem("currencies",JSON.stringify(def));
 		return def;
 	};
-	return JSON.parse(currencies);
-}
-
-function get_currency_rates(currencies : any){
-	let rates = {};
-	for (let i = 0; i < currencies.length; i++) {
-		let currency = currencies[i];
-		if (localStorage.getItem(currency) != null){
-			let temp = localStorage.getItem(currency) as string;
-			rates[currency] = Number.parseFloat(temp);
-			continue;
-		};
-		rates[currency] = 0.0;
-	};
-	return rates;
+	return JSON.parse(currencies) as currencies_arr;
 }
 
 function get_updated_rates(){
@@ -177,48 +173,46 @@ function get_updated_rates(){
 	const param2 = "currencies=";
 	const base_currency = get_base_currency();
 	const currencies = get_currencies();
-	const currency_rates = get_currency_rates(currencies);
 	const req = new XMLHttpRequest();
-
-	req.addEventListener("readystatechange",() => {
+	
+	req.onreadystatechange = get_currency_rates;
+	req.open(
+		"GET",
+		currency_api.concat("?",param1,base_currency,"&",param2,[currencies[0].name,currencies[1].name,currencies[2].name].toString())
+	);
+	req.setRequestHeader("apikey", API_KEY);
+	req.send();
+	function get_currency_rates(){
 		if (this.readyState == 4 && this.status == 200) {
 			const res = JSON.parse(this.responseText);
 			for (let i = 0; i < 3; i++) {
 				let currency = currencies[i];
-				const updated_rate_string = (1.0 / parseFloat(res["data"][currency])).toFixed(2);
+				const updated_rate_string = (1.0 / parseFloat(res["data"][currency.name])).toFixed(2);
 				const updated_rate_float = parseFloat(updated_rate_string);
-				update_color(elm_id[1]+i, updated_rate_float - currency_rates[currency]);
-
-				currency_rates[currency] = updated_rate_float;
-
-				localStorage.setItem(currency, updated_rate_string);
+				
+				update_color(elm_id[1]+i, updated_rate_float - parseFloat(currency.rate));
+				currency.rate = updated_rate_string;
 			};
+			localStorage.setItem("currencies", JSON.stringify(currencies));
 			update_currency_html_elements();
 		};
-	});
-	req.open(
-		"GET",
-		currency_api.concat("?",param1,base_currency,"&",param2,currencies.toString())
-	);
-	req.setRequestHeader("apikey", API_KEY);
-	req.send();
+	}
 }
 
 function update_currency_html_elements(){
 	const currencies = get_currencies();
-	const currency_rates = get_currency_rates(currencies);
 	for (let i = 0; i < 3; i++) {
 		const currency = currencies[i];
 		let cur_node = document.getElementById(elm_id[0]+i) as HTMLElement;
-		cur_node.innerHTML = currency;
+		cur_node.innerHTML = currency.name;
 		let val_node = document.getElementById(elm_id[1]+i) as HTMLElement;
-		val_node.innerHTML = currency_rates[currency];
+		val_node.innerHTML = currency.rate;
 	};
 }
 
 function hide_currency_elements(set = true){
-	const currency = document.getElementById("currencies") as HTMLElement;
-	const childElements = Object.values(currency.childNodes) as HTMLElement[]
+	const currency_parent_node = document.getElementById("currencies") as HTMLElement;
+	const childElements = Object.values(currency_parent_node.childNodes) as HTMLElement[]
 	for (const child of childElements){
 		child.hidden = set;
 	};
@@ -244,56 +238,42 @@ function save(){
 	let apikey_node = document.getElementById("api_key_select") as HTMLInputElement;
 	localStorage.setItem("API_KEY",apikey_node.value);
 
-	if(apikey_node.value != ""){
-		// API_KEY = apikey_node.value;
-		hide_currency_elements(false);
-		get_updated_rates();
-	}else{
-		// API_KEY = null;
-		hide_currency_elements(true);
-	};
-
-	let currencies = ["","",""];
-	let shortcut = get_shortcuts();
+	let currencies : currencies_arr = get_currencies();
+	let shortcuts : shortcut_arr = get_shortcuts();
 	for (let i = 0; i < 8; i++){
 		if(i < 3){
 			const currency_node = document.getElementById(elm_id[2]+i) as HTMLInputElement;
-			currencies[i] = currency_node.value;
+			currencies[i].name = currency_node.value;
 		};
+		var shortcut : shortcut_dict = shortcuts[i];
 		const link_node = document.getElementById(elm_id[3]+i) as HTMLInputElement;
 		const name_node = document.getElementById(elm_id[4]+i) as HTMLInputElement;
 		const img_node = document.getElementById(elm_id[5]+i) as HTMLInputElement;
-		if(shortcut[i]["link"] != link_node.value){
-			// User changed shortcut link
-			// Check if he changed name and icon
-			// if he didnt we will assume that the unchanged infos
-			// were for the old link if he did we will assume that the changed
-			// infos are for the new link
-			shortcut[i]["link"] = link_node.value;
-			if(shortcut[i]["name"] != name_node.value){
-				shortcut[i]["name"] = name_node.value;
+		if(shortcut.link != link_node.value){
+			shortcut.link = link_node.value;
+			if(shortcut.name != name_node.value){
+				shortcut.name = name_node.value;
 			}else{
-				shortcut[i]["name"] = "";
+				shortcut.name = "";
 			};
 			if(img_node.value == ""){
-				shortcut[i]["img"] = "";
-				save_shortcut(shortcut);
+				shortcut.img = "";
+				save_shortcuts(shortcuts);
 				continue;
 			};
 		}else{
-			shortcut[i]["name"] = name_node.value;
+			shortcut.name = name_node.value;
 			var img = img_node.value;
 			if(img == ""){
-				save_shortcut(shortcut);
+				save_shortcuts(shortcuts);
 				continue;
 			};
 		};
-		// if user changed link icon we will read it here
 		const reader = new FileReader();
 			reader.addEventListener("loadend", (event) => {
 				if(event.target == null)return;
-				shortcut[i]["img"] = event.target.result;
-				save_shortcut(shortcut);
+				shortcut.img = event.target.result as string;
+				save_shortcuts(shortcuts);
 			});
 		if(img_node.files == null)continue;
 		var image = img_node.files.item(0);
@@ -301,13 +281,19 @@ function save(){
 		reader.readAsDataURL(image);
 	};
 	localStorage.setItem("currencies",JSON.stringify(currencies));
+	if(apikey_node.value != ""){
+		hide_currency_elements(false);
+		get_updated_rates();
+	}else{
+		hide_currency_elements(true);
+	};
 }
 
 let check = 0;
-function save_shortcut(shortcut : any) {
+function save_shortcuts(shortcuts : shortcut_arr) {
 	if(++check == 8){
 		check = 0;
-		localStorage.setItem("shortcuts",JSON.stringify(shortcut));
+		localStorage.setItem("shortcuts",JSON.stringify(shortcuts));
 		configure_shortcuts();
 		config_settings_page();
 	};
@@ -319,19 +305,20 @@ function config_settings_page(){
 	const base_cur_node = document.getElementById("base_currency") as HTMLInputElement;
 	base_cur_node.value = get_base_currency();
 
-	const shortcut = get_shortcuts();
+	const shortcuts = get_shortcuts();
 	const currencies = get_currencies();
 
 	for (let i = 0; i < 8; i++) {
 		const link_node = document.getElementById(elm_id[3]+i) as HTMLInputElement;
 		const name_node = document.getElementById(elm_id[4]+i) as HTMLInputElement;
 		const img_node = document.getElementById(elm_id[5]+i) as HTMLInputElement;
-		link_node.value = shortcut[i]["link"];
-		name_node.value = shortcut[i]["name"];
+		var shortcut = shortcuts[i];
+		link_node.value = shortcut.link;
+		name_node.value = shortcut.name;
 		img_node.value = "";
 		if(!(i < 3)) continue; // only 3 currencies
 		const currency_node = document.getElementById(elm_id[2]+i) as HTMLInputElement;
-		currency_node.value = currencies[i];
+		currency_node.value = currencies[i].name;
 	};
 	const save_button = document.getElementById("save-button") as HTMLInputElement;
 	save_button.addEventListener("click",save);
