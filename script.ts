@@ -44,7 +44,7 @@ function ready(){
 function get_shortcuts() : shortcut_arr{
 	let shortcuts = localStorage.getItem("shortcuts");
 	if(shortcuts != null){
-		return JSON.parse(shortcuts);
+		return JSON.parse(shortcuts) as shortcut_arr;
 	};
 	let temp : shortcut_arr = [
 		{name:"",img:"",link:"https://github.com/enfyna"},
@@ -175,14 +175,14 @@ function get_updated_rates(){
 	const currencies = get_currencies();
 	const req = new XMLHttpRequest();
 	
-	req.onreadystatechange = get_currency_rates;
+	req.onreadystatechange = get;
 	req.open(
 		"GET",
 		currency_api.concat("?",param1,base_currency,"&",param2,[currencies[0].name,currencies[1].name,currencies[2].name].toString())
 	);
 	req.setRequestHeader("apikey", API_KEY);
 	req.send();
-	function get_currency_rates(){
+	function get(){
 		if (this.readyState == 4 && this.status == 200) {
 			const res = JSON.parse(this.responseText);
 			for (let i = 0; i < 3; i++) {
@@ -407,10 +407,14 @@ function translate() {
 			"en": ["Name"],
 		},
 	];
-	translations.forEach((dict) => {
-		document.getElementsByName(dict.name).forEach((element) => {
-			const list = dict[lang];
-			element.innerHTML = list[new Date().getTime() % list.length];
+	translations.forEach(dict => {
+		document.getElementsByName(dict.name).forEach(element => {
+			const list : Array<string> = dict[lang];
+			if(list.length > 1){
+				element.innerHTML = list[new Date().getTime() % list.length];
+			}else{
+				element.innerHTML = list[0];
+			}
 		});
 	});
 }
