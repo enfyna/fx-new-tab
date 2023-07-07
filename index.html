@@ -8,6 +8,19 @@
 	<script src="tsc/script.js"></script>
 	<script src="bootstrap/bootstrap.js"></script>
 </head>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+	<symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+		<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+	</symbol>
+	<symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+		<path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+	</symbol>
+	<symbol id="settings-gear-fill" fill="white" viewBox="0 0 16 16">
+		<path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+	</symbol>
+</svg>
+
 <body class="container-fluid row d-flex justify-content-center align-items-center vh-100 bg-dark">
 
 <div class="col-lg-4 row d-flex justify-content-center align-items-start h-100 flex-fill">
@@ -128,14 +141,24 @@
 	<div class="container-fluid bg-dark p-4 mb-5 min-vh-100">
 		<!-- Settings text -->
 		<div class="row justify-content-center align-items-center">
-			<svg class="col-1" width="32" height="32" fill="white" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-				<path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
-			</svg>
+			<svg class="col-1" width="24" height="24" role="img"><use xlink:href="#settings-gear-fill"/></svg>
 			<h1 class="col-11 text-white" name="settings">
 			</h1>
 		</div>
 		<hr class="border-2 border-primary">
 		<!-- Link settings -->
+		<div class="text-center">
+			<div class="alert alert-primary d-flex align-items-center" role="alert">
+				<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+				<div name="delete-link">
+				</div>
+			</div>
+			<div class="alert alert-primary d-flex align-items-center" role="alert">
+				<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+				<div name="image-link">
+				</div>
+			</div>
+		</div>
 		<div class="row justify-content-evenly">
 			<div class="col-lg-11 bg-primary rounded p-1 m-1">
 				<div class="row">
@@ -158,7 +181,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-11 bg-primary rounded p-1 m-1">
+			<div class="col-lg-11 bg-danger rounded p-1 m-1">
 				<div class="row">
 					<div class="col-4">
 						<div class="input-group">
@@ -177,7 +200,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-11 bg-danger rounded p-1 m-1">
+			<div class="col-lg-11 bg-success rounded p-1 m-1">
 				<div class="row">
 					<div class="col-4">
 						<div class="input-group">
@@ -196,7 +219,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-11 bg-danger rounded p-1 m-1">
+			<div class="col-lg-11 bg-warning rounded p-1 m-1">
 				<div class="row">
 					<div class="col-4">
 						<div class="input-group">
@@ -215,7 +238,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-11 bg-success rounded p-1 m-1">
+			<div class="col-lg-11 bg-primary rounded p-1 m-1">
 				<div class="row">
 					<div class="col-4">
 						<div class="input-group">
@@ -234,7 +257,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-11 bg-success rounded p-1 m-1">
+			<div class="col-lg-11 bg-danger rounded p-1 m-1">
 				<div class="row">
 					<div class="col-4">
 						<div class="input-group">
@@ -253,7 +276,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-11 bg-warning rounded p-1 m-1">
+			<div class="col-lg-11 bg-success rounded p-1 m-1">
 				<div class="row">
 					<div class="col-4">
 						<div class="input-group">
@@ -292,12 +315,41 @@
 				</div>
 			</div>
 		</div>
+		<hr class="border-2 border-primary">
+		<!-- Save Button -->
 		<div class="text-center">
-			<span class="badge badge-info bg-danger" name="delete-link"></span>
-			<span class="badge badge-info bg-primary" name="image-link"></span>
+			<div class="alert alert-primary d-flex align-items-center" role="alert">
+				<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+				<div name="cookie-info">
+				</div>
+			</div>
+			<div class="alert alert-danger d-flex align-items-center" role="alert">
+				<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#exclamation-triangle-fill"/></svg>
+				<div name="delete-cookie-warning">
+				</div>
+			</div>
+			<button type="submit" class="col-lg-2 btn btn-primary fw-bold mt-1" id="save-button" name="save-button"></button>
+			<br class="m-5">
 		</div>
 		<hr class="border-2 border-primary">
 		<!-- Currency settings -->
+		<div class="text-center">
+			<div class="alert alert-primary d-flex align-items-center" role="alert">
+				<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+				<div name="api-key-info">
+				</div>
+			</div>
+			<div class="alert alert-warning d-flex align-items-center" role="alert">
+				<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+				<div name="rate-update-info">
+				</div>
+			</div>
+			<div class="alert alert-danger d-flex align-items-center" role="alert">
+				<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#exclamation-triangle-fill"/></svg>
+				<div name="currency-api-warning">
+				</div>
+			</div>
+		</div>
 		<div class="row bg-primary rounded m-1 d-flex justify-content-center align-items-center">
 			<div class="col-lg-2 mt-1 mb-1">
 				<select class="form-select" id="base_currency">
@@ -351,19 +403,7 @@
 					<span class="input-group-text" id="input-group">API Key</span>
 					<input type="text" class="form-control" id="api_key_select">
 				</div>
-			</div>
-		</div>
-		<!-- Save Button -->
-		<div class="text-center">
-			<span class="badge bg-warning text-black" name="api-key-info"></span>
-			<span class="badge bg-primary" name="rate-update-info"></span>
-		</div>
-		<hr class="border-2 border-primary">
-		<div class="text-center">
-			<span class="badge bg-primary" name="cookie-info"></span>
-			<span class="badge bg-warning text-black" name="delete-cookie-warning"></span>
-			<br>
-			<button type="submit" class="col-lg-2 btn btn-primary fw-bold mt-3" id="save-button" name="save-button"></button>
+			</div>	
 		</div>
 		<hr class="border-2 border-primary">
 	</div>

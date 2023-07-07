@@ -47,14 +47,14 @@ function get_shortcuts() : shortcut_arr{
 		return JSON.parse(shortcuts) as shortcut_arr;
 	};
 	let temp : shortcut_arr = [
-		{name:"",img:"",link:"https://github.com/enfyna"},
-		{name:"",img:"",link:"https://chat.openai.com/"},
-		{name:"",img:"",link:"http://ekampus.btu.edu.tr"},
-		{name:"",img:"",link:"https://obs.btu.edu.tr/"},
+		{name:"",img:"",link:"https://github.com"},
+		{name:"",img:"",link:"https://youtube.com/"},
+		{name:"",img:"",link:"https://chat.openai.com"},
 		{name:"",img:"",link:"https://mail.google.com/mail/u/0/#inbox"},
-		{name:"",img:"",link:"https://ask.godotengine.org/questions"},
+		{name:"",img:"",link:"https://discord.com"},
+		{name:"",img:"",link:"https://web.telegram.org/a/"},
 		{name:"",img:"",link:"https://web.whatsapp.com/"},
-		{name:"",img:"",link:"https://www.doviz.com/"},
+		{name:"",img:"",link:"https://amazon.com"},
    	];
 	localStorage.setItem("shortcuts",JSON.stringify(temp));
 	return temp;
@@ -80,7 +80,7 @@ function configure_shortcuts(){
 		var img_node = (document.getElementById(elm_id[8]+i)) as HTMLImageElement;
 		name_node.innerHTML = shortcut.name;
 		img_node.src = shortcut.img;
-		if(shortcut.img == ""){
+		if(shortcut.img == "" || img_node.naturalHeight < 64 || img_node.naturalWidth < 64){
 			get_favicon_from_url(shortcut.link,i);
 			continue;
 		};
@@ -92,7 +92,7 @@ function get_favicon_from_url(url : string, idx : Number){
 		console.log("No internet connection. Cant get favicons.");
 		return;
 	};
-	url = url.replace("https://","").replace("http://","").split("/")[0];
+	url = url.replace("https://","").replace("http://","").replace("www.","").split("/")[0];
 
 	let foreignImg = new Image();
 
@@ -250,9 +250,9 @@ function save(){
 		const name_node = document.getElementById(elm_id[4]+i) as HTMLInputElement;
 		const img_node = document.getElementById(elm_id[5]+i) as HTMLInputElement;
 		if(shortcut.link != link_node.value){
-			shortcut.link = link_node.value;
+			shortcut.link = link_node.value.trim();
 			if(shortcut.name != name_node.value){
-				shortcut.name = name_node.value;
+				shortcut.name = name_node.value.trim();
 			}else{
 				shortcut.name = "";
 			};
@@ -358,13 +358,13 @@ function translate() {
 		},
 		{
 			"name": "image-link",
-			"tr": ["Link ikonunu resim dosyası yükleyerek ayarlayabilirsin."],
-			"en": ["Set a custom link icon by uploading a image file."],
+			"tr": ["Link ikonunu resim dosyası yükleyerek ayarlayabilirsin. (en az 64x64 boyutunda)"],
+			"en": ["Set a custom link icon by uploading a image file. (at least 64x64 resolution)"],
 		},
 		{
 			"name": "delete-cookie-warning",
 			"tr": ["Bu site için çerezleri silersen ayarların sıfırlanır."],
-			"en": ["If you delete cookies for this site link and currency data will be lost."],
+			"en": ["If you delete cookies for this site all data will revert to the default values."],
 		},
 		{
 			"name": "cookie-info",
@@ -377,9 +377,14 @@ function translate() {
 			"en": ["Currency rates update daily."],
 		},
 		{
+			"name":"currency-api-warning",
+			"tr":["Bu eklentinin \"https://freecurrencyapi.com\" ile bir bağlantısı yoktur. Giriş yapmayı tercih ederseniz onların gizlilik politikalarını kabul etmeniz gerekmektedir."],
+			"en":["This addon has no affiliation with \"https://freecurrencyapi.com\". If you choose to sign in you have to accept their privacy policies."],
+		},
+		{
 			"name": "api-key-info",
-			"tr": ["API key'i \"https://freecurrencyapi.com\" kayıt olup alabilirsin."],
-			"en": ["To get your API Key sign in to : https://freecurrencyapi.com (optional)."],
+			"tr": ["Ana sayfanda 3 tane kurun değerini görmek istiyorsan kullanabilirsin. Bu özellik API key'in varsa çalışır. API key'i \"https://freecurrencyapi.com\" kayıt olup alabilirsin."],
+			"en": ["This is a optional feature that adds 3 currency rate info to your main page. .This feature will work if you have a API Key. To get it sign in to : https://freecurrencyapi.com (optional)."],
 		},
 		{
 			"name": "save-button",
