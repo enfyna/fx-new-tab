@@ -338,13 +338,13 @@ function translate() {
 	const translations = [
 		{
 			"name": "greeting",
-			"tr": ["Merhaba!", "Nasılsın?", "Nasıl gidiyor?"],
-			"en": ["Hi!", "Hello!", "Hello there!"],
+			"tr": ["Merhaba!", "Nasılsın?", "Nasıl gidiyor?","İyi günler!","Hoş geldin!",],
+			"en": ["Hi!","Hey!","Hello!","Hello there!","Howdy!","Nice to meet you!","Welcome!",],
 		},
 		{
 			"name": "motivational",
-			"tr": ["Başarabilirsin!", "Yapmak istediğini gözünde büyütme!", "Başlamak bitirmenin yarısıdır!",],
-			"en": ["You can do it!", "Doing things is easier when you start!", "Always try to get better!",],
+			"tr": ["Çalışmaya devam et!","Her adım, hedefe yaklaşmanı sağlar.","Başarı, pes etmeyenlere gelir.","Pes etme!","Zorluklar seni güçlendirir!","Hatalarından ders al!","Başarabilirsin!","Yapmak istediğini gözünde büyütme!","Başlamak bitirmenin yarısıdır!",],
+			"en": ["Keep pushing forward!","Believe in yourself!","You can do it!","Doing things is easier when you start!","Always try to get better!","Never give up!","You've got this!","Focus on progress, not perfection!","Learn from your mistakes!","Success is within reach!"],
 		},
 		{
 			"name": "settings",
