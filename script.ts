@@ -379,7 +379,7 @@ function translate() {
 		{
 			"name": "api-key-info",
 			"tr": ["API key'i \"https://freecurrencyapi.com\" kayıt olup alabilirsin."],
-			"en": ["To get your API Key sign in to : https://freecurrencyapi.com .(optional)"],
+			"en": ["To get your API Key sign in to : https://freecurrencyapi.com (optional)."],
 		},
 		{
 			"name": "save-button",
