@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<title>New Tab</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="bootstrap/bootstrap.css">
-<script src="tsc/script.js"></script>
-<script src="bootstrap/bootstrap.js"></script>
-
+	<title>New Tab</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="bootstrap/bootstrap.css">
+	<script src="tsc/script.js"></script>
+	<script src="bootstrap/bootstrap.js"></script>
 </head>
-
 <body class="container-fluid row d-flex justify-content-center align-items-center vh-100 bg-dark">
 
 <div class="col-lg-4 row d-flex justify-content-center align-items-start h-100 flex-fill">
@@ -128,24 +125,20 @@
 </div>
 
 <div class="collapse sticky-bottom" id="navbarToggleExternalContent">
-	<div class="container-fluid bg-dark p-4 min-vh-100">
+	<div class="container-fluid bg-dark p-4 mb-5 min-vh-100">
 		<!-- Settings text -->
 		<div class="row justify-content-center align-items-center">
-			<div class="col-1 text-center">
-				<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white" class="bi bi-gear-fill" viewBox="0 0 16 16">
-					<path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
-				</svg>
-			</div>
-			<div class="col-11">
-				<h1 class="text-white fw-bold" name="settings">
-				</h1>
-			</div>
+			<svg class="col-1" width="32" height="32" fill="white" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+				<path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+			</svg>
+			<h1 class="col-11 text-white" name="settings">
+			</h1>
 		</div>
 		<hr class="border-2 border-primary">
 		<!-- Link settings -->
 		<div class="row justify-content-evenly">
-			<div class="col-lg-5 p-1 m-1 rounded bg-primary">
-				<div class="row d-flex justify-content-center align-items-center">
+			<div class="col-lg-11 bg-primary rounded p-1 m-1">
+				<div class="row">
 					<div class="col-4">
 						<div class="input-group">
 							<span class="input-group-text" name="link-label"></span>
@@ -165,8 +158,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-5 bg-primary rounded p-1 m-1">
-				<div class="row d-flex justify-content-center align-items-center">
+			<div class="col-lg-11 bg-primary rounded p-1 m-1">
+				<div class="row">
 					<div class="col-4">
 						<div class="input-group">
 							<span class="input-group-text" name="link-label"></span>
@@ -184,10 +177,8 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="row justify-content-evenly">
-			<div class="col-lg-5 bg-danger rounded p-1 m-1">
-				<div class="row d-flex justify-content-center align-items-center">
+			<div class="col-lg-11 bg-danger rounded p-1 m-1">
+				<div class="row">
 					<div class="col-4">
 						<div class="input-group">
 							<span class="input-group-text" name="link-label"></span>
@@ -205,8 +196,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-5 bg-danger rounded p-1 m-1">
-				<div class="row d-flex justify-content-center align-items-center">
+			<div class="col-lg-11 bg-danger rounded p-1 m-1">
+				<div class="row">
 					<div class="col-4">
 						<div class="input-group">
 							<span class="input-group-text" name="link-label"></span>
@@ -224,10 +215,8 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="row justify-content-evenly">
-			<div class="col-lg-5 bg-success rounded p-1 m-1">
-				<div class="row d-flex justify-content-center align-items-center">
+			<div class="col-lg-11 bg-success rounded p-1 m-1">
+				<div class="row">
 					<div class="col-4">
 						<div class="input-group">
 							<span class="input-group-text" name="link-label"></span>
@@ -245,8 +234,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-5 bg-success rounded p-1 m-1">
-				<div class="row d-flex justify-content-center align-items-center">
+			<div class="col-lg-11 bg-success rounded p-1 m-1">
+				<div class="row">
 					<div class="col-4">
 						<div class="input-group">
 							<span class="input-group-text" name="link-label"></span>
@@ -264,10 +253,8 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="row justify-content-evenly">
-			<div class="col-lg-5 bg-warning rounded p-1 m-1">
-				<div class="row d-flex justify-content-center align-items-center">
+			<div class="col-lg-11 bg-warning rounded p-1 m-1">
+				<div class="row">
 					<div class="col-4">
 						<div class="input-group">
 							<span class="input-group-text"  name="link-label"></span>
@@ -285,8 +272,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-5 bg-warning rounded p-1 m-1">
-				<div class="row d-flex justify-content-center align-items-center">
+			<div class="col-lg-11 bg-warning rounded p-1 m-1">
+				<div class="row">
 					<div class="col-4">
 						<div class="input-group">
 							<span class="input-group-text"  name="link-label"></span>
@@ -295,7 +282,7 @@
 					</div>
 					<div class="col-4">
 						<div class="input-group">
-							<span class="input-group-text"  name="name-label"></span>
+							<span class="input-group-text" name="name-label"></span>
 							<input type="text" class="form-control" id="select_name_7">
 						</div>
 					</div>
@@ -309,80 +296,78 @@
 			<span class="badge badge-info bg-danger" name="delete-link"></span>
 			<span class="badge badge-info bg-primary" name="image-link"></span>
 		</div>
+		<hr class="border-2 border-primary">
 		<!-- Currency settings -->
-		<div class="row bg-primary rounded mt-1 mb-1">
-			<div class="col">
-				<div class="row d-flex justify-content-center align-items-center">
-					<div class="col fw-bold text-center" name="base-currency-label">
-					</div>
-					<div class="col">
-						<select class="form-select" id="base_currency">
-							<option value="USD">USD</option>
-							<option value="EUR">EUR</option>
-							<option value="TRY">TRY</option>
-							<option value="GBP">GBP</option>
-							<option value="AUD">AUD</option>
-							<option value="JPY">JPY</option>
-							<option value="CNY">CNY</option>
-						</select>
-					</div>
-					<div class="col fw-bold text-center" name="currencies-label">
-					</div>
-					<div class="col">
-						<select class="form-select" id="cur_select_0">
-							<option value="USD">USD</option>
-							<option value="EUR">EUR</option>
-							<option value="TRY">TRY</option>
-							<option value="GBP">GBP</option>
-							<option value="AUD">AUD</option>
-							<option value="JPY">JPY</option>
-							<option value="CNY">CNY</option>
-						</select>
-					</div>
-					<div class="col">
-						<select class="form-select" id="cur_select_1">
-							<option value="USD">USD</option>
-							<option value="EUR">EUR</option>
-							<option value="TRY">TRY</option>
-							<option value="GBP">GBP</option>
-							<option value="AUD">AUD</option>
-							<option value="JPY">JPY</option>
-							<option value="CNY">CNY</option>
-						</select>
-					</div>
-					<div class="col">
-						<select class="form-select" id="cur_select_2">
-							<option value="USD">USD</option>
-							<option value="EUR">EUR</option>
-							<option value="TRY">TRY</option>
-							<option value="GBP">GBP</option>
-							<option value="AUD">AUD</option>
-							<option value="JPY">JPY</option>
-							<option value="CNY">CNY</option>
-						</select>
-					</div>
-					<div class="col-lg-5">
-						<div class="input-group mb-1 mt-1">
-							<span class="input-group-text" id="input-group">API Key</span>
-							<input type="text" class="form-control" id="api_key_select">
-						</div>
-					</div>
+		<div class="row bg-primary rounded m-1 d-flex justify-content-center align-items-center">
+			<div class="col-lg-2 mt-1 mb-1">
+				<select class="form-select" id="base_currency">
+					<option disabled name="base-currency-label"></option>
+					<option value="USD">USD</option>
+					<option value="EUR">EUR</option>
+					<option value="TRY">TRY</option>
+					<option value="GBP">GBP</option>
+					<option value="AUD">AUD</option>
+					<option value="JPY">JPY</option>
+					<option value="CNY">CNY</option>
+				</select>
+			</div>
+			<div class="col fw-bold text-center mt-1 mb-1" name="currencies-label">
+			</div>
+			<div class="col mt-1 mb-1">
+				<select class="form-select" id="cur_select_0">
+					<option value="USD">USD</option>
+					<option value="EUR">EUR</option>
+					<option value="TRY">TRY</option>
+					<option value="GBP">GBP</option>
+					<option value="AUD">AUD</option>
+					<option value="JPY">JPY</option>
+					<option value="CNY">CNY</option>
+				</select>
+			</div>
+			<div class="col mt-1 mb-1">
+				<select class="form-select" id="cur_select_1">
+					<option value="USD">USD</option>
+					<option value="EUR">EUR</option>
+					<option value="TRY">TRY</option>
+					<option value="GBP">GBP</option>
+					<option value="AUD">AUD</option>
+					<option value="JPY">JPY</option>
+					<option value="CNY">CNY</option>
+				</select>
+			</div>
+			<div class="col mt-1 mb-1">
+				<select class="form-select" id="cur_select_2">
+					<option value="USD">USD</option>
+					<option value="EUR">EUR</option>
+					<option value="TRY">TRY</option>
+					<option value="GBP">GBP</option>
+					<option value="AUD">AUD</option>
+					<option value="JPY">JPY</option>
+					<option value="CNY">CNY</option>
+				</select>
+			</div>
+			<div class="col-lg-3 mt-1 mb-1">
+				<div class="input-group">
+					<span class="input-group-text" id="input-group">API Key</span>
+					<input type="text" class="form-control" id="api_key_select">
 				</div>
 			</div>
 		</div>
 		<!-- Save Button -->
-		<div class="row justify-content-center">
-			<button type="submit" class="col-lg-2 btn btn-primary fw-bold" id="save-button" name="save-button"></button>
-		</div>
 		<div class="text-center">
 			<span class="badge bg-warning text-black" name="api-key-info"></span>
 			<span class="badge bg-primary" name="rate-update-info"></span>
+		</div>
+		<hr class="border-2 border-primary">
+		<div class="text-center">
 			<span class="badge bg-primary" name="cookie-info"></span>
 			<span class="badge bg-warning text-black" name="delete-cookie-warning"></span>
+			<br>
+			<button type="submit" class="col-lg-2 btn btn-primary fw-bold mt-3" id="save-button" name="save-button"></button>
 		</div>
+		<hr class="border-2 border-primary">
 	</div>
 </div>
-
 <nav class="navbar fixed-bottom navbar-dark">
 	<div class="container-fluid">
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent">
