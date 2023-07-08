@@ -10,9 +10,9 @@
 </p>
 <br>
 
-![Screenshot 2023-07-07 at 17-42-05 New Tab](https://github.com/enfyna/fx-new-tab/assets/91965312/05275107-f806-465b-9ddc-1564b465e60d)
+![image_1](https://github.com/enfyna/fx-new-tab/assets/91965312/05275107-f806-465b-9ddc-1564b465e60d)
 
-![11](https://github.com/enfyna/fx-new-tab/assets/91965312/b22db60e-af42-46f5-a51a-67fa0c2b306e)
+![image_2](https://github.com/enfyna/fx-new-tab/assets/91965312/b22db60e-af42-46f5-a51a-67fa0c2b306e)
 
 <br>
 <h3 align="center">
