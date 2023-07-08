@@ -20,6 +20,14 @@
     Add to Firefox
   </a>
 </h3>
+
+
+<h6 align="center">
+  <a href="https://enfyna.github.io/fx-new-tab">
+    or test it here
+  </a>
+</h6>
+
 <br>
 <hr>
 
