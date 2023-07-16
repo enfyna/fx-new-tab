@@ -172,7 +172,7 @@ function get_updated_rates(){
 	const base_currency = get_base_currency().toLocaleLowerCase();
 	const currencies = get_currencies();
 	const req = new XMLHttpRequest();
-	
+
 	req.onreadystatechange = get;
 	req.open(
 		"GET",
@@ -186,7 +186,7 @@ function get_updated_rates(){
 				let currency = currencies[i];
 				const updated_rate_string = (1.0 / parseFloat(res[base_currency][currency.name.toLocaleLowerCase()])).toFixed(2);
 				const updated_rate_float = parseFloat(updated_rate_string);
-				
+
 				update_color(elm_id[1]+i, updated_rate_float - parseFloat(currency.rate));
 				currency.rate = updated_rate_string;
 			};
