@@ -1,4 +1,4 @@
-const currency_api = "https://api.freecurrencyapi.com/v1/latest";
+const currency_api = "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/";
 const img_api = "https://icon.horse/icon/";
 const elm_id = [
     "cur_name_",
@@ -15,7 +15,7 @@ window.addEventListener("load", ready);
 function ready() {
     translate();
     configure_shortcuts();
-    if (get_api_key() != "") {
+    if (is_currency_rates_enabled()) {
         update_currency_html_elements();
         if (did_a_day_pass()) {
             get_updated_rates();
@@ -49,10 +49,9 @@ function configure_shortcuts() {
     for (let i = 0; i < 8; i++) {
         var shortcut = shortcuts[i];
         var a_node = document.getElementById(elm_id[6] + i);
-        if (a_node.parentElement === null)
-            continue;
+        var a_node_parent = a_node.parentElement;
         if (shortcut.link == "") {
-            a_node.parentElement.hidden = true;
+            a_node_parent.hidden = true;
             continue;
         }
         ;
@@ -60,7 +59,7 @@ function configure_shortcuts() {
             shortcut.name = shortcut.link.replace("https://", "").replace("http://", "").split("/")[0];
         }
         ;
-        a_node.parentElement.hidden = false;
+        a_node_parent.hidden = false;
         a_node.href = shortcut.link;
         var name_node = (document.getElementById(elm_id[7] + i));
         var img_node = (document.getElementById(elm_id[8] + i));
@@ -113,14 +112,14 @@ function did_a_day_pass() {
     ;
     return false;
 }
-function get_api_key() {
-    let key = localStorage.getItem("API_KEY");
-    if (key == null || key == "") {
+function is_currency_rates_enabled() {
+    let key = localStorage.getItem("is_currency_rates_enabled");
+    if (key == null || key == "" || key == "false") {
         hide_currency_elements(true);
-        return "";
+        return false;
     }
     hide_currency_elements(false);
-    return key;
+    return true;
 }
 function get_base_currency() {
     let currency = localStorage.getItem("base_currency");
@@ -150,22 +149,18 @@ function get_updated_rates() {
         console.log("No internet connection. Cant get currency rates.");
         return;
     }
-    const API_KEY = get_api_key();
-    const param1 = "base_currency=";
-    const param2 = "currencies=";
-    const base_currency = get_base_currency();
+    const base_currency = get_base_currency().toLocaleLowerCase();
     const currencies = get_currencies();
     const req = new XMLHttpRequest();
     req.onreadystatechange = get;
-    req.open("GET", currency_api.concat("?", param1, base_currency, "&", param2, [currencies[0].name, currencies[1].name, currencies[2].name].toString()));
-    req.setRequestHeader("apikey", API_KEY);
+    req.open("GET", currency_api.concat(base_currency, ".min.json"));
     req.send();
     function get() {
         if (this.readyState == 4 && this.status == 200) {
             const res = JSON.parse(this.responseText);
             for (let i = 0; i < 3; i++) {
                 let currency = currencies[i];
-                const updated_rate_string = (1.0 / parseFloat(res["data"][currency.name])).toFixed(2);
+                const updated_rate_string = (1.0 / parseFloat(res[base_currency][currency.name.toLocaleLowerCase()])).toFixed(2);
                 const updated_rate_float = parseFloat(updated_rate_string);
                 update_color(elm_id[1] + i, updated_rate_float - parseFloat(currency.rate));
                 currency.rate = updated_rate_string;
@@ -213,8 +208,8 @@ function save() {
     let base_currency_node = document.getElementById("base_currency");
     let base_currency = base_currency_node.value;
     localStorage.setItem("base_currency", base_currency);
-    let apikey_node = document.getElementById("api_key_select");
-    localStorage.setItem("API_KEY", apikey_node.value);
+    let api_node = document.getElementById("enable_api");
+    localStorage.setItem("is_currency_rates_enabled", "" + api_node.checked);
     let currencies = get_currencies();
     let shortcuts = get_shortcuts();
     for (let i = 0; i < 8; i++) {
@@ -260,8 +255,6 @@ function save() {
             shortcut.img = event.target.result;
             save_shortcuts(shortcuts);
         });
-        if (img_node.files == null)
-            continue;
         var image = img_node.files.item(0);
         if (image == null)
             continue;
@@ -269,7 +262,7 @@ function save() {
     }
     ;
     localStorage.setItem("currencies", JSON.stringify(currencies));
-    if (apikey_node.value != "") {
+    if (api_node.checked) {
         hide_currency_elements(false);
         get_updated_rates();
     }
@@ -289,8 +282,8 @@ function save_shortcuts(shortcuts) {
     ;
 }
 function config_settings_page() {
-    const api_node = document.getElementById("api_key_select");
-    api_node.value = get_api_key();
+    const api_node = document.getElementById("enable_api");
+    api_node.checked = is_currency_rates_enabled();
     const base_cur_node = document.getElementById("base_currency");
     base_cur_node.value = get_base_currency();
     const shortcuts = get_shortcuts();
@@ -366,14 +359,19 @@ function translate() {
             "en": ["Currency rates update daily."],
         },
         {
-            "name": "currency-api-warning",
-            "tr": ["Bu eklentinin \"https://freecurrencyapi.com\" ile bir bağlantısı yoktur. Giriş yapmayı tercih ederseniz onların gizlilik politikalarını kabul etmeniz gerekmektedir."],
-            "en": ["This addon has no affiliation with \"https://freecurrencyapi.com\". If you choose to sign in you have to accept their privacy policies."],
+            "name": "enable-api-label",
+            "tr": ["Kur bilgilerini göster"],
+            "en": ["Enable currency rates"],
+        },
+        {
+            "name": "currency-api-info",
+            "tr": ["Döviz değerleri bu API kullanılarak alınmaktadır : https://github.com/fawazahmed0/currency-api"],
+            "en": ["Currency rates are provided by this API : https://github.com/fawazahmed0/currency-api"],
         },
         {
             "name": "api-key-info",
-            "tr": ["Ana sayfanda 3 tane kurun değerini görmek istiyorsan kullanabilirsin. Bu özellik API key'in varsa çalışır. API key'i \"https://freecurrencyapi.com\" kayıt olup alabilirsin."],
-            "en": ["This is a optional feature that adds 3 currency rate info to your main page. .This feature will work if you have a API Key. To get it sign in to : https://freecurrencyapi.com (optional)."],
+            "tr": ["Ana sayfanda 3 tane kurun değerini görmek istiyorsan kullanabilirsin."],
+            "en": ["This is a optional feature that adds 3 currency rate info to your main page."],
         },
         {
             "name": "save-button",

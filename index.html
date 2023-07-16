@@ -9,7 +9,8 @@
 	<script src="bootstrap/bootstrap.js"></script>
 </head>
 
-<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+<svg xmlns="http://www.w3.org/2000/svg" hidden="true">
+	<!-- Icons  -->
 	<symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
 		<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
 	</symbol>
@@ -21,43 +22,35 @@
 	</symbol>
 </svg>
 
-<body class="container-fluid row d-flex justify-content-center align-items-center vh-100 bg-dark">
+<body class="container-fluid row d-flex vh-100 bg-black">
 
 <div class="col-lg-4 row d-flex justify-content-center align-items-start h-100 flex-fill">
 	<!-- Currency rates -->
 	<div class="col-lg-12 col-sm-12 row d-flex justify-content-center align-items-center" id="currencies">
 		<div class="col-lg-4 col-sm-4 mt-4 mb-4" hidden="true">
 			<div class="card p-2 text-center text-white fw-bold text-nowrap bg-primary">
-				<h5 class="card-header" id="cur_name_0">
-				</h5>
-				<p class="card-text" id="cur_0">
-				</p>
+				<h5 class="card-header" id="cur_name_0"></h5>
+				<p class="card-text" id="cur_0"></p>
 			</div>
 		</div>
 		<div class="col-lg-4 col-sm-4 mt-4 mb-4" hidden="true">
 			<div class="card p-2 text-center text-white fw-bold text-nowrap bg-primary">
-				<h5 class="card-header" id="cur_name_1">
-				</h5>
-				<p class="card-text" id="cur_1">
-				</p>
+				<h5 class="card-header" id="cur_name_1"></h5>
+				<p class="card-text" id="cur_1"></p>
 			</div>
 		</div>
 		<div class="col-lg-4 col-sm-4 mt-4 mb-4" hidden="true">
 			<div class="card p-2 text-center text-white fw-bold text-nowrap bg-primary">
-				<h5 class="card-header" id="cur_name_2">
-				</h5>
-				<p class="card-text" id="cur_2">
-				</p>
+				<h5 class="card-header" id="cur_name_2"></h5>
+				<p class="card-text" id="cur_2"></p>
 			</div>
 		</div>
 	</div>
 	<!-- Greeting message -->
-	<div class="col-lg-12 col-sm-12 ">
-		<div class="card p-2 text-center text-white bg-dark">
-			<h1 class="card-header" name="greeting">
-			</h1>
-			<h5 class="card-title mt-5 mb-5" name="motivational">
-			</h5>
+	<div class="col-lg-12 col-sm-12">
+		<div class="card p-2 text-center text-white bg-black">
+			<h1 class="card-header" name="greeting"></h1>
+			<h5 class="card-title mt-5 mb-5" name="motivational"></h5>
 		</div>
 	</div>
 </div>
@@ -138,29 +131,33 @@
 </div>
 
 <div class="collapse sticky-bottom" id="navbarToggleExternalContent">
-	<div class="container-fluid bg-dark p-4 mb-5 min-vh-100">
+	<div class="container-fluid bg-black p-4 mb-4 min-vh-100">
 		<!-- Settings text -->
-		<div class="row justify-content-center align-items-center">
+		<div class="row align-items-center">
 			<svg class="col-1" width="24" height="24" role="img"><use xlink:href="#settings-gear-fill"/></svg>
-			<h1 class="col-11 text-white" name="settings">
-			</h1>
+			<h1 class="col-8 text-white" name="settings"></h1>
+			<button type="submit" class="col-3 btn btn-primary fw-bold" id="save-button" name="save-button"></button>
+		</div>
+		<hr class="border-2 border-primary">
+		<!-- Save Info -->
+		<div class="row g-lg-2">
+			<div class="col-lg-6">
+				<div class="alert alert-primary d-flex align-items-center h-75" role="alert">
+					<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+					<div name="cookie-info"></div>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="alert alert-danger d-flex align-items-center h-75" role="alert">
+					<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#exclamation-triangle-fill"/></svg>
+					<div name="delete-cookie-warning"></div>
+				</div>
+			</div>
 		</div>
 		<hr class="border-2 border-primary">
 		<!-- Link settings -->
-		<div class="text-center">
-			<div class="alert alert-primary d-flex align-items-center" role="alert">
-				<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
-				<div name="delete-link">
-				</div>
-			</div>
-			<div class="alert alert-primary d-flex align-items-center" role="alert">
-				<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
-				<div name="image-link">
-				</div>
-			</div>
-		</div>
-		<div class="row justify-content-evenly">
-			<div class="col-lg-11 bg-primary rounded p-1 m-1">
+		<div class="row">
+			<div class="col-lg-12 bg-primary rounded p-1 m-1">
 				<div class="row">
 					<div class="col-4">
 						<div class="input-group">
@@ -181,7 +178,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-11 bg-danger rounded p-1 m-1">
+			<div class="col-lg-12 bg-danger rounded p-1 m-1">
 				<div class="row">
 					<div class="col-4">
 						<div class="input-group">
@@ -200,7 +197,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-11 bg-success rounded p-1 m-1">
+			<div class="col-lg-12 bg-success rounded p-1 m-1">
 				<div class="row">
 					<div class="col-4">
 						<div class="input-group">
@@ -219,7 +216,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-11 bg-warning rounded p-1 m-1">
+			<div class="col-lg-12 bg-warning rounded p-1 m-1">
 				<div class="row">
 					<div class="col-4">
 						<div class="input-group">
@@ -238,7 +235,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-11 bg-primary rounded p-1 m-1">
+			<div class="col-lg-12 bg-primary rounded p-1 m-1">
 				<div class="row">
 					<div class="col-4">
 						<div class="input-group">
@@ -257,7 +254,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-11 bg-danger rounded p-1 m-1">
+			<div class="col-lg-12 bg-danger rounded p-1 m-1">
 				<div class="row">
 					<div class="col-4">
 						<div class="input-group">
@@ -276,7 +273,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-11 bg-success rounded p-1 m-1">
+			<div class="col-lg-12 bg-success rounded p-1 m-1">
 				<div class="row">
 					<div class="col-4">
 						<div class="input-group">
@@ -295,7 +292,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-11 bg-warning rounded p-1 m-1">
+			<div class="col-lg-12 bg-warning rounded p-1 m-1">
 				<div class="row">
 					<div class="col-4">
 						<div class="input-group">
@@ -315,42 +312,30 @@
 				</div>
 			</div>
 		</div>
-		<hr class="border-2 border-primary">
-		<!-- Save Button -->
-		<div class="text-center">
-			<div class="alert alert-primary d-flex align-items-center" role="alert">
-				<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
-				<div name="cookie-info">
+		<!-- Link settings info -->
+		<div class="row g-lg-2">
+			<div class="col-lg-6">
+				<div class="alert alert-primary d-flex align-items-center h-75 mt-2" role="alert">
+					<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+					<div name="delete-link"></div>
 				</div>
 			</div>
-			<div class="alert alert-danger d-flex align-items-center" role="alert">
-				<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#exclamation-triangle-fill"/></svg>
-				<div name="delete-cookie-warning">
-				</div>
-			</div>
-			<button type="submit" class="col-lg-2 btn btn-primary fw-bold mt-1" id="save-button" name="save-button"></button>
-			<br class="m-5">
-		</div>
-		<hr class="border-2 border-primary">
-		<!-- Currency settings -->
-		<div class="text-center">
-			<div class="alert alert-primary d-flex align-items-center" role="alert">
-				<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
-				<div name="api-key-info">
-				</div>
-			</div>
-			<div class="alert alert-warning d-flex align-items-center" role="alert">
-				<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
-				<div name="rate-update-info">
-				</div>
-			</div>
-			<div class="alert alert-danger d-flex align-items-center" role="alert">
-				<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#exclamation-triangle-fill"/></svg>
-				<div name="currency-api-warning">
+			<div class="col-lg-6">
+				<div class="alert alert-primary d-flex align-items-center h-75 mt-2" role="alert">
+					<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+					<div name="image-link"></div>
 				</div>
 			</div>
 		</div>
-		<div class="row bg-primary rounded m-1 d-flex justify-content-center align-items-center">
+		<hr class="border-2 border-primary">
+		<!-- Currency API settings -->
+		<div class="row bg-primary rounded mb-1 d-flex justify-content-center align-items-center">
+			<div class="col-lg-3 mt-1 mb-1">
+				<div class="form-check form-switch">
+					<input class="form-check-input" type="checkbox" id="enable_api">
+					<label class="form-check-label fw-bold text-white" for="enable-api" name="enable-api-label"></label>
+				</div>
+			</div>	
 			<div class="col-lg-2 mt-1 mb-1">
 				<select class="form-select" id="base_currency">
 					<option disabled name="base-currency-label"></option>
@@ -363,7 +348,7 @@
 					<option value="CNY">CNY</option>
 				</select>
 			</div>
-			<div class="col fw-bold text-center mt-1 mb-1" name="currencies-label">
+			<div class="col fw-bold text-center text-white mt-1 mb-1" name="currencies-label">
 			</div>
 			<div class="col mt-1 mb-1">
 				<select class="form-select" id="cur_select_0">
@@ -398,12 +383,27 @@
 					<option value="CNY">CNY</option>
 				</select>
 			</div>
-			<div class="col-lg-3 mt-1 mb-1">
-				<div class="input-group">
-					<span class="input-group-text" id="input-group">API Key</span>
-					<input type="text" class="form-control" id="api_key_select">
+		</div>
+		<!-- Currency API warnings -->
+		<div class="row g-lg-2">
+			<div class="col-lg-6">
+				<div class="alert alert-primary d-flex align-items-center h-75 mt-2" role="alert">
+					<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+					<div name="api-key-info"></div>
 				</div>
-			</div>	
+			</div>
+			<div class="col-lg-6">
+				<div class="alert alert-warning d-flex align-items-center h-75 mt-2" role="alert">
+					<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+					<div name="rate-update-info"></div>
+				</div>
+			</div>
+			<div class="col-lg-12">
+				<div class="alert alert-success d-flex align-items-center" role="alert">
+					<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+					<div name="currency-api-info"></div>
+				</div>
+			</div>
 		</div>
 		<hr class="border-2 border-primary">
 	</div>

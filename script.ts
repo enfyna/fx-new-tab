@@ -13,7 +13,7 @@ interface currencies_dict {
 interface currencies_arr {
 	[index:number]:currencies_dict;
 }
-const currency_api = "https://api.freecurrencyapi.com/v1/latest";
+const currency_api = "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/";
 const img_api = "https://icon.horse/icon/";
 const elm_id = [
 	"cur_name_",
@@ -32,7 +32,7 @@ window.addEventListener("load",ready);
 function ready(){
 	translate();
 	configure_shortcuts();
-	if(get_api_key() != ""){
+	if(is_currency_rates_enabled()){
 		update_currency_html_elements();
 		if(did_a_day_pass()){
 			get_updated_rates();
@@ -63,27 +63,29 @@ function get_shortcuts() : shortcut_arr{
 function configure_shortcuts(){
 	let shortcuts : shortcut_arr = get_shortcuts();
 	for (let i = 0; i < 8; i++){
-		var shortcut : shortcut_dict = shortcuts[i]
-		var a_node = document.getElementById(elm_id[6]+i) as HTMLAnchorElement;
-		if(a_node.parentElement === null)continue;
+		set_shortcut_node(shortcuts[i], i);
+	};
+}
+function set_shortcut_node(shortcut : shortcut_dict, i : Number){
+	var a_node = document.getElementById(elm_id[6]+i) as HTMLAnchorElement;
+	var a_node_parent = a_node.parentElement;
 
-		if(shortcut.link == ""){
-			a_node.parentElement.hidden = true;
-			continue;
-		};
-		if(shortcut.name == ""){
-			shortcut.name = shortcut.link.replace("https://","").replace("http://","").split("/")[0];
-		};
-		a_node.parentElement.hidden = false;
-		a_node.href = shortcut.link;
-		var name_node = (document.getElementById(elm_id[7]+i)) as HTMLHeadingElement;
-		var img_node = (document.getElementById(elm_id[8]+i)) as HTMLImageElement;
-		name_node.innerHTML = shortcut.name;
-		img_node.src = shortcut.img;
-		if(shortcut.img == "" || img_node.naturalHeight < 64 || img_node.naturalWidth < 64){
-			get_favicon_from_url(shortcut.link,i);
-			continue;
-		};
+	if(shortcut.link == ""){
+		a_node_parent.hidden = true;
+		return;
+	};
+	if(shortcut.name == ""){
+		shortcut.name = shortcut.link.replace("https://","").replace("http://","").split("/")[0];
+	};
+	a_node_parent.hidden = false;
+	a_node.href = shortcut.link;
+	var name_node = (document.getElementById(elm_id[7]+i)) as HTMLHeadingElement;
+	var img_node = (document.getElementById(elm_id[8]+i)) as HTMLImageElement;
+	name_node.innerHTML = shortcut.name;
+	img_node.src = shortcut.img;
+	if(shortcut.img == "" || img_node.naturalHeight < 64 || img_node.naturalWidth < 64){
+		get_favicon_from_url(shortcut.link,i);
+		return;
 	};
 }
 
@@ -129,14 +131,14 @@ function did_a_day_pass() : boolean{
 	return false;
 }
 
-function get_api_key() : string{
-	let key = localStorage.getItem("API_KEY");
-	if(key == null || key == ""){
+function is_currency_rates_enabled() : boolean {
+	let key = localStorage.getItem("is_currency_rates_enabled");
+	if(key == null || key == "" || key == "false"){
 		hide_currency_elements(true);
-		return "";
+		return false
 	}
 	hide_currency_elements(false);
-	return key;
+	return true;
 }
 
 function get_base_currency() : string{
@@ -167,27 +169,22 @@ function get_updated_rates(){
 		console.log("No internet connection. Cant get currency rates.");
 		return;
 	}
-	const API_KEY = get_api_key();
-
-	const param1 = "base_currency=";
-	const param2 = "currencies=";
-	const base_currency = get_base_currency();
+	const base_currency = get_base_currency().toLocaleLowerCase();
 	const currencies = get_currencies();
 	const req = new XMLHttpRequest();
 	
 	req.onreadystatechange = get;
 	req.open(
 		"GET",
-		currency_api.concat("?",param1,base_currency,"&",param2,[currencies[0].name,currencies[1].name,currencies[2].name].toString())
+		currency_api.concat(base_currency,".min.json")
 	);
-	req.setRequestHeader("apikey", API_KEY);
 	req.send();
 	function get(){
 		if (this.readyState == 4 && this.status == 200) {
 			const res = JSON.parse(this.responseText);
 			for (let i = 0; i < 3; i++) {
 				let currency = currencies[i];
-				const updated_rate_string = (1.0 / parseFloat(res["data"][currency.name])).toFixed(2);
+				const updated_rate_string = (1.0 / parseFloat(res[base_currency][currency.name.toLocaleLowerCase()])).toFixed(2);
 				const updated_rate_float = parseFloat(updated_rate_string);
 				
 				update_color(elm_id[1]+i, updated_rate_float - parseFloat(currency.rate));
@@ -235,8 +232,8 @@ function save(){
 	let base_currency = base_currency_node.value;
 	localStorage.setItem("base_currency",base_currency);
 
-	let apikey_node = document.getElementById("api_key_select") as HTMLInputElement;
-	localStorage.setItem("API_KEY",apikey_node.value);
+	let api_node = document.getElementById("enable_api") as HTMLInputElement;
+	localStorage.setItem("is_currency_rates_enabled",""+api_node.checked);
 
 	let currencies : currencies_arr = get_currencies();
 	let shortcuts : shortcut_arr = get_shortcuts();
@@ -275,13 +272,12 @@ function save(){
 				shortcut.img = event.target.result as string;
 				save_shortcuts(shortcuts);
 			});
-		if(img_node.files == null)continue;
 		var image = img_node.files.item(0);
 		if(image == null)continue;
 		reader.readAsDataURL(image);
 	};
 	localStorage.setItem("currencies",JSON.stringify(currencies));
-	if(apikey_node.value != ""){
+	if(api_node.checked){
 		hide_currency_elements(false);
 		get_updated_rates();
 	}else{
@@ -300,8 +296,9 @@ function save_shortcuts(shortcuts : shortcut_arr) {
 }
 
 function config_settings_page(){
-	const api_node = document.getElementById("api_key_select") as HTMLInputElement;
-	api_node.value = get_api_key();
+	const api_node = document.getElementById("enable_api") as HTMLInputElement;
+	api_node.checked = is_currency_rates_enabled();
+
 	const base_cur_node = document.getElementById("base_currency") as HTMLInputElement;
 	base_cur_node.value = get_base_currency();
 
@@ -377,14 +374,19 @@ function translate() {
 			"en": ["Currency rates update daily."],
 		},
 		{
-			"name":"currency-api-warning",
-			"tr":["Bu eklentinin \"https://freecurrencyapi.com\" ile bir bağlantısı yoktur. Giriş yapmayı tercih ederseniz onların gizlilik politikalarını kabul etmeniz gerekmektedir."],
-			"en":["This addon has no affiliation with \"https://freecurrencyapi.com\". If you choose to sign in you have to accept their privacy policies."],
+			"name":"enable-api-label",
+			"tr":["Kur bilgilerini göster"],
+			"en":["Enable currency rates"],
+		},
+		{
+			"name":"currency-api-info",
+			"tr":["Döviz değerleri bu API kullanılarak alınmaktadır : https://github.com/fawazahmed0/currency-api"],
+			"en":["Currency rates are provided by this API : https://github.com/fawazahmed0/currency-api"],
 		},
 		{
 			"name": "api-key-info",
-			"tr": ["Ana sayfanda 3 tane kurun değerini görmek istiyorsan kullanabilirsin. Bu özellik API key'in varsa çalışır. API key'i \"https://freecurrencyapi.com\" kayıt olup alabilirsin."],
-			"en": ["This is a optional feature that adds 3 currency rate info to your main page. .This feature will work if you have a API Key. To get it sign in to : https://freecurrencyapi.com (optional)."],
+			"tr": ["Ana sayfanda 3 tane kurun değerini görmek istiyorsan kullanabilirsin."],
+			"en": ["This is a optional feature that adds 3 currency rate info to your main page."],
 		},
 		{
 			"name": "save-button",
