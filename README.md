@@ -10,9 +10,9 @@
 </p>
 <br>
 
-![img_1](https://github.com/enfyna/fx-new-tab/assets/91965312/3a0d1ad4-1c40-46f6-b878-48db3ddfff2a)
+![img_1](https://github.com/enfyna/fx-new-tab/assets/91965312/a40b3257-f831-4eef-943f-af5cc941fa3a)
 
-![img_2](https://github.com/enfyna/fx-new-tab/assets/91965312/292ac4fd-4c5c-4788-9394-78a2976fe2d2)
+![img_2](https://github.com/enfyna/fx-new-tab/assets/91965312/a44d8393-d4b9-4e18-959d-4e9218b874c5)
 
 <br>
 <h3 align="center">
