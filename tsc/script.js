@@ -47,29 +47,31 @@ function get_shortcuts() {
 function configure_shortcuts() {
     let shortcuts = get_shortcuts();
     for (let i = 0; i < 8; i++) {
-        var shortcut = shortcuts[i];
-        var a_node = document.getElementById(elm_id[6] + i);
-        var a_node_parent = a_node.parentElement;
-        if (shortcut.link == "") {
-            a_node_parent.hidden = true;
-            continue;
-        }
-        ;
-        if (shortcut.name == "") {
-            shortcut.name = shortcut.link.replace("https://", "").replace("http://", "").split("/")[0];
-        }
-        ;
-        a_node_parent.hidden = false;
-        a_node.href = shortcut.link;
-        var name_node = (document.getElementById(elm_id[7] + i));
-        var img_node = (document.getElementById(elm_id[8] + i));
-        name_node.innerHTML = shortcut.name;
-        img_node.src = shortcut.img;
-        if (shortcut.img == "" || img_node.naturalHeight < 64 || img_node.naturalWidth < 64) {
-            get_favicon_from_url(shortcut.link, i);
-            continue;
-        }
-        ;
+        set_shortcut_node(shortcuts[i], i);
+    }
+    ;
+}
+function set_shortcut_node(shortcut, i) {
+    var a_node = document.getElementById(elm_id[6] + i);
+    var a_node_parent = a_node.parentElement;
+    if (shortcut.link == "") {
+        a_node_parent.hidden = true;
+        return;
+    }
+    ;
+    if (shortcut.name == "") {
+        shortcut.name = shortcut.link.replace("https://", "").replace("http://", "").split("/")[0];
+    }
+    ;
+    a_node_parent.hidden = false;
+    a_node.href = shortcut.link;
+    var name_node = (document.getElementById(elm_id[7] + i));
+    var img_node = (document.getElementById(elm_id[8] + i));
+    name_node.innerHTML = shortcut.name;
+    img_node.src = shortcut.img;
+    if (shortcut.img == "" || img_node.naturalHeight < 64 || img_node.naturalWidth < 64) {
+        get_favicon_from_url(shortcut.link, i);
+        return;
     }
     ;
 }
@@ -380,8 +382,8 @@ function translate() {
         },
         {
             "name": "base-currency-label",
-            "tr": ["Ana para birimi"],
-            "en": ["Base currency"],
+            "tr": ["Ana para birimini seç"],
+            "en": ["Select base currency"],
         },
         {
             "name": "currencies-label",

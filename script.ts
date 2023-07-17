@@ -395,8 +395,8 @@ function translate() {
 		},
 		{
 			"name": "base-currency-label",
-			"tr": ["Ana para birimi"],
-			"en": ["Base currency"],
+			"tr": ["Ana para birimini seç"],
+			"en": ["Select base currency"],
 		},
 		{
 			"name": "currencies-label",
