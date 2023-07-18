@@ -15,17 +15,23 @@ interface currencies_arr {
 }
 const currency_api = "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/";
 const img_api = "https://icon.horse/icon/";
-const elm_id = [
-	"cur_name_",
-	"cur_",
-	"cur_select_",
-	"select_link_",
-	"select_name_",
-	"select_img_",
-	"link_",
-	"name_",
-	"img_",
-];
+const node = {
+	"currency":{
+		"name":"currency_name_",
+		"value":"currency_value_",
+		"option":"currency_option_",
+	},
+	"shortcut":{
+		"link":"link_",
+		"name":"name_",
+		"img":"img_",
+	},
+	"shortcut_setting":{
+		"link":"select_link_",
+		"name":"select_name_",
+		"img":"select_img_",
+	},
+};
 
 window.addEventListener("load",ready);
 
@@ -66,21 +72,21 @@ function configure_shortcuts(){
 		set_shortcut_node(shortcuts[i], i);
 	};
 }
-function set_shortcut_node(shortcut : shortcut_dict, i : Number){
-	var a_node = document.getElementById(elm_id[6]+i) as HTMLAnchorElement;
-	var a_node_parent = a_node.parentElement;
 
+function set_shortcut_node(shortcut : shortcut_dict, i : Number){
+	var link_node = document.getElementById(node.shortcut.link+i) as HTMLAnchorElement;
+	var link_node_parent = link_node.parentElement;
 	if(shortcut.link == ""){
-		a_node_parent.hidden = true;
+		link_node_parent.hidden = true;
 		return;
 	};
 	if(shortcut.name == ""){
 		shortcut.name = shortcut.link.replace("https://","").replace("http://","").split("/")[0];
 	};
-	a_node_parent.hidden = false;
-	a_node.href = shortcut.link;
-	var name_node = (document.getElementById(elm_id[7]+i)) as HTMLHeadingElement;
-	var img_node = (document.getElementById(elm_id[8]+i)) as HTMLImageElement;
+	link_node_parent.hidden = false;
+	link_node.href = shortcut.link;
+	var name_node = (document.getElementById(node.shortcut.name+i)) as HTMLHeadingElement;
+	var img_node = (document.getElementById(node.shortcut.img+i)) as HTMLImageElement;
 	name_node.innerHTML = shortcut.name;
 	img_node.src = shortcut.img;
 	if(shortcut.img == "" || img_node.naturalHeight < 64 || img_node.naturalWidth < 64){
@@ -110,7 +116,7 @@ function get_favicon_from_url(url : string, idx : Number){
 		canvas.height = foreignImg.height;
 		context.drawImage(foreignImg, 0, 0);
 		var image = canvas.toDataURL();
-		var img_node = document.getElementById(elm_id[8]+idx) as HTMLImageElement;
+		var img_node = document.getElementById(node.shortcut.img+idx) as HTMLImageElement;
 		img_node.src = image;
 		let shortcuts = get_shortcuts();
 		shortcuts[idx.toString()]["img"] = image;
@@ -187,7 +193,7 @@ function get_updated_rates(){
 				const updated_rate_string = (1.0 / parseFloat(res[base_currency][currency.name.toLocaleLowerCase()])).toFixed(2);
 				const updated_rate_float = parseFloat(updated_rate_string);
 
-				update_color(elm_id[1]+i, updated_rate_float - parseFloat(currency.rate));
+				update_color(node.currency.value+i, updated_rate_float - parseFloat(currency.rate));
 				currency.rate = updated_rate_string;
 			};
 			localStorage.setItem("currencies", JSON.stringify(currencies));
@@ -200,9 +206,9 @@ function update_currency_html_elements(){
 	const currencies = get_currencies();
 	for (let i = 0; i < 3; i++) {
 		const currency = currencies[i];
-		let cur_node = document.getElementById(elm_id[0]+i) as HTMLElement;
+		let cur_node = document.getElementById(node.currency.name+i) as HTMLElement;
 		cur_node.innerHTML = currency.name;
-		let val_node = document.getElementById(elm_id[1]+i) as HTMLElement;
+		let val_node = document.getElementById(node.currency.value+i) as HTMLElement;
 		val_node.innerHTML = currency.rate;
 	};
 }
@@ -219,7 +225,7 @@ const card_class = "card p-2 text-center text-white fw-bold text-nowrap"
 function update_color(child_id : string, diff : number){
 	const node = document.getElementById(child_id) as HTMLElement;
 	const parent_node = node.parentElement;
-	if(parent_node == null)return;
+	if(parent_node == null) return;
 	let color = "bg-danger";
 	if(diff >= 0){
 		color = "bg-success";
@@ -239,13 +245,13 @@ function save(){
 	let shortcuts : shortcut_arr = get_shortcuts();
 	for (let i = 0; i < 8; i++){
 		if(i < 3){
-			const currency_node = document.getElementById(elm_id[2]+i) as HTMLInputElement;
+			const currency_node = document.getElementById(node.currency.option+i) as HTMLInputElement;
 			currencies[i].name = currency_node.value;
 		};
 		var shortcut : shortcut_dict = shortcuts[i];
-		const link_node = document.getElementById(elm_id[3]+i) as HTMLInputElement;
-		const name_node = document.getElementById(elm_id[4]+i) as HTMLInputElement;
-		const img_node = document.getElementById(elm_id[5]+i) as HTMLInputElement;
+		const link_node = document.getElementById(node.shortcut_setting.link+i) as HTMLInputElement;
+		const name_node = document.getElementById(node.shortcut_setting.name+i) as HTMLInputElement;
+		const img_node = document.getElementById(node.shortcut_setting.img+i) as HTMLInputElement;
 		if(shortcut.link != link_node.value){
 			shortcut.link = link_node.value.trim();
 			if(shortcut.name != name_node.value){
@@ -306,15 +312,15 @@ function config_settings_page(){
 	const currencies = get_currencies();
 
 	for (let i = 0; i < 8; i++) {
-		const link_node = document.getElementById(elm_id[3]+i) as HTMLInputElement;
-		const name_node = document.getElementById(elm_id[4]+i) as HTMLInputElement;
-		const img_node = document.getElementById(elm_id[5]+i) as HTMLInputElement;
 		var shortcut = shortcuts[i];
-		link_node.value = shortcut.link;
-		name_node.value = shortcut.name;
-		img_node.value = "";
+		var link_setting_node = document.getElementById(node.shortcut_setting.link+i) as HTMLInputElement;
+		var name_setting_node = document.getElementById(node.shortcut_setting.name+i) as HTMLInputElement;
+		var img_setting_node = document.getElementById(node.shortcut_setting.img+i) as HTMLInputElement;
+		name_setting_node.value = shortcut.name;
+		link_setting_node.value = shortcut.link;
+		img_setting_node.value = "";
 		if(!(i < 3)) continue; // only 3 currencies
-		const currency_node = document.getElementById(elm_id[2]+i) as HTMLInputElement;
+		const currency_node = document.getElementById(node.currency.option+i) as HTMLInputElement;
 		currency_node.value = currencies[i].name;
 	};
 	const save_button = document.getElementById("save-button") as HTMLInputElement;

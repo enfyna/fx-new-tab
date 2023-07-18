@@ -1,16 +1,22 @@
 const currency_api = "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/";
 const img_api = "https://icon.horse/icon/";
-const elm_id = [
-    "cur_name_",
-    "cur_",
-    "cur_select_",
-    "select_link_",
-    "select_name_",
-    "select_img_",
-    "link_",
-    "name_",
-    "img_",
-];
+const node = {
+    "currency": {
+        "name": "currency_name_",
+        "value": "currency_value_",
+        "option": "currency_option_",
+    },
+    "shortcut": {
+        "link": "link_",
+        "name": "name_",
+        "img": "img_",
+    },
+    "shortcut_setting": {
+        "link": "select_link_",
+        "name": "select_name_",
+        "img": "select_img_",
+    },
+};
 window.addEventListener("load", ready);
 function ready() {
     translate();
@@ -52,10 +58,10 @@ function configure_shortcuts() {
     ;
 }
 function set_shortcut_node(shortcut, i) {
-    var a_node = document.getElementById(elm_id[6] + i);
-    var a_node_parent = a_node.parentElement;
+    var link_node = document.getElementById(node.shortcut.link + i);
+    var link_node_parent = link_node.parentElement;
     if (shortcut.link == "") {
-        a_node_parent.hidden = true;
+        link_node_parent.hidden = true;
         return;
     }
     ;
@@ -63,10 +69,10 @@ function set_shortcut_node(shortcut, i) {
         shortcut.name = shortcut.link.replace("https://", "").replace("http://", "").split("/")[0];
     }
     ;
-    a_node_parent.hidden = false;
-    a_node.href = shortcut.link;
-    var name_node = (document.getElementById(elm_id[7] + i));
-    var img_node = (document.getElementById(elm_id[8] + i));
+    link_node_parent.hidden = false;
+    link_node.href = shortcut.link;
+    var name_node = (document.getElementById(node.shortcut.name + i));
+    var img_node = (document.getElementById(node.shortcut.img + i));
     name_node.innerHTML = shortcut.name;
     img_node.src = shortcut.img;
     if (shortcut.img == "" || img_node.naturalHeight < 64 || img_node.naturalWidth < 64) {
@@ -93,7 +99,7 @@ function get_favicon_from_url(url, idx) {
         canvas.height = foreignImg.height;
         context.drawImage(foreignImg, 0, 0);
         var image = canvas.toDataURL();
-        var img_node = document.getElementById(elm_id[8] + idx);
+        var img_node = document.getElementById(node.shortcut.img + idx);
         img_node.src = image;
         let shortcuts = get_shortcuts();
         shortcuts[idx.toString()]["img"] = image;
@@ -164,7 +170,7 @@ function get_updated_rates() {
                 let currency = currencies[i];
                 const updated_rate_string = (1.0 / parseFloat(res[base_currency][currency.name.toLocaleLowerCase()])).toFixed(2);
                 const updated_rate_float = parseFloat(updated_rate_string);
-                update_color(elm_id[1] + i, updated_rate_float - parseFloat(currency.rate));
+                update_color(node.currency.value + i, updated_rate_float - parseFloat(currency.rate));
                 currency.rate = updated_rate_string;
             }
             ;
@@ -178,9 +184,9 @@ function update_currency_html_elements() {
     const currencies = get_currencies();
     for (let i = 0; i < 3; i++) {
         const currency = currencies[i];
-        let cur_node = document.getElementById(elm_id[0] + i);
+        let cur_node = document.getElementById(node.currency.name + i);
         cur_node.innerHTML = currency.name;
-        let val_node = document.getElementById(elm_id[1] + i);
+        let val_node = document.getElementById(node.currency.value + i);
         val_node.innerHTML = currency.rate;
     }
     ;
@@ -216,14 +222,14 @@ function save() {
     let shortcuts = get_shortcuts();
     for (let i = 0; i < 8; i++) {
         if (i < 3) {
-            const currency_node = document.getElementById(elm_id[2] + i);
+            const currency_node = document.getElementById(node.currency.option + i);
             currencies[i].name = currency_node.value;
         }
         ;
         var shortcut = shortcuts[i];
-        const link_node = document.getElementById(elm_id[3] + i);
-        const name_node = document.getElementById(elm_id[4] + i);
-        const img_node = document.getElementById(elm_id[5] + i);
+        const link_node = document.getElementById(node.shortcut_setting.link + i);
+        const name_node = document.getElementById(node.shortcut_setting.name + i);
+        const img_node = document.getElementById(node.shortcut_setting.img + i);
         if (shortcut.link != link_node.value) {
             shortcut.link = link_node.value.trim();
             if (shortcut.name != name_node.value) {
@@ -291,16 +297,16 @@ function config_settings_page() {
     const shortcuts = get_shortcuts();
     const currencies = get_currencies();
     for (let i = 0; i < 8; i++) {
-        const link_node = document.getElementById(elm_id[3] + i);
-        const name_node = document.getElementById(elm_id[4] + i);
-        const img_node = document.getElementById(elm_id[5] + i);
         var shortcut = shortcuts[i];
-        link_node.value = shortcut.link;
-        name_node.value = shortcut.name;
-        img_node.value = "";
+        var link_setting_node = document.getElementById(node.shortcut_setting.link + i);
+        var name_setting_node = document.getElementById(node.shortcut_setting.name + i);
+        var img_setting_node = document.getElementById(node.shortcut_setting.img + i);
+        name_setting_node.value = shortcut.name;
+        link_setting_node.value = shortcut.link;
+        img_setting_node.value = "";
         if (!(i < 3))
             continue; // only 3 currencies
-        const currency_node = document.getElementById(elm_id[2] + i);
+        const currency_node = document.getElementById(node.currency.option + i);
         currency_node.value = currencies[i].name;
     }
     ;
