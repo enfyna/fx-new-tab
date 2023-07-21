@@ -1,0 +1,19 @@
+{
+  "name": "fx-home-page",
+  "version": "1.2.0",
+  "description": "A new look for firefox homepage and the newtab page.",
+  "main": "tsc/script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gulp": "gulp"
+  },
+  "author": "enfyna",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.3.0",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-terser": "^2.1.0"
+  }
+}

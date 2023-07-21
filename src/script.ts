@@ -76,6 +76,7 @@ function configure_shortcuts(){
 function set_shortcut_node(shortcut : shortcut_dict, i : Number){
 	var link_node = document.getElementById(node.shortcut.link+i) as HTMLAnchorElement;
 	var link_node_parent = link_node.parentElement;
+	if(link_node_parent == null) return;
 	if(shortcut.link == ""){
 		link_node_parent.hidden = true;
 		return;
@@ -278,7 +279,9 @@ function save(){
 				shortcut.img = event.target.result as string;
 				save_shortcuts(shortcuts);
 			});
-		var image = img_node.files.item(0);
+		var files = img_node.files;
+		if(files == null) continue;
+		var image = files.item(0);
 		if(image == null)continue;
 		reader.readAsDataURL(image);
 	};
