@@ -358,7 +358,7 @@ function translate() {
 			"tr": ["Bir linkin linkini silerek ana menüden kaldırabilirsin."],
 			"en": ["Delete shortcut link to remove it from the main menu."],
 			"de": ["Entfernen Sie die URL, um sie aus dem Hauptmenü zu löschen."],
-			"es": ["Elimina el enlace para quitarlo del menú principal."],
+			"es": ["Elimina el URL para quitarlo del menú principal."],
 		},
 		{
 			"name": "image-link",
@@ -435,7 +435,7 @@ function translate() {
 			"tr": ["Link"],
 			"en": ["Link"],
 			"de": ["URL"],
-			"es": ["Enlace"],
+			"es": ["URL"],
 		},
 		{
 			"name": "name-label",
@@ -457,7 +457,7 @@ function translate() {
 			lang = "es"; 
 			break;
 		default:
-			lang = "de";
+			lang = "en";
 			break;
 	};
 	translations.forEach(dict => {
