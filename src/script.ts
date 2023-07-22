@@ -331,98 +331,135 @@ function config_settings_page(){
 }
 
 function translate() {
-	let lang : string;
-	switch (navigator.language.toLowerCase()) {
-		case "tr":
-		case "tr-tr":
-			lang = "tr";
-			break;
-		default:
-			lang = "en";
-			break;
-	};
 	const translations = [
 		{
 			"name": "greeting",
-			"tr": ["Merhaba!", "Nasılsın?", "Nasıl gidiyor?","İyi günler!","Hoş geldin!",],
-			"en": ["Hi!","Hey!","Hello!","Hello there!","Howdy!","Nice to meet you!","Welcome!",],
+			"tr": ["Merhaba!", "Nasılsın?", "Nasıl gidiyor?", "İyi günler!", "Hoş geldin!"],
+			"en": ["Hi!", "Hey!", "Hello!", "Hello there!", "Howdy!", "Nice to meet you!", "Welcome!"],
+			"de": ["Hallo!", "Hey!", "Guten Tag!", "Hallo da!", "Grüß Gott!", "Freut mich, dich kennenzulernen!", "Willkommen!"],
+			"es": ["¡Hola!", "¡Hola!", "¡Hola!", "¡Hola!", "¡Hola!", "¡Encantado de conocerte!", "¡Bienvenido!"],
 		},
 		{
 			"name": "motivational",
-			"tr": ["Çalışmaya devam et!","Her adım, hedefe yaklaşmanı sağlar.","Başarı, pes etmeyenlere gelir.","Pes etme!","Zorluklar seni güçlendirir!","Hatalarından ders al!","Başarabilirsin!","Yapmak istediğini gözünde büyütme!","Başlamak bitirmenin yarısıdır!",],
-			"en": ["Keep pushing forward!","Believe in yourself!","You can do it!","Doing things is easier when you start!","Always try to get better!","Never give up!","You've got this!","Focus on progress, not perfection!","Learn from your mistakes!","Success is within reach!"],
+			"tr": ["Çalışmaya devam et!", "Her adım, hedefe yaklaşmanı sağlar.", "Başarı, pes etmeyenlere gelir.", "Pes etme!", "Zorluklar seni güçlendirir!", "Hatalarından ders al!", "Başarabilirsin!", "Yapmak istediğini gözünde büyütme!", "Başlamak bitirmenin yarısıdır!"],
+			"en": ["Keep pushing forward!", "Believe in yourself!", "You can do it!", "Doing things is easier when you start!", "Always try to get better!", "Never give up!", "You've got this!", "Focus on progress, not perfection!", "Learn from your mistakes!", "Success is within reach!"],
+			"de": ["Immer weitermachen!", "Glaube an dich selbst!", "Du schaffst das!", "Dinge zu tun ist leichter, wenn du anfängst!", "Versuche immer, besser zu werden!", "Gib niemals auf!", "Du schaffst das!", "Fokussiere dich auf Fortschritt, nicht Perfektion!", "Lerne aus deinen Fehlern!", "Erfolg ist in Reichweite!"],
+			"es": ["¡Sigue adelante!", "¡Cree en ti mismo!", "¡Tú puedes hacerlo!", "Hacer las cosas es más fácil cuando empiezas.", "¡Siempre trata de mejorar!", "¡Nunca te rindas!", "¡Tú puedes lograrlo!", "¡Enfócate en el progreso, no en la perfección!", "¡Aprende de tus errores!", "¡El éxito está al alcance!"],
 		},
 		{
 			"name": "settings",
 			"tr": ["Ayarlar"],
 			"en": ["Settings"],
+			"de": ["Einstellungen"],
+			"es": ["Ajustes"],
 		},
 		{
 			"name": "delete-link",
 			"tr": ["Bir linkin linkini silerek ana menüden kaldırabilirsin."],
-			"en": ["Delete shortcut link to remove it from main menu."],
+			"en": ["Delete shortcut link to remove it from the main menu."],
+			"de": ["Entfernen Sie die URL, um sie aus dem Hauptmenü zu löschen."],
+			"es": ["Elimina el enlace para quitarlo del menú principal."],
 		},
 		{
 			"name": "image-link",
 			"tr": ["Link ikonunu resim dosyası yükleyerek ayarlayabilirsin. (en az 64x64 boyutunda)"],
-			"en": ["Set a custom link icon by uploading a image file. (at least 64x64 resolution)"],
+			"en": ["Set a custom link icon by uploading an image file. (at least 64x64 resolution)"],
+			"de": ["Legen Sie ein benutzerdefiniertes Verknüpfungssymbol fest, indem Sie eine Bilddatei hochladen. (mindestens 64x64 Auflösung)"],
+			"es": ["Establece un ícono de enlace personalizado subiendo un archivo de imagen. (al menos 64x64 de resolución)"],
 		},
 		{
 			"name": "delete-cookie-warning",
 			"tr": ["Bu site için çerezleri silersen ayarların sıfırlanır."],
-			"en": ["If you delete cookies for this site all data will revert to the default values."],
+			"en": ["If you delete cookies for this site, all data will revert to the default values."],
+			"de": ["Wenn Sie die Cookies für diese Website löschen, werden alle Daten auf die Standardwerte zurückgesetzt."],
+			"es": ["Si eliminas las cookies de este sitio, todos los datos volverán a los valores predeterminados."],
 		},
 		{
 			"name": "cookie-info",
 			"tr": ["Bu site ayarları kaydetmek için çerez kullanır."],
-			"en": ["This site uses cookies to save Settings."],
+			"en": ["This site uses cookies to save settings."],
+			"de": ["Diese Website verwendet Cookies, um Einstellungen zu speichern."],
+			"es": ["Este sitio utiliza cookies para guardar la configuración."],
 		},
 		{
 			"name": "rate-update-info",
 			"tr": ["Döviz değerleri günlük yenilenir."],
 			"en": ["Currency rates update daily."],
+			"de": ["Währungskurse werden täglich aktualisiert."],
+			"es": ["Los tipos de cambio de divisas se actualizan diariamente."],
 		},
 		{
-			"name":"enable-api-label",
-			"tr":["Kur bilgilerini göster"],
-			"en":["Enable currency rates"],
+			"name": "enable-api-label",
+			"tr": ["Kur bilgilerini göster"],
+			"en": ["Enable currency rates"],
+			"de": ["Währungskurse aktivieren"],
+			"es": ["Habilitar tasas de cambio de divisas"]
 		},
 		{
-			"name":"currency-api-info",
-			"tr":["Döviz değerleri bu API kullanılarak alınmaktadır : https://github.com/fawazahmed0/currency-api"],
-			"en":["Currency rates are provided by this API : https://github.com/fawazahmed0/currency-api"],
+			"name": "currency-api-info",
+			"tr": ["Döviz değerleri bu API kullanılarak alınmaktadır: https://github.com/fawazahmed0/currency-api"],
+			"en": ["Currency rates are provided by this API: https://github.com/fawazahmed0/currency-api"],
+			"de": ["Währungskurse werden von dieser API bereitgestellt: https://github.com/fawazahmed0/currency-api"],
+			"es": ["Las tasas de cambio de divisas son proporcionadas por esta API: https://github.com/fawazahmed0/currency-api"],
 		},
 		{
 			"name": "api-key-info",
 			"tr": ["Ana sayfanda 3 tane kurun değerini görmek istiyorsan kullanabilirsin."],
-			"en": ["This is a optional feature that adds 3 currency rate info to your main page."],
+			"en": ["This is an optional feature that adds 3 currency rate info to your main page."],
+			"de": ["Dies ist eine optionale Funktion, die 3 Währungskursinformationen auf Ihrer Hauptseite hinzufügt."],
+			"es": ["Esta es una característica opcional que agrega información de 3 tasas de cambio de divisas a tu página principal."],
 		},
 		{
 			"name": "save-button",
 			"tr": ["Kaydet"],
 			"en": ["Save"],
+			"de": ["Speichern"],
+			"es": ["Guardar"],
 		},
 		{
 			"name": "base-currency-label",
 			"tr": ["Ana para birimini seç"],
 			"en": ["Select base currency"],
+			"de": ["Wählen Sie die Basiswährung"],
+			"es": ["Selecciona la moneda base"],
 		},
 		{
 			"name": "currencies-label",
 			"tr": ["Para birimleri"],
 			"en": ["Currencies"],
+			"de": ["Währungen"],
+			"es": ["Monedas"],
 		},
 		{
 			"name": "link-label",
 			"tr": ["Link"],
 			"en": ["Link"],
+			"de": ["URL"],
+			"es": ["Enlace"],
 		},
 		{
 			"name": "name-label",
 			"tr": ["İsim"],
 			"en": ["Name"],
-		},
+			"de": ["Name"],
+			"es": ["Nombre"],
+		},		
 	];
+	let lang : string;
+	switch (navigator.language.toLowerCase().split("-")[0]){
+		case "tr":
+			lang = "tr";
+			break;
+		case "de":
+			lang = "de"; 
+			break;
+		case "es":
+			lang = "es"; 
+			break;
+		default:
+			lang = "de";
+			break;
+	};
 	translations.forEach(dict => {
 		document.getElementsByName(dict.name).forEach(element => {
 			const list : Array<string> = dict[lang];
