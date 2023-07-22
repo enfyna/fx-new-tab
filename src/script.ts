@@ -33,7 +33,7 @@ const node = {
 	},
 };
 
-window.addEventListener("load",ready);
+window.addEventListener("DOMContentLoaded",ready);
 
 function ready(){
 	translate();
