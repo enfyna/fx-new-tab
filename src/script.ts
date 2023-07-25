@@ -66,11 +66,14 @@ function get_shortcuts() : shortcut_arr{
 	return temp;
 }
 
+var active_shortcut_number : number = 0
 function configure_shortcuts(){
+	active_shortcut_number = 0
 	let shortcuts : shortcut_arr = get_shortcuts();
 	for (let i = 0; i < 8; i++){
 		set_shortcut_node(shortcuts[i], i);
 	};
+	align_shortcut_nodes();
 }
 
 function set_shortcut_node(shortcut : shortcut_dict, i : Number){
@@ -84,6 +87,7 @@ function set_shortcut_node(shortcut : shortcut_dict, i : Number){
 	if(shortcut.name == ""){
 		shortcut.name = shortcut.link.replace("https://","").replace("http://","").split("/")[0];
 	};
+	active_shortcut_number += 1;
 	link_node_parent.hidden = false;
 	link_node.href = shortcut.link;
 	var name_node = (document.getElementById(node.shortcut.name+i)) as HTMLHeadingElement;
@@ -93,6 +97,16 @@ function set_shortcut_node(shortcut : shortcut_dict, i : Number){
 	if(shortcut.img == "" || img_node.naturalHeight < 64 || img_node.naturalWidth < 64){
 		get_favicon_from_url(shortcut.link,i);
 		return;
+	};
+}
+
+function align_shortcut_nodes(){
+	var node = document.getElementById("ShortcutContainer") as HTMLElement;
+	if(active_shortcut_number <= 4){
+		node.classList.replace("align-items-start","align-items-center")
+	}
+	else{
+		node.classList.replace("align-items-center","align-items-start")
 	};
 }
 
