@@ -456,6 +456,13 @@ function translate() {
 			"es": ["Las tasas de cambio de divisas son proporcionadas por esta API: https://github.com/fawazahmed0/currency-api"],
 		},
 		{
+			"name": "currency-api-refresh-warning",
+			"tr": ["Eğer seçtiğiniz kur güncellenmezse bir kaç saniye beklemeyi deneyin."],
+			"en": ["If currency types do not update, try waiting a few seconds."],
+			"de": ["Wenn sich die Währungskurse nicht aktualisieren, versuchen Sie es nach einigen Sekunden erneut."],
+			"es": ["Si las tasas de cambio de divisas no se actualizan, intente esperar unos segundos."],
+		},
+		{
 			"name": "api-key-info",
 			"tr": ["Ana sayfanda 3 tane kurun değerini görmek istiyorsan kullanabilirsin."],
 			"en": ["This is an optional feature that adds 3 currency rate info to your main page."],
