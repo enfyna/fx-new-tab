@@ -398,20 +398,6 @@ function config_settings_page(){
 function translate() {
 	const translations = [
 		{
-			"name": "greeting",
-			"tr": ["Merhaba!", "Nasılsın?", "Nasıl gidiyor?", "İyi günler!", "Hoş geldin!"],
-			"en": ["Hi!", "Hey!", "Hello!", "Hello there!", "Howdy!", "Nice to meet you!", "Welcome!"],
-			"de": ["Hallo!", "Hey!", "Guten Tag!", "Hallo da!", "Grüß Gott!", "Freut mich, dich kennenzulernen!", "Willkommen!"],
-			"es": ["¡Hola!", "¡Hola!", "¡Hola!", "¡Hola!", "¡Hola!", "¡Encantado de conocerte!", "¡Bienvenido!"],
-		},
-		{
-			"name": "motivational",
-			"tr": ["Çalışmaya devam et!", "Her adım, hedefe yaklaşmanı sağlar.", "Başarı, pes etmeyenlere gelir.", "Pes etme!", "Zorluklar seni güçlendirir!", "Hatalarından ders al!", "Başarabilirsin!", "Yapmak istediğini gözünde büyütme!", "Başlamak bitirmenin yarısıdır!"],
-			"en": ["Keep pushing forward!", "Believe in yourself!", "You can do it!", "Doing things is easier when you start!", "Always try to get better!", "Never give up!", "You've got this!", "Focus on progress, not perfection!", "Learn from your mistakes!", "Success is within reach!"],
-			"de": ["Immer weitermachen!", "Glaube an dich selbst!", "Du schaffst das!", "Dinge zu tun ist leichter, wenn du anfängst!", "Versuche immer, besser zu werden!", "Gib niemals auf!", "Du schaffst das!", "Fokussiere dich auf Fortschritt, nicht Perfektion!", "Lerne aus deinen Fehlern!", "Erfolg ist in Reichweite!"],
-			"es": ["¡Sigue adelante!", "¡Cree en ti mismo!", "¡Tú puedes hacerlo!", "Hacer las cosas es más fácil cuando empiezas.", "¡Siempre trata de mejorar!", "¡Nunca te rindas!", "¡Tú puedes lograrlo!", "¡Enfócate en el progreso, no en la perfección!", "¡Aprende de tus errores!", "¡El éxito está al alcance!"],
-		},
-		{
 			"name": "settings",
 			"tr": ["Ayarlar"],
 			"en": ["Settings"],
@@ -509,6 +495,13 @@ function translate() {
 			"de": ["Name"],
 			"es": ["Nombre"],
 		},
+		{
+			"name": "note-input",
+			"tr": ["Kısa bir not giriniz"],
+			"en": ["Please enter a brief note"],
+			"de": ["Geben Sie eine kurze Notiz ein"],
+			"es": ["Ingresa una nota breve"]
+		},
 	];
 	let lang : string;
 	switch (navigator.language.toLowerCase().split("-")[0]){
@@ -528,11 +521,11 @@ function translate() {
 	translations.forEach(dict => {
 		document.getElementsByName(dict.name).forEach(element => {
 			const list : Array<string> = dict[lang];
-			if(list.length > 1){
-				element.innerHTML = list[new Date().getTime() % list.length];
-			}else{
-				element.innerHTML = list[0];
+			if(dict.name == "note-input"){
+				(element as HTMLInputElement).placeholder = list[0];
 			}
+			element.innerHTML = list[0];
+			
 		});
 	});
 }
