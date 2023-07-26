@@ -111,6 +111,7 @@ function configure_notes(){
 		button.addEventListener("click", () => {
 			var button : HTMLButtonElement = document.getElementById(node.note.note + i) as HTMLButtonElement;
 			var note : HTMLInputElement = document.getElementById(node.note.input + i) as HTMLInputElement;
+			note.value = button.innerHTML;
 			button.hidden = true;
 			note.hidden = false;
 			note.focus()
@@ -118,6 +119,7 @@ function configure_notes(){
 		note.addEventListener("change", () => {
 			var button : HTMLButtonElement = document.getElementById(node.note.note + i) as HTMLButtonElement;
 			var note : HTMLInputElement = document.getElementById(node.note.input + i) as HTMLInputElement;
+			note.value = note.value.trim()
 			var notes : notes_arr = get_notes();
 			notes[i].note = note.value;
 			localStorage.setItem("notes", JSON.stringify(notes));
