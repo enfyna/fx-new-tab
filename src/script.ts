@@ -412,115 +412,115 @@ function translate() {
 	const translations = [
 		{
 			"name": "settings",
-			"tr": ["Ayarlar"],
-			"en": ["Settings"],
-			"de": ["Einstellungen"],
-			"es": ["Ajustes"],
+			"tr": "Ayarlar",
+			"en": "Settings",
+			"de": "Einstellungen",
+			"es": "Ajustes",
 		},
 		{
 			"name": "delete-link",
-			"tr": ["Bir linkin linkini silerek ana menüden kaldırabilirsin."],
-			"en": ["Delete shortcut link to remove it from the main menu."],
-			"de": ["Entfernen Sie die URL, um sie aus dem Hauptmenü zu löschen."],
-			"es": ["Elimina el URL para quitarlo del menú principal."],
+			"tr": "Bir linkin linkini silerek ana menüden kaldırabilirsin.",
+			"en": "Delete shortcut link to remove it from the main menu.",
+			"de": "Entfernen Sie die URL, um sie aus dem Hauptmenü zu löschen.",
+			"es": "Elimina el URL para quitarlo del menú principal.",
 		},
 		{
 			"name": "image-link",
-			"tr": ["Link ikonunu resim dosyası yükleyerek ayarlayabilirsin. (en az 64x64 boyutunda)"],
-			"en": ["Set a custom link icon by uploading an image file. (at least 64x64 resolution)"],
-			"de": ["Legen Sie ein benutzerdefiniertes Verknüpfungssymbol fest, indem Sie eine Bilddatei hochladen. (mindestens 64x64 Auflösung)"],
-			"es": ["Establece un ícono de enlace personalizado subiendo un archivo de imagen. (al menos 64x64 de resolución)"],
+			"tr": "Link ikonunu resim dosyası yükleyerek ayarlayabilirsin. (en az 64x64 boyutunda)",
+			"en": "Set a custom link icon by uploading an image file. (at least 64x64 resolution)",
+			"de": "Legen Sie ein benutzerdefiniertes Verknüpfungssymbol fest, indem Sie eine Bilddatei hochladen. (mindestens 64x64 Auflösung)",
+			"es": "Establece un ícono de enlace personalizado subiendo un archivo de imagen. (al menos 64x64 de resolución)",
 		},
 		{
 			"name": "delete-cookie-warning",
-			"tr": ["Bu site için çerezleri silersen ayarların sıfırlanır."],
-			"en": ["If you delete cookies for this site, all data will revert to the default values."],
-			"de": ["Wenn Sie die Cookies für diese Website löschen, werden alle Daten auf die Standardwerte zurückgesetzt."],
-			"es": ["Si eliminas las cookies de este sitio, todos los datos volverán a los valores predeterminados."],
+			"tr": "Bu site için çerezleri silersen ayarların sıfırlanır.",
+			"en": "If you delete cookies for this site, all data will revert to the default values.",
+			"de": "Wenn Sie die Cookies für diese Website löschen, werden alle Daten auf die Standardwerte zurückgesetzt.",
+			"es": "Si eliminas las cookies de este sitio, todos los datos volverán a los valores predeterminados.",
 		},
 		{
 			"name": "cookie-info",
-			"tr": ["Bu site ayarları kaydetmek için çerez kullanır."],
-			"en": ["This site uses cookies to save settings."],
-			"de": ["Diese Website verwendet Cookies, um Einstellungen zu speichern."],
-			"es": ["Este sitio utiliza cookies para guardar la configuración."],
+			"tr": "Bu site ayarları kaydetmek için çerez kullanır.",
+			"en": "This site uses cookies to save settings.",
+			"de": "Diese Website verwendet Cookies, um Einstellungen zu speichern.",
+			"es": "Este sitio utiliza cookies para guardar la configuración.",
 		},
 		{
 			"name": "rate-update-info",
-			"tr": ["Döviz değerleri günlük yenilenir."],
-			"en": ["Currency rates update daily."],
-			"de": ["Währungskurse werden täglich aktualisiert."],
-			"es": ["Los tipos de cambio de divisas se actualizan diariamente."],
+			"tr": "Döviz değerleri günlük yenilenir.",
+			"en": "Currency rates update daily.",
+			"de": "Währungskurse werden täglich aktualisiert.",
+			"es": "Los tipos de cambio de divisas se actualizan diariamente.",
 		},
 		{
 			"name": "enable-api-label",
-			"tr": ["Kur bilgilerini göster"],
-			"en": ["Enable currency rates"],
-			"de": ["Währungskurse aktivieren"],
-			"es": ["Habilitar tasas de cambio de divisas"]
+			"tr": "Kur bilgilerini göster",
+			"en": "Enable currency rates",
+			"de": "Währungskurse aktivieren",
+			"es": "Habilitar tasas de cambio de divisas",
 		},
 		{
 			"name": "currency-api-info",
-			"tr": ["Döviz değerleri bu API kullanılarak alınmaktadır: https://github.com/fawazahmed0/currency-api"],
-			"en": ["Currency rates are provided by this API: https://github.com/fawazahmed0/currency-api"],
-			"de": ["Währungskurse werden von dieser API bereitgestellt: https://github.com/fawazahmed0/currency-api"],
-			"es": ["Las tasas de cambio de divisas son proporcionadas por esta API: https://github.com/fawazahmed0/currency-api"],
+			"tr": "Döviz değerleri bu API kullanılarak alınmaktadır: https://github.com/fawazahmed0/currency-api",
+			"en": "Currency rates are provided by this API: https://github.com/fawazahmed0/currency-api",
+			"de": "Währungskurse werden von dieser API bereitgestellt: https://github.com/fawazahmed0/currency-api",
+			"es": "Las tasas de cambio de divisas son proporcionadas por esta API: https://github.com/fawazahmed0/currency-api",
 		},
 		{
 			"name": "currency-api-refresh-warning",
-			"tr": ["Eğer seçtiğiniz kur güncellenmezse bir kaç saniye beklemeyi deneyin."],
-			"en": ["If currency types do not update, try waiting a few seconds."],
-			"de": ["Wenn sich die Währungskurse nicht aktualisieren, versuchen Sie es nach einigen Sekunden erneut."],
-			"es": ["Si las tasas de cambio de divisas no se actualizan, intente esperar unos segundos."],
+			"tr": "Eğer seçtiğiniz kur güncellenmezse bir kaç saniye beklemeyi deneyin.",
+			"en": "If currency types do not update, try waiting a few seconds.",
+			"de": "Wenn sich die Währungskurse nicht aktualisieren, versuchen Sie es nach einigen Sekunden erneut.",
+			"es": "Si las tasas de cambio de divisas no se actualizan, intente esperar unos segundos.",
 		},
 		{
 			"name": "api-key-info",
-			"tr": ["Ana sayfanda 3 tane kurun değerini görmek istiyorsan kullanabilirsin."],
-			"en": ["This is an optional feature that adds 3 currency rate info to your main page."],
-			"de": ["Dies ist eine optionale Funktion, die 3 Währungskursinformationen auf Ihrer Hauptseite hinzufügt."],
-			"es": ["Esta es una característica opcional que agrega información de 3 tasas de cambio de divisas a tu página principal."],
+			"tr": "Ana sayfanda 3 tane kurun değerini görmek istiyorsan kullanabilirsin.",
+			"en": "This is an optional feature that adds 3 currency rate info to your main page.",
+			"de": "Dies ist eine optionale Funktion, die 3 Währungskursinformationen auf Ihrer Hauptseite hinzufügt.",
+			"es": "Esta es una característica opcional que agrega información de 3 tasas de cambio de divisas a tu página principal.",
 		},
 		{
 			"name": "save-button",
-			"tr": ["Kaydet"],
-			"en": ["Save"],
-			"de": ["Speichern"],
-			"es": ["Guardar"],
+			"tr": "Kaydet",
+			"en": "Save",
+			"de": "Speichern",
+			"es": "Guardar",
 		},
 		{
 			"name": "base-currency-label",
-			"tr": ["Ana para birimini seç"],
-			"en": ["Select base currency"],
-			"de": ["Wählen Sie die Basiswährung"],
-			"es": ["Selecciona la moneda base"],
+			"tr": "Ana para birimini seç",
+			"en": "Select base currency",
+			"de": "Wählen Sie die Basiswährung",
+			"es": "Selecciona la moneda base",
 		},
 		{
 			"name": "currencies-label",
-			"tr": ["Para birimleri"],
-			"en": ["Currencies"],
-			"de": ["Währungen"],
-			"es": ["Monedas"],
+			"tr": "Para birimleri",
+			"en": "Currencies",
+			"de": "Währungen",
+			"es": "Monedas"
 		},
 		{
 			"name": "link-label",
-			"tr": ["Link"],
-			"en": ["Link"],
-			"de": ["URL"],
-			"es": ["URL"],
+			"tr": "Link",
+			"en": "Link",
+			"de": "URL",
+			"es": "URL",
 		},
 		{
 			"name": "name-label",
-			"tr": ["İsim"],
-			"en": ["Name"],
-			"de": ["Name"],
-			"es": ["Nombre"],
+			"tr": "İsim",
+			"en": "Name",
+			"de": "Name",
+			"es": "Nombre",
 		},
 		{
 			"name": "note-input",
-			"tr": ["Kısa bir not giriniz"],
-			"en": ["Please enter a brief note"],
-			"de": ["Geben Sie eine kurze Notiz ein"],
-			"es": ["Ingresa una nota breve"]
+			"tr": "Kısa bir not giriniz",
+			"en": "Please enter a brief note",
+			"de": "Geben Sie eine kurze Notiz ein",
+			"es": "Ingresa una nota breve",
 		},
 	];
 	let lang : string;
@@ -540,12 +540,11 @@ function translate() {
 	};
 	translations.forEach(dict => {
 		document.getElementsByName(dict.name).forEach(element => {
-			const list : Array<string> = dict[lang];
+			const list : string = dict[lang];
 			if(dict.name == "note-input"){
-				(element as HTMLInputElement).placeholder = list[0];
+				(element as HTMLInputElement).placeholder = list;
 			}
-			element.innerHTML = list[0];
-			
+			element.innerHTML = list;
 		});
 	});
 }
