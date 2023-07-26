@@ -1,17 +1,23 @@
-interface shortcut_dict {
+interface shortcut {
 	name:string;
 	link:string;
 	img:string;
 }
 interface shortcut_arr {
-    [index:number]:shortcut_dict;
+    [index:number]:shortcut;
 }
-interface currencies_dict {
+interface currency {
 	name:string;
 	rate:string;
 }
 interface currencies_arr {
-	[index:number]:currencies_dict;
+	[index:number]:currency;
+}
+interface note {
+	note:string;
+}
+interface notes_arr {
+	[index:number]:note;
 }
 const currency_api = "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/";
 const img_api = "https://icon.horse/icon/";
@@ -31,6 +37,10 @@ const node = {
 		"name":"select_name_",
 		"img":"select_img_",
 	},
+	"note":{
+		"note":"note_",
+		"input":"note_input_",
+	},
 };
 
 window.addEventListener("DOMContentLoaded",ready);
@@ -38,6 +48,7 @@ window.addEventListener("DOMContentLoaded",ready);
 function ready(){
 	translate();
 	configure_shortcuts();
+	configure_notes();
 	if(is_currency_rates_enabled()){
 		update_currency_html_elements();
 		if(did_a_day_pass()){
@@ -76,7 +87,48 @@ function configure_shortcuts(){
 	align_shortcut_nodes();
 }
 
-function set_shortcut_node(shortcut : shortcut_dict, i : Number){
+function get_notes() : notes_arr {
+	const notesString = localStorage.getItem("notes");
+	if (notesString != null && notesString != "") {
+		return JSON.parse(notesString) as notes_arr; 	
+	}
+	let temp : notes_arr = [
+		{note: ""},
+		{note: ""},
+		{note: ""},
+		{note: ""},
+	];
+	localStorage.setItem("notes", JSON.stringify(temp));
+	return temp;
+}
+
+function configure_notes(){
+	var notes : notes_arr = get_notes();
+	for	(let i = 0; i < 4; i++){
+		var button : HTMLButtonElement = document.getElementById(node.note.note + i) as HTMLButtonElement;
+		button.innerHTML = notes[i].note;
+		var note : HTMLInputElement = document.getElementById(node.note.input + i) as HTMLInputElement;
+		button.addEventListener("click", () => {
+			var button : HTMLButtonElement = document.getElementById(node.note.note + i) as HTMLButtonElement;
+			var note : HTMLInputElement = document.getElementById(node.note.input + i) as HTMLInputElement;
+			button.hidden = true;
+			note.hidden = false;
+			note.focus()
+		});
+		note.addEventListener("change", () => {
+			var button : HTMLButtonElement = document.getElementById(node.note.note + i) as HTMLButtonElement;
+			var note : HTMLInputElement = document.getElementById(node.note.input + i) as HTMLInputElement;
+			var notes : notes_arr = get_notes();
+			notes[i].note = note.value;
+			localStorage.setItem("notes", JSON.stringify(notes));
+			button.innerHTML = note.value;
+			note.hidden = true;
+			button.hidden = false;
+		});
+	};
+}
+
+function set_shortcut_node(shortcut : shortcut, i : Number){
 	var link_node = document.getElementById(node.shortcut.link+i) as HTMLAnchorElement;
 	var link_node_parent = link_node.parentElement;
 	if(link_node_parent == null) return;
@@ -236,7 +288,6 @@ function hide_currency_elements(set = true){
 	};
 }
 
-const card_class = "card p-2 text-center text-white fw-bold text-nowrap"
 function update_color(child_id : string, diff : number){
 	const node = document.getElementById(child_id) as HTMLElement;
 	const parent_node = node.parentElement;
@@ -245,7 +296,7 @@ function update_color(child_id : string, diff : number){
 	if(diff >= 0){
 		color = "bg-success";
 	};
-	parent_node.className = card_class.concat(" ",color);
+	parent_node.classList.replace("bg-primary",color);
 }
 
 function save(){
@@ -263,7 +314,7 @@ function save(){
 			const currency_node = document.getElementById(node.currency.option+i) as HTMLInputElement;
 			currencies[i].name = currency_node.value;
 		};
-		var shortcut : shortcut_dict = shortcuts[i];
+		var shortcut : shortcut = shortcuts[i];
 		const link_node = document.getElementById(node.shortcut_setting.link+i) as HTMLInputElement;
 		const name_node = document.getElementById(node.shortcut_setting.name+i) as HTMLInputElement;
 		const img_node = document.getElementById(node.shortcut_setting.img+i) as HTMLInputElement;
@@ -457,7 +508,7 @@ function translate() {
 			"en": ["Name"],
 			"de": ["Name"],
 			"es": ["Nombre"],
-		},		
+		},
 	];
 	let lang : string;
 	switch (navigator.language.toLowerCase().split("-")[0]){
@@ -465,10 +516,10 @@ function translate() {
 			lang = "tr";
 			break;
 		case "de":
-			lang = "de"; 
+			lang = "de";
 			break;
 		case "es":
-			lang = "es"; 
+			lang = "es";
 			break;
 		default:
 			lang = "en";
