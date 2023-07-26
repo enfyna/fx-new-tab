@@ -309,6 +309,10 @@ function update_color(child_id : string, diff : number){
 }
 
 function save(){
+	const navbar = document.getElementsByClassName("navbar")[0] as HTMLElement;
+	if(!navbar.classList.replace("bg-transparent","bg-black")){
+		navbar.classList.replace("bg-black","bg-transparent");
+	}
 	let base_currency_node = document.getElementById("base_currency") as HTMLInputElement;
 	let base_currency = base_currency_node.value;
 	localStorage.setItem("base_currency",base_currency);
