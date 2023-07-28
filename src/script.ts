@@ -46,51 +46,168 @@ const node = {
 window.addEventListener("DOMContentLoaded",ready);
 
 function ready(){
-	translate();
 	configure_shortcuts();
 	configure_notes();
-	if(is_currency_rates_enabled()){
-		update_currency_html_elements();
-		if(did_a_day_pass()){
-			get_updated_rates();
-		};
-	};
-	config_settings_page();
+	configure_currencies();
+	translate();
 }
 
-function get_shortcuts() : shortcut_arr{
-	let shortcuts = localStorage.getItem("shortcuts");
-	if(shortcuts != null){
-		return JSON.parse(shortcuts) as shortcut_arr;
-	};
-	let temp : shortcut_arr = [
-		{name:"",img:"",link:"https://github.com"},
-		{name:"",img:"",link:"https://youtube.com/"},
-		{name:"",img:"",link:"https://chat.openai.com"},
-		{name:"",img:"",link:"https://mail.google.com/mail/u/0/#inbox"},
-		{name:"",img:"",link:"https://discord.com"},
-		{name:"",img:"",link:"https://web.telegram.org/a/"},
-		{name:"",img:"",link:"https://web.whatsapp.com/"},
-		{name:"",img:"",link:"https://amazon.com"},
-   	];
-	localStorage.setItem("shortcuts",JSON.stringify(temp));
-	return temp;
-}
-
-var active_shortcut_number : number = 0
-function configure_shortcuts(){
-	active_shortcut_number = 0
-	let shortcuts : shortcut_arr = get_shortcuts();
+/// Shortcuts
+function align_shortcuts(){
+	var active_shortcuts : number = 0
+	var shortcuts = get_shortcut(null);
 	for (let i = 0; i < 8; i++){
-		set_shortcut_node(shortcuts[i], i);
-	};
-	align_shortcut_nodes();
+		if (shortcuts[i].link != ""){
+			active_shortcuts += 1
+		};
+	}
+	var container = document.getElementById("ShortcutContainer") as HTMLElement;
+	container.classList.replace(
+		active_shortcuts <= 4 ? "align-items-start" : "align-items-center",
+		active_shortcuts <= 4 ? "align-items-center" : "align-items-start"
+	);
 }
 
+function configure_shortcuts(){
+	align_shortcuts();
+	for (let i = 0; i < 8; i++){
+		set_shortcut_node(i);
+		set_shortcut_setting(i);
+	};
+}
+
+function get_shortcut(idx : number | null){
+	let shortcuts = localStorage.getItem("shortcuts");
+	let arr : shortcut_arr;
+	if(shortcuts != null){
+		arr = JSON.parse(shortcuts) as shortcut_arr;
+	}
+	else{
+		arr = [
+			{name:"",img:"",link:"https://github.com"},
+			{name:"",img:"",link:"https://youtube.com/"},
+			{name:"",img:"",link:"https://chat.openai.com"},
+			{name:"",img:"",link:"https://mail.google.com/mail/u/0/#inbox"},
+			{name:"",img:"",link:"https://discord.com"},
+			{name:"",img:"",link:"https://web.telegram.org/a/"},
+			{name:"",img:"",link:"https://web.whatsapp.com/"},
+			{name:"",img:"",link:"https://amazon.com"},
+		];
+		localStorage.setItem("shortcuts",JSON.stringify(arr));
+	};
+	return idx == null ? arr : arr[idx];
+}
+
+function set_shortcut(shortcut : shortcut, idx : number){
+	let arr = get_shortcut(null);
+	arr[idx] = shortcut;
+	localStorage.setItem("shortcuts",JSON.stringify(arr));
+	align_shortcuts();
+	set_shortcut_node(idx);
+}
+
+function set_shortcut_node(i : number){
+	var shortcut : shortcut = get_shortcut(i) as shortcut;
+	var link_node = document.getElementById(node.shortcut.link+i) as HTMLAnchorElement;
+	var link_node_parent = link_node.parentElement;
+	if(link_node_parent == null)
+		return;
+	if(shortcut.link == ""){
+		link_node_parent.hidden = true;
+		return;
+	};
+	if(shortcut.name == ""){
+		shortcut.name = shortcut.link.replace("https://","").replace("http://","").split("/")[0];
+	};
+	var img_node = (document.getElementById(node.shortcut.img+i)) as HTMLImageElement;
+	var name_node = (document.getElementById(node.shortcut.name+i)) as HTMLHeadingElement;
+	img_node.src = shortcut.img;
+	name_node.innerHTML = shortcut.name;
+	link_node.href = shortcut.link;
+	link_node_parent.hidden = false;
+	if(shortcut.img == "" || img_node.naturalHeight < 64 || img_node.naturalWidth < 64){
+		get_favicon_from_url(shortcut.link).then(
+			image => {
+				var img_node = document.getElementById(node.shortcut.img+i) as HTMLImageElement;
+				img_node.src = image;
+				let shortcut = get_shortcut(i) as shortcut;
+				shortcut.img = image;
+				set_shortcut(shortcut,i);
+			}
+		).catch(err => {console.log(err)});
+		return;
+	};
+}
+
+async function get_favicon_from_url(url : string){
+	return new Promise<string>((resolve, reject) => {
+		if(navigator.onLine == false){
+			return reject("No internet connection. Cant get favicon.");
+		};
+		url = url.replace("https://","").replace("http://","").replace("www.","").split("/")[0];
+
+		let foreignImg = new Image();
+
+		foreignImg.crossOrigin = "anonymous";
+		foreignImg.src = img_api + url;
+
+		foreignImg.addEventListener("load", imgload);
+
+		function imgload() {
+			let canvas = document.createElement("canvas");
+			let context = canvas.getContext("2d") as CanvasRenderingContext2D;
+			canvas.width = foreignImg.width;
+			canvas.height = foreignImg.height;
+			context.drawImage(foreignImg, 0, 0);
+			var image = canvas.toDataURL();
+			return resolve(image);
+		};
+	});
+}
+
+function set_shortcut_setting(i : number){
+	var shortcut : shortcut = get_shortcut(i) as shortcut;
+	var link_node = document.getElementById(node.shortcut_setting.link+i) as HTMLInputElement;
+	var name_node = document.getElementById(node.shortcut_setting.name+i) as HTMLInputElement;
+	var img_node = document.getElementById(node.shortcut_setting.img+i) as HTMLInputElement;
+	link_node.value = shortcut.link;
+	name_node.value = (shortcut.name == null || shortcut.name == "") ? shortcut.link.replace("https://","").replace("http://","").split("/")[0] : shortcut.name;
+	img_node.value = "";
+	link_node.addEventListener("change",() =>{
+		var link = link_node.value.trim();
+		shortcut.link = link;
+		if(link == ""){
+			shortcut.img = "";
+			shortcut.name = "";
+			name_node.value = "";
+			img_node.value = "";
+		}
+		set_shortcut(shortcut,i);
+	});
+	name_node.addEventListener("change",()=>{
+		var name = name_node.value.trim();
+		shortcut.name = name;
+		set_shortcut(shortcut,i);
+	});
+	img_node.addEventListener("input",()=>{
+		const reader = new FileReader();
+		reader.addEventListener("loadend", (event) => {
+			if(event.target == null)return;
+			shortcut.img = event.target.result as string;
+			set_shortcut(shortcut,i);
+		});
+		var files = img_node.files;
+		if(files == null) return;
+		var image = files.item(0);
+		if(image == null)return;
+		reader.readAsDataURL(image);
+	});
+}
+/// Notes
 function get_notes() : notes_arr {
 	const notesString = localStorage.getItem("notes");
 	if (notesString != null && notesString != "") {
-		return JSON.parse(notesString) as notes_arr; 	
+		return JSON.parse(notesString) as notes_arr;
 	}
 	let temp : notes_arr = [
 		{note: ""},
@@ -136,279 +253,188 @@ function save_note(i : number){
 	note.hidden = true;
 	button.hidden = false;
 }
+/// Currencies
+function configure_currencies(){
+	if(did_a_day_pass()){
+		get_rates().then(
+			() => {
+				for (let i = 0; i < 3; i++) {
+					reset_currency_rate(i);
+					update_currency_node(i);
+				};
+			}
+		).catch(err=>{console.log(err)});
+	}else{
+		for (let i = 0; i < 3; i++) {
+			update_currency_node(i);
+		};
+	};
 
-function set_shortcut_node(shortcut : shortcut, i : Number){
-	var link_node = document.getElementById(node.shortcut.link+i) as HTMLAnchorElement;
-	var link_node_parent = link_node.parentElement;
-	if(link_node_parent == null) return;
-	if(shortcut.link == ""){
-		link_node_parent.hidden = true;
-		return;
-	};
-	if(shortcut.name == ""){
-		shortcut.name = shortcut.link.replace("https://","").replace("http://","").split("/")[0];
-	};
-	active_shortcut_number += 1;
-	link_node_parent.hidden = false;
-	link_node.href = shortcut.link;
-	var name_node = (document.getElementById(node.shortcut.name+i)) as HTMLHeadingElement;
-	var img_node = (document.getElementById(node.shortcut.img+i)) as HTMLImageElement;
-	name_node.innerHTML = shortcut.name;
-	img_node.src = shortcut.img;
-	if(shortcut.img == "" || img_node.naturalHeight < 64 || img_node.naturalWidth < 64){
-		get_favicon_from_url(shortcut.link,i);
-		return;
-	};
+	var national = document.getElementById("national-currencies") as HTMLOptGroupElement;
+	var crypto = document.getElementById("crypto-currencies") as HTMLOptGroupElement;
+
+	national = national.cloneNode(true) as HTMLOptGroupElement;
+	crypto = crypto.cloneNode(true) as HTMLOptGroupElement;
+
+	national.hidden = false;
+	crypto.hidden = false;
+
+	var select_ids = [node.currency.option+0, node.currency.option+1,node.currency.option+2,"base_currency"]
+
+	for (let i = 0; i < select_ids.length; i++) {
+		var select = document.getElementById(select_ids[i]) as HTMLSelectElement;
+		select.appendChild(national.cloneNode(true));
+		select.appendChild(crypto.cloneNode(true));
+		if (i == select_ids.length - 1) {
+			select.value = get_base_currency();
+			select.addEventListener("change",()=>{
+				localStorage.setItem("base_currency",select.value);
+				currencies_json = null;
+				get_rates().then(
+					() => {
+						for (let i = 0; i < 3; i++) {
+							reset_currency_rate(i);
+							update_currency_node(i);
+						};	
+					},
+					err => {console.log(err)}
+				);
+			});
+			continue;
+		};
+		select.value = (get_currency(i) as currency).name.toUpperCase();
+		select.addEventListener("change",()=>{
+			var select = document.getElementById(node.currency.option + i) as HTMLSelectElement;
+			var cr = get_currency(i) as currency;
+			cr.name = select.value;
+			cr.rate = "-";
+			set_currency(cr,i);
+			update_currency_node(i)
+		});
+	}
+	var check = document.getElementById("enable_api") as HTMLInputElement
+	check.checked = is_currency_rates_enabled();
+	hide_currency_elements(!check.checked);
+	check.addEventListener("change",()=>{
+		hide_currency_elements(!check.checked);
+		localStorage.setItem("is_currency_rates_enabled",check.checked.toString());
+	});
+
+	var nav = document.getElementById("nav-button") as HTMLButtonElement;
+	nav.addEventListener("click",()=>{
+		var navbar = document.getElementById("navbar");
+		if (navbar.classList.replace("bg-transparent","bg-black")) 
+			return;
+		navbar.classList.replace("bg-black","bg-transparent");
+	});
 }
 
-function align_shortcut_nodes(){
-	var node = document.getElementById("ShortcutContainer") as HTMLElement;
-	if(active_shortcut_number <= 4){
-		node.classList.replace("align-items-start","align-items-center")
-	}
-	else{
-		node.classList.replace("align-items-center","align-items-start")
-	};
-}
-
-function get_favicon_from_url(url : string, idx : Number){
-	if(navigator.onLine == false){
-		console.log("No internet connection. Cant get favicons.");
-		return;
-	};
-	url = url.replace("https://","").replace("http://","").replace("www.","").split("/")[0];
-
-	let foreignImg = new Image();
-
-	foreignImg.crossOrigin = "anonymous";
-	foreignImg.src =  img_api + url;
-
-	foreignImg.addEventListener("load", imgload);
-
-	function imgload() {
-		let canvas = document.createElement("canvas");
-		let context = canvas.getContext("2d") as CanvasRenderingContext2D;
-		canvas.width = foreignImg.width;
-		canvas.height = foreignImg.height;
-		context.drawImage(foreignImg, 0, 0);
-		var image = canvas.toDataURL();
-		var img_node = document.getElementById(node.shortcut.img+idx) as HTMLImageElement;
-		img_node.src = image;
-		let shortcuts = get_shortcuts();
-		shortcuts[idx.toString()]["img"] = image;
-		localStorage.setItem("shortcuts",JSON.stringify(shortcuts));
-	}
+function reset_currency_rate(i : number){
+	var cr = get_currency(i) as currency;
+	cr.rate = "-";
+	set_currency(cr,i);
 }
 
 function did_a_day_pass() : boolean{
-	let date = localStorage.getItem("date");
-	localStorage.setItem("date", new Date().getTime().toString());
-	if (date == null){
-		return true;
-	};
-	let saved_date = new Date(parseInt(date));
-	if(new Date().getTime() - saved_date.getTime() > 86400000){
+	let saved_date_str : string = localStorage.getItem("date");
+	let now : number = Date.now();
+	if (saved_date_str == null || now - parseInt(saved_date_str) > 86400000){
+		localStorage.setItem("date",now.toString());
 		return true;
 	};
 	return false;
 }
 
 function is_currency_rates_enabled() : boolean {
-	let key = localStorage.getItem("is_currency_rates_enabled");
-	if(key == null || key == "" || key == "false"){
-		hide_currency_elements(true);
-		return false
-	}
-	hide_currency_elements(false);
-	return true;
+	let key = localStorage.getItem("is_currency_rates_enabled") as string;
+	return (key == "true") ? true : false;
+}
+
+function get_currency(idx : number | null) : currencies_arr | currency {
+	let currencies = localStorage.getItem("currencies");
+	let arr : currencies_arr;
+	if (currencies != null){
+		arr = JSON.parse(currencies);
+	}else{
+		arr = [
+			{name:"USD",rate:"-"},
+			{name:"EUR",rate:"-"},
+			{name:"GBP",rate:"-"}
+		];
+		localStorage.setItem("currencies",JSON.stringify(arr));
+	};
+	return idx == null ? arr : arr[idx] as currency;
+}
+
+function set_currency(currency : currency, idx : number){
+	let arr = get_currency(null);
+	arr[idx] = currency;
+	localStorage.setItem("currencies",JSON.stringify(arr));
+}
+
+function update_currency_node(idx : number)  {
+	var name_node = document.getElementById(node.currency.name + idx) as HTMLDivElement;
+	var rate_node = document.getElementById(node.currency.value + idx) as HTMLDivElement;
+
+	var currency = get_currency(idx) as currency;
+
+	name_node.innerText = currency.name;
+	rate_node.innerText = currency.rate;
+
+	if (currency.rate == "-"){
+		get_rates().then(res => {
+			currency.rate = (1.0 / res[currency.name.toLowerCase()]).toFixed(2);
+			rate_node.innerText = currency.rate;
+			set_currency(currency,idx);
+			update_currency_node(idx);
+		}).catch(err => {console.log(err)});
+	};
 }
 
 function get_base_currency() : string{
-	let currency = localStorage.getItem("base_currency");
-	if (currency == null){
+	let currency = localStorage.getItem("base_currency") as string;
+	if (currency.length == 0) {
 		currency = "TRY";
 		localStorage.setItem("base_currency",currency);
 	};
 	return currency;
 }
 
-function get_currencies() : currencies_arr {
-	let currencies = localStorage.getItem("currencies");
-	if (currencies == null){
-		let def : currencies_arr = [
-			{name:"USD",rate:"0.0"},
-			{name:"EUR",rate:"0.0"},
-			{name:"GBP",rate:"0.0"}
-		];
-		localStorage.setItem("currencies",JSON.stringify(def));
-		return def;
+function hide_currency_elements(set : boolean = true) : void {
+	const parent = document.getElementById("currencies");
+	for (const child of parent.children){
+		(child as HTMLElement).hidden = set;
 	};
-	return JSON.parse(currencies) as currencies_arr;
 }
-
-function get_updated_rates(){
-	if(navigator.onLine == false){
-		console.log("No internet connection. Cant get currency rates.");
-		return;
-	}
-	const base_currency = get_base_currency().toLocaleLowerCase();
-	const currencies = get_currencies();
-	const req = new XMLHttpRequest();
-
-	req.onreadystatechange = get;
-	req.open(
-		"GET",
-		currency_api.concat(base_currency,".min.json")
-	);
-	req.send();
-	function get(){
-		if (this.readyState == 4 && this.status == 200) {
-			const res = JSON.parse(this.responseText);
-			for (let i = 0; i < 3; i++) {
-				let currency = currencies[i];
-				const updated_rate_string = (1.0 / parseFloat(res[base_currency][currency.name.toLocaleLowerCase()])).toFixed(2);
-				const updated_rate_float = parseFloat(updated_rate_string);
-
-				update_color(node.currency.value+i, updated_rate_float - parseFloat(currency.rate));
-				currency.rate = updated_rate_string;
-			};
-			localStorage.setItem("currencies", JSON.stringify(currencies));
-			update_currency_html_elements();
+var currencies_json : object
+async function get_rates(){
+	return new Promise<object>((resolve, reject) => {
+		if(navigator.onLine == false){
+			return reject("No internet connection. Cant get currency rates.");
 		};
-	}
-}
-
-function update_currency_html_elements(){
-	const currencies = get_currencies();
-	for (let i = 0; i < 3; i++) {
-		const currency = currencies[i];
-		let cur_node = document.getElementById(node.currency.name+i) as HTMLElement;
-		cur_node.innerHTML = currency.name;
-		let val_node = document.getElementById(node.currency.value+i) as HTMLElement;
-		val_node.innerHTML = currency.rate;
-	};
-}
-
-function hide_currency_elements(set = true){
-	const currency_parent_node = document.getElementById("currencies") as HTMLElement;
-	const childElements = Object.values(currency_parent_node.childNodes) as HTMLElement[]
-	for (const child of childElements){
-		child.hidden = set;
-	};
-}
-
-function update_color(child_id : string, diff : number){
-	const node = document.getElementById(child_id) as HTMLElement;
-	const parent_node = node.parentElement;
-	if(parent_node == null) return;
-	let color = "bg-danger";
-	if(diff >= 0){
-		color = "bg-success";
-	};
-	parent_node.classList.replace("bg-primary",color);
-}
-
-function save(){
-	const navbar = document.getElementsByClassName("navbar")[0] as HTMLElement;
-	if(!navbar.classList.replace("bg-transparent","bg-black")){
-		navbar.classList.replace("bg-black","bg-transparent");
-	}
-	let base_currency_node = document.getElementById("base_currency") as HTMLInputElement;
-	let base_currency = base_currency_node.value;
-	localStorage.setItem("base_currency",base_currency);
-
-	let api_node = document.getElementById("enable_api") as HTMLInputElement;
-	localStorage.setItem("is_currency_rates_enabled",""+api_node.checked);
-
-	let currencies : currencies_arr = get_currencies();
-	let shortcuts : shortcut_arr = get_shortcuts();
-	for (let i = 0; i < 8; i++){
-		if(i < 3){
-			const currency_node = document.getElementById(node.currency.option+i) as HTMLInputElement;
-			currencies[i].name = currency_node.value;
-		};
-		var shortcut : shortcut = shortcuts[i];
-		const link_node = document.getElementById(node.shortcut_setting.link+i) as HTMLInputElement;
-		const name_node = document.getElementById(node.shortcut_setting.name+i) as HTMLInputElement;
-		const img_node = document.getElementById(node.shortcut_setting.img+i) as HTMLInputElement;
-		if(shortcut.link != link_node.value){
-			shortcut.link = link_node.value.trim();
-			if(shortcut.name != name_node.value){
-				shortcut.name = name_node.value.trim();
-			}else{
-				shortcut.name = "";
-			};
-			if(img_node.value == ""){
-				shortcut.img = "";
-				save_shortcuts(shortcuts);
-				continue;
-			};
-		}else{
-			shortcut.name = name_node.value;
-			var img = img_node.value;
-			if(img == ""){
-				save_shortcuts(shortcuts);
-				continue;
+		if(currencies_json != null){
+			return resolve(currencies_json);
+		} 
+		const base_currency = get_base_currency().toLowerCase();
+		const req : XMLHttpRequest = new XMLHttpRequest();
+		req.onreadystatechange = () => {
+			if (req.readyState == 4) {
+				if(req.status == 200){
+					currencies_json = JSON.parse(req.responseText)[base_currency];
+					return resolve(currencies_json);
+				}else{
+					return reject("HTTP request failed");
+				};
 			};
 		};
-		const reader = new FileReader();
-			reader.addEventListener("loadend", (event) => {
-				if(event.target == null)return;
-				shortcut.img = event.target.result as string;
-				save_shortcuts(shortcuts);
-			});
-		var files = img_node.files;
-		if(files == null) continue;
-		var image = files.item(0);
-		if(image == null)continue;
-		reader.readAsDataURL(image);
-	};
-	localStorage.setItem("currencies",JSON.stringify(currencies));
-	if(api_node.checked){
-		hide_currency_elements(false);
-		get_updated_rates();
-	}else{
-		hide_currency_elements(true);
-	};
+		req.open("GET",
+			currency_api.concat(base_currency, ".min.json"),true
+		);
+		req.send();
+	});
 }
-
-let check = 0;
-function save_shortcuts(shortcuts : shortcut_arr) {
-	if(++check == 8){
-		check = 0;
-		localStorage.setItem("shortcuts",JSON.stringify(shortcuts));
-		configure_shortcuts();
-		config_settings_page();
-	};
-}
-
-function config_settings_page(){
-	const api_node = document.getElementById("enable_api") as HTMLInputElement;
-	api_node.checked = is_currency_rates_enabled();
-
-	const base_cur_node = document.getElementById("base_currency") as HTMLInputElement;
-	base_cur_node.value = get_base_currency();
-
-	const shortcuts = get_shortcuts();
-	const currencies = get_currencies();
-
-	for (let i = 0; i < 8; i++) {
-		var shortcut = shortcuts[i];
-		var link_setting_node = document.getElementById(node.shortcut_setting.link+i) as HTMLInputElement;
-		var name_setting_node = document.getElementById(node.shortcut_setting.name+i) as HTMLInputElement;
-		var img_setting_node = document.getElementById(node.shortcut_setting.img+i) as HTMLInputElement;
-		name_setting_node.value = shortcut.name;
-		link_setting_node.value = shortcut.link;
-		img_setting_node.value = "";
-		if(!(i < 3)) continue; // only 3 currencies
-		const currency_node = document.getElementById(node.currency.option+i) as HTMLInputElement;
-		currency_node.value = currencies[i].name;
-	};
-	const save_button = document.getElementById("save-button") as HTMLInputElement;
-	save_button.addEventListener("click",save);
-}
-
-function translate() {
+/// Translations
+function translate() : void {
 	const translations = [
 		{
 			"name": "settings",
@@ -529,6 +555,20 @@ function translate() {
 			"de": "Wenn Sie auf einen Fehler gestoßen sind oder ein neues Feature wünschen, können Sie hier eine neue Issue öffnen: https://github.com/enfyna/fx-new-tab/issues",
 			"es": "Si has encontrado algún error o deseas una nueva función, puedes abrir un issue aquí: https://github.com/enfyna/fx-new-tab/issues",
 		},
+		{
+			"name": "national-currencies",
+			"tr": "Ulusal para birimleri",
+			"en": "National currencies",
+			"de": "Nationale Währungen",
+			"es": "Monedas nacionales",
+		},
+		{
+			"name": "crypto-currencies",
+			"tr": "Kripto para birimleri",
+			"en": "Cryptocurrencies",
+			"de": "Kryptowährungen",
+			"es": "Criptomonedas",
+		}
 	];
 	let lang : string;
 	switch (navigator.language.toLowerCase().split("-")[0]){
@@ -547,11 +587,19 @@ function translate() {
 	};
 	translations.forEach(dict => {
 		document.getElementsByName(dict.name).forEach(element => {
-			const list : string = dict[lang];
+			const translation : string = dict[lang];
 			if(dict.name == "note-input"){
-				(element as HTMLInputElement).placeholder = list;
+				(element as HTMLInputElement).placeholder = translation;
 			}
-			element.innerHTML = list;
+			else if(dict.name == "base-currency-label"){
+				(element as HTMLOptGroupElement).label = translation;
+			}
+			else if(dict.name == "crypto-currencies" || dict.name == "national-currencies"){
+				(element as HTMLOptGroupElement).label = translation;
+			}
+			else{
+				element.innerHTML = translation;
+			};
 		});
 	});
 }
