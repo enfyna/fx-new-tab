@@ -75,15 +75,16 @@ function configure_shortcuts(){
 		set_shortcut_setting(i);
 	};
 }
-
+let shortcuts : shortcut_arr;
 function get_shortcut(idx : number | null){
-	let shortcuts = localStorage.getItem("shortcuts");
-	let arr : shortcut_arr;
-	if(shortcuts != null){
-		arr = JSON.parse(shortcuts) as shortcut_arr;
+	if (shortcuts != null)
+		return idx == null ? shortcuts : shortcuts[idx];
+	let data = localStorage.getItem("shortcuts");
+	if(data != null){
+		shortcuts = JSON.parse(data) as shortcut_arr;
 	}
 	else{
-		arr = [
+		shortcuts = [
 			{name:"",img:"",link:"https://github.com"},
 			{name:"",img:"",link:"https://youtube.com/"},
 			{name:"",img:"",link:"https://chat.openai.com"},
@@ -93,9 +94,9 @@ function get_shortcut(idx : number | null){
 			{name:"",img:"",link:"https://web.whatsapp.com/"},
 			{name:"",img:"",link:"https://amazon.com"},
 		];
-		localStorage.setItem("shortcuts",JSON.stringify(arr));
+		localStorage.setItem("shortcuts",JSON.stringify(shortcuts));
 	};
-	return idx == null ? arr : arr[idx];
+	return idx == null ? shortcuts : shortcuts[idx];
 }
 
 function set_shortcut(shortcut : shortcut, idx : number){
