@@ -121,7 +121,7 @@ function set_shortcut_node(i : number){
 		shortcut.name = shortcut.link.replace("https://","").replace("http://","").split("/")[0];
 	};
 	var name_node = (document.getElementById(node.shortcut.name+i)) as HTMLHeadingElement;
-	name_node.innerHTML = shortcut.name;
+	name_node.innerText = shortcut.name;
 	link_node.href = shortcut.link;
 	link_node_parent.hidden = false;
 	var img_node = document.getElementById(node.shortcut.img+i) as HTMLImageElement;
@@ -231,12 +231,12 @@ function configure_notes(){
 	var notes : notes_arr = get_notes();
 	for	(let i = 0; i < 4; i++){
 		var button : HTMLButtonElement = document.getElementById(node.note.note + i) as HTMLButtonElement;
-		button.innerHTML = notes[i].note;
+		button.innerText = notes[i].note;
 		var note : HTMLInputElement = document.getElementById(node.note.input + i) as HTMLInputElement;
 		button.addEventListener("click", () => {
 			var button : HTMLButtonElement = document.getElementById(node.note.note + i) as HTMLButtonElement;
 			var note : HTMLInputElement = document.getElementById(node.note.input + i) as HTMLInputElement;
-			note.value = button.innerHTML;
+			note.value = button.innerText;
 			button.hidden = true;
 			note.hidden = false;
 			note.focus();
@@ -257,7 +257,7 @@ function save_note(i : number){
 	var notes : notes_arr = get_notes();
 	notes[i].note = note.value;
 	localStorage.setItem("notes", JSON.stringify(notes));
-	button.innerHTML = note.value;
+	button.innerText = note.value;
 	note.hidden = true;
 	button.hidden = false;
 }
@@ -606,7 +606,7 @@ function translate() : void {
 				(element as HTMLOptGroupElement).label = translation;
 			}
 			else{
-				element.innerHTML = translation;
+				element.innerText = translation;
 			};
 		});
 	});
