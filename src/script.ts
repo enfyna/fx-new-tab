@@ -119,23 +119,30 @@ function set_shortcut_node(i : number){
 	if(shortcut.name == ""){
 		shortcut.name = shortcut.link.replace("https://","").replace("http://","").split("/")[0];
 	};
-	var img_node = (document.getElementById(node.shortcut.img+i)) as HTMLImageElement;
 	var name_node = (document.getElementById(node.shortcut.name+i)) as HTMLHeadingElement;
-	img_node.src = shortcut.img;
 	name_node.innerHTML = shortcut.name;
 	link_node.href = shortcut.link;
 	link_node_parent.hidden = false;
-	if(shortcut.img == "" || img_node.naturalHeight < 64 || img_node.naturalWidth < 64){
-		get_favicon_from_url(shortcut.link).then(
-			image => {
-				var img_node = document.getElementById(node.shortcut.img+i) as HTMLImageElement;
-				img_node.src = image;
-				let shortcut = get_shortcut(i) as shortcut;
-				shortcut.img = image;
-				set_shortcut(shortcut,i);
-			}
-		).catch(err => {console.log(err)});
-		return;
+	var img_node = document.getElementById(node.shortcut.img+i) as HTMLImageElement;
+
+	const loadImage = (url: string) => {
+		return get_favicon_from_url(url).then(image => {
+			img_node.src = image;
+			let shortcut = get_shortcut(i) as shortcut;
+			shortcut.img = image;
+			set_shortcut(shortcut, i); 
+		});
+	};
+
+	img_node.onload = () => {
+		if(img_node.naturalHeight < 64 || img_node.naturalWidth < 64){
+			loadImage(shortcut.link);
+		}
+	};
+	img_node.src = shortcut.img;
+
+	if(shortcut.img == "") {
+		loadImage(shortcut.link);
 	};
 }
 
