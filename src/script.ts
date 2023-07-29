@@ -3,21 +3,12 @@ interface shortcut {
 	link:string;
 	img:string;
 }
-interface shortcut_arr {
-    [index:number]:shortcut;
-}
 interface currency {
 	name:string;
 	rate:string;
 }
-interface currencies_arr {
-	[index:number]:currency;
-}
 interface note {
 	note:string;
-}
-interface notes_arr {
-	[index:number]:note;
 }
 const currency_api = "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/";
 const img_api = "https://icon.horse/icon/";
@@ -75,13 +66,13 @@ function configure_shortcuts(){
 		set_shortcut_setting(i);
 	};
 }
-let shortcuts : shortcut_arr;
+let shortcuts : shortcut[];
 function get_shortcut(idx : number | null){
 	if (shortcuts != null)
 		return idx == null ? shortcuts : shortcuts[idx];
 	let data = localStorage.getItem("shortcuts");
 	if(data != null){
-		shortcuts = JSON.parse(data) as shortcut_arr;
+		shortcuts = JSON.parse(data) as shortcut[];
 	}
 	else{
 		shortcuts = [
@@ -126,28 +117,27 @@ function set_shortcut_node(i : number){
 	link_node_parent.hidden = false;
 	var img_node = document.getElementById(node.shortcut.img+i) as HTMLImageElement;
 
-	const loadImage = (url: string) => {
+	const loadImageFromAPI = (url: string) => {
 		return get_favicon_from_url(url).then(image => {
 			img_node.src = image;
 			let shortcut = get_shortcut(i) as shortcut;
 			shortcut.img = image;
-			set_shortcut(shortcut, i); 
+			set_shortcut(shortcut, i);
 		});
 	};
-
 	img_node.onload = () => {
 		if(img_node.naturalHeight < 64 || img_node.naturalWidth < 64){
-			loadImage(shortcut.link);
+			loadImageFromAPI(shortcut.link);
 		}
 	};
-	img_node.src = shortcut.img;
-
 	if(shortcut.img == "") {
-		loadImage(shortcut.link);
+		loadImageFromAPI(shortcut.link);
+		return;
 	};
+	img_node.src = shortcut.img;
 }
 
-async function get_favicon_from_url(url : string){
+function get_favicon_from_url(url : string){
 	return new Promise<string>((resolve, reject) => {
 		if(navigator.onLine == false){
 			return reject("No internet connection. Cant get favicon.");
@@ -156,12 +146,7 @@ async function get_favicon_from_url(url : string){
 
 		let foreignImg = new Image();
 
-		foreignImg.crossOrigin = "anonymous";
-		foreignImg.src = img_api + url;
-
-		foreignImg.addEventListener("load", imgload);
-
-		function imgload() {
+		foreignImg.onload = () => {
 			let canvas = document.createElement("canvas");
 			let context = canvas.getContext("2d") as CanvasRenderingContext2D;
 			canvas.width = foreignImg.width;
@@ -170,6 +155,8 @@ async function get_favicon_from_url(url : string){
 			var image = canvas.toDataURL();
 			return resolve(image);
 		};
+		foreignImg.crossOrigin = "anonymous";
+		foreignImg.src = img_api + url;
 	});
 }
 
@@ -212,23 +199,28 @@ function set_shortcut_setting(i : number){
 	});
 }
 /// Notes
-function get_notes() : notes_arr {
-	const notesString = localStorage.getItem("notes");
-	if (notesString != null && notesString != "") {
-		return JSON.parse(notesString) as notes_arr;
+let notes : note[]
+function get_notes() : note[] {
+	if (notes != null){
+		return notes;
 	}
-	let temp : notes_arr = [
+	const arr = localStorage.getItem("notes");
+	if (arr != null && arr != "") {
+		notes = JSON.parse(arr)
+		return notes;
+	}
+	notes = [
 		{note: ""},
 		{note: ""},
 		{note: ""},
 		{note: ""},
 	];
-	localStorage.setItem("notes", JSON.stringify(temp));
-	return temp;
+	localStorage.setItem("notes", JSON.stringify(notes));
+	return notes;
 }
 
 function configure_notes(){
-	var notes : notes_arr = get_notes();
+	var notes : note[] = get_notes();
 	for	(let i = 0; i < 4; i++){
 		var button : HTMLButtonElement = document.getElementById(node.note.note + i) as HTMLButtonElement;
 		button.innerText = notes[i].note;
@@ -254,7 +246,7 @@ function save_note(i : number){
 	var button : HTMLButtonElement = document.getElementById(node.note.note + i) as HTMLButtonElement;
 	var note : HTMLInputElement = document.getElementById(node.note.input + i) as HTMLInputElement;
 	note.value = note.value.trim()
-	var notes : notes_arr = get_notes();
+	var notes : note[] = get_notes();
 	notes[i].note = note.value;
 	localStorage.setItem("notes", JSON.stringify(notes));
 	button.innerText = note.value;
@@ -303,14 +295,14 @@ function configure_currencies(){
 						for (let i = 0; i < 3; i++) {
 							reset_currency_rate(i);
 							update_currency_node(i);
-						};	
+						};
 					},
 					err => {console.log(err)}
 				);
 			});
 			continue;
 		};
-		select.value = (get_currency(i) as currency).name.toUpperCase();
+		select.value = (get_currency(i) as currency).name;
 		select.addEventListener("change",()=>{
 			var select = document.getElementById(node.currency.option + i) as HTMLSelectElement;
 			var cr = get_currency(i) as currency;
@@ -331,7 +323,7 @@ function configure_currencies(){
 	var nav = document.getElementById("nav-button") as HTMLButtonElement;
 	nav.addEventListener("click",()=>{
 		var navbar = document.getElementById("navbar");
-		if (navbar.classList.replace("bg-transparent","bg-black")) 
+		if (navbar.classList.replace("bg-transparent","bg-black"))
 			return;
 		navbar.classList.replace("bg-black","bg-transparent");
 	});
@@ -357,21 +349,23 @@ function is_currency_rates_enabled() : boolean {
 	let key = localStorage.getItem("is_currency_rates_enabled") as string;
 	return (key == "true") ? true : false;
 }
-
-function get_currency(idx : number | null) : currencies_arr | currency {
-	let currencies = localStorage.getItem("currencies");
-	let arr : currencies_arr;
+let currencies : currency[]
+function get_currency(idx : number | null) : currency[] | currency {
 	if (currencies != null){
-		arr = JSON.parse(currencies);
+		return idx == null ? currencies : currencies[idx] as currency;
+	}
+	var arr : string = localStorage.getItem("currencies");
+	if (arr != null){
+		currencies = JSON.parse(arr);
 	}else{
-		arr = [
+		currencies = [
 			{name:"USD",rate:"-"},
 			{name:"EUR",rate:"-"},
 			{name:"GBP",rate:"-"}
 		];
-		localStorage.setItem("currencies",JSON.stringify(arr));
+		localStorage.setItem("currencies",JSON.stringify(currencies));
 	};
-	return idx == null ? arr : arr[idx] as currency;
+	return idx == null ? currencies : currencies[idx] as currency;
 }
 
 function set_currency(currency : currency, idx : number){
@@ -415,14 +409,14 @@ function hide_currency_elements(set : boolean = true) : void {
 	};
 }
 var currencies_json : object
-async function get_rates(){
+function get_rates(){
 	return new Promise<object>((resolve, reject) => {
 		if(navigator.onLine == false){
 			return reject("No internet connection. Cant get currency rates.");
 		};
 		if(currencies_json != null){
 			return resolve(currencies_json);
-		} 
+		}
 		const base_currency = get_base_currency().toLowerCase();
 		const req : XMLHttpRequest = new XMLHttpRequest();
 		req.onreadystatechange = () => {
@@ -593,21 +587,23 @@ function translate() : void {
 			lang = "en";
 			break;
 	};
-	translations.forEach(dict => {
-		document.getElementsByName(dict.name).forEach(element => {
-			const translation : string = dict[lang];
-			if(dict.name == "note-input"){
+	for (const dict of translations) {
+		const elm_name : string = dict.name;
+		const translation : string = dict[lang];
+		if(elm_name == "note-input"){
+			for (const element of document.getElementsByName(elm_name)){
 				(element as HTMLInputElement).placeholder = translation;
-			}
-			else if(dict.name == "base-currency-label"){
+			};
+		}
+		else if(elm_name == "base-currency-label" || elm_name == "crypto-currencies" || elm_name == "national-currencies"){
+			for (const element of document.getElementsByName(elm_name)){
 				(element as HTMLOptGroupElement).label = translation;
-			}
-			else if(dict.name == "crypto-currencies" || dict.name == "national-currencies"){
-				(element as HTMLOptGroupElement).label = translation;
-			}
-			else{
+			};
+		}
+		else{
+			for (const element of document.getElementsByName(elm_name)){
 				element.innerText = translation;
 			};
-		});
-	});
+		};
+	};
 }
