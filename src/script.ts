@@ -256,14 +256,12 @@ function save_note(i : number){
 /// Currencies
 function configure_currencies(){
 	if(did_a_day_pass()){
-		get_rates().then(
-			() => {
-				for (let i = 0; i < 3; i++) {
-					reset_currency_rate(i);
-					update_currency_node(i);
-				};
-			}
-		).catch(err=>{console.log(err)});
+		get_rates().then(() => {
+			for (let i = 0; i < 3; i++) {
+				reset_currency_rate(i);
+				update_currency_node(i);
+			};
+		}).catch(err=>{console.log(err)});
 	}else{
 		for (let i = 0; i < 3; i++) {
 			update_currency_node(i);
@@ -290,15 +288,12 @@ function configure_currencies(){
 			select.addEventListener("change",()=>{
 				localStorage.setItem("base_currency",select.value);
 				currencies_json = null;
-				get_rates().then(
-					() => {
-						for (let i = 0; i < 3; i++) {
-							reset_currency_rate(i);
-							update_currency_node(i);
-						};
-					},
-					err => {console.log(err)}
-				);
+				get_rates().then(() => {
+					for (let i = 0; i < 3; i++) {
+						reset_currency_rate(i);
+						update_currency_node(i);
+					};
+				},err => {console.log(err)});
 			});
 			continue;
 		};
@@ -447,14 +442,14 @@ function translate() : void {
 		},
 		{
 			"name": "delete-link",
-			"tr": "Bir linkin linkini silerek ana menüden kaldırabilirsin.",
+			"tr": "Bir kısayolun linkini silerek ana menüden kaldırabilirsin.",
 			"en": "Delete shortcut link to remove it from the main menu.",
 			"de": "Entfernen Sie die URL, um sie aus dem Hauptmenü zu löschen.",
 			"es": "Elimina el URL para quitarlo del menú principal.",
 		},
 		{
 			"name": "image-link",
-			"tr": "Link ikonunu resim dosyası yükleyerek ayarlayabilirsin. (en az 64x64 boyutunda)",
+			"tr": "Kısayol ikonunu resim dosyası yükleyerek ayarlayabilirsin. (en az 64x64 boyutunda)",
 			"en": "Set a custom link icon by uploading an image file. (at least 64x64 resolution)",
 			"de": "Legen Sie ein benutzerdefiniertes Verknüpfungssymbol fest, indem Sie eine Bilddatei hochladen. (mindestens 64x64 Auflösung)",
 			"es": "Establece un ícono de enlace personalizado subiendo un archivo de imagen. (al menos 64x64 de resolución)",
@@ -509,13 +504,6 @@ function translate() : void {
 			"es": "Esta es una característica opcional que agrega información de 3 tasas de cambio de divisas a tu página principal.",
 		},
 		{
-			"name": "save-button",
-			"tr": "Kaydet",
-			"en": "Save",
-			"de": "Speichern",
-			"es": "Guardar",
-		},
-		{
 			"name": "base-currency-label",
 			"tr": "Ana para birimini seç",
 			"en": "Select base currency",
@@ -532,7 +520,7 @@ function translate() : void {
 		{
 			"name": "link-label",
 			"tr": "Link",
-			"en": "Link",
+			"en": "URL",
 			"de": "URL",
 			"es": "URL",
 		},
