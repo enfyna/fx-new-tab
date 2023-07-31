@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "version": "1.4.0",
+  "version": "1.5.0",
   "name": "New Tab",
   "description":"A new look for firefox homepage and the newtab page.",
   "icons": {
@@ -9,7 +9,7 @@
     "128": "icons/border-128.png"
   },  
   "permissions": [
-    "storage",
+    "storage"
   ],
   "chrome_url_overrides": { 
     "newtab": "index.html" 

@@ -333,7 +333,7 @@ function reset_currency_rate(i : number){
 function did_a_day_pass() : boolean{
 	let saved_date_str : string = localStorage.getItem("date");
 	let now : number = Date.now();
-	if (saved_date_str == null || now - parseInt(saved_date_str) > 86400000){
+	if (saved_date_str == null || now - parseInt(saved_date_str) > 70000000){
 		localStorage.setItem("date",now.toString());
 		return true;
 	};
@@ -342,7 +342,7 @@ function did_a_day_pass() : boolean{
 
 function is_currency_rates_enabled() : boolean {
 	let key = localStorage.getItem("is_currency_rates_enabled") as string;
-	return (key == "true") ? true : false;
+	return key == "true" ? true : false;
 }
 let currencies : currency[]
 function get_currency(idx : number | null) : currency[] | currency {
@@ -390,7 +390,7 @@ function update_currency_node(idx : number)  {
 
 function get_base_currency() : string{
 	let currency = localStorage.getItem("base_currency") as string;
-	if (currency.length == 0) {
+	if (currency == null || currency.length == 0) {
 		currency = "TRY";
 		localStorage.setItem("base_currency",currency);
 	};
@@ -424,8 +424,10 @@ function get_rates(){
 				};
 			};
 		};
-		req.open("GET",
-			currency_api.concat(base_currency, ".min.json"),true
+		req.open(
+			"GET",
+			currency_api.concat(base_currency, ".min.json"),
+			true
 		);
 		req.send();
 	});
