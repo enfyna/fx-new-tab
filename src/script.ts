@@ -117,7 +117,7 @@ function set_shortcut_node(i : number){
 	link_node_parent.hidden = false;
 	var img_node = document.getElementById(node.shortcut.img+i) as HTMLImageElement;
 
-	const loadImageFromAPI = (url: string) => {
+	const loadImageFromAPI = async (url: string) => {
 		return get_favicon_from_url(url).then(image => {
 			img_node.src = image;
 			let shortcut = get_shortcut(i) as shortcut;
@@ -155,6 +155,14 @@ function get_favicon_from_url(url : string){
 			var image = canvas.toDataURL();
 			return resolve(image);
 		};
+
+		setTimeout(() => {
+			if(!foreignImg.naturalHeight){
+				foreignImg.src = ''; // try to abort transaction
+				reject("Failed to get favicon.");
+			}
+		},1000);
+
 		foreignImg.crossOrigin = "anonymous";
 		foreignImg.src = img_api + url;
 	});
@@ -424,11 +432,15 @@ function get_rates(){
 				};
 			};
 		};
+		req.ontimeout = () => {
+			return reject("Request timed out");
+		};
 		req.open(
 			"GET",
 			currency_api.concat(base_currency, ".min.json"),
 			true
 		);
+		req.timeout = 5000;
 		req.send();
 	});
 }
