@@ -123,6 +123,21 @@ function set_shortcut_node(i : number){
 			let shortcut = get_shortcut(i) as shortcut;
 			shortcut.img = image;
 			set_shortcut(shortcut, i);
+		}).catch(() => {
+			// We couldnt get a favicon from the api
+			// so we will try to create a basic replacement
+			let canvas = document.createElement("canvas");
+			let context = canvas.getContext("2d") as CanvasRenderingContext2D;
+			canvas.width = 256;
+			canvas.height = 256;
+			context.fillStyle = "#442288aa";
+			context.fillRect(0,0,256,256);
+			context.font = "bold 160px monospace";
+			context.textAlign = "center";
+			context.fillStyle = "white";
+			context.textBaseline = "middle";
+			context.fillText(shortcut.name[0].toUpperCase(), canvas.width/2, canvas.height/2);
+			img_node.src = canvas.toDataURL();
 		});
 	};
 	img_node.onload = () => {
