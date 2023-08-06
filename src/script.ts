@@ -47,7 +47,7 @@ function ready(){
 function get_bg_image() {
 	const bg = localStorage.getItem("bg_img");
 	if (bg != null && bg != "") {
-		return "url("+bg+")";
+		return "url(".concat(bg,")");
 	}
 	return "none";
 }
