@@ -37,12 +37,71 @@ const node = {
 window.addEventListener("DOMContentLoaded",ready);
 
 function ready(){
+	configure_background();
 	configure_shortcuts();
 	configure_notes();
 	configure_currencies();
 	translate();
 }
+/// Background
+function get_bg_image() {
+	const bg = localStorage.getItem("bg_img");
+	if (bg != null && bg != "") {
+		return "url("+bg+")";
+	}
+	return "none";
+}
 
+function get_bg_fallback_color() {
+	const bg = localStorage.getItem("bg_fallback");
+	if (bg != null && bg != "") {
+		return bg;
+	}
+	return "black";
+}
+
+var bodyStyle : CSSStyleDeclaration
+function get_document_body_style(){
+	if (bodyStyle != null){
+		return bodyStyle;
+	}
+	bodyStyle = document.body.style
+	return bodyStyle;
+}
+
+function configure_background() {
+	set_bg_color();
+	get_document_body_style().cssText = `background-size: contain; background-position: center center;`;
+	set_bg_image();
+	var fb_clr_node = document.getElementById("bg_fallback_color") as HTMLInputElement;
+	fb_clr_node.value = get_bg_fallback_color();
+	fb_clr_node.onchange = () => {
+		localStorage.setItem("bg_fallback",fb_clr_node.value.trim());
+		set_bg_color();
+	};
+	var img_node = document.getElementById("select_bg") as HTMLInputElement
+	img_node.addEventListener("input",()=>{
+		const reader = new FileReader();
+		reader.addEventListener("loadend", (event) => {
+			if(event.target == null)return;
+			localStorage.setItem("bg_img",event.target.result as string);
+			set_bg_image();
+		});
+		var files = img_node.files;
+		if(files == null) return;
+		var image = files.item(0);
+		if(image == null)return;
+		reader.readAsDataURL(image);
+	});
+}
+
+function set_bg_image(){
+	get_document_body_style().backgroundImage = get_bg_image();
+}
+
+function set_bg_color(){
+	get_document_body_style().backgroundColor = get_bg_fallback_color();
+}
 /// Shortcuts
 function align_shortcuts(){
 	var active_shortcuts : number = 0
@@ -510,6 +569,34 @@ function translate() : void {
 			"en": "Enable currency rates",
 			"de": "Währungskurse aktivieren",
 			"es": "Habilitar tasas de cambio de divisas",
+		},
+		{
+			"name": "bg-settings",
+			"tr": "Arkaplan Ayarları",
+			"en": "Background Settings",
+			"de": "Hintergrund Einstellungen",
+			"es": "Configuración de fondo",
+		},
+		{
+			"name": "bg-fallback-color-label",
+			"tr": "Arkaplan Rengi",
+			"en": "Background Color",
+			"de": "Hintergrund Farbe",
+			"es": "Color de fondo",
+		},
+		{
+			"name": "bg-color-options",
+			"tr": "Arka plan rengini değiştirmek için herhangi bir onaltılık değer (#abc123) veya geçerli bir HTML renk adı kullanabilirsiniz. \nGeçerli HTML renk adlarının listesini buradan bulabilirsiniz: https://www.w3schools.com/tags/ref_colornames.asp",
+			"en": "To change the background color you can use any hex value (#abc123) or a valid HTML color name. \nYou can find a list of valid HTML color names from here : https://www.w3schools.com/tags/ref_colornames.asp",
+			"de": "Um die Hintergrundfarbe zu ändern, können Sie einen beliebigen Hex-Wert (#abc123) oder einen gültigen HTML-Farbnamen verwenden. \nEine Liste gültiger HTML-Farbnamen finden Sie hier: https://www.w3schools.com/tags/ref_colornames.asp",
+			"es": "Para cambiar el color de fondo, puedes usar cualquier valor hexadecimal (#abc123) o un nombre de color HTML válido. \nPuedes encontrar una lista de nombres de colores HTML válidos aquí: https://www.w3schools.com/tags/ref_colornames.asp",
+		},
+		{
+			"name": "bg-img-upload-info",
+			"tr": "Arka planı değiştirmek için bir resim dosyası yükleyebilirsiniz. \nNot: Yüklenen tüm resim dosyaları yerel olarak kaydedilir.",
+			"en": "You can upload a image file to change the background.\nNote : All uploaded image files are saved locally.",
+			"de": "Sie können eine Bilddatei hochladen, um den Hintergrund zu ändern. \nHinweis: Alle hochgeladenen Bilddateien werden lokal gespeichert.",
+			"es": "Puedes subir un archivo de imagen para cambiar el fondo. \nNota: Todos los archivos de imagen subidos se guardan localmente.",
 		},
 		{
 			"name": "currency-api-info",
