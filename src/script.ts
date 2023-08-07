@@ -608,6 +608,13 @@ function translate() : void {
 			"es": "Puedes subir un archivo de imagen para cambiar el fondo. \nNota: Todos los archivos de imagen subidos se guardan localmente.",
 		},
 		{
+			"name": "delete-bg-button",
+			"tr": "Sil",
+			"en": "Delete",
+			"de": "Löschen",
+			"es": "Borrar",
+		},
+		{
 			"name": "currency-api-info",
 			"tr": "Döviz değerleri bu API kullanılarak alınmaktadır: https://github.com/fawazahmed0/currency-api",
 			"en": "Currency rates are provided by this API: https://github.com/fawazahmed0/currency-api",
@@ -711,6 +718,11 @@ function translate() : void {
 		else if(elm_name == "base-currency-label" || elm_name == "crypto-currencies" || elm_name == "national-currencies"){
 			for (const element of document.getElementsByName(elm_name)){
 				(element as HTMLOptGroupElement).label = translation;
+			};
+		}
+		else if(elm_name == "delete-bg-button"){
+			for (const element of document.getElementsByName(elm_name)){
+				(element as HTMLInputElement).value = translation;
 			};
 		}
 		else{
