@@ -70,7 +70,7 @@ function get_document_body_style(){
 }
 
 function configure_background() {
-	get_document_body_style().cssText = `background-size: contain; background-position: center center;`;
+	get_document_body_style().cssText = `background-size: cover; background-position: center center;`;
 	set_bg_color();
 	set_bg_image();
 	var fb_clr_node = document.getElementById("bg_fallback_color") as HTMLInputElement;
