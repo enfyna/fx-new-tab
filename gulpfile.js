@@ -20,7 +20,22 @@ function minifyJS() {
 function minifyBootstrapCSS() {
     return gulp.src('bootstrap/bootstrap.css')
         .pipe(purify(['src/index.html', 'src/script.ts'], {
-            whitelist : ['collapsing','show']
+            whitelist : [
+                // navbar
+                'collapsing',
+                'show',
+                // input groups
+                'dropdown-toggle',
+                'form-select',
+                'has-validation',
+                'form-floating',
+                'form-control',
+                'dropdown-menu',
+                'input-group',
+                'valid-tooltip',
+                'invalid-tooltip',
+                'invalid-feedback',
+            ]
         }))
         .pipe(cleanCSS())
         .pipe(gulp.dest('tsc'));
