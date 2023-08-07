@@ -67,7 +67,7 @@
 </optgroup>
 
 
-<body class="container-fluid row d-flex vh-100 m-0 p-0 bg-black">
+<body class="container-fluid row d-flex vh-100 m-0 p-0">
 
 <div class="col-md-8 row d-flex justify-content-center min-vh-100 m-0 p-0 pt-3 g-3 align-items-start" id="ShortcutContainer">
 	<div class="col-sm-3" hidden="true">
@@ -383,8 +383,11 @@
 					<input type="text" class="form-control" id="bg_fallback_color" value="black">
 				</div>
 			</div>
-			<div class="col-4 mt-1 mb-1">
+			<div class="col-3 mt-1 mb-1">
 				<input class="form-control" type="file" id="select_bg" accept=".jpg, .jpeg, .png, .gif"/>
+			</div>
+			<div class="col-1">
+				<input type="button" class="btn btn-danger fw-bold w-100" value="Delete" id="delete_bg">
 			</div>
 		</div>
 		<div class="row g-2">

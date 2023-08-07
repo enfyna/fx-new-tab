@@ -70,8 +70,8 @@ function get_document_body_style(){
 }
 
 function configure_background() {
-	set_bg_color();
 	get_document_body_style().cssText = `background-size: contain; background-position: center center;`;
+	set_bg_color();
 	set_bg_image();
 	var fb_clr_node = document.getElementById("bg_fallback_color") as HTMLInputElement;
 	fb_clr_node.value = get_bg_fallback_color();
@@ -93,6 +93,11 @@ function configure_background() {
 		if(image == null)return;
 		reader.readAsDataURL(image);
 	});
+	var delete_bg = document.getElementById("delete_bg") as HTMLInputElement;
+	delete_bg.onclick = () => {
+		localStorage.setItem("bg_img","");
+		set_bg_image();
+	}
 }
 
 function set_bg_image(){
