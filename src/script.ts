@@ -201,7 +201,11 @@ function set_shortcut_node(i : number){
 			context.fillStyle = "white";
 			context.textBaseline = "middle";
 			context.fillText(shortcut.name[0].toUpperCase(), canvas.width/2, canvas.height/2);
-			img_node.src = canvas.toDataURL();
+			var image = canvas.toDataURL();
+			img_node.src = image
+			shortcut = get_shortcut(i) as shortcut;
+			shortcut.img = image;
+			set_shortcut(shortcut, i);
 		});
 	};
 	img_node.onload = () => {
