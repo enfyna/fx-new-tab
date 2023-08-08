@@ -179,76 +179,85 @@ function set_shortcut_node(i : number){
 	name_node.innerText = shortcut.name;
 	link_node.href = shortcut.link;
 	link_node_parent.hidden = false;
+
 	var img_node = document.getElementById(node.shortcut.img+i) as HTMLImageElement;
 
-	const loadImageFromAPI = async (url: string) => {
-		return get_favicon_from_url(url).then(image => {
-			img_node.src = image;
-			let shortcut = get_shortcut(i) as shortcut;
-			shortcut.img = image;
-			set_shortcut(shortcut, i);
-		}).catch(() => {
-			// We couldnt get a favicon from the api
-			// so we will try to create a basic replacement
-			let canvas = document.createElement("canvas");
-			let context = canvas.getContext("2d") as CanvasRenderingContext2D;
-			canvas.width = 256;
-			canvas.height = 256;
-			context.fillStyle = "#442288aa";
-			context.fillRect(0,0,256,256);
-			context.font = "bold 160px monospace";
-			context.textAlign = "center";
-			context.fillStyle = "white";
-			context.textBaseline = "middle";
-			context.fillText(shortcut.name[0].toUpperCase(), canvas.width/2, canvas.height/2);
-			var image = canvas.toDataURL();
-			img_node.src = image
-			shortcut = get_shortcut(i) as shortcut;
-			shortcut.img = image;
-			set_shortcut(shortcut, i);
-		});
-	};
-	img_node.onload = () => {
-		if(img_node.naturalHeight < 64 || img_node.naturalWidth < 64){
-			loadImageFromAPI(shortcut.link);
-		}
-	};
 	if(shortcut.img == "") {
-		loadImageFromAPI(shortcut.link);
+		get_shortcut_img(shortcut, i, img_node);
 		return;
 	};
 	img_node.src = shortcut.img;
 }
 
-function get_favicon_from_url(url : string){
-	return new Promise<string>((resolve, reject) => {
-		if(navigator.onLine == false){
-			return reject("No internet connection. Cant get favicon.");
-		};
-		url = url.replace("https://","").replace("http://","").replace("www.","").split("/")[0];
-
-		let foreignImg = new Image();
-
-		foreignImg.onload = () => {
-			let canvas = document.createElement("canvas");
-			let context = canvas.getContext("2d") as CanvasRenderingContext2D;
-			canvas.width = foreignImg.width;
-			canvas.height = foreignImg.height;
-			context.drawImage(foreignImg, 0, 0);
-			var image = canvas.toDataURL();
-			return resolve(image);
-		};
-
-		setTimeout(() => {
-			if(!foreignImg.naturalHeight){
-				foreignImg.src = ''; // try to abort transaction
-				reject("Failed to get favicon.");
-			}
-		},1000);
-
-		foreignImg.crossOrigin = "anonymous";
-		foreignImg.src = img_api + url;
+function get_shortcut_img(shortcut : shortcut,i : number, node : HTMLImageElement){
+	get_favicon_from_url(shortcut.link)
+	.then(response => {
+		var img_type = response.headers.get("Content-Type");
+		if(img_type == 'image/svg+xml'){
+			throw new Error('Cant display SVG file');
+		}
+		response.blob()
+		.then(blob => {
+			const b64 =  URL.createObjectURL(blob);
+			var img = new Image();
+			img.onload = () => {
+				var canvas = document.createElement("canvas")
+				canvas.width = img.width;
+				canvas.height = img.height;
+				var context = canvas.getContext("2d");
+				context.drawImage(img, 0, 0);
+				var dataurl = canvas.toDataURL(img_type);
+				shortcut.img = dataurl;
+				node.src = dataurl;
+				set_shortcut(shortcut, i);
+			};
+			img.src = b64;
+		});
+	})
+	.catch((err)=>{
+		console.log(err);
+		// We couldnt get a favicon from the api
+		// so we will try to create a basic replacement
+		let canvas = document.createElement("canvas");
+		let context = canvas.getContext("2d") as CanvasRenderingContext2D;
+		canvas.width = 256;
+		canvas.height = 256;
+		context.fillStyle = "#442288aa";
+		context.fillRect(0,0,256,256);
+		context.font = "bold 160px monospace";
+		context.textAlign = "center";
+		context.fillStyle = "white";
+		context.textBaseline = "middle";
+		context.fillText(shortcut.name[0].toUpperCase(), canvas.width/2, canvas.height/2);
+		var image = canvas.toDataURL();
+		node.src = image;
+		shortcut = get_shortcut(i) as shortcut;
+		shortcut.img = image;
+		set_shortcut(shortcut, i);
 	});
+}
+
+async function get_favicon_from_url(url : string){
+	if(navigator.onLine == false){
+		throw new Error("No internet connection. Cant get favicon.");
+	};
+	if(!url.startsWith("http")){
+		throw new Error("Invalid URL format");
+	};
+	url = url.replace("https://","").replace("http://","").replace("www.","").split("/")[0];
+	const response = await Promise.race([
+		fetch(img_api.concat(url), {method: "GET", mode: 'cors'}),
+		new Promise<Response>((_, reject) =>
+		 	setTimeout(() => reject({status:408}), 4000)
+		) // I dont like this but it is what it is
+	])
+	if (response.status == 408){
+		throw new Error("HTTP request timed out.")
+	}
+	if (response.status != 200){
+		throw new Error("HTTP request failed");
+	}
+	return response;
 }
 
 function set_shortcut_setting(i : number){
@@ -666,7 +675,7 @@ function translate() : void {
 		{
 			"name": "note-input",
 			"tr": "Kısa bir not giriniz",
-			"en": "Please enter a brief note",
+			"en": "Enter a brief note",
 			"de": "Geben Sie eine kurze Notiz ein",
 			"es": "Ingresa una nota breve",
 		},
