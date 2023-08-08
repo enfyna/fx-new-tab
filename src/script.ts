@@ -44,10 +44,10 @@ function ready(){
 	translate();
 }
 /// Background
-function get_bg_image() {
-	const bg = localStorage.getItem("bg_img");
-	if (bg != null && bg != "") {
-		return "url(".concat(bg,")");
+async function get_bg_image() {
+	const bg = await browser.storage.local.get("bg_img");
+	if (bg != null) {
+		return "url(".concat(bg['bg_img'],")");
 	}
 	return "none";
 }
@@ -84,8 +84,8 @@ function configure_background() {
 		const reader = new FileReader();
 		reader.addEventListener("loadend", (event) => {
 			if(event.target == null)return;
-			localStorage.setItem("bg_img",event.target.result as string);
-			set_bg_image();
+			browser.storage.local.set({'bg_img':event.target.result as string})
+			.then(()=>set_bg_image());
 		});
 		var files = img_node.files;
 		if(files == null) return;
@@ -95,13 +95,13 @@ function configure_background() {
 	});
 	var delete_bg = document.getElementById("delete_bg") as HTMLInputElement;
 	delete_bg.onclick = () => {
-		localStorage.setItem("bg_img","");
-		set_bg_image();
+		browser.storage.local.remove('bg_img')
+		.then(()=>set_bg_image());
 	}
 }
 
-function set_bg_image(){
-	get_document_body_style().backgroundImage = get_bg_image();
+async function set_bg_image(){
+	get_document_body_style().backgroundImage = await get_bg_image();
 }
 
 function set_bg_color(){
