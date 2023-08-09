@@ -34,10 +34,11 @@ const node = {
 	},
 };
 
+configure_background(); // try to load the background immediately
+
 window.addEventListener("DOMContentLoaded",ready);
 
 function ready(){
-	configure_background();
 	configure_shortcuts();
 	configure_notes();
 	configure_currencies();
@@ -45,9 +46,17 @@ function ready(){
 }
 /// Background
 async function get_bg_image() {
-	const bg = await browser.storage.local.get("bg_img");
-	if (bg != null) {
-		return "url(".concat(bg['bg_img'],")");
+	try {
+		const bg = await browser.storage.local.get("bg_img");
+		if (bg != null) {
+			return "url(".concat(bg['bg_img'],")");
+		}
+	} catch (error) {
+		console.log(error);
+		const old = localStorage.getItem("bg_img");
+		if (old != null && old != "") {
+			return "url(".concat(old,")");
+		}
 	}
 	return "none";
 }
