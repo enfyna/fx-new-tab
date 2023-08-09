@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="icons/border-128.png">
+  <img src="icons/icon.svg" width=100>
 </p>
 <h1 align="center">
   fx-new-tab
