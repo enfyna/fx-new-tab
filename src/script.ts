@@ -621,10 +621,10 @@ function translate() : void {
 		},
 		{
 			"name": "bg-img-upload-info",
-			"tr": "Arka planı değiştirmek için bir resim dosyası yükleyebilirsiniz. \nNot: Yüklenen tüm resim dosyaları yerel olarak kaydedilir.",
-			"en": "You can upload a image file to change the background.\nNote : All uploaded image files are saved locally.",
-			"de": "Sie können eine Bilddatei hochladen, um den Hintergrund zu ändern. \nHinweis: Alle hochgeladenen Bilddateien werden lokal gespeichert.",
-			"es": "Puedes subir un archivo de imagen para cambiar el fondo. \nNota: Todos los archivos de imagen subidos se guardan localmente.",
+			"tr": "Arka planı değiştirmek için bir resim dosyası yükleyebilirsiniz. \nNot: Yüklenen resim ne kadar büyükse o kadar yavaş açılır. Bu yüzden eğer resim çok yavaş yüklenirse, resmi sıkıştırmayı deneyebilirsiniz.",
+			"en": "You can upload a image file to change the background.\nNote : The larger the uploaded image, the slower it loads. Therefore, if the image loads very slowly, you can try compressing the image.",
+			"de": "Sie können eine Bilddatei hochladen, um den Hintergrund zu ändern. \nHinweis: Je größer das hochgeladene Bild ist, desto langsamer lädt es. Daher können Sie, wenn das Bild sehr langsam lädt, versuchen, das Bild zu komprimieren.",
+			"es": "Puedes subir un archivo de imagen para cambiar el fondo. \nNota: Cuanto más grande sea la imagen cargada, más lento se carga. Por lo tanto, si la imagen se carga muy lentamente, puedes intentar comprimir la imagen.",
 		},
 		{
 			"name": "delete-bg-button",
