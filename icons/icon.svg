@@ -1,0 +1,15 @@
+<svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>fx-new-tab</title>
+  <ellipse stroke-width="5" ry="240" rx="240" id="svg_9" cy="250" cx="250" stroke="#000" fill="#000000"/>
+  <rect stroke-width="0" rx="5" id="svg_10" height="80" width="60" y="150" x="100" stroke="#000" fill="#0d4efd"/>
+  <rect stroke-width="0" rx="5" id="svg_12" height="80" width="60" y="150" x="180" stroke="#000" fill="#e01829"/>
+  <rect stroke-width="0" rx="5" id="svg_13" height="80" width="60" y="150" x="260" stroke="#000" fill="#058719"/>
+  <rect stroke-width="0" rx="5" id="svg_14" height="80" width="60" y="150" x="340" stroke="#000" fill="#ffc107"/>
+  <rect stroke-width="0" rx="5" id="svg_15" height="80" width="60" y="270" x="100" stroke="#000" fill="#0d4efd"/>
+  <rect stroke-width="0" rx="5" id="svg_16" height="80" width="60" y="270" x="180" stroke="#000" fill="#e01829"/>
+  <rect stroke-width="0" rx="5" id="svg_17" height="80" width="60" y="270" x="260" stroke="#000" fill="#058719"/>
+  <rect stroke-width="0" rx="5" id="svg_18" height="80" width="60" y="270" x="340" stroke="#000" fill="#ffc107"/>
+ </g>
+</svg>
