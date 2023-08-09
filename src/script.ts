@@ -46,12 +46,13 @@ function ready(){
 }
 /// Background
 async function get_bg_image() {
-	try {
+	try{
 		const bg = await browser.storage.local.get("bg_img");
 		if (bg != null) {
 			return "url(".concat(bg['bg_img'],")");
 		}
-	} catch (error) {
+		throw new Error('BG image not found on browser.storage. Trying local storage.')
+	}catch (error) {
 		console.log(error);
 		const old = localStorage.getItem("bg_img");
 		if (old != null && old != "") {
