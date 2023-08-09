@@ -10,15 +10,11 @@
 </p>
 <br>
 
-![img_5](https://github.com/enfyna/fx-new-tab/assets/91965312/cbce6716-9745-4fda-8965-80f0d187b818)
+![y3](https://github.com/enfyna/fx-new-tab/assets/91965312/23888dbd-a54d-4525-87a1-df84155f7f19)
 
-![img_4](https://github.com/enfyna/fx-new-tab/assets/91965312/f34243ba-4401-423c-9fe8-79fd648a553d)
+![y5](https://github.com/enfyna/fx-new-tab/assets/91965312/ddef9930-cc96-493f-b0f0-fb684ae8ecae)
 
-![img_1](https://github.com/enfyna/fx-new-tab/assets/91965312/95488458-9d87-4385-ad53-96f9e05f4411)
-
-![img_2](https://github.com/enfyna/fx-new-tab/assets/91965312/1d01ea23-5182-4e9e-a5da-89cb4e181a0e)
-
-![img_3](https://github.com/enfyna/fx-new-tab/assets/91965312/863d20fb-18c5-4859-be63-01805881f6ee)
+![y1](https://github.com/enfyna/fx-new-tab/assets/91965312/1c77183f-f031-4fcc-8a73-8a507618610d)
 
 <br>
 
