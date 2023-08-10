@@ -150,14 +150,14 @@ function get_shortcut(idx : number | null){
 	}
 	else{
 		shortcuts = [
-			{name:"",img:"",link:"https://github.com"},
-			{name:"",img:"",link:"https://youtube.com/"},
-			{name:"",img:"",link:"https://chat.openai.com"},
-			{name:"",img:"",link:"https://mail.google.com/mail/u/0/#inbox"},
-			{name:"",img:"",link:"https://discord.com"},
-			{name:"",img:"",link:"https://web.telegram.org/a/"},
-			{name:"",img:"",link:"https://web.whatsapp.com/"},
-			{name:"",img:"",link:"https://amazon.com"},
+			{name:"github.com",img:"",link:"https://github.com"},
+			{name:"youtube.com",img:"",link:"https://youtube.com/"},
+			{name:"chat.openai.com",img:"",link:"https://chat.openai.com"},
+			{name:"mail.google.com",img:"",link:"https://mail.google.com/mail/u/0/#inbox"},
+			{name:"discord.com",img:"",link:"https://discord.com"},
+			{name:"web.telegram.org",img:"",link:"https://web.telegram.org/a/"},
+			{name:"web.whatsapp.com",img:"",link:"https://web.whatsapp.com/"},
+			{name:"amazon.com",img:"",link:"https://amazon.com"},
 		];
 		localStorage.setItem("shortcuts",JSON.stringify(shortcuts));
 	};
@@ -182,11 +182,14 @@ function set_shortcut_node(i : number){
 		link_node_parent.hidden = true;
 		return;
 	};
-	if(shortcut.name == ""){
-		shortcut.name = shortcut.link.replace("https://","").replace("http://","").split("/")[0];
-	};
 	var name_node = (document.getElementById(node.shortcut.name+i)) as HTMLHeadingElement;
-	name_node.innerText = shortcut.name;
+	if (shortcut.name == ""){
+		name_node.hidden = true;
+	}
+	else{
+		name_node.innerText = shortcut.name;
+		name_node.hidden = false;
+	}
 	link_node.href = shortcut.link;
 	link_node_parent.hidden = false;
 
@@ -238,10 +241,9 @@ function get_shortcut_img(shortcut : shortcut,i : number, node : HTMLImageElemen
 		context.textAlign = "center";
 		context.fillStyle = "white";
 		context.textBaseline = "middle";
-		context.fillText(shortcut.name[0].toUpperCase(), canvas.width/2, canvas.height/2);
+		context.fillText((shortcut.name[0] != null ? shortcut.name[0] : shortcut.link.replace("https://","").replace("http://","").replace("www.","").split("/")[0][0]).toUpperCase(), canvas.width/2, canvas.height/2);
 		var image = canvas.toDataURL();
 		node.src = image;
-		shortcut = get_shortcut(i) as shortcut;
 		shortcut.img = image;
 		set_shortcut(shortcut, i);
 	});
@@ -276,7 +278,7 @@ function set_shortcut_setting(i : number){
 	var name_node = document.getElementById(node.shortcut_setting.name+i) as HTMLInputElement;
 	var img_node = document.getElementById(node.shortcut_setting.img+i) as HTMLInputElement;
 	link_node.value = shortcut.link;
-	name_node.value = (shortcut.name == null || shortcut.name == "") ? shortcut.link.replace("https://","").replace("http://","").split("/")[0] : shortcut.name;
+	name_node.value = shortcut.name;
 	img_node.value = "";
 	link_node.addEventListener("change",() =>{
 		var link = link_node.value.trim();
