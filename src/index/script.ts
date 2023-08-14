@@ -13,18 +13,18 @@ interface note {
 	note:string;
 }
 const node = {
-	"currency":{
-		"name":"currency_name_",
-		"value":"currency_value_",
+	currency:{
+		name:"currency_name_",
+		value:"currency_value_",
 	},
-	"shortcut":{
-		"link":"link_",
-		"name":"name_",
-		"img":"img_",
+	shortcut:{
+		link:"link_",
+		name:"name_",
+		img:"img_",
 	},
-	"note":{
-		"note":"note_",
-		"input":"note_input_",
+	note:{
+		note:"note_",
+		input:"note_input_",
 	},
 };
 
@@ -161,10 +161,11 @@ function set_shortcut_node(i : number){
 	var name_node = (document.getElementById(node.shortcut.name+i)) as HTMLHeadingElement;
 	var img_node = document.getElementById(node.shortcut.img+i) as HTMLImageElement;
 	const circle = is_circle();
-	if (shortcut.name == "" || circle){
+	if (!shortcut.name || circle){
 		name_node.hidden = true;
 		if (circle){
 			img_node.classList.replace('rounded-3','rounded-circle');
+			img_node.parentElement.classList.remove('card-header');
 			img_node.parentElement.parentElement.classList.add('rounded-circle');
 		}
 	}

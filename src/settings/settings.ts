@@ -11,15 +11,15 @@ interface note {
 	note:string;
 }
 const node = {
-	"currency":{
+	currency:{
 		"option":"currency_option_",
 	},
-	"shortcut_setting":{
-		"link":"select_link_",
-		"name":"select_name_",
-		"img":"select_img_",
-		"reset":"reset_img_",
-		"default":"set_back_",
+	shortcut_setting:{
+		link:"select_link_",
+		name:"select_name_",
+		img:"select_img_",
+		reset:"reset_img_",
+		default:"set_back_",
 	},
 };
 
@@ -117,7 +117,7 @@ function configure_shortcut_settings(){
 			});
 			name_node.addEventListener("change",()=>{
 				var name = name_node.value.trim();
-				shortcut.name = name;
+				shortcut.name = name.length > 0 ? name : null;
 				set_shortcut(shortcut, id);
 			});
 			img_node.addEventListener("input",()=>{
@@ -154,7 +154,7 @@ function configure_shortcut_settings(){
 				context.textAlign = "center";
 				context.fillStyle = "white";
 				context.textBaseline = "middle";
-				context.fillText((shortcut.name[0] != null ? shortcut.name[0] : shortcut.link.split('/')[2].replace("www.","")[0]).toUpperCase(), canvas.width/2, canvas.height/2);
+				context.fillText((shortcut.name ?? shortcut.link).replace('https://','').replace('http://','').replace('www.','').toUpperCase().slice(0,2), canvas.width/2, canvas.height/2);
 				var image = canvas.toDataURL();
 				shortcut.img = image;
 				set_shortcut(shortcut, id);
