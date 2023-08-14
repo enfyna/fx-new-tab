@@ -3,27 +3,45 @@ const { series } = require('gulp');
 const htmlmin = require('gulp-htmlmin');
 const terser = require('gulp-terser');
 const purify = require('gulp-purifycss');
+const rename = require('gulp-rename');
 const cleanCSS = require('gulp-clean-css');
 
-function minifyHTML() {
-    return gulp.src('src/index.html')
-        .pipe(htmlmin({collapseWhitespace: true})) 
+function minifyIndex() {
+    return gulp.src('src/index/index.html')
+        .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(gulp.dest('.'));
 }
 
-function minifyJS() {
-    return gulp.src('tsc/script.js')
-        .pipe(terser())
-        .pipe(gulp.dest('tsc'));
+function minifySettings() {
+    return gulp.src('src/settings/settings.html')
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(gulp.dest('.'));
 }
 
-function minifyBootstrapCSS() {
+function minifyIndexJS() {
+    return gulp.src('tsc/script.js')
+        .pipe(terser())
+        .pipe(gulp.dest('build'));
+}
+
+function minifySettingsJS() {
+    return gulp.src('tsc/settings.js')
+        .pipe(terser())
+        .pipe(gulp.dest('build'));
+}
+
+function minifyIndexCSS() {
     return gulp.src('bootstrap/bootstrap.css')
-        .pipe(purify(['src/index.html', 'src/script.ts'], {
+        .pipe(purify(['src/index/index.html']))
+        .pipe(cleanCSS())
+        .pipe(rename('index.css'))
+        .pipe(gulp.dest('build'));
+}
+
+function minifySettingsCSS(){
+    return gulp.src('bootstrap/bootstrap.css')
+        .pipe(purify(['src/settings/settings.html'], {
             whitelist : [
-                // navbar
-                'collapsing',
-                'show',
                 // input groups
                 'dropdown-toggle',
                 'form-select',
@@ -38,8 +56,17 @@ function minifyBootstrapCSS() {
             ]
         }))
         .pipe(cleanCSS())
-        .pipe(gulp.dest('tsc'));
+        .pipe(rename('settings.css'))
+        .pipe(gulp.dest('build'));
 }
 
-exports.minify = series(minifyHTML, minifyJS);
-exports.minifyCSS = minifyBootstrapCSS;
+exports.minify = series(
+    minifyIndex,
+    minifyIndexJS,
+    minifySettings,
+    minifySettingsJS,
+);
+exports.minifyCSS = series(
+    minifyIndexCSS,
+    minifySettingsCSS,
+);
