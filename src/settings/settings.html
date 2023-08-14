@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Settings</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="build/settings.css">
+	<script src="build/settings.js" defer></script>
+</head>
+
+<svg xmlns="http://www.w3.org/2000/svg" hidden="true">
+	<!-- Icons  -->
+	<symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+		<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+	</symbol>
+	<symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+		<path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+	</symbol>
+	<symbol id="settings-gear-fill" fill="white" viewBox="0 0 16 16">
+		<path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+	</symbol>
+</svg>
+
+<optgroup id="national-currencies" name="national-currencies" hidden>
+	<option value="USD">USD</option>
+	<option value="EUR">EUR</option>
+	<option value="TRY">TRY</option>
+	<option value="AED">AED</option>
+	<option value="AUD">AUD</option>
+	<option value="BHD">BHD</option>
+	<option value="BRL">BRL</option>
+	<option value="CAD">CAD</option>
+	<option value="CHF">CHF</option>
+	<option value="CNY">CNY</option>
+	<option value="CZK">CZK</option>
+	<option value="DKK">DKK</option>
+	<option value="GBP">GBP</option>
+	<option value="HKD">HKD</option>
+	<option value="IDR">IDR</option>
+	<option value="INR">INR</option>
+	<option value="JPY">JPY</option>
+	<option value="KRW">KRW</option>
+	<option value="MXN">MXN</option>
+	<option value="NOK">NOK</option>
+	<option value="NZD">NZD</option>
+	<option value="PHP">PHP</option>
+	<option value="PLN">PLN</option>
+	<option value="RUB">RUB</option>
+	<option value="SAR">SAR</option>
+	<option value="SEK">SEK</option>
+	<option value="SGD">SGD</option>
+	<option value="THB">THB</option>
+	<option value="TWD">TWD</option>
+	<option value="ZAR">ZAR</option>
+</optgroup>
+
+<optgroup id="crypto-currencies" name="crypto-currencies" hidden>
+	<option value="BTC">BTC</option>
+	<option value="USDT">USDT</option>
+	<option value="ETH">ETH</option>
+	<option value="BNB">BNB</option>
+	<option value="XRP">XRP</option>
+	<option value="DOGE">DOGE</option>
+	<option value="SOL">SOL</option>
+	<option value="LTC">LTC</option>
+</optgroup>
+
+<body>
+
+<div class="container-fluid bg-black w-100 min-vh-100 m-0 p-3">
+
+<!-- Settings text -->
+<div class="row align-items-center">
+    <svg class="col-1" width="24" height="24" role="img"><use xlink:href="#settings-gear-fill"/></svg>
+    <h1 class="col-8 text-white" name="settings"></h1>
+</div>
+<hr class="border-2 border-primary">
+<!-- Save Info -->
+<div class="row g-2">
+    <div class="col-lg-12">
+        <div class="alert alert-success d-flex flex-row m-0">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+            <div name="github-repo-info"></div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="alert alert-primary d-flex flex-row m-0" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+            <div name="cookie-info"></div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="alert alert-danger d-flex flex-row m-0" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#exclamation-triangle-fill"/></svg>
+            <div name="delete-cookie-warning"></div>
+        </div>
+    </div>
+</div>
+<hr class="border-2 border-primary">
+<!-- Shortcut Shape settings -->
+<div class="row bg-warning rounded m-0 mb-2 d-flex flex-row align-items-center">
+    <div class="col-lg-3 mt-1 mb-1 fw-bold" name="shortcut-settings"></div>
+    <div class="col"></div>
+    <div class="col-lg-2 mt-1 mb-1">
+        <select class="form-select" id="shortcut_shape">
+            <optgroup name="shortcut-shape">
+                <option value="square" name="square"></option>
+                <option value="circle" name="circle"></option>
+            </optgroup>
+        </select>
+    </div>
+    <div class="col-lg-2 mt-1 mb-1">
+        <select class="form-select" id="shortcut_size">
+            <optgroup name="shortcut-size">
+                <option value="m-0">5</option>
+                <option value="m-1">4</option>
+                <option value="m-2">3</option>
+                <option value="m-3">2</option>
+                <option value="m-4">1</option>
+                <option value="m-5">0</option>
+            </optgroup>
+        </select>
+    </div>
+</div>
+<!-- Shortcut Shape Info -->
+<div class="row g-2">
+    <div class="col-lg-12">
+        <div class="alert alert-primary d-flex flex-row m-0" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+            <div name="circle-shape-info"></div>
+        </div>
+    </div>
+</div>
+<hr class="border-2 border-primary">
+<!-- Shortcut settings -->
+<div class="row flex-column m-0 mb-1">
+    <div class="col bg-primary rounded p-1 mx-0 my-1">
+        <div class="row">
+            <div class="col-4">
+                <div class="input-group">
+                    <span class="input-group-text" name="link-label"></span>
+                    <input type="text" class="form-control" id="select_link_0">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="input-group">
+                    <span class="input-group-text" name="name-label"></span>
+                    <input type="text" class="form-control" id="select_name_0">
+                </div>
+            </div>
+            <div class="col-3">
+                <input class="form-control" type="file" id="select_img_0" accept=".jpg, .jpeg, .png, .gif"/>
+            </div>
+            <div class="col-1">
+                <input class="btn btn-danger fw-bold w-100" type="button" id="set_back_0" name="set-default-button"/>
+            </div>
+            <div class="col-1">
+                <input class="btn btn-danger fw-bold w-100" type="button" id="reset_img_0" name="reset-icon-button"/>
+            </div>
+        </div>
+    </div>
+    <div class="col bg-danger rounded p-1 mx-0 my-1">
+        <div class="row">
+            <div class="col-4">
+                <div class="input-group">
+                    <span class="input-group-text" name="link-label"></span>
+                    <input type="text" class="form-control" id="select_link_1">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="input-group">
+                    <span class="input-group-text" name="name-label"></span>
+                    <input type="text" class="form-control" id="select_name_1">
+                </div>
+            </div>
+            <div class="col-3">
+                <input class="form-control" type="file" id="select_img_1" accept=".jpg, .jpeg, .png, .gif"/>
+            </div>
+            <div class="col-1">
+                <input class="btn btn-danger fw-bold w-100" type="button" id="set_back_1" name="set-default-button"/>
+            </div>
+            <div class="col-1">
+                <input class="btn btn-danger fw-bold w-100" type="button" id="reset_img_1" name="reset-icon-button"/>
+            </div>
+        </div>
+    </div>
+    <div class="col bg-success rounded p-1 mx-0 my-1">
+        <div class="row">
+            <div class="col-4">
+                <div class="input-group">
+                    <span class="input-group-text" name="link-label"></span>
+                    <input type="text" class="form-control" id="select_link_2">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="input-group">
+                    <span class="input-group-text" name="name-label"></span>
+                    <input type="text" class="form-control" id="select_name_2">
+                </div>
+            </div>
+            <div class="col-3">
+                <input class="form-control" type="file" id="select_img_2" accept=".jpg, .jpeg, .png, .gif"/>
+            </div>
+            <div class="col-1">
+                <input class="btn btn-danger fw-bold w-100" type="button" id="set_back_2" name="set-default-button"/>
+            </div>
+            <div class="col-1">
+                <input class="btn btn-danger fw-bold w-100" type="button" id="reset_img_2" name="reset-icon-button"/>
+            </div>
+        </div>
+    </div>
+    <div class="col bg-warning rounded p-1 mx-0 my-1">
+        <div class="row">
+            <div class="col-4">
+                <div class="input-group">
+                    <span class="input-group-text" name="link-label"></span>
+                    <input type="text" class="form-control" id="select_link_3">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="input-group">
+                    <span class="input-group-text" name="name-label"></span>
+                    <input type="text" class="form-control" id="select_name_3">
+                </div>
+            </div>
+            <div class="col-3">
+                <input class="form-control" type="file" id="select_img_3" accept=".jpg, .jpeg, .png, .gif"/>
+            </div>
+            <div class="col-1">
+                <input class="btn btn-danger fw-bold w-100" type="button" id="set_back_3" name="set-default-button"/>
+            </div>
+            <div class="col-1">
+                <input class="btn btn-danger fw-bold w-100" type="button" id="reset_img_3" name="reset-icon-button"/>
+            </div>
+        </div>
+    </div>
+    <div class="col bg-primary rounded p-1 mx-0 my-1">
+        <div class="row">
+            <div class="col-4">
+                <div class="input-group">
+                    <span class="input-group-text" name="link-label"></span>
+                    <input type="text" class="form-control" id="select_link_4">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="input-group">
+                    <span class="input-group-text" name="name-label"></span>
+                    <input type="text" class="form-control" id="select_name_4">
+                </div>
+            </div>
+            <div class="col-3">
+                <input class="form-control" type="file" id="select_img_4" accept=".jpg, .jpeg, .png, .gif"/>
+            </div>
+            <div class="col-1">
+                <input class="btn btn-danger fw-bold w-100" type="button" id="set_back_4" name="set-default-button"/>
+            </div>
+            <div class="col-1">
+                <input class="btn btn-danger fw-bold w-100" type="button" id="reset_img_4" name="reset-icon-button"/>
+            </div>
+        </div>
+    </div>
+    <div class="col bg-danger rounded p-1 mx-0 my-1">
+        <div class="row">
+            <div class="col-4">
+                <div class="input-group">
+                    <span class="input-group-text" name="link-label"></span>
+                    <input type="text" class="form-control" id="select_link_5">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="input-group">
+                    <span class="input-group-text"  name="name-label"></span>
+                    <input type="text" class="form-control" id="select_name_5">
+                </div>
+            </div>
+            <div class="col-3">
+                <input class="form-control" type="file" id="select_img_5" accept=".jpg, .jpeg, .png, .gif"/>
+            </div>
+            <div class="col-1">
+                <input class="btn btn-danger fw-bold w-100" type="button" id="set_back_5" name="set-default-button"/>
+            </div>
+            <div class="col-1">
+                <input class="btn btn-danger fw-bold w-100" type="button" id="reset_img_5" name="reset-icon-button"/>
+            </div>
+        </div>
+    </div>
+    <div class="col bg-success rounded p-1 mx-0 my-1">
+        <div class="row">
+            <div class="col-4">
+                <div class="input-group">
+                    <span class="input-group-text"  name="link-label"></span>
+                    <input type="text" class="form-control" id="select_link_6">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="input-group">
+                    <span class="input-group-text"  name="name-label"></span>
+                    <input type="text" class="form-control" id="select_name_6">
+                </div>
+            </div>
+            <div class="col-3">
+                <input class="form-control" type="file" id="select_img_6" accept=".jpg, .jpeg, .png, .gif"/>
+            </div>
+            <div class="col-1">
+                <input class="btn btn-danger fw-bold w-100" type="button" id="set_back_6" name="set-default-button"/>
+            </div>
+            <div class="col-1">
+                <input class="btn btn-danger fw-bold w-100" type="button" id="reset_img_6" name="reset-icon-button"/>
+            </div>
+        </div>
+    </div>
+    <div class="col bg-warning rounded p-1 mx-0 my-1">
+        <div class="row">
+            <div class="col-4">
+                <div class="input-group">
+                    <span class="input-group-text"  name="link-label"></span>
+                    <input type="text" class="form-control" id="select_link_7">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="input-group">
+                    <span class="input-group-text" name="name-label"></span>
+                    <input type="text" class="form-control" id="select_name_7">
+                </div>
+            </div>
+            <div class="col-3">
+                <input class="form-control" type="file" id="select_img_7" accept=".jpg, .jpeg, .png, .gif"/>
+            </div>
+            <div class="col-1">
+                <input class="btn btn-danger fw-bold w-100" type="button" id="set_back_7" name="set-default-button"/>
+            </div>
+            <div class="col-1">
+                <input class="btn btn-danger fw-bold w-100" type="button" id="reset_img_7" name="reset-icon-button"/>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Link settings info -->
+<div class="row g-2">
+    <div class="col-lg-12">
+        <div class="alert alert-primary d-flex flex-row m-0" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+            <div name="reset-default-icon-info"></div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="alert alert-primary d-flex flex-row m-0" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+            <div name="delete-link"></div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="alert alert-primary d-flex flex-row m-0" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+            <div name="image-link"></div>
+        </div>
+    </div>
+</div>
+<hr class="border-2 border-primary">
+<!-- Background settings -->
+<div class="row bg-success rounded m-0 mb-2 d-flex flex-row align-items-center">
+    <div class="col-4 fw-bold text-white" name="bg-settings"></div>
+    <div class="col-4">
+        <div class="input-group">
+            <span class="input-group-text" name="bg-fallback-color-label"></span>
+            <input type="text" class="form-control" id="bg_color">
+        </div>
+    </div>
+    <div class="col-3 mt-1 mb-1">
+        <input class="form-control" type="file" id="select_bg" accept=".jpg, .jpeg, .png, .gif"/>
+    </div>
+    <div class="col-1">
+        <input type="button" class="btn btn-danger fw-bold w-100" id="delete_bg" name="delete-bg-button">
+    </div>
+</div>
+<div class="row g-2">
+    <div class="col-lg-12">
+        <div class="alert alert-primary d-flex flex-row m-0" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+            <div name="bg-color-options"></div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="alert alert-primary d-flex flex-row m-0" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+            <div name="bg-img-upload-info"></div>
+        </div>
+    </div>
+</div>
+<hr class="border-2 border-primary">
+<!-- Note Settings  -->
+<div class="row bg-danger text-white rounded m-0 mb-2 d-flex flex-row align-items-center">
+    <div class="col-lg-3 mt-1 mb-1">
+        <div class="form-check form-switch mt-1 mb-1">
+            <input class="form-check-input" type="checkbox" id="enable_notes">
+            <label class="form-check-label fw-bold" for="enable_notes" name="enable-notes-label"></label>
+        </div>
+    </div>
+</div>
+<div class="row g-2">
+    <div class="col-lg-12">
+        <div class="alert alert-primary d-flex flex-row m-0" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+            <div name="note-disable-info"></div>
+        </div>
+    </div>
+</div>
+<hr class="border-2 border-primary">
+<!-- Currency API settings -->
+<div class="row bg-primary rounded m-0 mb-2 d-flex flex-row align-items-center">
+    <div class="col-lg-3 mt-1 mb-1">
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="enable_api">
+            <label class="form-check-label fw-bold text-white" for="enable_api" name="enable-api-label"></label>
+        </div>
+    </div>
+    <div class="col-lg-2 mt-1 mb-1">
+        <select class="form-select" id="base_currency">
+            <optgroup name="base-currency-label"></optgroup>
+        </select>
+    </div>
+    <div class="col fw-bold text-center text-white mt-1 mb-1" name="currencies-label">
+    </div>
+    <div class="col mt-1 mb-1">
+        <select class="form-select" id="currency_option_0">
+        </select>
+    </div>
+    <div class="col mt-1 mb-1">
+        <select class="form-select" id="currency_option_1">
+        </select>
+    </div>
+    <div class="col mt-1 mb-1">
+        <select class="form-select" id="currency_option_2">
+        </select>
+    </div>
+</div>
+<!-- Currency API warnings -->
+<div class="row g-2">
+    <div class="col-lg-6">
+        <div class="alert alert-primary d-flex flex-row m-0" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+            <div name="api-key-info"></div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="alert alert-warning d-flex flex-row m-0" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+            <div name="rate-update-info"></div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="alert alert-danger d-flex flex-row m-0" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#exclamation-triangle-fill"/></svg>
+            <div name="currency-api-refresh-warning"></div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="alert alert-success d-flex flex-row m-0" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+            <div name="currency-api-info"></div>
+        </div>
+    </div>
+</div>
+<hr class="border-2 border-primary mt-5">
+</div>
+
+<nav id="navbar" class="navbar fixed-bottom navbar-dark bg-black">
+	<div class="container-fluid justify-content-end">
+		<a href="index.html">
+			<button id="nav-button" class="navbar-toggler" type="button">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</a>
+	</div>
+</nav>
+
+</body>
+</html>

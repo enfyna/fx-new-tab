@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>New Tab</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="build/index.css">
+	<script src="build/script.js" defer></script>
+</head>
+<div class="rounded-circle"hidden></div>
+
+<body class="container-fluid row d-flex vh-100 m-0 p-0 justify-content-center bg-black">
+
+<div class="col-md-8 min-vh-100 m-0 p-0 g-3 row d-flex justify-content-center align-items-start" id="ShortcutContainer">
+	<div class="col-sm-3" hidden>
+		<a class="card bg-primary text-decoration-none m-0" id="link_0">
+			<div class="card-header ratio ratio-1x1">
+				<img class="card-img-top rounded-3 p-1" id="img_0">
+			</div>
+			<h7 class="card-title text-center text-white fw-bold text-truncate" id="name_0"></h7>
+		</a>
+	</div>
+	<div class="col-sm-3" hidden>
+		<a class="card bg-danger text-decoration-none m-0" id="link_1">
+			<div class="card-header ratio ratio-1x1">
+				<img class="card-img-top rounded-3 p-1" id="img_1">
+			</div>
+			<h7 class="card-title text-center text-white fw-bold text-truncate" id="name_1"></h7>
+		</a>
+	</div>
+	<div class="col-sm-3" hidden>
+		<a class="card bg-success text-decoration-none m-0" id="link_2">
+			<div class="card-header ratio ratio-1x1">
+				<img class="card-img-top rounded-3 p-1" id="img_2">
+			</div>
+			<h7 class="card-title text-center text-white fw-bold text-truncate" id="name_2"></h7>
+		</a>
+	</div>
+	<div class="col-sm-3" hidden>
+		<a class="card bg-warning text-decoration-none m-0" id="link_3">
+			<div class="card-header ratio ratio-1x1">
+				<img class="card-img-top rounded-3 p-1" id="img_3">
+			</div>
+			<h7 class="card-title text-center text-white fw-bold text-truncate" id="name_3"></h7>
+		</a>
+	</div>
+	<div class="col-sm-3" hidden>
+		<a class="card bg-primary text-decoration-none m-0" id="link_4">
+			<div class="card-header ratio ratio-1x1">
+				<img class="card-img-top rounded-3 p-1" id="img_4">
+			</div>
+			<h7 class="card-title text-center text-white fw-bold text-truncate" id="name_4"></h7>
+		</a>
+	</div>
+	<div class="col-sm-3" hidden>
+		<a class="card bg-danger text-decoration-none m-0" id="link_5">
+			<div class="card-header ratio ratio-1x1">
+				<img class="card-img-top rounded-3 p-1" id="img_5">
+			</div>
+			<h7 class="card-title text-center text-white fw-bold text-truncate" id="name_5"></h7>
+		</a>
+	</div>
+	<div class="col-sm-3" hidden>
+		<a class="card bg-success text-decoration-none m-0" id="link_6">
+			<div class="card-header ratio ratio-1x1">
+				<img class="card-img-top rounded-3 p-1" id="img_6">
+			</div>
+			<h7 class="card-title text-center text-white fw-bold text-truncate" id="name_6"></h7>
+		</a>
+	</div>
+	<div class="col-sm-3" hidden>
+		<a class="card bg-warning text-decoration-none m-0" id="link_7">
+			<div class="card-header ratio ratio-1x1">
+				<img class="card-img-top rounded-3 p-1" id="img_7">
+			</div>
+			<h7 class="card-title text-center text-white fw-bold text-truncate" id="name_7"></h7>
+		</a>
+	</div>
+</div>
+
+<div class="col-md-4 min-vh-100 m-0 p-0 row d-flex justify-content-center align-items-start" id="NCContainer">
+	<!-- Currency rates -->
+	<div class="col-12 m-0 p-0 g-3 row d-flex" id="currencies">
+		<div class="col-sm-4" hidden>
+			<div class="card text-center text-white fw-bold bg-primary">
+				<h5 class="card-header p-1" id="currency_name_0"></h5>
+				<p class="card-text" id="currency_value_0"></p>
+			</div>
+		</div>
+		<div class="col-sm-4" hidden>
+			<div class="card text-center text-white fw-bold bg-primary">
+				<h5 class="card-header p-1" id="currency_name_1"></h5>
+				<p class="card-text" id="currency_value_1"></p>
+			</div>
+		</div>
+		<div class="col-sm-4" hidden>
+			<div class="card text-center text-white fw-bold bg-primary">
+				<h5 class="card-header p-1" id="currency_name_2"></h5>
+				<p class="card-text" id="currency_value_2"></p>
+			</div>
+		</div>
+	</div>
+	<!-- Notes -->
+	<div class="col-12 g-1 row d-flex flex-column" id="notes">
+		<div class="col d-flex justify-content-end">
+			<button class="btn btn-primary fw-bold" id="note_0" hidden></button>
+			<input type="text" id="note_input_0" class="bg-black text-white rounded" name="note-input" hidden>
+		</div>
+		<div class="col d-flex justify-content-end">
+			<button class="btn btn-danger fw-bold" id="note_1" hidden></button>
+			<input type="text" id="note_input_1" class="bg-black text-white rounded" name="note-input" hidden>
+		</div>
+		<div class="col d-flex justify-content-end">
+			<button class="btn btn-success fw-bold" id="note_2" hidden></button>
+			<input type="text" id="note_input_2" class="bg-black text-white rounded" name="note-input" hidden>
+		</div>
+		<div class="col d-flex justify-content-end">
+			<button class="btn btn-warning fw-bold text-white" id="note_3" hidden></button>
+			<input type="text" id="note_input_3" class="bg-black text-white rounded" name="note-input" hidden>
+		</div>
+	</div>
+</div>
+
+<nav id="navbar" class="navbar fixed-bottom navbar-dark bg-transparent">
+	<div class="container-fluid justify-content-end">
+		<a href="settings.html">
+			<button id="nav-button" class="navbar-toggler" type="button">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</a>
+	</div>
+</nav>
+
+
+</body>
+</html>
