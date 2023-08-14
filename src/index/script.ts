@@ -166,20 +166,21 @@ function set_shortcut_node(i : number){
 	};
 	var name_node = (document.getElementById(node.shortcut.name+i)) as HTMLHeadingElement;
 	var img_node = document.getElementById(node.shortcut.img+i) as HTMLImageElement;
-	if (shortcut.name == "" || is_circle()){
+	const circle = is_circle();
+	if (shortcut.name == "" || circle){
 		name_node.hidden = true;
-		if (is_circle()){
+		if (circle){
 			img_node.classList.add('w-50');
 			img_node.classList.replace('rounded-3','rounded-circle');
 			img_node.parentElement.classList.remove('card-header');
 			img_node.parentElement.parentElement.classList.add('rounded-circle');
 		}
-		img_node.parentElement.parentElement.classList.replace('m-0',get_shortcut_size());
 	}
 	else{
 		name_node.innerText = shortcut.name;
 		name_node.hidden = false;
 	}
+	img_node.parentElement.parentElement.classList.replace('m-0',get_shortcut_size());
 	link_node.href = shortcut.link;
 	link_node.title = shortcut.link;
 	link_node_parent.hidden = false;
@@ -273,7 +274,7 @@ function is_circle() : boolean {
 	return save['shortcut_shape'] == 'circle' ? true : false;
 }
 
-function get_shortcut_size() {
+function get_shortcut_size() : string {
 	if (save['shortcut_size'] == null){
 		return 'm-0';
 	}
