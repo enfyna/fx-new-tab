@@ -277,20 +277,6 @@ function translate() : void {
 			"es": "Establece un ícono de enlace personalizado subiendo un archivo de imagen.",
 		},
 		{
-			"name": "delete-cookie-warning",
-			"tr": "Bu site için çerezleri silersen ayarların sıfırlanır.",
-			"en": "If you delete cookies for this site, all data will revert to the default values.",
-			"de": "Wenn Sie die Cookies für diese Website löschen, werden alle Daten auf die Standardwerte zurückgesetzt.",
-			"es": "Si eliminas las cookies de este sitio, todos los datos volverán a los valores predeterminados.",
-		},
-		{
-			"name": "cookie-info",
-			"tr": "Bu site ayarları kaydetmek için çerez kullanır.",
-			"en": "This site uses cookies to save settings.",
-			"de": "Diese Website verwendet Cookies, um Einstellungen zu speichern.",
-			"es": "Este sitio utiliza cookies para guardar la configuración.",
-		},
-		{
 			"name": "shortcut-settings",
 			"tr": "Kısayol Ayarları",
 			"en": "Shortcut Settings",
@@ -331,7 +317,7 @@ function translate() : void {
 			"en": "Circle",
 			"de": "Kreis",
 			"es": "Círculo"
-		},		
+		},
 		{
 			"name": "reset-icon-button",
 			"tr": "Yenile",
@@ -415,13 +401,6 @@ function translate() : void {
 			"en": "Delete",
 			"de": "Löschen",
 			"es": "Borrar",
-		},
-		{
-			"name": "currency-api-info",
-			"tr": "Döviz değerleri bu API kullanılarak alınmaktadır: https://github.com/fawazahmed0/currency-api",
-			"en": "Currency rates are provided by this API: https://github.com/fawazahmed0/currency-api",
-			"de": "Währungskurse werden von dieser API bereitgestellt: https://github.com/fawazahmed0/currency-api",
-			"es": "Las tasas de cambio de divisas son proporcionadas por esta API: https://github.com/fawazahmed0/currency-api",
 		},
 		{
 			"name": "currency-api-refresh-warning",
