@@ -8,32 +8,56 @@ const cleanCSS = require('gulp-clean-css');
 
 function minifyIndex() {
     return gulp.src('src/index/index.html')
-        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(htmlmin({
+            collapseWhitespace: true,
+            removeComments: true,
+            removeTagWhitespace: true,
+            removeAttributeQuotes: true,
+            collapseBooleanAttributes: true,
+        }))
         .pipe(gulp.dest('.'));
 }
 
 function minifySettings() {
     return gulp.src('src/settings/settings.html')
-        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(htmlmin({
+            collapseWhitespace: true,
+            removeComments: true,
+            removeTagWhitespace: true,
+            removeAttributeQuotes: true,
+            collapseBooleanAttributes: true,
+        }))
         .pipe(gulp.dest('.'));
 }
 
 function minifyIndexJS() {
     return gulp.src('tsc/script.js')
-        .pipe(terser())
+        .pipe(terser({
+            keep_fnames: false,
+            mangle: {
+                toplevel: true,
+                keep_fnames: false,
+            },
+        }))
         .pipe(gulp.dest('build'));
 }
 
 function minifySettingsJS() {
     return gulp.src('tsc/settings.js')
-        .pipe(terser())
+        .pipe(terser({
+            keep_fnames: false,
+            mangle: {
+                toplevel: true,
+                keep_fnames: false,
+            },
+        }))
         .pipe(gulp.dest('build'));
 }
 
 function minifyIndexCSS() {
     return gulp.src('bootstrap/bootstrap.css')
         .pipe(purify(['src/index/index.html']))
-        .pipe(cleanCSS())
+        .pipe(cleanCSS({level: {1: {all: true}, 2: {all: true}}}))
         .pipe(rename('index.css'))
         .pipe(gulp.dest('build'));
 }
@@ -55,7 +79,7 @@ function minifySettingsCSS(){
                 'invalid-feedback',
             ]
         }))
-        .pipe(cleanCSS())
+        .pipe(cleanCSS({level: {1: {all: true}, 2: {all: true}}}))
         .pipe(rename('settings.css'))
         .pipe(gulp.dest('build'));
 }
