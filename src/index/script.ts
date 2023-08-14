@@ -28,7 +28,6 @@ const node = {
 	},
 };
 
-// window.addEventListener("DOMContentLoaded",ready);
 let save : object = {}
 
 get_save().then(ready);
@@ -65,13 +64,8 @@ function get_bg_image() {
 	}
 }
 
-function get_bg_color() {
-	if(save['bg_color'] != null){
-		return save['bg_color'];
-	}
-	else{
-		return 'black';
-	}
+function get_bg_color() : string{
+	return save['bg_color'] ?? 'black';
 }
 
 function set_background() {
@@ -170,9 +164,7 @@ function set_shortcut_node(i : number){
 	if (shortcut.name == "" || circle){
 		name_node.hidden = true;
 		if (circle){
-			img_node.classList.add('w-50');
 			img_node.classList.replace('rounded-3','rounded-circle');
-			img_node.parentElement.classList.remove('card-header');
 			img_node.parentElement.parentElement.classList.add('rounded-circle');
 		}
 	}
@@ -268,17 +260,11 @@ function center_shortcuts() {
 }
 
 function is_circle() : boolean {
-	if(save['shortcut_shape'] == null){
-		return false;
-	}
 	return save['shortcut_shape'] == 'circle' ? true : false;
 }
 
 function get_shortcut_size() : string {
-	if (save['shortcut_size'] == null){
-		return 'm-0';
-	}
-	return save['shortcut_size'];
+	return save['shortcut_size'] ?? 'm-0';
 }
 
 /// Notes
@@ -297,10 +283,7 @@ function get_notes() : note[] {
 }
 
 function is_notes_enabled() : boolean {
-	if (save['is_notes_enabled'] == null){
-		return false;
-	}
-	return save['is_notes_enabled'];
+	return save['is_notes_enabled'] ?? false;
 }
 
 function configure_notes(){
@@ -359,27 +342,15 @@ function get_currencies(){
 }
 
 function get_base_currency() : string{
-	if (save['base_currency'] == null){
-		return 'TRY';
-	}
-	return save['base_currency'];
+	return save['base_currency'] ?? 'TRY';
 }
 
 function is_currency_rates_enabled() : boolean {
-	if (save['is_currency_rates_enabled'] == null){
-		return false;
-	}
-	return save['is_currency_rates_enabled'];
+	return save['is_currency_rates_enabled'] ?? false;
 }
 
 function did_a_day_pass() : boolean {
-	let saved_date_str : string;
-	if (save['date'] == null){
-		saved_date_str = "0";
-	}
-	else{
-		saved_date_str = save["date"];
-	}
+	const saved_date_str : string = save["date"] ?? '0';
 	const now : number = Date.now();
 	if (saved_date_str == null || now - parseInt(saved_date_str) > 70000000){
 		save['date'] = now;

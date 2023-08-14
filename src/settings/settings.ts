@@ -23,7 +23,6 @@ const node = {
 	},
 };
 
-// window.addEventListener("DOMContentLoaded",ready);
 let save : object = {}
 
 get_save().then(ready)
@@ -76,9 +75,7 @@ function configure_background_settings() {
 }
 
 function get_bg_color() : string{
-	if(save['bg_color'] != null)
-		return save['bg_color'];
-	return 'black';
+	return save['bg_color'] ?? 'black';
 }
 
 /// Shortcuts
@@ -182,10 +179,7 @@ function configure_note_settings() {
 }
 
 function is_notes_enabled() : boolean {
-	if (save['is_notes_enabled'] == null){
-		return false;
-	}
-	return save['is_notes_enabled'];
+	return save['is_notes_enabled'] ?? false;
 }
 
 /// Currencies
@@ -238,10 +232,7 @@ function configure_currency_settings(){
 }
 
 function is_currency_rates_enabled() : boolean {
-	if (save['is_currency_rates_enabled'] == null){
-		return false;
-	}
-	return save['is_currency_rates_enabled'] as boolean;
+	return save['is_currency_rates_enabled'] ?? false;
 }
 
 function get_currencies(){
@@ -258,10 +249,7 @@ function get_currencies(){
 }
 
 function get_base_currency() : string{
-	if (save['base_currency'] == null){
-		return 'TRY';
-	}
-	return save['base_currency'];
+	return save['base_currency'] ?? 'TRY';
 }
 
 /// Translations
