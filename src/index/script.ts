@@ -81,7 +81,10 @@ function set_background() {
 /// Shortcuts
 async function configure_shortcuts(){
 	if(save['shortcuts'] == null){
+		const load_text = document.getElementById('loading') as HTMLDivElement;
+		load_text.innerText = 'Finding Shortcuts Please Wait...'
 		await find_user_sites();
+		load_text.innerText = ''
 	}
 	align_shortcuts();
 	for (let i = 0; i < 8; i++){
@@ -92,7 +95,7 @@ async function configure_shortcuts(){
 async function find_user_sites(){
 	return browser.history.search({
 		text:"",
-		maxResults:500,
+		maxResults:1000,
 	}).then(res=>{
 		let sites = {};
 		let sorted = {};
@@ -110,9 +113,7 @@ async function find_user_sites(){
 			sorted[sites[site]].push(site);
 		}
 		let sorted_keys = Object.keys(sorted).map((item)=>Number(item));
-		sorted_keys.sort(function(first, second) {
-			return second - first;
-		});
+		sorted_keys.sort((first, second)=>{return second - first;});
 		let shortcut_added : number = 0;
 		let shortcuts : shortcut[] = []
 		for (let i = 0; i < 8; i++) {
