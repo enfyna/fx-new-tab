@@ -81,10 +81,13 @@ function set_background() {
 /// Shortcuts
 async function configure_shortcuts(){
 	if(save['shortcuts'] == null){
+		const settings_button = document.getElementById('nav-button') as HTMLButtonElement;
+		settings_button.hidden = true;
 		const load_text = document.getElementById('loading') as HTMLDivElement;
-		load_text.innerText = 'Finding Shortcuts Please Wait...'
+		load_text.innerText = 'Finding Shortcuts Please Wait...';
 		await find_user_sites();
-		load_text.innerText = ''
+		settings_button.hidden = false;
+		load_text.innerText = '';
 	}
 	align_shortcuts();
 	for (let i = 0; i < 8; i++){
@@ -131,6 +134,7 @@ async function find_user_sites(){
 			}
 		}
 		save['shortcuts'] = shortcuts;
+		set_save();
 	})
 }
 
@@ -299,7 +303,7 @@ function configure_notes(){
 		button.innerText = notes[i].note;
 		button.hidden = false;
 		var note : HTMLInputElement = document.getElementById(node.note.input + i) as HTMLInputElement;
-		button.addEventListener("click", () => {
+		button.addEventListener('click', () => {
 			var button : HTMLButtonElement = document.getElementById(node.note.note + i) as HTMLButtonElement;
 			var note : HTMLInputElement = document.getElementById(node.note.input + i) as HTMLInputElement;
 			note.value = button.innerText;
@@ -307,11 +311,10 @@ function configure_notes(){
 			note.hidden = false;
 			note.focus();
 		});
-		note.addEventListener("change", () => {
-			save_note(i);
-		});
-		note.addEventListener("blur", () => {
-			save_note(i);
+		['change', 'blur'].forEach(event => {
+			note.addEventListener((event), () => {
+				save_note(i);
+			});
 		});
 	};
 }
