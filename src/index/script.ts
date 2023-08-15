@@ -85,7 +85,8 @@ async function configure_shortcuts(){
 		settings_button.hidden = true;
 		const load_text = document.getElementById('loading') as HTMLDivElement;
 		load_text.innerText = 'Finding Shortcuts Please Wait...';
-		await find_user_sites();
+		save['shortcuts'] = await find_user_sites();
+		set_save();
 		settings_button.hidden = false;
 		load_text.innerText = '';
 	}
@@ -133,8 +134,7 @@ async function find_user_sites(){
 				shortcut_added += 1;
 			}
 		}
-		save['shortcuts'] = shortcuts;
-		set_save();
+		return shortcuts;
 	})
 }
 
