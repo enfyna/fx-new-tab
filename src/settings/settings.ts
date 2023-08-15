@@ -382,13 +382,6 @@ function translate() : void {
 			"es": "Color de fondo",
 		},
 		{
-			"name": "bg-color-options",
-			"tr": "Arka plan rengini değiştirmek için herhangi bir onaltılık değer (#abc123) veya geçerli bir HTML renk adı kullanabilirsiniz. \nGeçerli HTML renk adlarının listesini buradan bulabilirsiniz: https://www.w3schools.com/tags/ref_colornames.asp",
-			"en": "To change the background color you can use any hex value (#abc123) or a valid HTML color name. \nYou can find a list of valid HTML color names from here : https://www.w3schools.com/tags/ref_colornames.asp",
-			"de": "Um die Hintergrundfarbe zu ändern, können Sie einen beliebigen Hex-Wert (#abc123) oder einen gültigen HTML-Farbnamen verwenden. \nEine Liste gültiger HTML-Farbnamen finden Sie hier: https://www.w3schools.com/tags/ref_colornames.asp",
-			"es": "Para cambiar el color de fondo, puedes usar cualquier valor hexadecimal (#abc123) o un nombre de color HTML válido. \nPuedes encontrar una lista de nombres de colores HTML válidos aquí: https://www.w3schools.com/tags/ref_colornames.asp",
-		},
-		{
 			"name": "bg-img-upload-info",
 			"tr": "Arka planı değiştirmek için bir resim dosyası yükleyebilirsiniz. \nNot: Yüklenen resim ne kadar büyükse o kadar yavaş açılır. Bu yüzden eğer resim çok yavaş yüklenirse, resmi sıkıştırmayı deneyebilirsiniz.",
 			"en": "You can upload a image file to change the background.\nNote : The larger the uploaded image, the slower it loads. Therefore, if the image loads very slowly, you can try compressing the image.",
