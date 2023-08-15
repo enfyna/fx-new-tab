@@ -14,6 +14,7 @@ function minifyIndex() {
             removeTagWhitespace: true,
             removeAttributeQuotes: true,
             collapseBooleanAttributes: true,
+            minifyCSS: true,
         }))
         .pipe(gulp.dest('.'));
 }
@@ -26,6 +27,7 @@ function minifySettings() {
             removeTagWhitespace: true,
             removeAttributeQuotes: true,
             collapseBooleanAttributes: true,
+            minifyCSS: true,
         }))
         .pipe(gulp.dest('.'));
 }
