@@ -14,7 +14,13 @@
 
 ![y5](https://github.com/enfyna/fx-new-tab/assets/91965312/ddef9930-cc96-493f-b0f0-fb684ae8ecae)
 
+![u2](https://github.com/enfyna/fx-new-tab/assets/91965312/50f60bab-58ce-4b82-90c2-6bbb053dd3e5)
+
+![u3](https://github.com/enfyna/fx-new-tab/assets/91965312/4cb3c38c-7ac4-4b7d-82b6-2d19520079f6)
+
 ![y1](https://github.com/enfyna/fx-new-tab/assets/91965312/1c77183f-f031-4fcc-8a73-8a507618610d)
+
+![u1](https://github.com/enfyna/fx-new-tab/assets/91965312/e4a8f966-f40f-4afe-b36e-edb3f89abc0b)
 
 <br>
 
