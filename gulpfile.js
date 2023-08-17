@@ -58,7 +58,11 @@ function minifySettingsJS() {
 
 function minifyIndexCSS() {
     return gulp.src('bootstrap/bootstrap.css')
-        .pipe(purify(['src/index/index.html']))
+        .pipe(purify(['src/index/index.html'],{
+            whitelist: [
+                'rounded-circle',
+            ]
+        }))
         .pipe(cleanCSS({level: {1: {all: true}, 2: {all: true}}}))
         .pipe(rename('index.css'))
         .pipe(gulp.dest('build'));
