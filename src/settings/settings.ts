@@ -444,13 +444,6 @@ function translate() : void {
 			"es": "Si las tasas de cambio de divisas no se actualizan, intente esperar unos segundos.",
 		},
 		{
-			"name": "api-key-info",
-			"tr": "Ana sayfanda 3 tane kurun değerini görmek istiyorsan kullanabilirsin.",
-			"en": "This is an optional feature that adds 3 currency rate info to your main page.",
-			"de": "Dies ist eine optionale Funktion, die 3 Währungskursinformationen auf Ihrer Hauptseite hinzufügt.",
-			"es": "Esta es una característica opcional que agrega información de 3 tasas de cambio de divisas a tu página principal.",
-		},
-		{
 			"name": "base-currency-label",
 			"tr": "Ana para birimini seç",
 			"en": "Select base currency",
