@@ -290,13 +290,6 @@ function translate() : void {
 			"es": "Configuración de Accesos Directos"
 		},
 		{
-			"name": "circle-shape-info",
-			"tr": "Kısayollar için daire şeklini seçerseniz isimlerini göstermezler.",
-			"en": "Circle shape shortcuts will not display their names.",
-			"de": "Verknüpfungen im Kreisformat zeigen ihre Namen nicht an.",
-			"es": "Los accesos directos con forma de círculo no mostrarán sus nombres."
-		},
-		{
 			"name": "shortcut-size",
 			"tr": "Boyut",
 			"en": "Size",
