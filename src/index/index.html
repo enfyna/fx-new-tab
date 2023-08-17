@@ -9,12 +9,47 @@
 </head>
 
 <style>
-	.card {
+	.move_up {
 		transition: 0.1s;
 	}
-	.card:hover {
+	.move_up:hover {
 		transform: translateY(-5px);
 		box-shadow: 0 10px 15px rgba(0,0,0,0.5);
+	}
+	.move_down {
+		transition: 0.1s;
+		transform: translateY(-5px);
+		box-shadow: 0 10px 15px rgba(0,0,0,0.5);
+	}
+	.move_down:hover {
+		transform: translateY(0px);
+		box-shadow: 0 0px 0px rgba(0,0,0,0);
+	}
+	.rotate {
+		transition: 0.1s;
+	}
+	.rotate:hover {
+		transform: rotate(10deg);
+		scale: 1.05;
+	}
+	.glow {
+		transition: 0.1s;
+	}
+	.glow:hover {
+		box-shadow: 0 0px 10px 10px var(--glow-clr);
+		scale: 1.05;
+	}
+	.bg-primary {
+		--glow-clr: blue;
+	}
+	.bg-danger {
+		--glow-clr: red;
+	}
+	.bg-warning {
+		--glow-clr: yellow;
+	}
+	.bg-success {
+		--glow-clr: green;
 	}
 </style>
 

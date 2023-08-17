@@ -86,6 +86,12 @@ function configure_shortcut_settings(){
 		save['shortcut_shape'] = shape.value.trim();
 		set_save();
 	});
+	let translation = document.getElementById('shortcut_transition') as HTMLSelectElement;
+	translation.value = save['shortcut_transition'] != null ? save['shortcut_transition'] : 'move_up';
+	translation.addEventListener('change',()=>{
+		save['shortcut_transition'] = translation.value.trim();
+		set_save();
+	});
 	let size = document.getElementById('shortcut_size') as HTMLSelectElement;
 	size.value = save['shortcut_size'] != null ? save['shortcut_size'] : 'm-0';
 	size.addEventListener('change',()=>{
@@ -319,6 +325,48 @@ function translate() : void {
 			"es": "Círculo"
 		},
 		{
+			"name": "shortcut-transition",
+			"tr": "Geçiş Türü",
+			"en": "Transition Type",
+			"de": "Übergangstyp",
+			"es": "Tipo de Transición"
+		},
+		{
+			"name": "none",
+			"tr": "Hiçbiri",
+			"en": "None",
+			"de": "Keiner",
+			"es": "Ninguno"
+		},
+		{
+			"name": "move_down",
+			"tr": "Aşağı hareket et",
+			"en": "Move down",
+			"de": "Nach unten bewegen",
+			"es": "Mover hacia abajo"
+		},
+		{
+			"name": "move_up",
+			"tr": "Yukarı hareket et",
+			"en": "Move up",
+			"de": "Nach oben bewegen",
+			"es": "Mover hacia arriba"
+		},
+		{
+			"name": "rotate",
+			"tr": "Döndür",
+			"en": "Rotate",
+			"de": "Rotieren",
+			"es": "Rotar"
+		},
+		{
+			"name": "glow",
+			"tr": "Parla",
+			"en": "Glow",
+			"de": "Leuchten",
+			"es": "Resplandor"
+		},
+		{
 			"name": "reset-icon-button",
 			"tr": "Yenile",
 			"en": "Reset",
@@ -482,7 +530,7 @@ function translate() : void {
 				(element as HTMLInputElement).placeholder = translation;
 			};
 		}
-		else if(elm_name == "base-currency-label" || elm_name == "crypto-currencies" || elm_name == "national-currencies" || elm_name == "shortcut-shape" || elm_name == "shortcut-size"){
+		else if(elm_name == "base-currency-label" || elm_name == "crypto-currencies" || elm_name == "national-currencies" || elm_name == "shortcut-shape" || elm_name == "shortcut-size" || elm_name == "shortcut-transition"){
 			for (const element of document.getElementsByName(elm_name)){
 				(element as HTMLOptGroupElement).label = translation;
 			};

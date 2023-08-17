@@ -163,6 +163,10 @@ function set_shortcut_node(i : number){
 		link_node_parent.hidden = true;
 		return;
 	};
+	let transition = get_shortcut_transition()
+	if (transition != 'none'){
+		link_node.classList.add(transition)
+	}
 	var name_node = (document.getElementById(node.shortcut.name+i)) as HTMLHeadingElement;
 	var img_node = document.getElementById(node.shortcut.img+i) as HTMLImageElement;
 	const circle = is_circle();
@@ -271,6 +275,10 @@ function is_circle() : boolean {
 
 function get_shortcut_size() : string {
 	return save['shortcut_size'] ?? 'm-0';
+}
+
+function get_shortcut_transition() : string {
+	return save['shortcut_transition'] ?? 'move_up';
 }
 
 /// Notes
