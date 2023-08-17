@@ -402,13 +402,6 @@ function translate() : void {
 			"es": "Habilitar notas",
 		},
 		{
-			"name": "note-disable-info",
-			"tr": "Eğer notları ve kur bilgisi özelliğini devre dışı bırakırsanız ana sayfadaki kısayollar sayfanın ortasına yerleştirilir.",
-			"en": "If notes and currency rates are disabled, shortcuts will be centered.",
-			"de": "Wenn Notizen und Währungskurse deaktiviert sind, werden die Schnellzugriffe zentriert.",
-			"es": "Si se deshabilitan las notas y las tasas de cambio de divisas, los accesos directos se centrarán.",
-		},
-		{
 			"name": "bg-settings",
 			"tr": "Arkaplan Ayarları",
 			"en": "Background Settings",
