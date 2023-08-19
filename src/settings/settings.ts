@@ -346,6 +346,20 @@ function translate() : void {
 			"es": "Mover hacia arriba"
 		},
 		{
+			"name": "scale_down",
+			"tr": "Küçült",
+			"en": "Scale down",
+			"de": "Verkleinern",
+			"es": "Reducir tamaño"
+		},
+		{
+			"name": "scale_up",
+			"tr": "Büyüt",
+			"en": "Scale up",
+			"de": "Vergrößern",
+			"es": "Aumentar tamaño"
+		},
+		{
 			"name": "rotate",
 			"tr": "Döndür",
 			"en": "Rotate",
