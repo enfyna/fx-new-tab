@@ -42,6 +42,7 @@ async function ready(){
 		center_shortcuts();
 	}
 	set_background();
+	set_settings_button();
 	translate();
 }
 
@@ -444,6 +445,15 @@ function get_rates(){
 		req.timeout = 5000;
 		req.send();
 	});
+}
+
+/// Settings Button
+function set_settings_button(){
+	const nav = document.getElementById('nav-button') as HTMLButtonElement;
+	nav.addEventListener('click', () => {
+		location.href = 'settings.html';
+	});
+	nav.hidden = false;
 }
 
 /// Translations
