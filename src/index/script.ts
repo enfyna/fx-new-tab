@@ -32,7 +32,7 @@ let save : object = {}
 
 get_save().then(ready);
 
-async function ready(){
+function ready(){
 	configure_shortcuts();
 	if (is_currency_rates_enabled() || is_notes_enabled()){
 		configure_notes();
