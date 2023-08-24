@@ -140,18 +140,21 @@ async function find_user_sites(){
 }
 
 function align_shortcuts(){
+	var container = document.getElementById("ShortcutContainer") as HTMLElement;
+
 	var active_shortcuts : number = 0
 	var shortcuts = save['shortcuts'];
-	for (let i = 0; i < 8; i++){
-		if (shortcuts[i].link != ""){
-			active_shortcuts += 1
-		};
+	for (let i = 0; i < 12; i++){
+		if (shortcuts[i].link == ""){
+			continue;
+		}
+		if (++active_shortcuts == 5){
+			container.classList.replace(
+				"align-items-center","align-items-start"
+			);
+			break;
+		}
 	}
-	var container = document.getElementById("ShortcutContainer") as HTMLElement;
-	container.classList.replace(
-		active_shortcuts <= 4 ? "align-items-start" : "align-items-center",
-		active_shortcuts <= 4 ? "align-items-center" : "align-items-start"
-	);
 	if (container.clientHeight > window.innerHeight){
 		container.classList.add('col-md-10');
 	}
