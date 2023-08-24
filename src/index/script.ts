@@ -91,10 +91,10 @@ async function configure_shortcuts(){
 		settings_button.hidden = false;
 		load_text.innerText = '';
 	}
-	align_shortcuts();
-	for (let i = 0; i < 8; i++){
+	for (let i = 0; i < 12; i++){
 		set_shortcut_node(i);
 	};
+	align_shortcuts();
 }
 
 async function find_user_sites(){
@@ -121,10 +121,10 @@ async function find_user_sites(){
 		sorted_keys.sort((first, second)=>{return second - first;});
 		let shortcut_added : number = 0;
 		let shortcuts : shortcut[] = []
-		for (let i = 0; i < 8; i++) {
+		for (let i = 0; i < 12; i++) {
 			const arr = sorted[sorted_keys[i]];
 			for (let i = 0; i < arr.length; i++) {
-				if (shortcut_added == 8){
+				if (shortcut_added == 12){
 					break;
 				}
 				let shortcut : shortcut = {name:"",link:"",img:""};
@@ -152,18 +152,19 @@ function align_shortcuts(){
 		active_shortcuts <= 4 ? "align-items-start" : "align-items-center",
 		active_shortcuts <= 4 ? "align-items-center" : "align-items-start"
 	);
+	if (container.clientHeight > window.innerHeight){
+		container.classList.add('col-md-10');
+	}
 }
 
 function set_shortcut_node(i : number){
 	var shortcut : shortcut = save['shortcuts'][i] as shortcut;
+	if (shortcut == null || shortcut.link.length == 0)
+		return; 
 	var link_node = document.getElementById(node.shortcut.link+i) as HTMLAnchorElement;
 	var link_node_parent = link_node.parentElement;
 	if(link_node_parent == null)
 		return;
-	if(shortcut.link == ""){
-		link_node_parent.hidden = true;
-		return;
-	};
 	let transition = get_shortcut_transition()
 	if (transition != 'none'){
 		link_node.classList.add(transition)

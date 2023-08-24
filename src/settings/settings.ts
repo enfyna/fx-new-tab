@@ -98,9 +98,16 @@ function configure_shortcut_settings(){
 		save['shortcut_size'] = size.value.trim();
 		set_save();
 	});
-	for (let i = 0; i < 8; i++) {
+	for (let i = 0; i < 12; i++) {
 		((id)=>{
 			let shortcut = {...save['shortcuts'][id]} as shortcut;
+			if (shortcut.link == null) {
+				shortcut = {
+					link: '',
+					name: '',
+					img: ''
+				}
+			}
 			let link_node = document.getElementById(node.shortcut_setting.link+id) as HTMLInputElement;
 			let name_node = document.getElementById(node.shortcut_setting.name+id) as HTMLInputElement;
 			let img_node = document.getElementById(node.shortcut_setting.img+id) as HTMLInputElement;
