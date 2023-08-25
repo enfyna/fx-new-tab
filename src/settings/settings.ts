@@ -229,7 +229,7 @@ function configure_currency_settings(){
 
 	get_currencies();
 
-	const selects = document.getElementsByTagName('select');
+	const selects = document.getElementById('currency_setting').getElementsByTagName('select');
 
 	for(let i = 0; i < selects.length; i++){
 		const select = selects[i] as HTMLSelectElement;
