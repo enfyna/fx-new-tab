@@ -216,11 +216,14 @@ function is_notes_enabled() : boolean {
 
 /// Currencies
 function configure_currency_settings(){
-	var national = document.getElementById("national-currencies") as HTMLOptGroupElement;
-	var crypto = document.getElementById("crypto-currencies") as HTMLOptGroupElement;
+	const national_node = document.getElementById("national-currencies") as HTMLOptGroupElement;
+	const crypto_node = document.getElementById("crypto-currencies") as HTMLOptGroupElement;
 
-	national = national.cloneNode(true) as HTMLOptGroupElement;
-	crypto = crypto.cloneNode(true) as HTMLOptGroupElement;
+	const national = national_node.cloneNode(true) as HTMLOptGroupElement;
+	const crypto = crypto_node.cloneNode(true) as HTMLOptGroupElement;
+
+	national_node.remove();
+	crypto_node.remove();
 
 	national.hidden = false;
 	crypto.hidden = false;
