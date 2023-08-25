@@ -33,6 +33,7 @@ async function ready(){
 	configure_background_settings();
 	configure_note_settings();
 	configure_currency_settings();
+	configure_home_button();
 	translate();
 }
 
@@ -40,9 +41,15 @@ async function ready(){
 async function get_save(){
 	save = await browser.storage.local.get(null);
 }
-
+let saving = false;
 function set_save(){
-	browser.storage.local.set(save);
+	saving = true;
+	const save_info = document.getElementById('save-info');
+	save_info.hidden = false;
+	browser.storage.local.set(save).then(()=>{
+		saving = false;
+		save_info.hidden = true;
+	});
 }
 
 /// Background
@@ -281,6 +288,14 @@ function get_currencies(){
 
 function get_base_currency() : string{
 	return save['base_currency'] ?? 'TRY';
+}
+
+/// Nav Button
+function configure_home_button(){
+	document.getElementById('nav-button').addEventListener('click',()=>{
+		if(!saving)
+			location.href = 'index.html';
+	});
 }
 
 /// Translations
@@ -523,6 +538,13 @@ function translate() : void {
 			"en": "Cryptocurrencies",
 			"de": "Kryptowährungen",
 			"es": "Criptomonedas",
+		},
+		{
+			"name": "save-info",
+			"tr": "Lütfen bekleyiniz...",
+			"en": "Please Wait...",
+			"de": "Bitte Warten...",
+			"es": "Por favor, espere...",
 		}
 	];
 	let lang : string;
