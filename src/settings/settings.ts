@@ -28,7 +28,6 @@ let save : object = {}
 get_save().then(ready)
 
 async function ready(){
-	await get_save();
 	configure_shortcut_settings();
 	configure_background_settings();
 	configure_note_settings();
