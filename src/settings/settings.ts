@@ -98,87 +98,106 @@ function configure_shortcut_settings(){
 		save['shortcut_size'] = size.value.trim();
 		set_save();
 	});
+	const shortcut_container = document.getElementById("shortcut-settings-container") as HTMLDivElement;
+	let shortcut_setting = document.getElementById("shortcut-setting") as HTMLDivElement;
 	for (let i = 0; i < 12; i++) {
-		((id)=>{
-			let shortcut = {...save['shortcuts'][id]} as shortcut;
-			if (shortcut.link == null) {
-				shortcut = {
-					link: '',
-					name: '',
-					img: ''
-				}
-			}
-			let link_node = document.getElementById(node.shortcut_setting.link+id) as HTMLInputElement;
-			let name_node = document.getElementById(node.shortcut_setting.name+id) as HTMLInputElement;
-			let img_node = document.getElementById(node.shortcut_setting.img+id) as HTMLInputElement;
-			let reset_node = document.getElementById(node.shortcut_setting.reset+id) as HTMLInputElement;
-			let def_node = document.getElementById(node.shortcut_setting.default+id) as HTMLInputElement;
-			link_node.value = shortcut.link;
-			name_node.value = shortcut.name;
-			img_node.value = "";
-
-			link_node.addEventListener("change",() =>{
-				var link = link_node.value.trim();
-				shortcut.link = link;
-				if(link == ""){
-					shortcut.img = "";
-					shortcut.name = "";
-					name_node.value = "";
-					img_node.value = "";
-				}
-				set_shortcut(shortcut, id);
-			});
-			name_node.addEventListener("change",()=>{
-				var name = name_node.value.trim();
-				shortcut.name = name.length > 0 ? name : null;
-				set_shortcut(shortcut, id);
-			});
-			img_node.addEventListener("input",()=>{
-				const reader = new FileReader();
-				reader.addEventListener("loadend", (event) => {
-					if(event.target == null) return;
-					shortcut.img = event.target.result as string;
-					set_shortcut(shortcut, id);
-				});
-				var files = img_node.files;
-				if(files == null) return;
-				var image = files.item(0);
-				if(image == null)return;
-				reader.readAsDataURL(image);
-			});
-			reset_node.addEventListener('click',()=>{
-				if(shortcut.img == ''){
-					return
-				}
-				shortcut.img = '';
-				set_shortcut(shortcut, id);
-			});
-			def_node.addEventListener('click',()=>{
-				if(shortcut.link == ''){
-					return
-				}
-				let canvas = document.createElement("canvas");
-				let context = canvas.getContext("2d") as CanvasRenderingContext2D;
-				canvas.width = 256;
-				canvas.height = 256;
-				context.fillStyle = "#442288aa";
-				context.fillRect(0,0,256,256);
-				context.font = "bold 160px monospace";
-				context.textAlign = "center";
-				context.fillStyle = "white";
-				context.textBaseline = "middle";
-				context.fillText((shortcut.name ?? shortcut.link).replace('https://','').replace('http://','').replace('www.','').toUpperCase().slice(0,2), canvas.width/2, canvas.height/2);
-				var image = canvas.toDataURL();
-				shortcut.img = image;
-				set_shortcut(shortcut, id);
-			});
-		})(i);
+		shortcut_container.appendChild(
+			create_shortcut_setting(i, shortcut_setting)
+		);
 	}
+	shortcut_setting.remove();
 }
 
 function set_shortcut(shortcut : shortcut, i : number) {
 	save['shortcuts'][i] = shortcut;
 	set_save();
+}
+
+function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivElement{
+	elm = elm.cloneNode(true) as HTMLDivElement;
+	const colors = ['bg-primary','bg-danger','bg-success','bg-warning'];
+	elm.classList.add(colors[id%4]);
+	elm.hidden = false;
+	let root = elm.getElementsByTagName('input');
+	let shortcut = save['shortcuts'][id] as shortcut;
+	if (shortcut.link == null) {
+		shortcut = {
+			link: '',
+			name: '',
+			img: ''
+		}
+	}
+	for (let i = 0; i < root.length; i++) {
+		let input = root[i] as HTMLInputElement;
+		switch(true){
+			case input.id.startsWith(node.shortcut_setting.link):
+				input.value = shortcut.link;
+				input.addEventListener("change",() =>{
+					var link = input.value.trim();
+					shortcut.link = link;
+					if(link.length == 0){
+						shortcut.img = "";
+						shortcut.name = "";
+					}
+					set_shortcut(shortcut, id);
+				});
+				break;
+			case input.id.startsWith(node.shortcut_setting.name):
+				input.value = shortcut.name;
+				input.addEventListener("change",()=>{
+					var name = input.value.trim();
+					shortcut.name = name.length > 0 ? name : null;
+					set_shortcut(shortcut, id);
+				});
+				break;
+			case input.id.startsWith(node.shortcut_setting.img):
+				input.addEventListener("input",()=>{
+					const reader = new FileReader();
+					reader.addEventListener("loadend", (event) => {
+						if(event.target == null) return;
+						shortcut.img = event.target.result as string;
+						set_shortcut(shortcut, id);
+					});
+					var files = input.files;
+					if(files == null) return;
+					var image = files.item(0);
+					if(image == null)return;
+					reader.readAsDataURL(image);
+				});
+				break;
+			case input.id.startsWith(node.shortcut_setting.reset):
+				input.addEventListener('click',()=>{
+					if(shortcut.img == ''){
+						return
+					}
+					shortcut.img = '';
+					set_shortcut(shortcut, id);
+				});
+				break;
+			case input.id.startsWith(node.shortcut_setting.default):
+				input.addEventListener('click',()=>{
+					if(shortcut.link == ''){
+						return
+					}
+					let canvas = document.createElement("canvas");
+					let context = canvas.getContext("2d") as CanvasRenderingContext2D;
+					canvas.width = 256;
+					canvas.height = 256;
+					context.fillStyle = "#442288aa";
+					context.fillRect(0,0,256,256);
+					context.font = "bold 160px monospace";
+					context.textAlign = "center";
+					context.fillStyle = "white";
+					context.textBaseline = "middle";
+					context.fillText((shortcut.name ?? shortcut.link).replace('https://','').replace('http://','').replace('www.','').toUpperCase().slice(0,2), canvas.width/2, canvas.height/2);
+					var image = canvas.toDataURL();
+					shortcut.img = image;
+					set_shortcut(shortcut, id);
+				});			
+				break;
+		}
+	}
+	return elm;
 }
 
 /// Notes
