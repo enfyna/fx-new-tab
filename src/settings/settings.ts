@@ -7,14 +7,11 @@ interface currency {
 	name:string;
 	rate:string;
 }
-interface note {
-	note:string;
-}
 const node = {
 	currency:{
-		"option":"currency_option_",
+		option:"currency_option_",
 	},
-	shortcut_setting:{
+	shortcut:{
 		link:"select_link_",
 		name:"select_name_",
 		img:"select_img_",
@@ -135,17 +132,17 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 	const inputs = elm.getElementsByTagName('input');
 	for(let i = 0; i < inputs.length; i++){
 		const inp = inputs[i];
-		if(inp.id.startsWith(node.shortcut_setting.link)){
+		if(inp.id.startsWith(node.shortcut.link)){
 			inp.value = shortcut.link;
 		}
-		else if (inp.id.startsWith(node.shortcut_setting.name)){
+		else if (inp.id.startsWith(node.shortcut.name)){
 			inp.value = shortcut.name;
 		}
 	}
 	elm.addEventListener('change',(event)=>{
 		const input = event.target as HTMLInputElement;
 		switch(true){
-			case input.id.startsWith(node.shortcut_setting.link):
+			case input.id.startsWith(node.shortcut.link):
 				var link = input.value.trim();
 				shortcut.link = link;
 				if(link.length == 0){
@@ -154,12 +151,12 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 				}
 				set_shortcut(shortcut, id);
 				break;
-			case input.id.startsWith(node.shortcut_setting.name):
+			case input.id.startsWith(node.shortcut.name):
 				var name = input.value.trim();
 				shortcut.name = name.length > 0 ? name : null;
 				set_shortcut(shortcut, id);
 				break;
-			case input.id.startsWith(node.shortcut_setting.img):
+			case input.id.startsWith(node.shortcut.img):
 				const reader = new FileReader();
 				reader.addEventListener("loadend", (event) => {
 					if(event.target == null) return;
@@ -172,14 +169,14 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 				if(image == null)return;
 				reader.readAsDataURL(image);
 				break;
-			case input.id.startsWith(node.shortcut_setting.reset):
+			case input.id.startsWith(node.shortcut.reset):
 				if(shortcut.img == ''){
 					return
 				}
 				shortcut.img = '';
 				set_shortcut(shortcut, id);
 				break;
-			case input.id.startsWith(node.shortcut_setting.default):
+			case input.id.startsWith(node.shortcut.default):
 				if(shortcut.link == ''){
 					return
 				}
@@ -232,14 +229,25 @@ function configure_currency_settings(){
 
 	get_currencies();
 
-	var select_ids = [node.currency.option+0, node.currency.option+1,node.currency.option+2,"base_currency"]
+	const selects = document.getElementsByTagName('select');
 
-	for (let i = 0; i < select_ids.length; i++) {
-		var select = document.getElementById(select_ids[i]) as HTMLSelectElement;
+	for(let i = 0; i < selects.length; i++){
+		const select = selects[i] as HTMLSelectElement;
 		select.appendChild(national.cloneNode(true));
 		select.appendChild(crypto.cloneNode(true));
 
-		if (i == select_ids.length - 1) {
+		if (select.id.startsWith(node.currency.option)){
+			const id = select.id.replace(node.currency.option,'');
+			select.value = save['currencies'][id].name;
+			select.addEventListener("change",()=>{
+				var cr = save['currencies'][id] as currency;
+				cr.name = select.value;
+				cr.rate = '-';
+				save['currencies'][id] = cr;
+				set_save();
+			});
+		}
+		else{
 			select.value = get_base_currency();
 			select.addEventListener("change",()=>{
 				save['base_currency'] = select.value;
@@ -248,17 +256,7 @@ function configure_currency_settings(){
 				}
 				set_save()
 			});
-			continue;
-		};
-		select.value = save['currencies'][i].name;
-		select.addEventListener("change",()=>{
-			var select = document.getElementById(node.currency.option + i) as HTMLSelectElement;
-			var cr = save['currencies'][i] as currency;
-			cr.name = select.value;
-			cr.rate = "-";
-			save['currencies'][i] = cr;
-			set_save();
-		});
+		}
 	}
 	var check = document.getElementById("enable_api") as HTMLInputElement
 	check.checked = is_currency_rates_enabled();
@@ -274,7 +272,7 @@ function is_currency_rates_enabled() : boolean {
 
 function get_currencies(){
 	if (save['currencies'] != null){
-		return save['notes'];
+		return save['currencies'];
 	}
 	save['currencies'] = [
 		{name:'USD',rate:'-'},
