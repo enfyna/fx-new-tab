@@ -102,7 +102,7 @@ async function configure_shortcuts(){
 			return;
 
 		active_shortcuts++;
-		
+
 		(container as HTMLElement).hidden = false;
 		const link = container.querySelector('a') as HTMLAnchorElement;
 		const img = container.querySelector('img') as HTMLImageElement;
@@ -115,12 +115,11 @@ async function configure_shortcuts(){
 			if (circle){
 				img.classList.replace('rounded-3','rounded-circle');
 				img.parentElement.classList.remove('card-header');
-				img.parentElement.parentElement.classList.add('rounded-circle');
+				link.classList.add('rounded-circle');
 			}
 		}
 		else{
 			name.innerText = shortcut.name;
-			name.hidden = false;
 		}
 		link.classList.replace('m-0',get_shortcut_size());
 		link.href = shortcut.link;
@@ -145,46 +144,38 @@ async function configure_shortcuts(){
 	}
 }
 
-async function find_user_sites(){
-	return browser.history.search({
-		text:"",
-		maxResults:1000,
-	}).then(res=>{
-		let sites = {};
-		let sorted = {};
-		for (const site_id in res) {
-			const url = res[site_id].url.split('/').slice(0,3).join("/");
-			if (sites[url] == null){
-				sites[url] = res[site_id].visitCount
-			}
-			sites[url] += res[site_id].visitCount
-		}
-		for (const site in sites){
-			if(sorted[sites[site]] == null){
-				sorted[sites[site]] = []
-			}
-			sorted[sites[site]].push(site);
-		}
-		let sorted_keys = Object.keys(sorted).map((item)=>Number(item));
-		sorted_keys.sort((first, second)=>{return second - first;});
-		let shortcut_added : number = 0;
-		let shortcuts : shortcut[] = []
-		for (let i = 0; i < 12; i++) {
-			const arr = sorted[sorted_keys[i]];
-			for (let i = 0; i < arr.length; i++) {
-				if (shortcut_added == 12){
-					break;
-				}
-				let shortcut : shortcut = {name:"",link:"",img:""};
-				const site = arr[i];
-				shortcut.link = site;
-				shortcut.name = site.split('/')[2];
-				shortcuts.push(shortcut);
-				shortcut_added += 1;
-			}
-		}
-		return shortcuts;
-	})
+async function find_user_sites() {
+    const historyResults = await browser.history.search({
+        text: "",
+        maxResults: 1000,
+    });
+	
+    const sites = new Map();
+    for (const site of historyResults) {
+        const url = site.url.split('/').slice(0, 3).join("/");
+        const visitCount = site.visitCount;
+
+        sites.set(url, (sites.get(url) ?? 0) + visitCount);
+    }
+    const sorted : [string, number][] = [...sites.entries()]
+        .sort((a, b) => b[1] - a[1]);
+
+    const shortcuts : shortcut[] = [];
+    let shortcutAdded = 0;
+
+    for (const [url, visitCount] of sorted) {
+        if (shortcutAdded++ === 12) {
+            break;
+        }
+
+        const shortcut : shortcut = {
+            name: url.split('/')[2],
+            link: url,
+            img: "",
+        };
+        shortcuts.push(shortcut);
+    }
+    return shortcuts;
 }
 
 function get_shortcut_img(i : number, node : HTMLImageElement){
