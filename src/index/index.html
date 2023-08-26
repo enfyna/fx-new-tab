@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="build/index.css">
-	<script src="build/script.js"></script>
+	<script src="build/script.js" async></script>
 </head>
 
 <style>
@@ -50,6 +50,13 @@
 	.glow:hover {
 		box-shadow: 0 0px 10px 10px var(--glow-clr);
 		scale: 1.05;
+	}
+	.spin > div > img {
+		transition: 0.35s;
+		transform: rotateY(180deg);
+	}
+	.spin:hover > div > img {
+		transform: rotateY(0deg);
 	}
 	.bg-primary {
 		--glow-clr: blue;

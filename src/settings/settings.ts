@@ -397,6 +397,13 @@ function translate() : void {
 			"es": "Aumentar tamaño"
 		},
 		{
+			"name": "spin",
+			"tr": "Döndür",
+			"en": "Spin",
+			"de": "Drehen",
+			"es": "Girar"
+		},
+		{
 			"name": "rotate",
 			"tr": "Döndür",
 			"en": "Rotate",
