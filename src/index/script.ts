@@ -71,8 +71,6 @@ function get_bg_color() : string{
 
 function set_background() {
 	document.body.style.cssText += `
-		background-size: cover;
-		background-position: center center;
 		background-image: ${get_bg_image()};
 		background-color: ${get_bg_color()};
 	`;
@@ -91,10 +89,60 @@ async function configure_shortcuts(){
 		settings_button.hidden = false;
 		load_text.innerText = '';
 	}
-	for (let i = 0; i < 12; i++){
-		set_shortcut_node(i);
-	};
-	align_shortcuts();
+
+	let active_shortcuts : number = 0;
+
+	const transition = get_shortcut_transition();
+	const circle = is_circle();
+
+	const shortcuts = document.querySelectorAll('.shortcut');
+	shortcuts.forEach((container, index) => {
+		var shortcut : shortcut = save['shortcuts'][index] as shortcut;
+		if (shortcut == null || shortcut.link.length == 0)
+			return;
+
+		active_shortcuts++;
+		
+		(container as HTMLElement).hidden = false;
+		const link = container.querySelector('a') as HTMLAnchorElement;
+		const img = container.querySelector('img') as HTMLImageElement;
+		const name = container.querySelector('h7') as HTMLDivElement;
+		if (transition != 'none'){
+			link.classList.add(transition);
+		}
+		if (!shortcut.name || circle){
+			name.hidden = true;
+			if (circle){
+				img.classList.replace('rounded-3','rounded-circle');
+				img.parentElement.classList.remove('card-header');
+				img.parentElement.parentElement.classList.add('rounded-circle');
+			}
+		}
+		else{
+			name.innerText = shortcut.name;
+			name.hidden = false;
+		}
+		link.classList.replace('m-0',get_shortcut_size());
+		link.href = shortcut.link;
+
+		if(shortcut.img == "") {
+			get_shortcut_img(index, img);
+			return;
+		};
+		img.src = shortcut.img;
+	});
+
+	const container = document.getElementById("ShortcutContainer") as HTMLElement;
+
+	if (active_shortcuts > 4){
+		container.classList.replace(
+			"align-items-center","align-items-start"
+		);
+	}
+
+	if (container.clientHeight > window.innerHeight){
+		container.classList.add('col-md-10');
+	}
 }
 
 async function find_user_sites(){
@@ -137,67 +185,6 @@ async function find_user_sites(){
 		}
 		return shortcuts;
 	})
-}
-
-function align_shortcuts(){
-	var container = document.getElementById("ShortcutContainer") as HTMLElement;
-
-	var active_shortcuts : number = 0
-	var shortcuts = save['shortcuts'];
-	for (let i = 0; i < 12; i++){
-		if (shortcuts[i].link == ""){
-			continue;
-		}
-		if (++active_shortcuts == 5){
-			container.classList.replace(
-				"align-items-center","align-items-start"
-			);
-			break;
-		}
-	}
-	if (container.clientHeight > window.innerHeight){
-		container.classList.add('col-md-10');
-	}
-}
-
-function set_shortcut_node(i : number){
-	var shortcut : shortcut = save['shortcuts'][i] as shortcut;
-	if (shortcut == null || shortcut.link.length == 0)
-		return; 
-	var link_node = document.getElementById(node.shortcut.link+i) as HTMLAnchorElement;
-	var link_node_parent = link_node.parentElement;
-	if(link_node_parent == null)
-		return;
-	let transition = get_shortcut_transition()
-	if (transition != 'none'){
-		link_node.classList.add(transition)
-	}
-	var name_node = (document.getElementById(node.shortcut.name+i)) as HTMLHeadingElement;
-	var img_node = document.getElementById(node.shortcut.img+i) as HTMLImageElement;
-	const circle = is_circle();
-	if (!shortcut.name || circle){
-		name_node.hidden = true;
-		if (circle){
-			img_node.classList.replace('rounded-3','rounded-circle');
-			img_node.parentElement.classList.remove('card-header');
-			img_node.parentElement.parentElement.classList.add('rounded-circle');
-		}
-	}
-	else{
-		name_node.innerText = shortcut.name;
-		name_node.hidden = false;
-	}
-	img_node.parentElement.parentElement.classList.replace('m-0',get_shortcut_size());
-	link_node.href = shortcut.link;
-	link_node.title = shortcut.link;
-	link_node_parent.hidden = false;
-
-
-	if(shortcut.img == "") {
-		get_shortcut_img(i, img_node);
-		return;
-	};
-	img_node.src = shortcut.img;
 }
 
 function get_shortcut_img(i : number, node : HTMLImageElement){

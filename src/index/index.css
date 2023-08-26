@@ -1,3 +1,12 @@
+
+body {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+/* Transitions */
+
 .move_up {
     transition: 0.1s;
 }
