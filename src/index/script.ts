@@ -66,7 +66,7 @@ function get_bg_image() {
 }
 
 function get_bg_color() : string{
-	return save['bg_color'] ?? 'black';
+	return save['bg_color'] ?? '#031633';
 }
 
 function set_background() {
@@ -283,7 +283,7 @@ function get_shortcut_size() : string {
 }
 
 function get_shortcut_transition() : string {
-	return save['shortcut_transition'] ?? 'move_up';
+	return save['shortcut_transition'] ?? 'glow';
 }
 
 /// Notes
@@ -370,7 +370,7 @@ function is_currency_rates_enabled() : boolean {
 function did_a_day_pass() : boolean {
 	const saved_date_str : string = save["date"] ?? '0';
 	const now : number = Date.now();
-	if (saved_date_str == null || now - parseInt(saved_date_str) > 70000000){
+	if (saved_date_str == null || now - parseInt(saved_date_str) > 43200000){
 		save['date'] = now;
 		set_save();
 		return true;
