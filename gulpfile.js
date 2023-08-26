@@ -56,13 +56,20 @@ function minifySettingsJS() {
         .pipe(gulp.dest('build'));
 }
 
-function minifyIndexCSS() {
+function minifyIndexBootstrapCSS() {
     return gulp.src('bootstrap/bootstrap.css')
         .pipe(purify(['src/index/index.html'],{
             whitelist: [
                 'rounded-circle',
             ]
         }))
+        .pipe(cleanCSS({level: {1: {all: true}, 2: {all: true}}}))
+        .pipe(rename('bootstrap.css'))
+        .pipe(gulp.dest('build'));
+}
+
+function minifyIndexCSS() {
+    return gulp.src('src/index/index.css')
         .pipe(cleanCSS({level: {1: {all: true}, 2: {all: true}}}))
         .pipe(rename('index.css'))
         .pipe(gulp.dest('build'));
@@ -93,10 +100,11 @@ function minifySettingsCSS(){
 exports.minify = series(
     minifyIndex,
     minifyIndexJS,
+    minifyIndexCSS,
     minifySettings,
     minifySettingsJS,
 );
 exports.minifyCSS = series(
-    minifyIndexCSS,
+    minifyIndexBootstrapCSS,
     minifySettingsCSS,
 );

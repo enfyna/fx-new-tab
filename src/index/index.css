@@ -1,0 +1,61 @@
+.move_up {
+    transition: 0.1s;
+}
+.move_up:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0,0,0,0.5);
+}
+.move_down {
+    transition: 0.1s;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0,0,0,0.5);
+}
+.move_down:hover {
+    transform: translateY(0px);
+    box-shadow: 0 0px 0px transparent;
+}
+.rotate {
+    transition: 0.1s;
+}
+.rotate:hover {
+    transform: rotate(10deg);
+    scale: 1.05;
+}
+.scale_up {
+    transition: 0.1s;
+}
+.scale_up:hover{
+    transform: scale(1.1);
+}
+.scale_down {
+    transition: 0.1s;
+}
+.scale_down:hover {
+    transform: scale(0.9);
+}
+.glow {
+    transition: 0.1s;
+}
+.glow:hover {
+    box-shadow: 0 0px 10px 10px var(--glow-clr);
+    scale: 1.05;
+}
+.spin > div > img {
+    transition: 0.35s;
+    transform: rotateY(180deg);
+}
+.spin:hover > div > img {
+    transform: rotateY(0deg);
+}
+.bg-primary {
+    --glow-clr: blue;
+}
+.bg-danger {
+    --glow-clr: red;
+}
+.bg-warning {
+    --glow-clr: yellow;
+}
+.bg-success {
+    --glow-clr: green;
+}
