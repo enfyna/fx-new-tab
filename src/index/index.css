@@ -68,3 +68,18 @@ body {
 .bg-success {
     --glow-clr: green;
 }
+.bg-dark {
+    --glow-clr: darkslategrey;
+}
+.bg-black {
+    --glow-clr: black;
+}
+.bg-transparent {
+    --glow-clr: grey;
+}
+.bg-white {
+    --glow-clr: grey;
+}
+.bg-white > h7.text-white {
+    color: black !important;
+}

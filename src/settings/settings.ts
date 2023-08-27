@@ -86,12 +86,30 @@ async function configure_shortcut_settings(){
 	const shortcut_shape_settings = document.getElementById('shortcut_shape_settings');
 	shortcut_shape_settings.addEventListener('change',(event)=>{
 		const input = event.target as HTMLSelectElement;
-		save[input.id] = input.value.trim();
-		set_save();
+		switch (true) {
+			case input.id.startsWith('shortcut_col_color'):
+				const colors = get_shortcut_col_colors();
+				colors[input.id.split('_')[3]] = input.value.trim();
+				save['shortcut_col_colors'] = colors;
+				set_save();	
+				break;
+			default:
+				save[input.id] = input.value.trim();
+				set_save();
+				break;
+		}
 	});
+	const colors = get_shortcut_col_colors();
 	const selects = shortcut_shape_settings.getElementsByTagName('select');
 	for (const select of selects) {
-		select.value = save[select.id] ?? select.options[0].value;
+		switch (true) {
+			case select.id.startsWith('shortcut_col_color'):
+				select.value = colors[select.id.split('_')[3]];
+				break;
+			default:
+				select.value = save[select.id] ?? select.options[0].value;
+				break;
+		}
 	}
 	const shortcut_container = document.getElementById("shortcut-settings-container") as HTMLDivElement;
 
@@ -227,6 +245,11 @@ async function find_user_sites() {
     return shortcuts;
 }
 
+
+function get_shortcut_col_colors() : Array<string>{
+	return save['shortcut_col_colors'] ?? ['bg-primary','bg-danger','bg-success','bg-warning'];
+}
+
 /// Notes
 function configure_note_settings() {
 	const check = document.getElementById('enable_notes') as HTMLInputElement;
@@ -353,6 +376,13 @@ function translate() : void {
 			"en": "Shortcut Settings",
 			"de": "Verknüpfungseinstellungen",
 			"es": "Configuración de Accesos Directos"
+		},
+		{
+			"name": "shortcut-col-color",
+			"tr": "Sütun Rengi",
+			"en": "Column Color",
+			"de": "Spaltenfarbe",
+			"es": "Color de Columna"
 		},
 		{
 			"name": "shortcut-size",
@@ -602,7 +632,7 @@ function translate() : void {
 				(element as HTMLInputElement).placeholder = translation;
 			};
 		}
-		else if(elm_name == "base-currency-label" || elm_name == "crypto-currencies" || elm_name == "national-currencies" || elm_name == "shortcut-shape" || elm_name == "shortcut-size" || elm_name == "shortcut-transition"){
+		else if(elm_name == "base-currency-label" || elm_name == "crypto-currencies" || elm_name == "national-currencies" || elm_name == "shortcut-shape" || elm_name == "shortcut-size" || elm_name == "shortcut-transition" || elm_name == "shortcut-col-color"){
 			for (const element of document.getElementsByName(elm_name)){
 				(element as HTMLOptGroupElement).label = translation;
 			};

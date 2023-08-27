@@ -92,7 +92,7 @@ async function configure_shortcuts(){
 
 	let active_shortcuts : number = 0;
 
-	const colors = ['bg-primary','bg-danger','bg-success','bg-warning'];
+	const colors = get_shortcut_col_colors();
 	const transition = get_shortcut_transition();
 	const circle = is_circle();
 
@@ -259,6 +259,10 @@ function get_shortcut_size() : string {
 
 function get_shortcut_transition() : string {
 	return save['shortcut_transition'] ?? 'glow';
+}
+
+function get_shortcut_col_colors() : Array<string>{
+	return save['shortcut_col_colors'] ?? ['bg-primary','bg-danger','bg-success','bg-warning'];
 }
 
 /// Notes
