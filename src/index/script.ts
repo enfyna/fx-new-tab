@@ -145,36 +145,21 @@ async function configure_shortcuts(){
 }
 
 async function find_user_sites() {
-    const historyResults = await browser.history.search({
-        text: "",
-        maxResults: 1000,
+    const topSites = await browser.topSites.get({
+		limit: 12,
+        includeFavicon: true,
+		onePerDomain: true,
     });
-	
-    const sites = new Map();
-    for (const site of historyResults) {
-        const url = site.url.split('/').slice(0, 3).join("/");
-        const visitCount = site.visitCount;
-
-        sites.set(url, (sites.get(url) ?? 0) + visitCount);
-    }
-    const sorted : [string, number][] = [...sites.entries()]
-        .sort((a, b) => b[1] - a[1]);
-
     const shortcuts : shortcut[] = [];
-    let shortcutAdded = 0;
 
-    for (const [url, visitCount] of sorted) {
-        if (shortcutAdded++ === 12) {
-            break;
-        }
-
+    topSites.forEach(site => {
         const shortcut : shortcut = {
-            name: url.split('/')[2],
-            link: url,
-            img: "",
+            name: site.title,
+            link: site.url,
+            img: site.favicon ?? '',
         };
         shortcuts.push(shortcut);
-    }
+    });
     return shortcuts;
 }
 
