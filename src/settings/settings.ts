@@ -143,7 +143,7 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 			inp.value = shortcut.name;
 		}
 	}
-	elm.addEventListener('change',(event)=>{
+	elm.addEventListener('input',(event)=>{
 		const input = event.target as HTMLInputElement;
 		switch(true){
 			case input.id.startsWith(node.shortcut.link):
@@ -173,14 +173,19 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 				if(image == null)return;
 				reader.readAsDataURL(image);
 				break;
-			case input.id.startsWith(node.shortcut.reset):
+		}
+	});
+	elm.addEventListener('click',(event)=>{
+		const button = event.target as HTMLButtonElement;
+		switch (true){
+			case button.id.startsWith(node.shortcut.reset):
 				if(shortcut.img == ''){
 					return
 				}
 				shortcut.img = '';
 				set_shortcut(shortcut, id);
 				break;
-			case input.id.startsWith(node.shortcut.default):
+			case button.id.startsWith(node.shortcut.default):
 				if(shortcut.link == ''){
 					return
 				}
