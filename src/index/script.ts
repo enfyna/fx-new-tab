@@ -92,46 +92,58 @@ async function configure_shortcuts(){
 
 	let active_shortcuts : number = 0;
 
+	const colors = ['bg-primary','bg-danger','bg-success','bg-warning'];
 	const transition = get_shortcut_transition();
 	const circle = is_circle();
 
-	const shortcuts = document.querySelectorAll('.shortcut');
-	shortcuts.forEach((container, index) => {
+	const shortcut_base_node = document.getElementById('shortcut');
+	shortcut_base_node.hidden = false;
+
+	const link = shortcut_base_node.getElementsByTagName('a')[0] as HTMLAnchorElement;
+	link.classList.replace('m-0',get_shortcut_size());
+	if (transition != 'none'){
+		link.classList.add(transition);
+	}
+	const img = shortcut_base_node.getElementsByTagName('img')[0] as HTMLImageElement;
+	if (circle){
+		img.classList.replace('rounded-3','rounded-circle');
+		img.parentElement.classList.remove('card-header');
+		link.classList.add('rounded-circle');
+	}
+
+	const container = shortcut_base_node.parentElement as HTMLElement;
+
+	for(let index = 0; index < 12; index++){
 		var shortcut : shortcut = save['shortcuts'][index] as shortcut;
 		if (shortcut == null || shortcut.link.length == 0)
-			return;
+			continue;
 
 		active_shortcuts++;
 
-		(container as HTMLElement).hidden = false;
-		const link = container.querySelector('a') as HTMLAnchorElement;
-		const img = container.querySelector('img') as HTMLImageElement;
-		const name = container.querySelector('h7') as HTMLDivElement;
-		if (transition != 'none'){
-			link.classList.add(transition);
-		}
+		const shortcut_node = shortcut_base_node.cloneNode(true) as HTMLDivElement;
+		const link = shortcut_node.getElementsByTagName('a')[0] as HTMLAnchorElement;
+		const img = shortcut_node.getElementsByTagName('img')[0] as HTMLImageElement;
+		const name = shortcut_node.getElementsByTagName('h7')[0] as HTMLDivElement;
+		
+		link.classList.add(colors[index % 4]);	
+		
 		if (!shortcut.name || circle){
 			name.hidden = true;
-			if (circle){
-				img.classList.replace('rounded-3','rounded-circle');
-				img.parentElement.classList.remove('card-header');
-				link.classList.add('rounded-circle');
-			}
 		}
 		else{
 			name.innerText = shortcut.name;
 		}
-		link.classList.replace('m-0',get_shortcut_size());
 		link.href = shortcut.link;
+
+		container.appendChild(shortcut_node);
 
 		if(shortcut.img == "") {
 			get_shortcut_img(index, img);
-			return;
+			continue;
 		};
 		img.src = shortcut.img;
-	});
-
-	const container = document.getElementById("ShortcutContainer") as HTMLElement;
+	};
+	shortcut_base_node.remove();
 
 	if (active_shortcuts > 4){
 		container.classList.replace(
