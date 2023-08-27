@@ -83,29 +83,21 @@ function get_bg_color() : string{
 
 /// Shortcuts
 async function configure_shortcut_settings(){
-	let shape = document.getElementById('shortcut_shape') as HTMLSelectElement;
-	shape.value = save['shortcut_shape'] != null ? save['shortcut_shape'] : 'square';
-	shape.addEventListener('change',()=>{
-		save['shortcut_shape'] = shape.value.trim();
+	const shortcut_shape_settings = document.getElementById('shortcut_shape_settings');
+	shortcut_shape_settings.addEventListener('change',(event)=>{
+		const input = event.target as HTMLSelectElement;
+		save[input.id] = input.value.trim();
 		set_save();
 	});
-	let translation = document.getElementById('shortcut_transition') as HTMLSelectElement;
-	translation.value = save['shortcut_transition'] != null ? save['shortcut_transition'] : 'move_up';
-	translation.addEventListener('change',()=>{
-		save['shortcut_transition'] = translation.value.trim();
-		set_save();
-	});
-	let size = document.getElementById('shortcut_size') as HTMLSelectElement;
-	size.value = save['shortcut_size'] != null ? save['shortcut_size'] : 'm-0';
-	size.addEventListener('change',()=>{
-		save['shortcut_size'] = size.value.trim();
-		set_save();
-	});
+	const selects = shortcut_shape_settings.getElementsByTagName('select');
+	for (const select of selects) {
+		select.value = save[select.id] ?? select.options[0].value;
+	}
 	const shortcut_container = document.getElementById("shortcut-settings-container") as HTMLDivElement;
-	
+
 	const suggestions = document.createElement('datalist');
 	suggestions.id = 'suggestions';
-	
+
 	const topSites = await find_user_sites();
 	topSites.forEach(site => {
 		const url = document.createElement('option');
