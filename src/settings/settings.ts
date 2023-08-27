@@ -82,7 +82,7 @@ function get_bg_color() : string{
 }
 
 /// Shortcuts
-function configure_shortcut_settings(){
+async function configure_shortcut_settings(){
 	let shape = document.getElementById('shortcut_shape') as HTMLSelectElement;
 	shape.value = save['shortcut_shape'] != null ? save['shortcut_shape'] : 'square';
 	shape.addEventListener('change',()=>{
@@ -102,6 +102,18 @@ function configure_shortcut_settings(){
 		set_save();
 	});
 	const shortcut_container = document.getElementById("shortcut-settings-container") as HTMLDivElement;
+	
+	const suggestions = document.createElement('datalist');
+	suggestions.id = 'suggestions';
+	
+	const topSites = await find_user_sites();
+	topSites.forEach(site => {
+		const url = document.createElement('option');
+		url.value = site.link;
+		suggestions.appendChild(url);
+	});
+	shortcut_container.appendChild(suggestions);
+
 	let shortcut_setting = document.getElementById("shortcut-setting") as HTMLDivElement;
 	for (let i = 0; i < 12; i++) {
 		shortcut_container.appendChild(
@@ -197,6 +209,25 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 		}
 	});
 	return elm;
+}
+
+async function find_user_sites() {
+    const topSites = await browser.topSites.get({
+		limit: 100,
+        includeFavicon: false,
+		onePerDomain: false,
+    });
+    const shortcuts : shortcut[] = [];
+
+    topSites.forEach(site => {
+        const shortcut : shortcut = {
+            name: site.title,
+            link: site.url,
+            img: site.favicon ?? '',
+        };
+        shortcuts.push(shortcut);
+    });
+    return shortcuts;
 }
 
 /// Notes
