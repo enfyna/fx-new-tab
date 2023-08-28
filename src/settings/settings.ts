@@ -143,7 +143,7 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 	const colors = ['bg-primary','bg-danger','bg-success','bg-warning'];
 	elm.classList.add(colors[id%4]);
 	elm.hidden = false;
-	let shortcut = save['shortcuts'][id] as shortcut;
+	let shortcut = (save['shortcuts'][id] ?? {link:null}) as shortcut;
 	if (shortcut.link == null) {
 		shortcut = {
 			link: '',
