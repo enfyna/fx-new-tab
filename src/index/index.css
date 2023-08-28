@@ -57,29 +57,29 @@ body {
     transform: rotateY(0deg);
 }
 .bg-primary {
-    --glow-clr: blue;
+    --glow-clr: #00f;
 }
 .bg-danger {
-    --glow-clr: red;
+    --glow-clr: #f00;
 }
 .bg-warning {
-    --glow-clr: yellow;
+    --glow-clr: #ff0;
 }
 .bg-success {
-    --glow-clr: green;
+    --glow-clr: #0a0;
 }
 .bg-dark {
-    --glow-clr: darkslategrey;
+    --glow-clr: #222;
 }
 .bg-black {
-    --glow-clr: black;
+    --glow-clr: #000;
 }
 .bg-transparent {
-    --glow-clr: grey;
+    --glow-clr: #777;
 }
 .bg-white {
-    --glow-clr: grey;
+    --glow-clr: #fff;
 }
 .bg-white > h7.text-white {
-    color: black !important;
+    color: #000 !important;
 }
