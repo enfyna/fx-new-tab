@@ -406,6 +406,62 @@ function translate() : void {
 			"es": "Cuadrado"
 		},
 		{
+			"name": "blue",
+			"tr": "Mavi",
+			"en": "Blue",
+			"de": "Blau",
+			"es": "Azul"
+		},
+		{
+			"name": "red",
+			"tr": "Kırmızı",
+			"en": "Red",
+			"de": "Rot",
+			"es": "Rojo"
+		},
+		{
+			"name": "green",
+			"tr": "Yeşil",
+			"en": "Green",
+			"de": "Grün",
+			"es": "Verde"
+		},
+		{
+			"name": "yellow",
+			"tr": "Sarı",
+			"en": "Yellow",
+			"de": "Gelb",
+			"es": "Amarillo"
+		},
+		{
+			"name": "black",
+			"tr": "Siyah",
+			"en": "Black",
+			"de": "Schwarz",
+			"es": "Negro"
+		},
+		{
+			"name": "dark",
+			"tr": "Koyu",
+			"en": "Dark",
+			"de": "Dunkel",
+			"es": "Oscuro"
+		},
+		{
+			"name": "white",
+			"tr": "Beyaz",
+			"en": "White",
+			"de": "Weiß",
+			"es": "Blanco"
+		},
+		{
+			"name": "transparent",
+			"tr": "Saydam",
+			"en": "Transparent",
+			"de": "Durchsichtig",
+			"es": "Transparente"
+		},
+		{
 			"name": "circle",
 			"tr": "Daire",
 			"en": "Circle",
@@ -463,7 +519,7 @@ function translate() : void {
 		},
 		{
 			"name": "rotate",
-			"tr": "Döndür",
+			"tr": "Çevir",
 			"en": "Rotate",
 			"de": "Rotieren",
 			"es": "Rotar"
