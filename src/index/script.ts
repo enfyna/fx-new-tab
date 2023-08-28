@@ -34,6 +34,7 @@ get_save().then(ready);
 
 function ready(){
 	configure_shortcuts();
+	set_background();
 	if (is_currency_rates_enabled() || is_notes_enabled()){
 		configure_notes();
 		configure_currencies();
@@ -41,7 +42,6 @@ function ready(){
 	else{
 		center_shortcuts();
 	}
-	set_background();
 	set_settings_button();
 	translate();
 }
@@ -323,11 +323,9 @@ function save_note(i : number){
 }
 
 /// Currencies
-var currencies_json : object
-
-function get_currencies(){
+function get_currencies() : currency[] {
 	if (save['currencies'] != null){
-		return save['notes'];
+		return save['currencies'];
 	}
 	save['currencies'] = [
 		{name:'USD',rate:'-'},
@@ -349,7 +347,7 @@ function is_currency_rates_enabled() : boolean {
 function did_a_day_pass() : boolean {
 	const saved_date_str : string = save["date"] ?? '0';
 	const now : number = Date.now();
-	if (saved_date_str == null || now - parseInt(saved_date_str) > 43200000){
+	if (now - parseInt(saved_date_str) > 43200000){
 		save['date'] = now;
 		set_save();
 		return true;
@@ -357,44 +355,48 @@ function did_a_day_pass() : boolean {
 	return false;
 }
 
-function configure_currencies(){
+async function configure_currencies(){
 	if(!is_currency_rates_enabled()){
 		return;
 	}
-	get_currencies();
-	if(!did_a_day_pass()){
-		for (let i = 0; i < 3; i++) {
-			update_currency_node(i);
+	const currencies = get_currencies();
+
+	// Update the currency if a day has passed
+	// or if we have reset currency values
+	let fetch_currencies = did_a_day_pass();
+	if(!fetch_currencies){
+		if (currencies[0].rate == '-'){
+			fetch_currencies = true;
 		};
 	}
-	else{
-		get_rates().then(() => {
+
+	if(fetch_currencies){
+		try {
+			const rates = await get_rates();
 			for (let i = 0; i < 3; i++) {
-				save['currencies'][i].rate = '-';
-				update_currency_node(i);
+				const currency = currencies[i];
+				currency.rate = (1.0 / rates[currency.name.toLowerCase()]).toFixed(2);
 			};
-		}).catch(err=>{console.log(err)});
-	};
-}
-
-function update_currency_node(idx : number)  {
-	var name_node = document.getElementById(node.currency.name + idx) as HTMLDivElement;
-	var rate_node = document.getElementById(node.currency.value + idx) as HTMLDivElement;
-
-	name_node.innerText = save['currencies'][idx].name;
-	rate_node.innerText = save['currencies'][idx].rate;
-
-	if (save['currencies'][idx].rate == '-'){
-		get_rates().then((res : object) => {
-			const rate = (1.0 / res[save['currencies'][idx].name.toLowerCase()]).toFixed(2);
-			save['currencies'][idx].rate = rate;
-			rate_node.innerText = rate;
+			save['currencies'] = currencies;
 			set_save();
-			update_currency_node(idx);
-		}).catch(err => {console.log(err)});
+		}
+		catch (error) {
+			console.log(error);
+		}
+	}
+
+	const currency_container = document.getElementById('currencies');
+
+	const name_nodes = currency_container.getElementsByTagName('h5');
+	const rate_nodes = currency_container.getElementsByTagName('p');
+
+	for (let i = 0; i < 3; i++) {
+		const currency = currencies[i];
+		name_nodes[i].innerText = currency.name;
+		rate_nodes[i].innerText = currency.rate;
 	};
 
-	name_node.parentElement.parentElement.hidden = false;
+	currency_container.classList.replace('d-none','d-list');
 }
 
 function get_rates(){
@@ -402,16 +404,13 @@ function get_rates(){
 		if(navigator.onLine == false){
 			return reject("No internet connection. Cant get currency rates.");
 		};
-		if(currencies_json != null){
-			return resolve(currencies_json);
-		}
 		const base_currency = get_base_currency().toLowerCase();
 		const req : XMLHttpRequest = new XMLHttpRequest();
 		req.onreadystatechange = () => {
 			if (req.readyState == 4) {
 				if(req.status == 200){
-					currencies_json = JSON.parse(req.responseText)[base_currency];
-					return resolve(currencies_json);
+					const res = JSON.parse(req.responseText)[base_currency];
+					return resolve(res);
 				}else{
 					return reject("HTTP request failed");
 				};
@@ -422,7 +421,7 @@ function get_rates(){
 		};
 		req.open(
 			"GET",
-			currency_api.concat(base_currency, ".min.json"),
+			currency_api.concat(base_currency, ".min.json?", Date.now().toString()),
 			true
 		);
 		req.timeout = 5000;
