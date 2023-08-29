@@ -38,9 +38,9 @@ async function get_save(){
 	save = await browser.storage.local.get(null);
 }
 let saving = false;
+const save_info = document.getElementById('save-info');
 function set_save(){
 	saving = true;
-	const save_info = document.getElementById('save-info');
 	save_info.hidden = false;
 	browser.storage.local.set(save).then(()=>{
 		saving = false;
@@ -60,13 +60,11 @@ function configure_background_settings() {
 	img_node.addEventListener("input",()=>{
 		const reader = new FileReader();
 		reader.addEventListener("loadend", (event) => {
-			if(event.target == null)return;
-			save['bg_img'] = event.target.result as string;
+			if(event.target == null) return;
+			save['bg_img'] = ''.concat("url(", (event.target.result as string), ")");
 			set_save();
 		});
-		var files = img_node.files;
-		if(files == null) return;
-		var image = files.item(0);
+		const image = img_node.files.item(0);
 		if(image == null)return;
 		reader.readAsDataURL(image);
 	});
@@ -91,7 +89,7 @@ async function configure_shortcut_settings(){
 				const colors = get_shortcut_col_colors();
 				colors[input.id.split('_')[3]] = input.value.trim();
 				save['shortcut_col_colors'] = colors;
-				set_save();	
+				set_save();
 				break;
 			default:
 				save[input.id] = input.value.trim();
@@ -217,7 +215,7 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 				context.textAlign = "center";
 				context.fillStyle = "white";
 				context.textBaseline = "middle";
-				context.fillText((shortcut.name ?? shortcut.link).replace('https://','').replace('http://','').replace('www.','').toUpperCase().slice(0,2), canvas.width/2, canvas.height/2);
+				context.fillText(shortcut.link.replace('https://','').replace('http://','').replace('www.','').toUpperCase().slice(0,2), canvas.width/2, canvas.height/2);
 				shortcut.img = canvas.toDataURL();
 				set_shortcut(shortcut, id);
 				break;
