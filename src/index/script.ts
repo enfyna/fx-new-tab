@@ -56,23 +56,10 @@ function set_save(){
 }
 
 /// Background
-function get_bg_image() {
-	if(save['bg_img'] != null){
-		return ''.concat("url(",save['bg_img'],")");
-	}
-	else{
-		return 'none';
-	}
-}
-
-function get_bg_color() : string{
-	return save['bg_color'] ?? '#031633';
-}
-
 function set_background() {
 	document.body.style.cssText += `
-		background-image: ${get_bg_image()};
-		background-color: ${get_bg_color()};
+		background-image: ${(save['bg_img'] ?? 'none')};
+		background-color: ${(save['bg_color'] ?? '#033633')};
 	`;
 	document.body.classList.remove('bg-black');
 }
@@ -80,13 +67,10 @@ function set_background() {
 /// Shortcuts
 async function configure_shortcuts(){
 	if(save['shortcuts'] == null){
-		const settings_button = document.getElementById('nav-button') as HTMLButtonElement;
-		settings_button.hidden = true;
 		const load_text = document.getElementById('loading') as HTMLDivElement;
 		load_text.innerText = 'Finding Shortcuts Please Wait...';
 		save['shortcuts'] = await find_user_sites();
 		set_save();
-		settings_button.hidden = false;
 		load_text.innerText = '';
 	}
 
@@ -124,9 +108,9 @@ async function configure_shortcuts(){
 		const link = shortcut_node.getElementsByTagName('a')[0] as HTMLAnchorElement;
 		const img = shortcut_node.getElementsByTagName('img')[0] as HTMLImageElement;
 		const name = shortcut_node.getElementsByTagName('h7')[0] as HTMLDivElement;
-		
-		link.classList.add(colors[index % 4]);	
-		
+
+		link.classList.add(colors[index % 4]);
+
 		if (!shortcut.name || circle){
 			name.hidden = true;
 		}
@@ -175,33 +159,31 @@ async function find_user_sites() {
     return shortcuts;
 }
 
-function get_shortcut_img(i : number, node : HTMLImageElement){
-	get_favicon_from_url(save['shortcuts'][i].link)
-	.then(response => {
-		var img_type = response.headers.get("Content-Type");
+async function get_shortcut_img(i : number, node : HTMLImageElement){
+	try {
+		const response = await get_favicon_from_url(save['shortcuts'][i].link)
+
+		const img_type = response.headers.get("Content-Type");
 		if(img_type == 'image/svg+xml'){
 			throw new Error('Cant display SVG file');
 		}
-		response.blob()
-		.then(blob => {
-			const b64 =  URL.createObjectURL(blob);
-			var img = new Image();
-			img.onload = () => {
-				var canvas = document.createElement("canvas")
-				canvas.width = img.width;
-				canvas.height = img.height;
-				var context = canvas.getContext("2d");
-				context.drawImage(img, 0, 0);
-				var dataurl = canvas.toDataURL(img_type);
-				save['shortcuts'][i].img = dataurl;
-				node.src = dataurl;
-				set_save();
-			};
-			img.src = b64;
-		});
-	})
-	.catch((err)=>{
-		console.log(err);
+		const blob = await response.blob()
+		const b64 =  URL.createObjectURL(blob);
+		let img = new Image();
+		img.onload = () => {
+			var canvas = document.createElement("canvas")
+			canvas.width = img.width;
+			canvas.height = img.height;
+			var context = canvas.getContext("2d");
+			context.drawImage(img, 0, 0);
+			var dataurl = canvas.toDataURL(img_type);
+			save['shortcuts'][i].img = dataurl;
+			node.src = dataurl;
+			set_save();
+		};
+		img.src = b64;
+	} catch (error) {
+		console.log(error);
 		// We couldnt get a favicon from the api
 		// so we will try to create a basic replacement
 		let canvas = document.createElement("canvas");
@@ -214,12 +196,12 @@ function get_shortcut_img(i : number, node : HTMLImageElement){
 		context.textAlign = "center";
 		context.fillStyle = "white";
 		context.textBaseline = "middle";
-		context.fillText((save['shortcuts'][i].name[0] != null ? save['shortcuts'][i].name[0] : save['shortcuts'][i].link.replace("https://","").replace("http://","").replace("www.","").split("/")[0][0]).toUpperCase(), canvas.width/2, canvas.height/2);
+		context.fillText(save['shortcuts'][i].link.replace("https://","").replace("http://","").replace("www.","").toUpperCase().slice(0,2), canvas.width/2, canvas.height/2);
 		var image = canvas.toDataURL();
 		node.src = image;
 		save['shortcuts'][i].img = image;
 		set_save();
-	});
+	}
 }
 
 async function get_favicon_from_url(url : string){
@@ -250,7 +232,7 @@ function center_shortcuts() {
 }
 
 function is_circle() : boolean {
-	return save['shortcut_shape'] == 'circle' ? true : false;
+	return save['shortcut_shape'] == 'circle';
 }
 
 function get_shortcut_size() : string {
@@ -362,7 +344,7 @@ async function configure_currencies(){
 	const currencies = get_currencies();
 
 	// Update the currency if a day has passed
-	// or if we have reset currency values
+	// or if we have reset the currency values
 	let fetch_currencies = did_a_day_pass();
 	if(!fetch_currencies){
 		if (currencies[0].rate == '-'){
