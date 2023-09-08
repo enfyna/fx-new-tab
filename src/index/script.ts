@@ -74,8 +74,6 @@ async function configure_shortcuts(){
 		load_text.innerText = '';
 	}
 
-	let active_shortcuts : number = 0;
-
 	const colors = get_shortcut_col_colors();
 	const transition = get_shortcut_transition();
 	const circle = is_circle();
@@ -83,66 +81,62 @@ async function configure_shortcuts(){
 	const shortcut_base_node = document.getElementById('shortcut');
 	shortcut_base_node.hidden = false;
 
+	const size = get_shortcut_width();
+	shortcut_base_node.classList.add(size);
+
 	const link = shortcut_base_node.getElementsByTagName('a')[0] as HTMLAnchorElement;
 	link.classList.replace('m-0',get_shortcut_size());
 	if (transition != 'none'){
 		link.classList.add(transition);
 	}
-	const img = shortcut_base_node.getElementsByTagName('img')[0] as HTMLImageElement;
+
 	if (circle){
+		const img = shortcut_base_node.getElementsByTagName('img')[0] as HTMLImageElement;
 		img.classList.replace('rounded-3','rounded-circle');
 		img.parentElement.classList.remove('card-header');
 		link.classList.add('rounded-circle');
+	
+		const name = shortcut_base_node.getElementsByTagName('h7')[0] as HTMLDivElement;
+		name.remove();
 	}
 
 	const container = shortcut_base_node.parentElement as HTMLElement;
 
-	for(let index = 0; index < 12; index++){
-		var shortcut : shortcut = save['shortcuts'][index] as shortcut;
+	for(let i = 0; i < save['shortcuts'].length; i++){
+		var shortcut : shortcut = save['shortcuts'][i];
 		if (shortcut == null || shortcut.link.length == 0)
 			continue;
 
-		active_shortcuts++;
-
 		const shortcut_node = shortcut_base_node.cloneNode(true) as HTMLDivElement;
 		const link = shortcut_node.getElementsByTagName('a')[0] as HTMLAnchorElement;
-		const img = shortcut_node.getElementsByTagName('img')[0] as HTMLImageElement;
-		const name = shortcut_node.getElementsByTagName('h7')[0] as HTMLDivElement;
-
-		link.classList.add(colors[index % 4]);
-
-		if (!shortcut.name || circle){
-			name.hidden = true;
-		}
-		else{
-			name.innerText = shortcut.name;
-		}
+		link.classList.add(colors[i % 4]);
 		link.href = shortcut.link;
-
+				
+		if (!circle){
+			const name = shortcut_node.getElementsByTagName('h7')[0] as HTMLDivElement;
+			if(shortcut.name)
+				name.innerText = shortcut.name;
+			else{
+				name.hidden = true;
+			}
+		}
 		container.appendChild(shortcut_node);
 
+		const img = shortcut_node.getElementsByTagName('img')[0] as HTMLImageElement;
 		if(shortcut.img == "") {
-			get_shortcut_img(index, img);
+			get_shortcut_img(i, img);
 			continue;
 		};
 		img.src = shortcut.img;
 	};
 	shortcut_base_node.remove();
 
-	if (active_shortcuts > 4){
-		container.classList.replace(
-			"align-items-center","align-items-start"
-		);
-	}
-
-	if (container.clientHeight > window.innerHeight){
-		container.classList.add('col-md-10');
-	}
+	container.parentElement.classList.add(get_shortcut_v_align());
 }
 
 async function find_user_sites() {
     const topSites = await browser.topSites.get({
-		limit: 12,
+		limit: 8,
         includeFavicon: true,
 		onePerDomain: true,
     });
@@ -233,6 +227,14 @@ function center_shortcuts() {
 
 function is_circle() : boolean {
 	return save['shortcut_shape'] == 'circle';
+}
+
+function get_shortcut_width() : string {
+	return save['shortcut_width'] ?? 'col-sm-3';
+}
+
+function get_shortcut_v_align() : string {
+	return save['shortcut_v_align'] ?? 'align-items-center';
 }
 
 function get_shortcut_size() : string {

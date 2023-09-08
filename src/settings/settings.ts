@@ -17,6 +17,7 @@ const node = {
 		img:"select_img_",
 		reset:"reset_img_",
 		default:"set_back_",
+		remove:"remove_",
 	},
 };
 
@@ -39,13 +40,12 @@ async function get_save(){
 }
 let saving = false;
 const save_info = document.getElementById('save-info');
-function set_save(){
+async function set_save(){
 	saving = true;
 	save_info.hidden = false;
-	browser.storage.local.set(save).then(()=>{
-		saving = false;
-		save_info.hidden = true;
-	});
+	await browser.storage.local.set(save)
+	saving = false;
+	save_info.hidden = true;
 }
 
 /// Background
@@ -80,6 +80,9 @@ function get_bg_color() : string{
 }
 
 /// Shortcuts
+let topSites : shortcut[] = []
+let deleted_shortcuts : number[] = [];
+
 async function configure_shortcut_settings(){
 	const shortcut_shape_settings = document.getElementById('shortcut_shape_settings');
 	shortcut_shape_settings.addEventListener('change',(event)=>{
@@ -104,6 +107,18 @@ async function configure_shortcut_settings(){
 			case select.id.startsWith('shortcut_col_color'):
 				select.value = colors[select.id.split('_')[3]];
 				break;
+			case select.id.startsWith('shortcut_transition'):
+				select.value = get_shortcut_transition();
+				break;
+			case select.id.startsWith('shortcut_size'):
+				select.value = get_shortcut_size();
+				break;
+			case select.id.startsWith('shortcut_width'):
+				select.value = get_shortcut_width();
+				break;
+			case select.id.startsWith('shortcut_v_align'):
+				select.value = get_shortcut_v_align();
+				break;
 			default:
 				select.value = save[select.id] ?? select.options[0].value;
 				break;
@@ -114,7 +129,7 @@ async function configure_shortcut_settings(){
 	const suggestions = document.createElement('datalist');
 	suggestions.id = 'suggestions';
 
-	const topSites = await find_user_sites();
+	topSites = await find_user_sites();
 	topSites.forEach(site => {
 		const url = document.createElement('option');
 		url.value = site.link;
@@ -123,12 +138,23 @@ async function configure_shortcut_settings(){
 	shortcut_container.appendChild(suggestions);
 
 	let shortcut_setting = document.getElementById("shortcut-setting") as HTMLDivElement;
-	for (let i = 0; i < 12; i++) {
+	for (let i = 0; i < save['shortcuts'].length; i++) {
 		shortcut_container.appendChild(
 			create_shortcut_setting(i, shortcut_setting)
 		);
 	}
 	shortcut_setting.remove();
+
+	const add_shortcut_button = document.getElementById('add_shortcut');
+	add_shortcut_button.addEventListener('click',()=>{
+		shortcut_container.appendChild(
+			create_shortcut_setting(
+				(save['shortcuts'] as shortcut[]).push({link: '',name: '',img: ''}) - 1, 
+				shortcut_setting
+			)
+		);
+		set_save();
+	});
 }
 
 function set_shortcut(shortcut : shortcut, i : number) {
@@ -139,16 +165,10 @@ function set_shortcut(shortcut : shortcut, i : number) {
 function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivElement{
 	elm = elm.cloneNode(true) as HTMLDivElement;
 	const colors = ['bg-primary','bg-danger','bg-success','bg-warning'];
-	elm.classList.add(colors[id%4]);
+	elm.classList.add(colors[id % 4]);
 	elm.hidden = false;
-	let shortcut = (save['shortcuts'][id] ?? {link:null}) as shortcut;
-	if (shortcut.link == null) {
-		shortcut = {
-			link: '',
-			name: '',
-			img: ''
-		}
-	}
+	let shortcut = (save['shortcuts'][id] ?? {link: '',name: '',img: ''}) as shortcut;
+
 	const inputs = elm.getElementsByTagName('input');
 	for(let i = 0; i < inputs.length; i++){
 		const inp = inputs[i];
@@ -166,8 +186,8 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 				var link = input.value.trim();
 				shortcut.link = link;
 				if(link.length == 0){
-					shortcut.img = "";
-					shortcut.name = "";
+					shortcut.img = '';
+					shortcut.name = '';
 				}
 				set_shortcut(shortcut, id);
 				break;
@@ -195,11 +215,31 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 		const button = event.target as HTMLButtonElement;
 		switch (true){
 			case button.id.startsWith(node.shortcut.reset):
+				for (let i = 0; i < topSites.length; i++) {
+					const site = topSites[i];
+					if (site.link == shortcut.link){
+						shortcut.img = site.img;
+						set_shortcut(shortcut, id);
+						return;
+					}
+				}
 				if(shortcut.img == ''){
-					return
+					return;
 				}
 				shortcut.img = '';
 				set_shortcut(shortcut, id);
+				break;
+			case button.id.startsWith(node.shortcut.remove):
+				for (let i = 0; i < deleted_shortcuts.length; i++) {
+					if(deleted_shortcuts[i] < id){
+						id--;
+					};
+				}
+				(save['shortcuts'] as shortcut[]).splice(id, 1);
+				deleted_shortcuts.push(id);
+
+				button.parentElement.parentElement.parentElement.remove();
+				set_save();
 				break;
 			case button.id.startsWith(node.shortcut.default):
 				if(shortcut.link == ''){
@@ -227,7 +267,7 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 async function find_user_sites() {
     const topSites = await browser.topSites.get({
 		limit: 100,
-        includeFavicon: false,
+        includeFavicon: true,
 		onePerDomain: false,
     });
     const shortcuts : shortcut[] = [];
@@ -243,8 +283,23 @@ async function find_user_sites() {
     return shortcuts;
 }
 
+function get_shortcut_width() : string {
+	return save['shortcut_width'] ?? 'col-sm-3';
+}
 
-function get_shortcut_col_colors() : Array<string>{
+function get_shortcut_size() : string {
+	return save['shortcut_size'] ?? 'm-0';
+}
+
+function get_shortcut_v_align() : string {
+	return save['shortcut_v_align'] ?? 'align-items-center';
+}
+
+function get_shortcut_transition() : string {
+	return save['shortcut_transition'] ?? 'glow';
+}
+
+function get_shortcut_col_colors() : string[]{
 	return save['shortcut_col_colors'] ?? ['bg-primary','bg-danger','bg-success','bg-warning'];
 }
 
@@ -388,6 +443,33 @@ function translate() : void {
 			"en": "Size",
 			"de": "Größe",
 			"es": "Tamaño"
+		},
+		{	"name": "add-shortcut",
+			"tr": "",
+			"en": "Add Shortcut",
+			"de": "",
+			"es": ""
+		},
+		{
+			"name": "shortcut-v-align",
+			"tr": "",
+			"en": "Vertical Alignment",
+			"de": "",
+			"es": ""
+		},
+		{
+			"name": "shortcut-width",
+			"tr": "",
+			"en": "Width",
+			"de": "",
+			"es": ""
+		},
+		{
+			"name": "remove-shortcut",
+			"tr": "",
+			"en": "Remove",
+			"de": "",
+			"es": ""
 		},
 		{
 			"name": "shortcut-shape",
@@ -686,12 +768,12 @@ function translate() : void {
 				(element as HTMLInputElement).placeholder = translation;
 			};
 		}
-		else if(elm_name == "base-currency-label" || elm_name == "crypto-currencies" || elm_name == "national-currencies" || elm_name == "shortcut-shape" || elm_name == "shortcut-size" || elm_name == "shortcut-transition" || elm_name == "shortcut-col-color"){
+		else if(elm_name == "base-currency-label" || elm_name == "crypto-currencies" || elm_name == "national-currencies" || elm_name == "shortcut-shape" || elm_name == "shortcut-size" || elm_name == "shortcut-transition" || elm_name == "shortcut-col-color" || elm_name == "shortcut-width" || elm_name == "shortcut-v-align"){
 			for (const element of document.getElementsByName(elm_name)){
 				(element as HTMLOptGroupElement).label = translation;
 			};
 		}
-		else if(elm_name == "delete-bg-button" || elm_name == "reset-icon-button" || elm_name == "set-default-button"){
+		else if(elm_name == "delete-bg-button" || elm_name == "reset-icon-button" || elm_name == "set-default-button" || elm_name == "remove-shortcut" || elm_name == "add-shortcut"){
 			for (const element of document.getElementsByName(elm_name)){
 				(element as HTMLInputElement).value = translation;
 			};
