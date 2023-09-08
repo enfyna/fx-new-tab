@@ -61,7 +61,6 @@ function set_background() {
 		background-image: ${(save['bg_img'] ?? 'none')};
 		background-color: ${(save['bg_color'] ?? '#033633')};
 	`;
-	document.body.classList.remove('bg-black');
 }
 
 /// Shortcuts
