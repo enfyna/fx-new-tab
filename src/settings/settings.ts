@@ -28,6 +28,7 @@ get_save().then(ready)
 async function ready(){
 	configure_shortcut_settings();
 	configure_background_settings();
+	configure_clock_settings();
 	configure_note_settings();
 	configure_currency_settings();
 	configure_home_button();
@@ -328,6 +329,30 @@ function configure_note_settings() {
 
 function is_notes_enabled() : boolean {
 	return save['is_notes_enabled'] ?? false;
+}
+
+/// Clock
+function configure_clock_settings(){
+	const check = document.getElementById('enable_clock') as HTMLInputElement;
+	check.checked = is_clock_enabled();
+	check.addEventListener('change', () => {
+		save['is_clock_enabled'] = check.checked;
+		set_save();
+	});
+	const select = document.getElementById('clock_color') as HTMLSelectElement;
+	select.value = get_clock_color();
+	select.addEventListener('change',()=>{
+		save['clock_color'] = select.value.trim();
+		set_save();
+	})
+}
+
+function is_clock_enabled() : boolean{
+	return save['is_clock_enabled'] ?? false;
+}
+
+function get_clock_color() : string{
+	return save['clock_color'] ?? 'text-white';
 }
 
 /// Currencies
@@ -675,6 +700,20 @@ function translate() : void {
 			"es": "Habilitar tasas de cambio de divisas",
 		},
 		{
+			"name": "enable-clock-label",
+			"tr": "",
+			"en": "Enable clock",
+			"de": "",
+			"es": "",
+		},
+		{
+			"name": "clock-color-label",
+			"tr": "",
+			"en": "Color",
+			"de": "",
+			"es": "",
+		},
+		{
 			"name": "enable-notes-label",
 			"tr": "Notları etkinleştir",
 			"en": "Enable notes",
@@ -796,7 +835,7 @@ function translate() : void {
 				(element as HTMLInputElement).placeholder = translation;
 			};
 		}
-		else if(elm_name == "base-currency-label" || elm_name == "crypto-currencies" || elm_name == "national-currencies" || elm_name == "shortcut-shape" || elm_name == "shortcut-size" || elm_name == "shortcut-transition" || elm_name == "shortcut-col-color" || elm_name == "shortcut-width" || elm_name == "shortcut-v-align" || elm_name == "shortcut-h-align"){
+		else if(elm_name == "base-currency-label" || elm_name == "crypto-currencies" || elm_name == "national-currencies" || elm_name == "shortcut-shape" || elm_name == "shortcut-size" || elm_name == "shortcut-transition" || elm_name == "shortcut-col-color" || elm_name == "shortcut-width" || elm_name == "shortcut-v-align" || elm_name == "shortcut-h-align" || elm_name == "clock-color-label"){
 			for (const element of document.getElementsByName(elm_name)){
 				(element as HTMLOptGroupElement).label = translation;
 			};

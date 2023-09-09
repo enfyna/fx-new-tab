@@ -35,9 +35,10 @@ get_save().then(ready);
 function ready(){
 	configure_shortcuts();
 	set_background();
-	if (is_currency_rates_enabled() || is_notes_enabled()){
+	if (is_currency_rates_enabled() || is_notes_enabled() || is_clock_enabled()){
 		configure_notes();
 		configure_currencies();
+		configure_clock();
 	}
 	else{
 		center_shortcuts();
@@ -94,7 +95,7 @@ async function configure_shortcuts(){
 		img.classList.replace('rounded-3','rounded-circle');
 		img.parentElement.classList.remove('card-header');
 		link.classList.add('rounded-circle');
-	
+
 		const name = shortcut_base_node.getElementsByTagName('h7')[0] as HTMLDivElement;
 		name.remove();
 	}
@@ -111,7 +112,7 @@ async function configure_shortcuts(){
 		const link = shortcut_node.getElementsByTagName('a')[0] as HTMLAnchorElement;
 		link.classList.add(colors[i % 4]);
 		link.href = shortcut.link;
-				
+
 		if (!circle){
 			const name = shortcut_node.getElementsByTagName('h7')[0] as HTMLDivElement;
 			if(shortcut.name)
@@ -135,22 +136,22 @@ async function configure_shortcuts(){
 }
 
 async function find_user_sites() {
-    const topSites = await browser.topSites.get({
+	const topSites = await browser.topSites.get({
 		limit: 8,
-        includeFavicon: true,
+		includeFavicon: true,
 		onePerDomain: true,
-    });
-    const shortcuts : shortcut[] = [];
+	});
+	const shortcuts : shortcut[] = [];
 
-    topSites.forEach(site => {
-        const shortcut : shortcut = {
-            name: site.title,
-            link: site.url,
-            img: site.favicon ?? '',
-        };
-        shortcuts.push(shortcut);
-    });
-    return shortcuts;
+	topSites.forEach(site => {
+		const shortcut : shortcut = {
+			name: site.title,
+			link: site.url,
+			img: site.favicon ?? '',
+		};
+		shortcuts.push(shortcut);
+	});
+	return shortcuts;
 }
 
 async function get_shortcut_img(i : number, node : HTMLImageElement){
@@ -255,7 +256,7 @@ function get_shortcut_container_h_align() : string{
 }
 
 function get_shortcut_container_width() : string{
-	return save['shortcut_container_width'] ?? 'col-md-12';
+	return save['shortcut_container_width'] ?? 'col-md-8';
 }
 
 /// Notes
@@ -420,6 +421,37 @@ function get_rates(){
 		req.timeout = 5000;
 		req.send();
 	});
+}
+
+/// Clock
+function is_clock_enabled() : boolean{
+	return save['is_clock_enabled'] ?? false;
+}
+
+function configure_clock() {
+	const clock = document.getElementById('clock') as HTMLHeadingElement;
+
+	if(!is_clock_enabled()){
+		return;
+	}
+
+	clock.classList.add(get_clock_color());
+
+	function updateTime() {
+		const date = new Date();
+		const hours = date.getHours().toString().padStart(2, '0');
+		const minutes = date.getMinutes().toString().padStart(2, '0');
+		const seconds = date.getSeconds().toString().padStart(2, '0');
+		clock.innerText = `${hours}:${minutes}:${seconds}`;
+	}
+
+	updateTime();
+
+	setInterval(updateTime, 1000);
+}
+
+function get_clock_color() : string {
+	return save['clock_color'] ?? 'text-white';
 }
 
 /// Settings Button
