@@ -100,6 +100,7 @@ async function configure_shortcuts(){
 	}
 
 	const container = shortcut_base_node.parentElement as HTMLElement;
+	container.classList.add(get_shortcut_container_width());
 
 	for(let i = 0; i < save['shortcuts'].length; i++){
 		var shortcut : shortcut = save['shortcuts'][i];
@@ -130,7 +131,7 @@ async function configure_shortcuts(){
 	};
 	shortcut_base_node.remove();
 
-	container.parentElement.classList.add(get_shortcut_v_align());
+	container.parentElement.classList.add(get_shortcut_v_align(),get_shortcut_container_h_align());
 }
 
 async function find_user_sites() {
@@ -221,6 +222,7 @@ async function get_favicon_from_url(url : string){
 }
 
 function center_shortcuts() {
+	document.getElementById('ShortcutContainer').parentElement.classList.replace('col-md-8','col-md-12');
 	document.getElementById('NCContainer').remove();
 }
 
@@ -246,6 +248,14 @@ function get_shortcut_transition() : string {
 
 function get_shortcut_col_colors() : Array<string>{
 	return save['shortcut_col_colors'] ?? ['bg-primary','bg-danger','bg-success','bg-warning'];
+}
+
+function get_shortcut_container_h_align() : string{
+	return save['shortcut_container_h_align'] ?? 'justify-content-center';
+}
+
+function get_shortcut_container_width() : string{
+	return save['shortcut_container_width'] ?? 'col-md-12';
 }
 
 /// Notes

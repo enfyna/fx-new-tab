@@ -92,13 +92,12 @@ async function configure_shortcut_settings(){
 				const colors = get_shortcut_col_colors();
 				colors[input.id.split('_')[3]] = input.value.trim();
 				save['shortcut_col_colors'] = colors;
-				set_save();
 				break;
 			default:
 				save[input.id] = input.value.trim();
-				set_save();
 				break;
-		}
+			}
+		set_save();
 	});
 	const colors = get_shortcut_col_colors();
 	const selects = shortcut_shape_settings.getElementsByTagName('select');
@@ -118,6 +117,12 @@ async function configure_shortcut_settings(){
 				break;
 			case select.id.startsWith('shortcut_v_align'):
 				select.value = get_shortcut_v_align();
+				break;
+			case select.id.startsWith('shortcut_container_h_align'):
+				select.value = get_shortcut_container_h_align();
+				break;
+			case select.id.startsWith('shortcut_container_width'):
+				select.value = get_shortcut_container_width();
 				break;
 			default:
 				select.value = save[select.id] ?? select.options[0].value;
@@ -149,7 +154,7 @@ async function configure_shortcut_settings(){
 	add_shortcut_button.addEventListener('click',()=>{
 		shortcut_container.appendChild(
 			create_shortcut_setting(
-				(save['shortcuts'] as shortcut[]).push({link: '',name: '',img: ''}) - 1, 
+				(save['shortcuts'] as shortcut[]).push({link: '',name: '',img: ''}) - 1,
 				shortcut_setting
 			)
 		);
@@ -303,6 +308,14 @@ function get_shortcut_col_colors() : string[]{
 	return save['shortcut_col_colors'] ?? ['bg-primary','bg-danger','bg-success','bg-warning'];
 }
 
+function get_shortcut_container_h_align() : string{
+	return save['shortcut_container_h_align'] ?? 'justify-content-center';
+}
+
+function get_shortcut_container_width() : string{
+	return save['shortcut_container_width'] ?? 'col-md-12';
+}
+
 /// Notes
 function configure_note_settings() {
 	const check = document.getElementById('enable_notes') as HTMLInputElement;
@@ -444,7 +457,15 @@ function translate() : void {
 			"de": "Größe",
 			"es": "Tamaño"
 		},
-		{	"name": "add-shortcut",
+		{
+			"name": "shortcut-container-settings",
+			"tr": "",
+			"en": "Shortcut Container Settings",
+			"de": "",
+			"es": ""
+		},
+		{
+			"name": "add-shortcut",
 			"tr": "",
 			"en": "Add Shortcut",
 			"de": "",
@@ -454,6 +475,13 @@ function translate() : void {
 			"name": "shortcut-v-align",
 			"tr": "",
 			"en": "Vertical Alignment",
+			"de": "",
+			"es": ""
+		},
+		{
+			"name": "shortcut-h-align",
+			"tr": "",
+			"en": "Horizontal Alignment",
 			"de": "",
 			"es": ""
 		},
@@ -768,7 +796,7 @@ function translate() : void {
 				(element as HTMLInputElement).placeholder = translation;
 			};
 		}
-		else if(elm_name == "base-currency-label" || elm_name == "crypto-currencies" || elm_name == "national-currencies" || elm_name == "shortcut-shape" || elm_name == "shortcut-size" || elm_name == "shortcut-transition" || elm_name == "shortcut-col-color" || elm_name == "shortcut-width" || elm_name == "shortcut-v-align"){
+		else if(elm_name == "base-currency-label" || elm_name == "crypto-currencies" || elm_name == "national-currencies" || elm_name == "shortcut-shape" || elm_name == "shortcut-size" || elm_name == "shortcut-transition" || elm_name == "shortcut-col-color" || elm_name == "shortcut-width" || elm_name == "shortcut-v-align" || elm_name == "shortcut-h-align"){
 			for (const element of document.getElementsByName(elm_name)){
 				(element as HTMLOptGroupElement).label = translation;
 			};
