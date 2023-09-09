@@ -247,7 +247,7 @@ function get_shortcut_transition() : string {
 	return save['shortcut_transition'] ?? 'glow';
 }
 
-function get_shortcut_col_colors() : Array<string>{
+function get_shortcut_col_colors() : string[]{
 	return save['shortcut_col_colors'] ?? ['bg-primary','bg-danger','bg-success','bg-warning'];
 }
 
@@ -256,7 +256,7 @@ function get_shortcut_container_h_align() : string{
 }
 
 function get_shortcut_container_width() : string{
-	return save['shortcut_container_width'] ?? 'col-md-8';
+	return save['shortcut_container_width'] ?? 'col-md-6';
 }
 
 /// Notes

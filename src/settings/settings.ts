@@ -314,7 +314,7 @@ function get_shortcut_container_h_align() : string{
 }
 
 function get_shortcut_container_width() : string{
-	return save['shortcut_container_width'] ?? 'col-md-12';
+	return save['shortcut_container_width'] ?? 'col-md-6';
 }
 
 /// Notes
@@ -484,45 +484,45 @@ function translate() : void {
 		},
 		{
 			"name": "shortcut-container-settings",
-			"tr": "",
+			"tr": "Kısayol Konteyner Ayarları",
 			"en": "Shortcut Container Settings",
-			"de": "",
-			"es": ""
-		},
+			"de": "Verknüpfungscontainer-Einstellungen",
+			"es": "Configuración del contenedor de accesos directos"
+		},		
 		{
 			"name": "add-shortcut",
-			"tr": "",
+			"tr": "Kısayol ekle",
 			"en": "Add Shortcut",
-			"de": "",
-			"es": ""
+			"de": "Verknüpfung hinzufügen",
+			"es": "Agregar acceso directo"
 		},
 		{
 			"name": "shortcut-v-align",
-			"tr": "",
+			"tr": "Dikey Hizalanma",
 			"en": "Vertical Alignment",
-			"de": "",
-			"es": ""
+			"de": "Vertikale Ausrichtung",
+			"es": "Alineación vertical"
 		},
 		{
 			"name": "shortcut-h-align",
-			"tr": "",
+			"tr": "Yatay Hizalanma",
 			"en": "Horizontal Alignment",
-			"de": "",
-			"es": ""
+			"de": "Horizontale Ausrichtung",
+			"es": "Alineación horizontal"
 		},
 		{
 			"name": "shortcut-width",
-			"tr": "",
+			"tr": "Genişlik",
 			"en": "Width",
-			"de": "",
-			"es": ""
+			"de": "Breite",
+			"es": "Ancho"
 		},
 		{
 			"name": "remove-shortcut",
-			"tr": "",
+			"tr": "Sil",
 			"en": "Remove",
-			"de": "",
-			"es": ""
+			"de": "Entfernen",
+			"es": "Eliminar"
 		},
 		{
 			"name": "shortcut-shape",
@@ -601,6 +601,41 @@ function translate() : void {
 			"de": "Kreis",
 			"es": "Círculo"
 		},
+		{
+			"name": "center",
+			"tr": "Orta",
+			"en": "Center",
+			"de": "Mitte",
+			"es": "Centro"
+		},
+		{
+			"name": "top",
+			"tr": "Üst",
+			"en": "Top",
+			"de": "Oben",
+			"es": "Arriba"
+		},
+		{
+			"name": "bottom",
+			"tr": "Alt",
+			"en": "Bottom",
+			"de": "Unten",
+			"es": "Abajo"
+		},
+		{
+			"name": "left",
+			"tr": "Sol",
+			"en": "Left",
+			"de": "Links",
+			"es": "Izquierda"
+		},
+		{
+			"name": "right",
+			"tr": "Sağ",
+			"en": "Right",
+			"de": "Rechts",
+			"es": "Derecha"
+		},		
 		{
 			"name": "shortcut-transition",
 			"tr": "Geçiş Türü",
@@ -701,17 +736,17 @@ function translate() : void {
 		},
 		{
 			"name": "enable-clock-label",
-			"tr": "",
+			"tr": "Saati etkinleştir",
 			"en": "Enable clock",
-			"de": "",
-			"es": "",
+			"de": "Uhr aktivieren",
+			"es": "Habilitar reloj",
 		},
 		{
 			"name": "clock-color-label",
-			"tr": "",
+			"tr": "Renk",
 			"en": "Color",
-			"de": "",
-			"es": "",
+			"de": "Farbe",
+			"es": "Color",
 		},
 		{
 			"name": "enable-notes-label",
