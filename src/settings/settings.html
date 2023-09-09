@@ -16,6 +16,20 @@
 	<symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
 		<path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
 	</symbol>
+    <symbol id="trash-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+    </symbol>
+    <symbol id="reset-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+        <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>      
+    </symbol>
+    <symbol id="plus-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+    </symbol>
+    <symbol id="fallback-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
+    </symbol>
 </svg>
 
 <optgroup id="national-currencies" name="national-currencies" hidden>
@@ -239,7 +253,9 @@
     <div class="col rounded p-1 mx-0 my-1" id="shortcut-setting" hidden>
         <div class="row">
             <div class="col-1">
-                <input class="btn btn-danger border-dark fw-bold w-100" type="button" id="remove_" name="remove-shortcut"/>
+                <button class="btn btn-danger border-dark fw-bold w-100" type="button" id="remove_">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#trash-fill"/></svg>
+                </button>
             </div>
             <div class="col-3">
                 <div class="input-group">
@@ -257,18 +273,24 @@
                 <input class="form-control" type="file" id="select_img_" accept=".jpg, .jpeg, .png, .gif"/>
             </div>
             <div class="col-1">
-                <input class="btn btn-primary border-dark fw-bold w-100" type="button" id="set_back_" name="set-default-button"/>
+                <button class="btn btn-primary border-dark fw-bold w-100" type="button" id="set_back_">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#fallback-fill"/></svg>
+                </button>
             </div>
             <div class="col-1">
-                <input class="btn btn-primary border-dark fw-bold w-100" type="button" id="reset_img_" name="reset-icon-button"/>
+                <button class="btn btn-primary border-dark fw-bold w-100" type="button" id="reset_img_">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#reset-fill"/></svg>
+                </button>
             </div>
         </div>
     </div>
 </div>
 <!-- Add Shortcut Button -->
-<div class="row rounded p-1 mx-0 my-1 mb-2 bg-success">
-    <div class="col-12 d-flex align-items-center justify-content-center">
-        <input type="button" id="add_shortcut" name="add-shortcut" class="btn btn-primary border-dark">
+<div class="row rounded p-1 mx-0 my-1 mb-2 bg-primary">
+    <div class="col-12 d-flex justify-content-center">
+        <button type="button" id="add_shortcut" class="btn btn-success border-dark fw-bold w-25">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#plus-fill"/></svg>
+        </button>
     </div>
 </div>
 <!-- Link settings info -->
@@ -306,7 +328,9 @@
         <input class="form-control" type="file" id="select_bg" accept=".jpg, .jpeg, .png, .gif"/>
     </div>
     <div class="col-1">
-        <input type="button" class="btn btn-danger border-dark fw-bold w-100" id="delete_bg" name="delete-bg-button">
+        <button type="button" class="btn btn-danger border-dark fw-bold w-100" id="delete_bg">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"><use xlink:href="#trash-fill"/></svg>
+        </button>
     </div>
 </div>
 <div class="row g-2">

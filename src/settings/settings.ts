@@ -500,13 +500,6 @@ function translate() : void {
 			"es": "Configuración del contenedor de accesos directos"
 		},		
 		{
-			"name": "add-shortcut",
-			"tr": "Kısayol ekle",
-			"en": "Add Shortcut",
-			"de": "Verknüpfung hinzufügen",
-			"es": "Agregar acceso directo"
-		},
-		{
 			"name": "shortcut-v-align",
 			"tr": "Dikey Hizalanma",
 			"en": "Vertical Alignment",
@@ -526,13 +519,6 @@ function translate() : void {
 			"en": "Width",
 			"de": "Breite",
 			"es": "Ancho"
-		},
-		{
-			"name": "remove-shortcut",
-			"tr": "Sil",
-			"en": "Remove",
-			"de": "Entfernen",
-			"es": "Eliminar"
 		},
 		{
 			"name": "shortcut-shape",
@@ -710,20 +696,6 @@ function translate() : void {
 			"es": "Resplandor"
 		},
 		{
-			"name": "reset-icon-button",
-			"tr": "Yenile",
-			"en": "Reset",
-			"de": "Zurücksetzen",
-			"es": "Restablecer",
-		},
-		{
-			"name": "set-default-button",
-			"tr": "Varsayılan",
-			"en": "Default",
-			"de": "Standard",
-			"es": "Predeterminado",
-		},
-		{
 			"name": "reset-default-icon-info",
 			"tr": "Yenile: Bu işlem mevcut kısayol simgesini silecek ve ana sayfayı açtığınızda simge API'sından bir simge almaya çalışacak.\nVarsayılan: Bu işlem, temel bir yedek simgeyi kısayol simgesi olarak ayarlar. Bu seçeneği, simge API pikselli bir simge döndürürse kullanabilirsiniz.",
 			"en": "Reset: This will delete the current shortcut icon and when you open the main page will try to fetch a icon from the icon API.\nDefault: This will set a basic fallback icon as the shortcut icon. You can use this if the icon API returns a pixelated icon.",
@@ -785,13 +757,6 @@ function translate() : void {
 			"en": "You can upload a image file to change the background.\nNote : The larger the uploaded image, the slower it loads. Therefore, if the image loads very slowly, you can try compressing the image.",
 			"de": "Sie können eine Bilddatei hochladen, um den Hintergrund zu ändern. \nHinweis: Je größer das hochgeladene Bild ist, desto langsamer lädt es. Daher können Sie, wenn das Bild sehr langsam lädt, versuchen, das Bild zu komprimieren.",
 			"es": "Puedes subir un archivo de imagen para cambiar el fondo. \nNota: Cuanto más grande sea la imagen cargada, más lento se carga. Por lo tanto, si la imagen se carga muy lentamente, puedes intentar comprimir la imagen.",
-		},
-		{
-			"name": "delete-bg-button",
-			"tr": "Sil",
-			"en": "Delete",
-			"de": "Löschen",
-			"es": "Borrar",
 		},
 		{
 			"name": "currency-api-refresh-warning",
@@ -885,7 +850,7 @@ function translate() : void {
 				(element as HTMLOptGroupElement).label = translation;
 			};
 		}
-		else if(elm_name == "delete-bg-button" || elm_name == "reset-icon-button" || elm_name == "set-default-button" || elm_name == "remove-shortcut" || elm_name == "add-shortcut"){
+		else if(elm_name == "delete-bg-button" || elm_name == "set-default-button"){
 			for (const element of document.getElementsByName(elm_name)){
 				(element as HTMLInputElement).value = translation;
 			};
