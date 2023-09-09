@@ -437,12 +437,18 @@ function configure_clock() {
 
 	clock.classList.add(get_clock_color());
 
+	const format = get_clock_format();
+
 	function updateTime() {
 		const date = new Date();
-		const hours = date.getHours().toString().padStart(2, '0');
-		const minutes = date.getMinutes().toString().padStart(2, '0');
-		const seconds = date.getSeconds().toString().padStart(2, '0');
-		clock.innerText = `${hours}:${minutes}:${seconds}`;
+		clock.innerText = format
+			.replace('yy',date.getFullYear().toString().slice(2,4))
+			.replace('mm',(date.getMonth() + 1).toString().padStart(2, '0'))
+			.replace('dd',date.getDate().toString().padStart(2, '0'))
+			.replace('h',date.getHours().toString().padStart(2, '0'))
+			.replace('m',date.getMinutes().toString().padStart(2, '0'))
+			.replace('s',date.getSeconds().toString().padStart(2, '0'))
+			.replace('&n','\n');
 	}
 
 	updateTime();
@@ -452,6 +458,10 @@ function configure_clock() {
 
 function get_clock_color() : string {
 	return save['clock_color'] ?? 'text-white';
+}
+
+function get_clock_format() : string {
+	return save['clock_format'] ?? 'h:m';
 }
 
 /// Settings Button

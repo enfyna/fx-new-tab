@@ -339,12 +339,18 @@ function configure_clock_settings(){
 		save['is_clock_enabled'] = check.checked;
 		set_save();
 	});
-	const select = document.getElementById('clock_color') as HTMLSelectElement;
-	select.value = get_clock_color();
-	select.addEventListener('change',()=>{
-		save['clock_color'] = select.value.trim();
+	const color = document.getElementById('clock_color') as HTMLSelectElement;
+	color.value = get_clock_color();
+	color.addEventListener('change',()=>{
+		save['clock_color'] = color.value.trim();
 		set_save();
-	})
+	});
+	const format = document.getElementById('clock_format') as HTMLSelectElement;
+	format.value = get_clock_format();
+	format.addEventListener('change',()=>{
+		save['clock_format'] = format.value.trim();
+		set_save();
+	});
 }
 
 function is_clock_enabled() : boolean{
@@ -353,6 +359,10 @@ function is_clock_enabled() : boolean{
 
 function get_clock_color() : string{
 	return save['clock_color'] ?? 'text-white';
+}
+
+function get_clock_format() : string {
+	return save['clock_format'] ?? 'h:m';
 }
 
 /// Currencies
