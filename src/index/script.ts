@@ -485,7 +485,7 @@ function configure_firefox_watermark() {
 		return
 	const fx = document.getElementById('firefox_watermark') as HTMLDivElement;
 	fx.classList.add(get_firefox_watermark_color());
-	fx.hidden = false;
+	fx.classList.replace('d-none','d-flex');
 }
 
 function get_firefox_watermark_color() : string{
