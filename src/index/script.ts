@@ -43,6 +43,7 @@ function ready(){
 	else{
 		center_shortcuts();
 	}
+	configure_firefox_watermark();
 	set_settings_button();
 	translate();
 }
@@ -462,6 +463,23 @@ function get_clock_color() : string {
 
 function get_clock_format() : string {
 	return save['clock_format'] ?? 'h:m';
+}
+
+/// Firefox Watermark
+function is_firefox_watermark_enabled() : boolean{
+	return save['is_firefox_watermark_enabled'] ?? true;
+}
+
+function configure_firefox_watermark() {
+	if(!is_firefox_watermark_enabled())
+		return
+	const fx = document.getElementById('firefox_watermark') as HTMLDivElement;
+	fx.classList.add(get_firefox_watermark_color());
+	fx.hidden = false;
+}
+
+function get_firefox_watermark_color() : string{
+	return save['firefox_watermark_color'] ?? 'text-warning';
 }
 
 /// Settings Button

@@ -31,6 +31,7 @@ async function ready(){
 	configure_clock_settings();
 	configure_note_settings();
 	configure_currency_settings();
+	configure_firefox_watermark_settings();
 	configure_home_button();
 	translate();
 }
@@ -439,6 +440,30 @@ function get_base_currency() : string{
 	return save['base_currency'] ?? 'TRY';
 }
 
+/// Firefox Watermark
+function configure_firefox_watermark_settings() {
+	const check = document.getElementById('enable_firefox_watermark') as HTMLInputElement;
+	check.checked = is_firefox_watermark_enabled();
+	check.addEventListener('change',()=>{
+		save['is_firefox_watermark_enabled'] = check.checked;
+		set_save();
+	});
+	const color = document.getElementById('firefox_color') as HTMLSelectElement;
+	color.value = get_firefox_watermark_color();
+	color.addEventListener('change',()=>{
+		save['firefox_watermark_color'] = color.value.trim();
+		set_save();
+	})
+}
+
+function get_firefox_watermark_color() : string{
+	return save['firefox_watermark_color'] ?? 'text-warning';
+}
+
+function is_firefox_watermark_enabled() : boolean{
+	return save['is_firefox_watermark_enabled'] ?? true;
+}
+
 /// Nav Button
 function configure_home_button(){
 	document.getElementById('nav-button').addEventListener('click',()=>{
@@ -724,7 +749,14 @@ function translate() : void {
 			"es": "Habilitar reloj",
 		},
 		{
-			"name": "clock-color-label",
+			"name": "enable-firefox-label",
+			"tr": "Firefox logosunu etkinleştir",
+			"en": "Enable firefox icon",
+			"de": "Firefox logo aktivieren",
+			"es": "Habilitar icono de Firefox",
+		},
+		{
+			"name": "color-label",
 			"tr": "Renk",
 			"en": "Color",
 			"de": "Farbe",
@@ -845,7 +877,7 @@ function translate() : void {
 				(element as HTMLInputElement).placeholder = translation;
 			};
 		}
-		else if(elm_name == "base-currency-label" || elm_name == "crypto-currencies" || elm_name == "national-currencies" || elm_name == "shortcut-shape" || elm_name == "shortcut-size" || elm_name == "shortcut-transition" || elm_name == "shortcut-col-color" || elm_name == "shortcut-width" || elm_name == "shortcut-v-align" || elm_name == "shortcut-h-align" || elm_name == "clock-color-label"){
+		else if(elm_name == "base-currency-label" || elm_name == "crypto-currencies" || elm_name == "national-currencies" || elm_name == "shortcut-shape" || elm_name == "shortcut-size" || elm_name == "shortcut-transition" || elm_name == "shortcut-col-color" || elm_name == "shortcut-width" || elm_name == "shortcut-v-align" || elm_name == "shortcut-h-align" || elm_name == "color-label"){
 			for (const element of document.getElementsByName(elm_name)){
 				(element as HTMLOptGroupElement).label = translation;
 			};
