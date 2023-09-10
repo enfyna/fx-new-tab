@@ -80,7 +80,7 @@ body {
 .bg-white {
     --glow-clr: #fff;
 }
-.bg-white > h7.text-white {
+.bg-white > .text-white {
     color: #000 !important;
 }
 

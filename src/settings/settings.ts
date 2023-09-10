@@ -386,6 +386,16 @@ function configure_currency_settings(){
 
 	for(let i = 0; i < selects.length; i++){
 		const select = selects[i] as HTMLSelectElement;
+
+		if(select.id == 'currency_container_color'){
+			select.value = get_currency_container_color();
+			select.addEventListener('change',()=>{
+				save['currency_container_color'] = select.value.trim();
+				set_save();
+			})
+			continue;
+		}
+		
 		select.appendChild(national.cloneNode(true));
 		select.appendChild(crypto.cloneNode(true));
 
@@ -438,6 +448,10 @@ function get_currencies(){
 
 function get_base_currency() : string{
 	return save['base_currency'] ?? 'TRY';
+}
+
+function get_currency_container_color() : string{
+	return save['currency_container_color'] ?? 'bg-primary';
 }
 
 /// Firefox Watermark

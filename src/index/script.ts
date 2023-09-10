@@ -382,11 +382,15 @@ async function configure_currencies(){
 
 	const currency_container = document.getElementById('currencies');
 
+	const card_nodes = currency_container.getElementsByClassName('card');
 	const name_nodes = currency_container.getElementsByTagName('h5');
 	const rate_nodes = currency_container.getElementsByTagName('p');
 
+	const color = get_currency_container_color();
+
 	for (let i = 0; i < 3; i++) {
 		const currency = currencies[i];
+		card_nodes[i].classList.add(color);
 		name_nodes[i].innerText = currency.name;
 		rate_nodes[i].innerText = currency.rate;
 	};
@@ -422,6 +426,10 @@ function get_rates(){
 		req.timeout = 5000;
 		req.send();
 	});
+}
+
+function get_currency_container_color() : string{
+	return save['currency_container_color'] ?? 'bg-primary';
 }
 
 /// Clock
