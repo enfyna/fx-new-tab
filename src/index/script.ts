@@ -360,9 +360,11 @@ async function configure_currencies(){
 	// or if we have reset the currency values
 	let fetch_currencies = did_a_day_pass();
 	if(!fetch_currencies){
-		if (currencies[0].rate == '-'){
-			fetch_currencies = true;
-		};
+		for (let i = 0; i < currencies.length; i++) {
+			if (currencies[i].rate == '-'){
+				fetch_currencies = true;
+			};
+		}
 	}
 
 	if(fetch_currencies){
