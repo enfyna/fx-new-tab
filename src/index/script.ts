@@ -102,7 +102,7 @@ async function configure_shortcuts(){
 	}
 
 	const container = shortcut_base_node.parentElement as HTMLElement;
-	container.classList.add(get_shortcut_container_width(),get_shortcut_container_h_align());
+	container.classList.add(get_shortcut_container_width(),get_shortcut_container_h_align(),get_shortcut_v_align());
 
 	for(let i = 0; i < save['shortcuts'].length; i++){
 		var shortcut : shortcut = save['shortcuts'][i];
