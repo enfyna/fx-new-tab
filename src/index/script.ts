@@ -271,7 +271,6 @@ function get_notes() : note[] {
 		{note: ""},
 		{note: ""},
 	];
-	set_save();
 	return save['notes'];
 }
 
@@ -327,7 +326,6 @@ function get_currencies() : currency[] {
 		{name:'EUR',rate:'-'},
 		{name:'GBP',rate:'-'},
 	];
-	set_save();
 	return save['currencies'];
 }
 
@@ -344,7 +342,6 @@ function did_a_day_pass() : boolean {
 	const now : number = Date.now();
 	if (now - parseInt(saved_date_str) > 43200000){
 		save['date'] = now;
-		set_save();
 		return true;
 	};
 	return false;
