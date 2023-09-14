@@ -104,26 +104,26 @@ async function configure_shortcut_settings(){
 	const colors = get_shortcut_col_colors();
 	const selects = shortcut_shape_settings.getElementsByTagName('select');
 	for (const select of selects) {
-		switch (true) {
-			case select.id.startsWith('shortcut_col_color'):
+		switch (select.id) {
+			case 'shortcut_col_color':
 				select.value = colors[select.id.split('_')[3]];
 				break;
-			case select.id.startsWith('shortcut_transition'):
+			case 'shortcut_transition':
 				select.value = get_shortcut_transition();
 				break;
-			case select.id.startsWith('shortcut_size'):
+			case 'shortcut_size':
 				select.value = get_shortcut_size();
 				break;
-			case select.id.startsWith('shortcut_width'):
+			case 'shortcut_width':
 				select.value = get_shortcut_width();
 				break;
-			case select.id.startsWith('shortcut_v_align'):
+			case 'shortcut_v_align':
 				select.value = get_shortcut_v_align();
 				break;
-			case select.id.startsWith('shortcut_container_h_align'):
+			case 'shortcut_container_h_align':
 				select.value = get_shortcut_container_h_align();
 				break;
-			case select.id.startsWith('shortcut_container_width'):
+			case 'shortcut_container_width':
 				select.value = get_shortcut_container_width();
 				break;
 			default:
@@ -188,8 +188,8 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 	}
 	elm.addEventListener('input',(event)=>{
 		const input = event.target as HTMLInputElement;
-		switch(true){
-			case input.id.startsWith(node.shortcut.link):
+		switch(input.id){
+			case node.shortcut.link:
 				var link = input.value.trim();
 				shortcut.link = link;
 				if(link.length == 0){
@@ -198,12 +198,12 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 				}
 				set_shortcut(shortcut, id);
 				break;
-			case input.id.startsWith(node.shortcut.name):
+			case node.shortcut.name:
 				var name = input.value.trim();
 				shortcut.name = name.length > 0 ? name : null;
 				set_shortcut(shortcut, id);
 				break;
-			case input.id.startsWith(node.shortcut.img):
+			case node.shortcut.img:
 				const reader = new FileReader();
 				reader.addEventListener("loadend", (event) => {
 					if(event.target == null) return;
@@ -220,8 +220,8 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 	});
 	elm.addEventListener('click',(event)=>{
 		const button = event.target as HTMLButtonElement;
-		switch (true){
-			case button.id.startsWith(node.shortcut.reset):
+		switch (button.id){
+			case node.shortcut.reset:
 				for (let i = 0; i < topSites.length; i++) {
 					const site = topSites[i];
 					if (site.link == shortcut.link){
@@ -236,7 +236,7 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 				shortcut.img = '';
 				set_shortcut(shortcut, id);
 				break;
-			case button.id.startsWith(node.shortcut.remove):
+			case node.shortcut.remove:
 				for (let i = 0; i < deleted_shortcuts.length; i++) {
 					if(deleted_shortcuts[i] < id){
 						id--;
@@ -248,7 +248,7 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 				button.parentElement.parentElement.parentElement.remove();
 				set_save();
 				break;
-			case button.id.startsWith(node.shortcut.default):
+			case node.shortcut.default:
 				if(shortcut.link == ''){
 					return
 				}
