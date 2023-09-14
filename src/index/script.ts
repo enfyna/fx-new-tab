@@ -28,7 +28,9 @@ const node = {
 	},
 };
 
-let save : object = {}
+let save : object = {};
+let using_local_save : boolean = true;
+const start = Date.now();
 
 get_save().then(ready);
 
@@ -46,22 +48,44 @@ function ready(){
 	configure_firefox_watermark();
 	set_settings_button();
 	translate();
+	if(!using_local_save)
+		set_local_save();
+	console.info('time:' + (Date.now()-start).toString());
 }
 
 /// Save
 async function get_save(){
-	save = await browser.storage.local.get(null);
+	save = JSON.parse(localStorage.getItem('save'));
+	if(save == null){
+		using_local_save = false;
+		save = await browser.storage.local.get(null);
+	}else{
+		console.info('ok!');
+	}
 }
 
 function set_save(){
 	browser.storage.local.set(save);
 }
 
+function set_local_save(){
+	try{
+		localStorage.setItem('save', JSON.stringify(save));
+	}
+	catch{
+		console.error('Caching cant be used!\nExceeded 5MB limit.');
+	}
+}
+
+function clear_local_save(){
+	localStorage.clear();
+}
+
 /// Background
 function set_background() {
 	document.body.style.cssText += `
-		background-image: ${(save['bg_img'] ?? 'none')};
-		background-color: ${(save['bg_color'] ?? '#033633')};
+		background-image: ${save['bg_img'] ?? 'none'};
+		background-color: ${save['bg_color'] ?? '#033633'};
 	`;
 }
 
@@ -179,7 +203,7 @@ async function get_shortcut_img(i : number, node : HTMLImageElement){
 		};
 		img.src = b64;
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 		// We couldnt get a favicon from the api
 		// so we will try to create a basic replacement
 		let canvas = document.createElement("canvas");
@@ -498,6 +522,7 @@ function get_firefox_watermark_color() : string{
 function set_settings_button(){
 	const nav = document.getElementById('nav-button') as HTMLButtonElement;
 	nav.addEventListener('click', () => {
+		clear_local_save();
 		location.href = 'settings.html';
 	});
 	nav.hidden = false;
