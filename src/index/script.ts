@@ -64,8 +64,8 @@ async function get_save(){
 	}
 }
 
-function set_save(){
-	browser.storage.local.set(save);
+async function set_save(){
+	await browser.storage.local.set(save);
 }
 
 function set_local_save(){
@@ -304,40 +304,52 @@ function is_notes_enabled() : boolean {
 
 function configure_notes(){
 	if(!is_notes_enabled()){
-		document.getElementById('notes').remove();
 		return
 	}
-	var notes : note[] = get_notes();
-	for	(let i = 0; i < 4; i++){
-		var button : HTMLButtonElement = document.getElementById(node.note.note + i) as HTMLButtonElement;
+	const notes : note[] = get_notes();
+
+	const container = document.getElementById('notes') as HTMLDivElement;
+	const buttons = container.getElementsByTagName('button');
+	const inputs = container.getElementsByTagName('input');
+
+	for (let i = 0; i < notes.length; i++) {
+		const button = buttons[i];
+		const input = inputs[i];
+
 		button.innerText = notes[i].note;
 		button.hidden = false;
-		var note : HTMLInputElement = document.getElementById(node.note.input + i) as HTMLInputElement;
-		button.addEventListener('click', () => {
-			var button : HTMLButtonElement = document.getElementById(node.note.note + i) as HTMLButtonElement;
-			var note : HTMLInputElement = document.getElementById(node.note.input + i) as HTMLInputElement;
-			note.value = button.innerText;
-			button.hidden = true;
-			note.hidden = false;
-			note.focus();
-		});
-		['change', 'blur'].forEach(event => {
-			note.addEventListener((event), () => {
-				save_note(i);
-			});
-		});
-	};
-}
 
-function save_note(i : number){
-	var button : HTMLButtonElement = document.getElementById(node.note.note + i) as HTMLButtonElement;
-	var note : HTMLInputElement = document.getElementById(node.note.input + i) as HTMLInputElement;
-	note.value = note.value.trim()
-	save['notes'][i].note = note.value;
-	button.innerText = note.value;
-	note.hidden = true;
-	button.hidden = false;
-	set_save();
+		input.addEventListener('blur', note_interaction);
+	}
+	container.addEventListener('change', note_interaction);
+	container.addEventListener('click', note_interaction);
+
+	async function note_interaction(event : Event){
+		const elm = event.target as HTMLElement;
+		const id = elm.id;
+		const index = id.charAt(id.length - 1);
+		switch (id) {
+			case node.note.note + index:
+				const input = inputs[index] as HTMLInputElement;
+				input.value = elm.innerText;
+				input.hidden = false;
+				input.focus();
+				elm.hidden = true;
+				break;
+			case node.note.input + index:
+				if(event.type == 'click') return;
+				elm.hidden = true;
+				const button = buttons[index] as HTMLButtonElement;
+				const new_note = (elm as HTMLInputElement).value.trim();
+				button.innerText = new_note;
+				save['notes'][index].note = new_note;
+				await set_save();
+				set_local_save();
+				button.hidden = false;
+				break;
+		}
+	}
+	container.classList.replace('d-none','d-list');
 }
 
 /// Currencies
