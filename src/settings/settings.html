@@ -365,7 +365,7 @@
     </div>
 </div>
 <!-- Clock Settings  -->
-<div class="row bg-primary text-white rounded m-0 mb-2 d-flex flex-row align-items-center">
+<div class="row bg-primary text-white rounded m-0 mb-2 d-flex flex-row align-items-center" id="clock_settings">
     <div class="col-lg-3 mt-1 mb-1">
         <div class="form-check form-switch mt-1 mb-1">
             <input class="form-check-input" type="checkbox" id="enable_clock">
@@ -373,6 +373,14 @@
         </div>
     </div>
     <div class="col"></div>
+    <div class="col-lg-1 mt-1 mb-1">
+        <select class="form-select" id="clock_time_format">
+            <optgroup name="clock-time-format-label">
+                <option value="true">12</option>
+                <option value="false">24</option>
+            </optgroup>
+        </select>
+    </div>
     <div class="col-lg-3 mt-1 mb-1">
         <select class="form-select" id="clock_format">
             <optgroup name="clock-format-label">

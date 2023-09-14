@@ -334,22 +334,36 @@ function is_notes_enabled() : boolean {
 
 /// Clock
 function configure_clock_settings(){
-	const check = document.getElementById('enable_clock') as HTMLInputElement;
-	check.checked = is_clock_enabled();
-	check.addEventListener('change', () => {
-		save['is_clock_enabled'] = check.checked;
-		set_save();
+	const settings = document.getElementById('clock_settings') as HTMLDivElement;
+	settings.querySelectorAll('select , input').forEach(elm => {
+		switch(elm.id){
+			case 'enable_clock':
+				(elm as HTMLInputElement).checked = is_clock_enabled();
+				break;
+			case 'clock_color':
+				(elm as HTMLSelectElement).value = get_clock_color();
+				break;
+			case 'clock_format':
+				(elm as HTMLSelectElement).value = get_clock_format();
+				break;
+			case 'clock_time_format':
+				(elm as HTMLSelectElement).value = get_clock_time_format() ? 'true' : 'false';
+				break;
+		}
 	});
-	const color = document.getElementById('clock_color') as HTMLSelectElement;
-	color.value = get_clock_color();
-	color.addEventListener('change',()=>{
-		save['clock_color'] = color.value.trim();
-		set_save();
-	});
-	const format = document.getElementById('clock_format') as HTMLSelectElement;
-	format.value = get_clock_format();
-	format.addEventListener('change',()=>{
-		save['clock_format'] = format.value.trim();
+	settings.addEventListener('change',(event)=>{
+		const id = (event.target as HTMLElement).id;
+		switch (id) {
+			case 'enable_clock':
+				save['is_clock_enabled'] = (event.target as HTMLInputElement).checked;
+				break;
+			case 'clock_time_format':
+				save['clock_time_format'] = (event.target as HTMLSelectElement).value == 'true';
+				break;
+			default:
+				save[id] = (event.target as HTMLSelectElement).value.trim();
+				break;
+		}
 		set_save();
 	});
 }
@@ -364,6 +378,10 @@ function get_clock_color() : string{
 
 function get_clock_format() : string {
 	return save['clock_format'] ?? 'h:m';
+}
+
+function get_clock_time_format() : boolean {
+	return save['clock_time_format'] ?? false;
 }
 
 /// Currencies
@@ -395,7 +413,7 @@ function configure_currency_settings(){
 			})
 			continue;
 		}
-		
+
 		select.appendChild(national.cloneNode(true));
 		select.appendChild(crypto.cloneNode(true));
 
@@ -537,7 +555,7 @@ function translate() : void {
 			"en": "Shortcut Container Settings",
 			"de": "Verknüpfungscontainer-Einstellungen",
 			"es": "Configuración del contenedor de accesos directos"
-		},		
+		},
 		{
 			"name": "shortcut-v-align",
 			"tr": "Dikey Hizalanma",
@@ -670,7 +688,7 @@ function translate() : void {
 			"en": "Right",
 			"de": "Rechts",
 			"es": "Derecha"
-		},		
+		},
 		{
 			"name": "shortcut-transition",
 			"tr": "Geçiş Türü",

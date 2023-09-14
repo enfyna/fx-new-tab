@@ -440,23 +440,24 @@ function is_clock_enabled() : boolean{
 }
 
 function configure_clock() {
-	const clock = document.getElementById('clock') as HTMLHeadingElement;
-
 	if(!is_clock_enabled()){
 		return;
 	}
-
+	const clock = document.getElementById('clock') as HTMLHeadingElement;
 	clock.classList.add(get_clock_color());
 
-	const format = get_clock_format();
+	const clock_format = get_clock_format();
+	const time_format = get_clock_time_format();
 
 	function updateTime() {
 		const date = new Date();
-		clock.innerText = format
+		const hour = date.getHours();
+
+		clock.innerText = clock_format
 			.replace('yy',date.getFullYear().toString().slice(2,4))
 			.replace('mm',(date.getMonth() + 1).toString().padStart(2, '0'))
 			.replace('dd',date.getDate().toString().padStart(2, '0'))
-			.replace('h',date.getHours().toString().padStart(2, '0'))
+			.replace('h',(time_format ? (hour < 12 ? hour : hour - 12) : hour).toString().padStart(2, '0'))
 			.replace('m',date.getMinutes().toString().padStart(2, '0'))
 			.replace('s',date.getSeconds().toString().padStart(2, '0'))
 			.replace('&n','\n');
@@ -473,6 +474,10 @@ function get_clock_color() : string {
 
 function get_clock_format() : string {
 	return save['clock_format'] ?? 'h:m';
+}
+
+function get_clock_time_format() : boolean {
+	return save['clock_time_format'] ?? false;
 }
 
 /// Firefox Watermark
