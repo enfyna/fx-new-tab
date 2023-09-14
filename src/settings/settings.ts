@@ -188,6 +188,12 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 	}
 	elm.addEventListener('input',(event)=>{
 		const input = event.target as HTMLInputElement;
+		let shift = 0;
+		for (let i = 0; i < deleted_shortcuts.length; i++) {
+			if(deleted_shortcuts[i] < id){
+				shift++;
+			};
+		}
 		switch(input.id){
 			case node.shortcut.link:
 				var link = input.value.trim();
@@ -196,19 +202,19 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 					shortcut.img = '';
 					shortcut.name = '';
 				}
-				set_shortcut(shortcut, id);
+				set_shortcut(shortcut, id - shift);
 				break;
 			case node.shortcut.name:
 				var name = input.value.trim();
 				shortcut.name = name.length > 0 ? name : null;
-				set_shortcut(shortcut, id);
+				set_shortcut(shortcut, id - shift);
 				break;
 			case node.shortcut.img:
 				const reader = new FileReader();
 				reader.addEventListener("loadend", (event) => {
 					if(event.target == null) return;
 					shortcut.img = event.target.result as string;
-					set_shortcut(shortcut, id);
+					set_shortcut(shortcut, id - shift);
 				});
 				var files = input.files;
 				if(files == null) return;
@@ -220,13 +226,19 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 	});
 	elm.addEventListener('click',(event)=>{
 		const button = event.target as HTMLButtonElement;
+		let shift = 0;
+		for (let i = 0; i < deleted_shortcuts.length; i++) {
+			if(deleted_shortcuts[i] < id){
+				shift++;
+			};
+		}
 		switch (button.id){
 			case node.shortcut.reset:
 				for (let i = 0; i < topSites.length; i++) {
 					const site = topSites[i];
 					if (site.link == shortcut.link){
 						shortcut.img = site.img;
-						set_shortcut(shortcut, id);
+						set_shortcut(shortcut, id - shift);
 						return;
 					}
 				}
@@ -234,16 +246,11 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 					return;
 				}
 				shortcut.img = '';
-				set_shortcut(shortcut, id);
+				set_shortcut(shortcut, id - shift);
 				break;
 			case node.shortcut.remove:
-				for (let i = 0; i < deleted_shortcuts.length; i++) {
-					if(deleted_shortcuts[i] < id){
-						id--;
-					};
-				}
-				(save['shortcuts'] as shortcut[]).splice(id, 1);
-				deleted_shortcuts.push(id);
+				(save['shortcuts'] as shortcut[]).splice(id - shift, 1);
+				deleted_shortcuts.push(id - shift);
 
 				button.parentElement.parentElement.parentElement.remove();
 				set_save();
@@ -264,7 +271,7 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 				context.textBaseline = "middle";
 				context.fillText(shortcut.link.replace('https://','').replace('http://','').replace('www.','').toUpperCase().slice(0,2), canvas.width/2, canvas.height/2);
 				shortcut.img = canvas.toDataURL();
-				set_shortcut(shortcut, id);
+				set_shortcut(shortcut, id - shift);
 				break;
 		}
 	});
