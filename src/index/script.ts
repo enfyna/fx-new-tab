@@ -490,7 +490,7 @@ function configure_clock() {
 			.replace('yy',date.getFullYear().toString().slice(2,4))
 			.replace('mm',(date.getMonth() + 1).toString().padStart(2, '0'))
 			.replace('dd',date.getDate().toString().padStart(2, '0'))
-			.replace('h',(time_format ? (hour < 12 ? hour : hour - 12) : hour).toString().padStart(2, '0'))
+			.replace('h',(time_format ? (hour <= 12 ? hour : hour - 12) : hour).toString().padStart(2, '0'))
 			.replace('m',date.getMinutes().toString().padStart(2, '0'))
 			.replace('s',date.getSeconds().toString().padStart(2, '0'))
 			.replace('&n','\n');
