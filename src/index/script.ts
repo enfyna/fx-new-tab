@@ -377,7 +377,6 @@ function did_a_day_pass() : boolean {
 	const saved_date_str : string = save["date"] ?? '0';
 	const now : number = Date.now();
 	if (now - parseInt(saved_date_str) > 43200000){
-		save['date'] = now;
 		return true;
 	};
 	return false;
@@ -408,10 +407,11 @@ async function configure_currencies(){
 				currency.rate = (1.0 / rates[currency.name.toLowerCase()]).toFixed(2);
 			};
 			save['currencies'] = currencies;
+			save['date'] = Date.now();
 			set_save();
 		}
-		catch (error) {
-			console.log(error);
+		catch (err) {
+			console.error(err);
 		}
 	}
 
@@ -490,7 +490,7 @@ function configure_clock() {
 			.replace('yy',date.getFullYear().toString().slice(2,4))
 			.replace('mm',(date.getMonth() + 1).toString().padStart(2, '0'))
 			.replace('dd',date.getDate().toString().padStart(2, '0'))
-			.replace('h',(time_format ? (hour <= 12 ? hour : hour - 12) : hour).toString().padStart(2, '0'))
+			.replace('h',(!time_format || hour <= 12 ? hour : hour - 12).toString().padStart(2, '0'))
 			.replace('m',date.getMinutes().toString().padStart(2, '0'))
 			.replace('s',date.getSeconds().toString().padStart(2, '0'))
 			.replace('&n','\n');
