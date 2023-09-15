@@ -82,10 +82,10 @@
 
 <!-- Settings text -->
 <div class="row m-0">
-    <div class="col-sm-3 d-flex justify-content-center align-items-center">
+    <div class="col-lg-3 d-flex justify-content-center align-items-center">
         <h1 class="text-white m-0 mt-3" name="settings"></h1>
     </div>
-    <div class="col-sm-9 alert alert-success d-flex flex-row m-0 mt-3">
+    <div class="col-lg-9 alert alert-success d-flex flex-row m-0 mt-3">
         <svg width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
         <div name="github-repo-info"></div>
     </div>
@@ -95,9 +95,9 @@
 <div id="shortcut_shape_settings">
     <!-- Shortcut Container settings -->
     <div class="row bg-success rounded m-0 mb-1 d-flex flex-row align-items-center">
-        <div class="col-sm-4 my-1 text-black fw-bold" name="shortcut-container-settings"></div>
+        <div class="col-lg-4 my-1 text-black fw-bold" name="shortcut-container-settings"></div>
         <div class="col"></div>
-        <div class="col-sm-2 my-1">
+        <div class="col-lg-2 my-1">
             <select class="form-select" id="shortcut_container_width">
                 <optgroup name="shortcut-width">
                     <option value="col-md-1">8.3%</option>
@@ -115,7 +115,7 @@
                 </optgroup>
             </select>
         </div>
-        <div class="col-sm-2 my-1">
+        <div class="col-lg-2 my-1">
             <select class="form-select" id="shortcut_container_h_align">
                 <optgroup name="shortcut-h-align">
                     <option value="justify-content-start" name="left"></option>
@@ -124,7 +124,7 @@
                 </optgroup>
             </select>
         </div>
-        <div class="col-sm-2 my-1">
+        <div class="col-lg-2 my-1">
             <select class="form-select" id="shortcut_v_align">
                 <optgroup name="shortcut-v-align">
                     <option value="align-items-start" name="top"></option>
@@ -136,9 +136,9 @@
     </div>
     <!-- Shortcut Shape settings -->
     <div class="row bg-warning rounded m-0 mb-1 d-flex flex-row align-items-center">
-        <div class="col-sm-3 my-1 fw-bold text-black" name="shortcut-settings"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-2 my-1">
+        <div class="col-lg-3 my-1 fw-bold text-black" name="shortcut-settings"></div>
+        <div class="col-lg-1"></div>
+        <div class="col-lg-2 my-1">
             <select class="form-select" id="shortcut_col_color_0">
                 <optgroup name="shortcut-col-color">
                     <option name="blue" value="bg-primary">Blue</option>
@@ -152,7 +152,7 @@
                 </optgroup>
             </select>
         </div>
-        <div class="col-sm-2 my-1">
+        <div class="col-lg-2 my-1">
             <select class="form-select" id="shortcut_col_color_1">
                 <optgroup name="shortcut-col-color">
                     <option name="blue" value="bg-primary">Blue</option>
@@ -166,7 +166,7 @@
                 </optgroup>
             </select>
         </div>
-        <div class="col-sm-2 my-1">
+        <div class="col-lg-2 my-1">
             <select class="form-select" id="shortcut_col_color_2">
                 <optgroup name="shortcut-col-color">
                     <option name="blue" value="bg-primary">Blue</option>
@@ -180,7 +180,7 @@
                 </optgroup>
             </select>
         </div>
-        <div class="col-sm-2 my-1">
+        <div class="col-lg-2 my-1">
             <select class="form-select" id="shortcut_col_color_3">
                 <optgroup name="shortcut-col-color">
                     <option name="blue" value="bg-primary">Blue</option>
@@ -195,7 +195,7 @@
             </select>
         </div>
         <div class="col"></div>
-        <div class="col-sm-2 my-1">
+        <div class="col-lg-2 my-1">
             <select class="form-select" id="shortcut_transition">
                 <optgroup name="shortcut-transition">
                     <option value="glow" name="glow"></option>
@@ -209,7 +209,7 @@
                 </optgroup>
             </select>
         </div>
-        <div class="col-sm-2 my-1">
+        <div class="col-lg-2 my-1">
             <select class="form-select" id="shortcut_shape">
                 <optgroup name="shortcut-shape">
                     <option value="square" name="square"></option>
@@ -217,7 +217,7 @@
                 </optgroup>
             </select>
         </div>
-        <div class="col-sm-2 my-1">
+        <div class="col-lg-2 my-1">
             <select class="form-select" id="shortcut_size">
                 <optgroup name="shortcut-size">
                     <option value="m-0">5</option>
@@ -229,7 +229,7 @@
                 </optgroup>
             </select>
         </div>
-        <div class="col-sm-2 my-1">
+        <div class="col-lg-2 my-1">
             <select class="form-select" id="shortcut_width">
                 <optgroup name="shortcut-width">
                     <option value="col-sm-1">12 (8.3%)</option>
@@ -253,32 +253,32 @@
 <div class="row flex-column m-0" id="shortcut-settings-container">
     <div class="col rounded my-1" id="shortcut-setting" hidden>
         <div class="row">
-            <div class="col-sm-1 my-1">
+            <div class="col-lg-1 my-1">
                 <button class="btn btn-danger border-dark w-100" type="button" id="remove_">
                     <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#trash-fill"/></svg>
                 </button>
             </div>
-            <div class="col-sm-3 my-1">
+            <div class="col-lg-3 my-1">
                 <div class="input-group">
                     <span class="input-group-text" name="link-label"></span>
                     <input type="text" class="form-control" id="select_link_" list="suggestions">
                 </div>
             </div>
-            <div class="col-sm-3 my-1">
+            <div class="col-lg-3 my-1">
                 <div class="input-group">
                     <span class="input-group-text" name="name-label"></span>
                     <input type="text" class="form-control" id="select_name_">
                 </div>
             </div>
-            <div class="col-sm-3 my-1">
+            <div class="col-lg-3 my-1">
                 <input class="form-control" type="file" id="select_img_" accept=".jpg, .jpeg, .png, .gif"/>
             </div>
-            <div class="col-sm-1 my-1">
+            <div class="col-lg-1 my-1">
                 <button class="btn btn-primary border-dark w-100" type="button" id="set_back_">
                     <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#fallback-fill"/></svg>
                 </button>
             </div>
-            <div class="col-sm-1 my-1">
+            <div class="col-lg-1 my-1">
                 <button class="btn btn-primary border-dark w-100" type="button" id="reset_img_">
                     <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#reset-fill"/></svg>
                 </button>
@@ -296,19 +296,19 @@
 </div>
 <!-- Link settings info -->
 <div class="row g-2">
-    <div class="col-sm-12">
+    <div class="col-lg-12">
         <div class="alert alert-primary d-flex flex-row m-0" role="alert">
             <svg width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
             <div name="reset-default-icon-info"></div>
         </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-lg-6">
         <div class="alert alert-primary d-flex flex-row m-0" role="alert">
             <svg width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
             <div name="delete-link"></div>
         </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-lg-6">
         <div class="alert alert-primary d-flex flex-row m-0" role="alert">
             <svg width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
             <div name="image-link"></div>
@@ -318,24 +318,24 @@
 <hr class="border-2 border-primary">
 <!-- Background settings -->
 <div class="row bg-success rounded m-0 mb-2 d-flex flex-row align-items-center">
-    <div class="col-sm-4 fw-bold text-white my-1" name="bg-settings"></div>
-    <div class="col-sm-4 my-1">
+    <div class="col-lg-4 fw-bold text-white my-1" name="bg-settings"></div>
+    <div class="col-lg-4 my-1">
         <div class="input-group">
             <span class="input-group-text" name="bg-fallback-color-label"></span>
             <input type="color" class="form-control form-control-color" id="bg_color">
         </div>
     </div>
-    <div class="col-sm-3 my-1">
+    <div class="col-lg-3 my-1">
         <input class="form-control" type="file" id="select_bg" accept=".jpg, .jpeg, .png, .gif"/>
     </div>
-    <div class="col-sm-1 my-1">
+    <div class="col-lg-1 my-1">
         <button type="button" class="btn btn-danger border-dark w-100" id="delete_bg">
             <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#trash-fill"/></svg>
         </button>
     </div>
 </div>
 <div class="row g-2">
-    <div class="col-sm-12">
+    <div class="col-lg-12">
         <div class="alert alert-primary d-flex flex-row m-0" role="alert">
             <svg width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
             <div name="bg-img-upload-info"></div>
@@ -345,14 +345,14 @@
 <hr class="border-2 border-primary">
 <!-- Firefox Watermark Settings  -->
 <div class="row bg-warning rounded m-0 mb-2 d-flex flex-row align-items-center">
-    <div class="col-sm-3 my-1">
+    <div class="col-lg-3 my-1">
         <div class="form-check form-switch my-1">
             <input class="form-check-input" type="checkbox" id="enable_firefox_watermark">
             <label class="form-check-label fw-bold text-black" for="enable_firefox_watermark" name="enable-firefox-label"></label>
         </div>
     </div>
     <div class="col"></div>
-    <div class="col-sm-2 my-1">
+    <div class="col-lg-2 my-1">
         <select class="form-select" id="firefox_color">
             <optgroup name="color-label">
                 <option name="white" value="text-white"></option>
@@ -367,14 +367,14 @@
 </div>
 <!-- Clock Settings  -->
 <div class="row bg-primary text-white rounded m-0 mb-2 d-flex flex-row align-items-center" id="clock_settings">
-    <div class="col-sm-3 my-1">
+    <div class="col-lg-3 my-1">
         <div class="form-check form-switch my-1">
             <input class="form-check-input" type="checkbox" id="enable_clock">
             <label class="form-check-label fw-bold" for="enable_clock" name="enable-clock-label"></label>
         </div>
     </div>
     <div class="col"></div>
-    <div class="col-sm-1 my-1">
+    <div class="col-lg-1 my-1">
         <select class="form-select" id="clock_time_format">
             <!-- <optgroup name="clock-time-format-label"> -->
                 <option value="true">12</option>
@@ -382,7 +382,7 @@
             <!-- </optgroup> -->
         </select>
     </div>
-    <div class="col-sm-3 my-1">
+    <div class="col-lg-3 my-1">
         <select class="form-select" id="clock_format">
             <!-- <optgroup name="clock-format-label"> -->
                 <option value="h:m">h:m</option>
@@ -398,7 +398,7 @@
             <!-- </optgroup> -->
         </select>
     </div>
-    <div class="col-sm-2 my-1">
+    <div class="col-lg-2 my-1">
         <select class="form-select" id="clock_color">
             <optgroup name="color-label">
                 <option name="white" value="text-white"></option>
@@ -413,7 +413,7 @@
 </div>
 <!-- Note Settings  -->
 <div class="row bg-danger text-white rounded m-0 mb-2 d-flex flex-row align-items-center">
-    <div class="col-sm-3 my-1">
+    <div class="col-lg-3 my-1">
         <div class="form-check form-switch my-1">
             <input class="form-check-input" type="checkbox" id="enable_notes">
             <label class="form-check-label fw-bold" for="enable_notes" name="enable-notes-label"></label>
@@ -422,32 +422,32 @@
 </div>
 <!-- Currency API settings -->
 <div class="row bg-success rounded m-0 mb-2 d-flex flex-row align-items-center" id="currency_setting">
-    <div class="col-sm-5 my-1">
+    <div class="col-lg-5 my-1">
         <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" id="enable_api">
             <label class="form-check-label fw-bold text-white" for="enable_api" name="enable-api-label"></label>
         </div>
     </div>
-    <div class="col-sm-1 my-1">
+    <div class="col-lg-1 my-1">
         <select class="form-select" id="base_currency">
             <optgroup name="base-currency-label"></optgroup>
         </select>
     </div>
-    <div class="col-sm-1 fw-bold text-center text-white my-1" name="currencies-label">
+    <div class="col-lg-1 fw-bold text-center text-white my-1" name="currencies-label">
     </div>
-    <div class="col-sm-1 my-1">
+    <div class="col-lg-1 my-1">
         <select class="form-select" id="currency_option_0">
         </select>
     </div>
-    <div class="col-sm-1 my-1">
+    <div class="col-lg-1 my-1">
         <select class="form-select" id="currency_option_1">
         </select>
     </div>
-    <div class="col-sm-1 my-1">
+    <div class="col-lg-1 my-1">
         <select class="form-select" id="currency_option_2">
         </select>
     </div>
-    <div class="col-sm-2 my-1">
+    <div class="col-lg-2 my-1">
         <select class="form-select" id="currency_container_color">
             <optgroup name="color-label">
                 <option name="white" value="bg-white"></option>
@@ -462,13 +462,13 @@
 </div>
 <!-- Currency API warnings -->
 <div class="row g-2">
-    <div class="col-sm-6">
+    <div class="col-lg-6">
         <div class="alert alert-warning d-flex flex-row m-0" role="alert">
             <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
             <div name="rate-update-info"></div>
         </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-lg-6">
         <div class="alert alert-danger d-flex flex-row m-0" role="alert">
             <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#exclamation-triangle-fill"/></svg>
             <div name="currency-api-refresh-warning"></div>
