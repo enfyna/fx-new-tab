@@ -391,51 +391,59 @@ function configure_currency_settings(){
 	national.hidden = false;
 	crypto.hidden = false;
 
-	get_currencies();
+	const currencies = get_currencies();
 
-	const selects = document.getElementById('currency_setting').getElementsByTagName('select');
-
-	for(let i = 0; i < selects.length; i++){
-		const select = selects[i] as HTMLSelectElement;
-
-		if(select.id == 'currency_container_color'){
-			select.value = get_currency_container_color();
-			select.addEventListener('change',()=>{
-				save['currency_container_color'] = select.value.trim();
-				set_save();
-			})
-			continue;
+	const container = document.getElementById('currency_setting');
+	const selects = container.getElementsByTagName('select');
+	const inputs = container.getElementsByTagName('input');
+	for (let i = 0; i < selects.length + inputs.length; i++) {
+		let elm : HTMLInputElement | HTMLSelectElement;
+		if(i < selects.length)
+			elm = selects[i];
+		else
+			elm = inputs[i - selects.length];
+		switch (elm.id){
+			case 'enable_api':
+				(elm as HTMLInputElement).checked = is_currency_rates_enabled();
+				break;
+			case 'currency_container_color':
+				elm.value = get_currency_container_color();
+				break;
+			default:
+				elm.appendChild(national.cloneNode(true));
+				elm.appendChild(crypto.cloneNode(true));
+				if(elm.id == 'base_currency')
+					elm.value = get_base_currency();
+				else{
+					const idx = elm.id.split('_')[2];
+					elm.value = currencies[idx].name;
+				}
+				break;
 		}
-
-		select.appendChild(national.cloneNode(true));
-		select.appendChild(crypto.cloneNode(true));
-
-		if (select.id.startsWith(node.currency.option)){
-			const id = select.id.replace(node.currency.option,'');
-			select.value = save['currencies'][id].name;
-			select.addEventListener("change",()=>{
-				var cr = save['currencies'][id] as currency;
-				cr.name = select.value;
-				cr.rate = '-';
-				save['currencies'][id] = cr;
-				set_save();
-			});
-		}
-		else{
-			select.value = get_base_currency();
-			select.addEventListener("change",()=>{
-				save['base_currency'] = select.value;
+	}
+	container.addEventListener('change',(event)=>{
+		const elm = event.target as HTMLInputElement | HTMLSelectElement;
+		switch (elm.id) {
+			case 'enable_api':
+				save['is_currency_rates_enabled'] = (elm as HTMLInputElement).checked;
+				break;
+			case 'currency_container_color':
+				save['currency_container_color'] = elm.value.trim();
+				break;
+			case 'base_currency':
+				save['base_currency'] = elm.value.trim();
 				for (let i = 0; i < 3; i++) {
 					save['currencies'][i].rate = '-';
 				}
-				set_save()
-			});
+				break;
+			default:
+				const idx = elm.id.split('_')[2];
+				var cr = currencies[idx] as currency;
+				cr.name = elm.value.trim();
+				cr.rate = '-';
+				save['currencies'] = currencies;
+				break;
 		}
-	}
-	var check = document.getElementById("enable_api") as HTMLInputElement
-	check.checked = is_currency_rates_enabled();
-	check.addEventListener("change",()=>{
-		save['is_currency_rates_enabled'] = check.checked;
 		set_save();
 	});
 }
@@ -444,17 +452,12 @@ function is_currency_rates_enabled() : boolean {
 	return save['is_currency_rates_enabled'] ?? false;
 }
 
-function get_currencies(){
-	if (save['currencies'] != null){
-		return save['currencies'];
-	}
-	save['currencies'] = [
+function get_currencies() : currency[]{
+	return save['currencies'] ?? [
 		{name:'USD',rate:'-'},
 		{name:'EUR',rate:'-'},
 		{name:'GBP',rate:'-'},
 	];
-	set_save();
-	return save['currencies'];
 }
 
 function get_base_currency() : string{
