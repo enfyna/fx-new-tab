@@ -233,8 +233,7 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 				break;
 			case node.shortcut.remove:
 				for (let i = 0; i < save['shortcuts'].length; i++) {
-					const shrtct = save['shortcuts'][i];
-					if (shrtct == shortcut){
+					if (save['shortcuts'][i] == shortcut){
 						save['shortcuts'].splice(i,1);
 						break;
 					}
@@ -248,11 +247,11 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 				}
 				let canvas = document.createElement("canvas");
 				let context = canvas.getContext("2d") as CanvasRenderingContext2D;
-				canvas.width = 256;
-				canvas.height = 256;
+				canvas.width = 64;
+				canvas.height = 64;
 				context.fillStyle = "#442288aa";
-				context.fillRect(0,0,256,256);
-				context.font = "bold 160px monospace";
+				context.fillRect(0,0,64,64);
+				context.font = "bold 40px monospace";
 				context.textAlign = "center";
 				context.fillStyle = "white";
 				context.textBaseline = "middle";

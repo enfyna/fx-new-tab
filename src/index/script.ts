@@ -208,11 +208,11 @@ async function get_shortcut_img(i : number, node : HTMLImageElement){
 		// so we will try to create a basic replacement
 		let canvas = document.createElement("canvas");
 		let context = canvas.getContext("2d") as CanvasRenderingContext2D;
-		canvas.width = 256;
-		canvas.height = 256;
+		canvas.width = 64;
+		canvas.height = 64;
 		context.fillStyle = "#442288aa";
-		context.fillRect(0,0,256,256);
-		context.font = "bold 160px monospace";
+		context.fillRect(0,0,64,64);
+		context.font = "bold 40px monospace";
 		context.textAlign = "center";
 		context.fillStyle = "white";
 		context.textBaseline = "middle";
