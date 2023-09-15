@@ -74,6 +74,7 @@ function set_local_save(){
 	}
 	catch{
 		console.error('Caching cant be used!\nExceeded 5MB limit.');
+		clear_local_save();
 	}
 }
 
@@ -118,7 +119,6 @@ async function configure_shortcuts(){
 	if (circle){
 		const img = shortcut_base_node.getElementsByTagName('img')[0] as HTMLImageElement;
 		img.classList.replace('rounded-3','rounded-circle');
-		img.parentElement.classList.remove('card-header');
 		link.classList.add('rounded-circle');
 
 		const name = shortcut_base_node.getElementsByTagName('h7')[0] as HTMLDivElement;
@@ -286,16 +286,12 @@ function get_shortcut_container_width() : string{
 
 /// Notes
 function get_notes() : note[] {
-	if (save['notes'] != null){
-		return save['notes'];
-	}
-	save['notes'] = [
+	return save['notes'] ?? [
 		{note: ""},
 		{note: ""},
 		{note: ""},
 		{note: ""},
 	];
-	return save['notes'];
 }
 
 function is_notes_enabled() : boolean {
@@ -326,9 +322,8 @@ function configure_notes(){
 
 	async function note_interaction(event : Event){
 		const elm = event.target as HTMLElement;
-		const id = elm.id;
-		const index = id.charAt(id.length - 1);
-		switch (id) {
+		const index = elm.id.charAt(elm.id.length - 1);
+		switch (elm.id) {
 			case node.note.note + index:
 				const input = inputs[index] as HTMLInputElement;
 				input.value = elm.innerText;
@@ -342,9 +337,10 @@ function configure_notes(){
 				const button = buttons[index] as HTMLButtonElement;
 				const new_note = (elm as HTMLInputElement).value.trim();
 				button.innerText = new_note;
-				save['notes'][index].note = new_note;
+				notes[index].note = new_note;
+				save['notes'] = notes;
 				await set_save();
-				set_local_save();
+				clear_local_save();
 				button.hidden = false;
 				break;
 		}
@@ -354,15 +350,11 @@ function configure_notes(){
 
 /// Currencies
 function get_currencies() : currency[] {
-	if (save['currencies'] != null){
-		return save['currencies'];
-	}
-	save['currencies'] = [
+	return save['currencies'] ?? [
 		{name:'USD',rate:'-'},
 		{name:'EUR',rate:'-'},
 		{name:'GBP',rate:'-'},
 	];
-	return save['currencies'];
 }
 
 function get_base_currency() : string{
@@ -374,12 +366,7 @@ function is_currency_rates_enabled() : boolean {
 }
 
 function did_a_day_pass() : boolean {
-	const saved_date_str : string = save["date"] ?? '0';
-	const now : number = Date.now();
-	if (now - parseInt(saved_date_str) > 43200000){
-		return true;
-	};
-	return false;
+	return Date.now() - (save["date"] ?? 0) > 43200000;
 }
 
 async function configure_currencies(){
@@ -395,10 +382,10 @@ async function configure_currencies(){
 		for (let i = 0; i < currencies.length; i++) {
 			if (currencies[i].rate == '-'){
 				fetch_currencies = true;
+				break;
 			};
 		}
 	}
-
 	if(fetch_currencies){
 		try {
 			const rates = await get_rates();
@@ -409,12 +396,12 @@ async function configure_currencies(){
 			save['currencies'] = currencies;
 			save['date'] = Date.now();
 			set_save();
+			set_local_save();
 		}
 		catch (err) {
 			console.error(err);
 		}
 	}
-
 	const currency_container = document.getElementById('currencies');
 
 	const card_nodes = currency_container.getElementsByClassName('card');
@@ -495,9 +482,7 @@ function configure_clock() {
 			.replace('s',date.getSeconds().toString().padStart(2, '0'))
 			.replace('&n','\n');
 	}
-
 	updateTime();
-
 	setInterval(updateTime, 1000);
 }
 
