@@ -166,8 +166,8 @@ async function configure_shortcut_settings(){
 
 function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivElement{
 	elm = elm.cloneNode(true) as HTMLDivElement;
-	const colors = ['bg-primary','bg-danger','bg-success','bg-warning'];
-	elm.classList.add(colors[id % 4]);
+	const color = get_shortcut_col_colors()[id % 4];
+	elm.classList.add(color);
 	elm.hidden = false;
 	let shortcut = save['shortcuts'][id] as shortcut;
 
