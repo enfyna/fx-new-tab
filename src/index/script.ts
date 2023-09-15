@@ -1,5 +1,36 @@
 const currency_api = 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/';
 const img_api = 'https://icon.horse/icon/';
+interface save{
+	bg_img:string;
+	bg_color:string;
+
+	shortcuts:shortcut[];
+	shortcut_shape:string;
+	shortcut_width:string;
+	shortcut_v_align:string;
+	shortcut_size:string;
+	shortcut_transition:string;
+	shortcut_col_colors:string[];
+	shortcut_container_h_align:string;
+	shortcut_container_width:string;
+	
+	notes:note[];
+	is_notes_enabled:boolean;
+	
+	currencies:currency[];
+	base_currency:string;
+	is_currency_rates_enabled:boolean;
+	date:number;
+	currency_container_color:string;
+	
+	is_clock_enabled:boolean;
+	clock_color:string;
+	clock_format:string;
+	clock_time_format:boolean;
+
+	is_firefox_watermark_enabled:boolean;
+	firefox_watermark_color:string;
+}
 interface shortcut {
 	name:string;
 	link:string;
@@ -28,7 +59,7 @@ const node = {
 	},
 };
 
-let save : object = {};
+let save : save;
 let using_local_save : boolean = true;
 const start = Date.now();
 
@@ -55,10 +86,10 @@ function ready(){
 
 /// Save
 async function get_save(){
-	save = JSON.parse(localStorage.getItem('save'));
-	if(save == null){
+	save = JSON.parse(localStorage.getItem('save')) as save;
+	if(!save){
 		using_local_save = false;
-		save = await browser.storage.local.get(null);
+		save = await browser.storage.local.get(null) as save;
 	}else{
 		console.info('ok!');
 	}
@@ -85,18 +116,19 @@ function clear_local_save(){
 /// Background
 function set_background() {
 	document.body.style.cssText += `
-		background-image: ${save['bg_img'] ?? 'none'};
-		background-color: ${save['bg_color'] ?? '#033633'};
+		background-image: ${save.bg_img ?? 'none'};
+		background-color: ${save.bg_color ?? '#033633'};
 	`;
 }
 
 /// Shortcuts
 async function configure_shortcuts(){
-	if(save['shortcuts'] == null){
+	if(!save.shortcuts){
 		const load_text = document.getElementById('loading') as HTMLDivElement;
 		load_text.innerText = 'Finding Shortcuts Please Wait...';
-		save['shortcuts'] = await find_user_sites();
-		set_save();
+		save.shortcuts = await find_user_sites();
+		await set_save();
+		clear_local_save();
 		load_text.innerText = '';
 	}
 
@@ -128,8 +160,8 @@ async function configure_shortcuts(){
 	const container = shortcut_base_node.parentElement as HTMLElement;
 	container.classList.add(get_shortcut_container_width(),get_shortcut_container_h_align(),get_shortcut_v_align());
 
-	for(let i = 0; i < save['shortcuts'].length; i++){
-		var shortcut : shortcut = save['shortcuts'][i];
+	for(let i = 0; i < save.shortcuts.length; i++){
+		var shortcut : shortcut = save.shortcuts[i];
 		if (shortcut == null || shortcut.link.length == 0)
 			continue;
 
@@ -181,7 +213,7 @@ async function find_user_sites() {
 
 async function get_shortcut_img(i : number, node : HTMLImageElement){
 	try {
-		const response = await get_favicon_from_url(save['shortcuts'][i].link)
+		const response = await get_favicon_from_url(save.shortcuts[i].link)
 
 		const img_type = response.headers.get("Content-Type");
 		if(img_type == 'image/svg+xml'){
@@ -197,9 +229,10 @@ async function get_shortcut_img(i : number, node : HTMLImageElement){
 			var context = canvas.getContext("2d");
 			context.drawImage(img, 0, 0);
 			var dataurl = canvas.toDataURL(img_type);
-			save['shortcuts'][i].img = dataurl;
+			save.shortcuts[i].img = dataurl;
 			node.src = dataurl;
 			set_save();
+			clear_local_save();
 		};
 		img.src = b64;
 	} catch (error) {
@@ -216,11 +249,12 @@ async function get_shortcut_img(i : number, node : HTMLImageElement){
 		context.textAlign = "center";
 		context.fillStyle = "white";
 		context.textBaseline = "middle";
-		context.fillText(save['shortcuts'][i].link.replace("https://","").replace("http://","").replace("www.","").toUpperCase().slice(0,2), canvas.width/2, canvas.height/2);
+		context.fillText(save.shortcuts[i].link.replace("https://","").replace("http://","").replace("www.","").toUpperCase().slice(0,2), canvas.width/2, canvas.height/2);
 		var image = canvas.toDataURL();
 		node.src = image;
-		save['shortcuts'][i].img = image;
+		save.shortcuts[i].img = image;
 		set_save();
+		clear_local_save();
 	}
 }
 
@@ -253,40 +287,40 @@ function center_shortcuts() {
 }
 
 function is_circle() : boolean {
-	return save['shortcut_shape'] == 'circle';
+	return save.shortcut_shape == 'circle';
 }
 
 function get_shortcut_width() : string {
-	return save['shortcut_width'] ?? 'col-sm-3';
+	return save.shortcut_width ?? 'col-sm-3';
 }
 
 function get_shortcut_v_align() : string {
-	return save['shortcut_v_align'] ?? 'align-items-center';
+	return save.shortcut_v_align ?? 'align-items-center';
 }
 
 function get_shortcut_size() : string {
-	return save['shortcut_size'] ?? 'm-0';
+	return save.shortcut_size ?? 'm-0';
 }
 
 function get_shortcut_transition() : string {
-	return save['shortcut_transition'] ?? 'glow';
+	return save.shortcut_transition ?? 'glow';
 }
 
 function get_shortcut_col_colors() : string[]{
-	return save['shortcut_col_colors'] ?? ['bg-primary','bg-danger','bg-success','bg-warning'];
+	return save.shortcut_col_colors ?? ['bg-primary','bg-danger','bg-success','bg-warning'];
 }
 
 function get_shortcut_container_h_align() : string{
-	return save['shortcut_container_h_align'] ?? 'justify-content-center';
+	return save.shortcut_container_h_align ?? 'justify-content-center';
 }
 
 function get_shortcut_container_width() : string{
-	return save['shortcut_container_width'] ?? 'col-md-6';
+	return save.shortcut_container_width ?? 'col-md-6';
 }
 
 /// Notes
 function get_notes() : note[] {
-	return save['notes'] ?? [
+	return save.notes ?? [
 		{note: ""},
 		{note: ""},
 		{note: ""},
@@ -295,7 +329,7 @@ function get_notes() : note[] {
 }
 
 function is_notes_enabled() : boolean {
-	return save['is_notes_enabled'] ?? false;
+	return save.is_notes_enabled ?? false;
 }
 
 function configure_notes(){
@@ -338,7 +372,7 @@ function configure_notes(){
 				const new_note = (elm as HTMLInputElement).value.trim();
 				button.innerText = new_note;
 				notes[index].note = new_note;
-				save['notes'] = notes;
+				save.notes = notes;
 				await set_save();
 				clear_local_save();
 				button.hidden = false;
@@ -350,7 +384,7 @@ function configure_notes(){
 
 /// Currencies
 function get_currencies() : currency[] {
-	return save['currencies'] ?? [
+	return save.currencies ?? [
 		{name:'USD',rate:'-'},
 		{name:'EUR',rate:'-'},
 		{name:'GBP',rate:'-'},
@@ -358,15 +392,15 @@ function get_currencies() : currency[] {
 }
 
 function get_base_currency() : string{
-	return save['base_currency'] ?? 'TRY';
+	return save.base_currency ?? 'TRY';
 }
 
 function is_currency_rates_enabled() : boolean {
-	return save['is_currency_rates_enabled'] ?? false;
+	return save.is_currency_rates_enabled ?? false;
 }
 
 function did_a_day_pass() : boolean {
-	return Date.now() - (save["date"] ?? 0) > 43200000;
+	return Date.now() - (save.date ?? 0) > 43200000;
 }
 
 async function configure_currencies(){
@@ -393,10 +427,10 @@ async function configure_currencies(){
 				const currency = currencies[i];
 				currency.rate = (1.0 / rates[currency.name.toLowerCase()]).toFixed(2);
 			};
-			save['currencies'] = currencies;
-			save['date'] = Date.now();
+			save.currencies = currencies;
+			save.date = Date.now();
 			set_save();
-			set_local_save();
+			clear_local_save();
 		}
 		catch (err) {
 			console.error(err);
@@ -451,12 +485,12 @@ function get_rates(){
 }
 
 function get_currency_container_color() : string{
-	return save['currency_container_color'] ?? 'bg-primary';
+	return save.currency_container_color ?? 'bg-primary';
 }
 
 /// Clock
 function is_clock_enabled() : boolean{
-	return save['is_clock_enabled'] ?? false;
+	return save.is_clock_enabled ?? false;
 }
 
 function configure_clock() {
@@ -487,20 +521,20 @@ function configure_clock() {
 }
 
 function get_clock_color() : string {
-	return save['clock_color'] ?? 'text-white';
+	return save.clock_color ?? 'text-white';
 }
 
 function get_clock_format() : string {
-	return save['clock_format'] ?? 'h:m';
+	return save.clock_format ?? 'h:m';
 }
 
 function get_clock_time_format() : boolean {
-	return save['clock_time_format'] ?? false;
+	return save.clock_time_format ?? false;
 }
 
 /// Firefox Watermark
 function is_firefox_watermark_enabled() : boolean{
-	return save['is_firefox_watermark_enabled'] ?? true;
+	return save.is_firefox_watermark_enabled ?? true;
 }
 
 function configure_firefox_watermark() {
@@ -512,7 +546,7 @@ function configure_firefox_watermark() {
 }
 
 function get_firefox_watermark_color() : string{
-	return save['firefox_watermark_color'] ?? 'text-warning';
+	return save.firefox_watermark_color ?? 'text-warning';
 }
 
 /// Settings Button

@@ -1,3 +1,34 @@
+interface save{
+	bg_img:string;
+	bg_color:string;
+
+	shortcuts:shortcut[];
+	shortcut_shape:string;
+	shortcut_width:string;
+	shortcut_v_align:string;
+	shortcut_size:string;
+	shortcut_transition:string;
+	shortcut_col_colors:string[];
+	shortcut_container_h_align:string;
+	shortcut_container_width:string;
+	
+	notes:note[];
+	is_notes_enabled:boolean;
+	
+	currencies:currency[];
+	base_currency:string;
+	is_currency_rates_enabled:boolean;
+	date:number;
+	currency_container_color:string;
+	
+	is_clock_enabled:boolean;
+	clock_color:string;
+	clock_format:string;
+	clock_time_format:boolean;
+
+	is_firefox_watermark_enabled:boolean;
+	firefox_watermark_color:string;
+}
 interface shortcut {
 	name:string;
 	link:string;
@@ -6,6 +37,9 @@ interface shortcut {
 interface currency {
 	name:string;
 	rate:string;
+}
+interface note {
+	note:string;
 }
 const node = {
 	currency:{
@@ -21,7 +55,7 @@ const node = {
 	},
 };
 
-let save : object = {}
+let save : save;
 
 get_save().then(ready)
 
@@ -38,14 +72,14 @@ async function ready(){
 
 /// Save
 async function get_save(){
-	save = await browser.storage.local.get(null);
+	save = await browser.storage.local.get(null) as save;
 }
 let saving = false;
 const save_info = document.getElementById('save-info');
 async function set_save(){
 	saving = true;
 	save_info.hidden = false;
-	await browser.storage.local.set(save)
+	await browser.storage.local.set(save);
 	saving = false;
 	save_info.hidden = true;
 }
@@ -55,7 +89,7 @@ function configure_background_settings() {
 	var fb_clr_node = document.getElementById("bg_color") as HTMLInputElement;
 	fb_clr_node.value = get_bg_color();
 	fb_clr_node.onchange = () => {
-		save['bg_color'] = fb_clr_node.value.trim();
+		save.bg_color = fb_clr_node.value.trim();
 		set_save();
 	};
 	var img_node = document.getElementById("select_bg") as HTMLInputElement
@@ -63,7 +97,7 @@ function configure_background_settings() {
 		const reader = new FileReader();
 		reader.addEventListener("loadend", (event) => {
 			if(event.target == null) return;
-			save['bg_img'] = ''.concat("url(", (event.target.result as string), ")");
+			save.bg_img = ''.concat("url(", (event.target.result as string), ")");
 			set_save();
 		});
 		const image = img_node.files.item(0);
@@ -72,17 +106,17 @@ function configure_background_settings() {
 	});
 	var delete_bg = document.getElementById("delete_bg") as HTMLInputElement;
 	delete_bg.onclick = () => {
-		save['bg_img'] = null;
+		save.bg_img = null;
 		set_save();
 	}
 }
 
 function get_bg_color() : string{
-	return save['bg_color'] ?? 'black';
+	return save.bg_color ?? 'black';
 }
 
 /// Shortcuts
-let topSites : shortcut[] = []
+let topSites : shortcut[];
 
 async function configure_shortcut_settings(){
 	const shortcut_shape_settings = document.getElementById('shortcut_shape_settings');
@@ -92,7 +126,7 @@ async function configure_shortcut_settings(){
 			case input.id.startsWith('shortcut_col_color'):
 				const colors = get_shortcut_col_colors();
 				colors[input.id.split('_')[3]] = input.value.trim();
-				save['shortcut_col_colors'] = colors;
+				save.shortcut_col_colors = colors;
 				break;
 			default:
 				save[input.id] = input.value.trim();
@@ -145,7 +179,7 @@ async function configure_shortcut_settings(){
 	shortcut_container.appendChild(suggestions);
 
 	let shortcut_setting = document.getElementById("shortcut-setting") as HTMLDivElement;
-	for (let i = 0; i < save['shortcuts'].length; i++) {
+	for (let i = 0; i < save.shortcuts.length; i++) {
 		shortcut_container.appendChild(
 			create_shortcut_setting(i, shortcut_setting)
 		);
@@ -156,7 +190,7 @@ async function configure_shortcut_settings(){
 	add_shortcut_button.addEventListener('click',()=>{
 		shortcut_container.appendChild(
 			create_shortcut_setting(
-				(save['shortcuts'] as shortcut[]).push({link: '',name: '',img: ''}) - 1,
+				save.shortcuts.push({link: '',name: '',img: ''}) - 1,
 				shortcut_setting
 			)
 		);
@@ -169,7 +203,7 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 	const color = get_shortcut_col_colors()[id % 4];
 	elm.classList.add(color);
 	elm.hidden = false;
-	let shortcut = save['shortcuts'][id] as shortcut;
+	let shortcut = save.shortcuts[id] as shortcut;
 
 	const inputs = elm.getElementsByTagName('input');
 	for(let i = 0; i < inputs.length; i++){
@@ -232,9 +266,9 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 				set_save();
 				break;
 			case node.shortcut.remove:
-				for (let i = 0; i < save['shortcuts'].length; i++) {
-					if (save['shortcuts'][i] == shortcut){
-						save['shortcuts'].splice(i,1);
+				for (let i = 0; i < save.shortcuts.length; i++) {
+					if (save.shortcuts[i] == shortcut){
+						save.shortcuts.splice(i,1);
 						break;
 					}
 				}
@@ -284,31 +318,31 @@ async function find_user_sites() {
 }
 
 function get_shortcut_width() : string {
-	return save['shortcut_width'] ?? 'col-sm-3';
+	return save.shortcut_width ?? 'col-sm-3';
 }
 
 function get_shortcut_size() : string {
-	return save['shortcut_size'] ?? 'm-0';
+	return save.shortcut_size ?? 'm-0';
 }
 
 function get_shortcut_v_align() : string {
-	return save['shortcut_v_align'] ?? 'align-items-center';
+	return save.shortcut_v_align ?? 'align-items-center';
 }
 
 function get_shortcut_transition() : string {
-	return save['shortcut_transition'] ?? 'glow';
+	return save.shortcut_transition ?? 'glow';
 }
 
 function get_shortcut_col_colors() : string[]{
-	return save['shortcut_col_colors'] ?? ['bg-primary','bg-danger','bg-success','bg-warning'];
+	return save.shortcut_col_colors ?? ['bg-primary','bg-danger','bg-success','bg-warning'];
 }
 
 function get_shortcut_container_h_align() : string{
-	return save['shortcut_container_h_align'] ?? 'justify-content-center';
+	return save.shortcut_container_h_align ?? 'justify-content-center';
 }
 
 function get_shortcut_container_width() : string{
-	return save['shortcut_container_width'] ?? 'col-md-6';
+	return save.shortcut_container_width ?? 'col-md-6';
 }
 
 /// Notes
@@ -316,13 +350,13 @@ function configure_note_settings() {
 	const check = document.getElementById('enable_notes') as HTMLInputElement;
 	check.checked = is_notes_enabled();
 	check.addEventListener('change', () => {
-		save['is_notes_enabled'] = check.checked;
+		save.is_notes_enabled = check.checked;
 		set_save();
 	});
 }
 
 function is_notes_enabled() : boolean {
-	return save['is_notes_enabled'] ?? false;
+	return save.is_notes_enabled ?? false;
 }
 
 /// Clock
@@ -348,10 +382,10 @@ function configure_clock_settings(){
 		const id = (event.target as HTMLElement).id;
 		switch (id) {
 			case 'enable_clock':
-				save['is_clock_enabled'] = (event.target as HTMLInputElement).checked;
+				save.is_clock_enabled = (event.target as HTMLInputElement).checked;
 				break;
 			case 'clock_time_format':
-				save['clock_time_format'] = (event.target as HTMLSelectElement).value == 'true';
+				save.clock_time_format = (event.target as HTMLSelectElement).value == 'true';
 				break;
 			default:
 				save[id] = (event.target as HTMLSelectElement).value.trim();
@@ -362,19 +396,19 @@ function configure_clock_settings(){
 }
 
 function is_clock_enabled() : boolean{
-	return save['is_clock_enabled'] ?? false;
+	return save.is_clock_enabled ?? false;
 }
 
 function get_clock_color() : string{
-	return save['clock_color'] ?? 'text-white';
+	return save.clock_color ?? 'text-white';
 }
 
 function get_clock_format() : string {
-	return save['clock_format'] ?? 'h:m';
+	return save.clock_format ?? 'h:m';
 }
 
 function get_clock_time_format() : boolean {
-	return save['clock_time_format'] ?? false;
+	return save.clock_time_format ?? false;
 }
 
 /// Currencies
@@ -425,15 +459,15 @@ function configure_currency_settings(){
 		const elm = event.target as HTMLInputElement | HTMLSelectElement;
 		switch (elm.id) {
 			case 'enable_api':
-				save['is_currency_rates_enabled'] = (elm as HTMLInputElement).checked;
+				save.is_currency_rates_enabled = (elm as HTMLInputElement).checked;
 				break;
 			case 'currency_container_color':
-				save['currency_container_color'] = elm.value.trim();
+				save.currency_container_color = elm.value.trim();
 				break;
 			case 'base_currency':
-				save['base_currency'] = elm.value.trim();
+				save.base_currency = elm.value.trim();
 				for (let i = 0; i < 3; i++) {
-					save['currencies'][i].rate = '-';
+					save.currencies[i].rate = '-';
 				}
 				break;
 			default:
@@ -441,7 +475,7 @@ function configure_currency_settings(){
 				var cr = currencies[idx] as currency;
 				cr.name = elm.value.trim();
 				cr.rate = '-';
-				save['currencies'] = currencies;
+				save.currencies = currencies;
 				break;
 		}
 		set_save();
@@ -449,11 +483,11 @@ function configure_currency_settings(){
 }
 
 function is_currency_rates_enabled() : boolean {
-	return save['is_currency_rates_enabled'] ?? false;
+	return save.is_currency_rates_enabled ?? false;
 }
 
 function get_currencies() : currency[]{
-	return save['currencies'] ?? [
+	return save.currencies ?? [
 		{name:'USD',rate:'-'},
 		{name:'EUR',rate:'-'},
 		{name:'GBP',rate:'-'},
@@ -461,11 +495,11 @@ function get_currencies() : currency[]{
 }
 
 function get_base_currency() : string{
-	return save['base_currency'] ?? 'TRY';
+	return save.base_currency ?? 'TRY';
 }
 
 function get_currency_container_color() : string{
-	return save['currency_container_color'] ?? 'bg-primary';
+	return save.currency_container_color ?? 'bg-primary';
 }
 
 /// Firefox Watermark
@@ -473,23 +507,23 @@ function configure_firefox_watermark_settings() {
 	const check = document.getElementById('enable_firefox_watermark') as HTMLInputElement;
 	check.checked = is_firefox_watermark_enabled();
 	check.addEventListener('change',()=>{
-		save['is_firefox_watermark_enabled'] = check.checked;
+		save.is_firefox_watermark_enabled = check.checked;
 		set_save();
 	});
 	const color = document.getElementById('firefox_color') as HTMLSelectElement;
 	color.value = get_firefox_watermark_color();
 	color.addEventListener('change',()=>{
-		save['firefox_watermark_color'] = color.value.trim();
+		save.firefox_watermark_color = color.value.trim();
 		set_save();
 	})
 }
 
 function get_firefox_watermark_color() : string{
-	return save['firefox_watermark_color'] ?? 'text-warning';
+	return save.firefox_watermark_color ?? 'text-warning';
 }
 
 function is_firefox_watermark_enabled() : boolean{
-	return save['is_firefox_watermark_enabled'] ?? true;
+	return save.is_firefox_watermark_enabled ?? true;
 }
 
 /// Nav Button
