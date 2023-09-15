@@ -86,199 +86,200 @@
         <h1 class="text-white m-0 mt-3" name="settings"></h1>
     </div>
     <div class="col-lg-9 alert alert-success d-flex flex-row m-0 mt-3">
-        <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+        <svg width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
         <div name="github-repo-info"></div>
     </div>
 </div>
 <hr class="border-2 border-primary">
-<!-- Shortcut Container settings -->
+<!-- Shortcut settings -->
 <div id="shortcut_shape_settings">
-<div class="row bg-success rounded m-0 mb-1 d-flex flex-row align-items-center">
-    <div class="col-lg-4 mt-1 mb-1 text-black fw-bold" name="shortcut-container-settings"></div>
-    <div class="col"></div>
-    <div class="col-lg-2 mt-1 mb-1">
-        <select class="form-select" id="shortcut_container_width">
-            <optgroup name="shortcut-width">
-                <option value="col-md-1">8.3%</option>
-                <option value="col-md-2">16.6%</option>
-                <option value="col-md-3">25%</option>
-                <option value="col-md-4">33.3%</option>
-                <option value="col-md-5">41.6%</option>
-                <option value="col-md-6">50%</option>
-                <option value="col-md-7">58.3%</option>
-                <option value="col-md-8">66.6%</option>
-                <option value="col-md-9">75%</option>
-                <option value="col-md-10">83.3%</option>
-                <option value="col-md-11">91.6%</option>
-                <option value="col-md-12">100%</option>
-            </optgroup>
-        </select>
+    <!-- Shortcut Container settings -->
+    <div class="row bg-success rounded m-0 mb-1 d-flex flex-row align-items-center">
+        <div class="col-lg-4 my-1 text-black fw-bold" name="shortcut-container-settings"></div>
+        <div class="col"></div>
+        <div class="col-lg-2 my-1">
+            <select class="form-select" id="shortcut_container_width">
+                <optgroup name="shortcut-width">
+                    <option value="col-md-1">8.3%</option>
+                    <option value="col-md-2">16.6%</option>
+                    <option value="col-md-3">25%</option>
+                    <option value="col-md-4">33.3%</option>
+                    <option value="col-md-5">41.6%</option>
+                    <option value="col-md-6">50%</option>
+                    <option value="col-md-7">58.3%</option>
+                    <option value="col-md-8">66.6%</option>
+                    <option value="col-md-9">75%</option>
+                    <option value="col-md-10">83.3%</option>
+                    <option value="col-md-11">91.6%</option>
+                    <option value="col-md-12">100%</option>
+                </optgroup>
+            </select>
+        </div>
+        <div class="col-lg-2 my-1">
+            <select class="form-select" id="shortcut_container_h_align">
+                <optgroup name="shortcut-h-align">
+                    <option value="justify-content-start" name="left"></option>
+                    <option value="justify-content-center" name="center"></option>
+                    <option value="justify-content-end" name="right"></option>
+                </optgroup>
+            </select>
+        </div>
+        <div class="col-lg-2 my-1">
+            <select class="form-select" id="shortcut_v_align">
+                <optgroup name="shortcut-v-align">
+                    <option value="align-items-start" name="top"></option>
+                    <option value="align-items-center" name="center"></option>
+                    <option value="align-items-end" name="bottom"></option>
+                </optgroup>
+            </select>
+        </div>
     </div>
-    <div class="col-lg-2 mt-1 mb-1">
-        <select class="form-select" id="shortcut_container_h_align">
-            <optgroup name="shortcut-h-align">
-                <option value="justify-content-start" name="left"></option>
-                <option value="justify-content-center" name="center"></option>
-                <option value="justify-content-end" name="right"></option>
-            </optgroup>
-        </select>
+    <!-- Shortcut Shape settings -->
+    <div class="row bg-warning rounded m-0 mb-1 d-flex flex-row align-items-center">
+        <div class="col-lg-3 my-1 fw-bold text-black" name="shortcut-settings"></div>
+        <div class="col-lg-1"></div>
+        <div class="col-lg-2 my-1">
+            <select class="form-select" id="shortcut_col_color_0">
+                <optgroup name="shortcut-col-color">
+                    <option name="blue" value="bg-primary">Blue</option>
+                    <option name="red" value="bg-danger">Red</option>
+                    <option name="green" value="bg-success">Green</option>
+                    <option name="yellow" value="bg-warning">Yellow</option>
+                    <option name="black" value="bg-black">Black</option>
+                    <option name="dark" value="bg-dark">Dark</option>
+                    <option name="white" value="bg-white">White</option>
+                    <option name="transparent" value="bg-transparent">Transparent</option>
+                </optgroup>
+            </select>
+        </div>
+        <div class="col-lg-2 my-1">
+            <select class="form-select" id="shortcut_col_color_1">
+                <optgroup name="shortcut-col-color">
+                    <option name="blue" value="bg-primary">Blue</option>
+                    <option name="red" value="bg-danger">Red</option>
+                    <option name="green" value="bg-success">Green</option>
+                    <option name="yellow" value="bg-warning">Yellow</option>
+                    <option name="black" value="bg-black">Black</option>
+                    <option name="dark" value="bg-dark">Dark</option>
+                    <option name="white" value="bg-white">White</option>
+                    <option name="transparent" value="bg-transparent">Transparent</option>
+                </optgroup>
+            </select>
+        </div>
+        <div class="col-lg-2 my-1">
+            <select class="form-select" id="shortcut_col_color_2">
+                <optgroup name="shortcut-col-color">
+                    <option name="blue" value="bg-primary">Blue</option>
+                    <option name="red" value="bg-danger">Red</option>
+                    <option name="green" value="bg-success">Green</option>
+                    <option name="yellow" value="bg-warning">Yellow</option>
+                    <option name="black" value="bg-black">Black</option>
+                    <option name="dark" value="bg-dark">Dark</option>
+                    <option name="white" value="bg-white">White</option>
+                    <option name="transparent" value="bg-transparent">Transparent</option>
+                </optgroup>
+            </select>
+        </div>
+        <div class="col-lg-2 my-1">
+            <select class="form-select" id="shortcut_col_color_3">
+                <optgroup name="shortcut-col-color">
+                    <option name="blue" value="bg-primary">Blue</option>
+                    <option name="red" value="bg-danger">Red</option>
+                    <option name="green" value="bg-success">Green</option>
+                    <option name="yellow" value="bg-warning">Yellow</option>
+                    <option name="black" value="bg-black">Black</option>
+                    <option name="dark" value="bg-dark">Dark</option>
+                    <option name="white" value="bg-white">White</option>
+                    <option name="transparent" value="bg-transparent">Transparent</option>
+                </optgroup>
+            </select>
+        </div>
+        <div class="col"></div>
+        <div class="col-lg-2 my-1">
+            <select class="form-select" id="shortcut_transition">
+                <optgroup name="shortcut-transition">
+                    <option value="glow" name="glow"></option>
+                    <option value="spin" name="spin"></option>
+                    <option value="rotate" name="rotate"></option>
+                    <option value="move_down" name="move_down"></option>
+                    <option value="move_up" name="move_up"></option>
+                    <option value="scale_down" name="scale_down"></option>
+                    <option value="scale_up" name="scale_up"></option>
+                    <option value="none" name="none"></option>
+                </optgroup>
+            </select>
+        </div>
+        <div class="col-lg-2 my-1">
+            <select class="form-select" id="shortcut_shape">
+                <optgroup name="shortcut-shape">
+                    <option value="square" name="square"></option>
+                    <option value="circle" name="circle"></option>
+                </optgroup>
+            </select>
+        </div>
+        <div class="col-lg-2 my-1">
+            <select class="form-select" id="shortcut_size">
+                <optgroup name="shortcut-size">
+                    <option value="m-0">5</option>
+                    <option value="m-1">4</option>
+                    <option value="m-2">3</option>
+                    <option value="m-3">2</option>
+                    <option value="m-4">1</option>
+                    <option value="m-5">0</option>
+                </optgroup>
+            </select>
+        </div>
+        <div class="col-lg-2 my-1">
+            <select class="form-select" id="shortcut_width">
+                <optgroup name="shortcut-width">
+                    <option value="col-sm-1">12 (8.3%)</option>
+                    <option value="col-sm-2">6 (16.6%)</option>
+                    <option value="col-sm-3">4 (25%)</option>
+                    <option value="col-sm-4">3 (33.3%)</option>
+                    <option value="col-sm-5">2 (41.6%)</option>
+                    <option value="col-sm-6">2 (50%)</option>
+                    <option value="col-sm-7">1 (58.3%)</option>
+                    <option value="col-sm-8">1 (66.6%)</option>
+                    <option value="col-sm-9">1 (75%)</option>
+                    <option value="col-sm-10">1 (83.3%)</option>
+                    <option value="col-sm-11">1 (91.6%)</option>
+                    <option value="col-sm-12">1 (100%)</option>
+                </optgroup>
+            </select>
+        </div>
     </div>
-    <div class="col-lg-2 mt-1 mb-1">
-        <select class="form-select" id="shortcut_v_align">
-            <optgroup name="shortcut-v-align">
-                <option value="align-items-start" name="top"></option>
-                <option value="align-items-center" name="center"></option>
-                <option value="align-items-end" name="bottom"></option>
-            </optgroup>
-        </select>
-    </div>
-</div>
-<!-- Shortcut Shape settings -->
-<div class="row bg-warning rounded m-0 mb-1 d-flex flex-row align-items-center">
-    <div class="col-lg-3 mt-1 mb-1 fw-bold text-black" name="shortcut-settings"></div>
-    <div class="col-lg-1"></div>
-    <div class="col-lg-2 mt-1 mb-1">
-        <select class="form-select" id="shortcut_col_color_0">
-            <optgroup name="shortcut-col-color">
-                <option name="blue" value="bg-primary">Blue</option>
-                <option name="red" value="bg-danger">Red</option>
-                <option name="green" value="bg-success">Green</option>
-                <option name="yellow" value="bg-warning">Yellow</option>
-                <option name="black" value="bg-black">Black</option>
-                <option name="dark" value="bg-dark">Dark</option>
-                <option name="white" value="bg-white">White</option>
-                <option name="transparent" value="bg-transparent">Transparent</option>
-            </optgroup>
-        </select>
-    </div>
-    <div class="col-lg-2 mt-1 mb-1">
-        <select class="form-select" id="shortcut_col_color_1">
-            <optgroup name="shortcut-col-color">
-                <option name="blue" value="bg-primary">Blue</option>
-                <option name="red" value="bg-danger">Red</option>
-                <option name="green" value="bg-success">Green</option>
-                <option name="yellow" value="bg-warning">Yellow</option>
-                <option name="black" value="bg-black">Black</option>
-                <option name="dark" value="bg-dark">Dark</option>
-                <option name="white" value="bg-white">White</option>
-                <option name="transparent" value="bg-transparent">Transparent</option>
-            </optgroup>
-        </select>
-    </div>
-    <div class="col-lg-2 mt-1 mb-1">
-        <select class="form-select" id="shortcut_col_color_2">
-            <optgroup name="shortcut-col-color">
-                <option name="blue" value="bg-primary">Blue</option>
-                <option name="red" value="bg-danger">Red</option>
-                <option name="green" value="bg-success">Green</option>
-                <option name="yellow" value="bg-warning">Yellow</option>
-                <option name="black" value="bg-black">Black</option>
-                <option name="dark" value="bg-dark">Dark</option>
-                <option name="white" value="bg-white">White</option>
-                <option name="transparent" value="bg-transparent">Transparent</option>
-            </optgroup>
-        </select>
-    </div>
-    <div class="col-lg-2 mt-1 mb-1">
-        <select class="form-select" id="shortcut_col_color_3">
-            <optgroup name="shortcut-col-color">
-                <option name="blue" value="bg-primary">Blue</option>
-                <option name="red" value="bg-danger">Red</option>
-                <option name="green" value="bg-success">Green</option>
-                <option name="yellow" value="bg-warning">Yellow</option>
-                <option name="black" value="bg-black">Black</option>
-                <option name="dark" value="bg-dark">Dark</option>
-                <option name="white" value="bg-white">White</option>
-                <option name="transparent" value="bg-transparent">Transparent</option>
-            </optgroup>
-        </select>
-    </div>
-    <div class="col"></div>
-    <div class="col-lg-2 mt-1 mb-1">
-        <select class="form-select" id="shortcut_transition">
-            <optgroup name="shortcut-transition">
-                <option value="glow" name="glow"></option>
-                <option value="spin" name="spin"></option>
-                <option value="rotate" name="rotate"></option>
-                <option value="move_down" name="move_down"></option>
-                <option value="move_up" name="move_up"></option>
-                <option value="scale_down" name="scale_down"></option>
-                <option value="scale_up" name="scale_up"></option>
-                <option value="none" name="none"></option>
-            </optgroup>
-        </select>
-    </div>
-    <div class="col-lg-2 mt-1 mb-1">
-        <select class="form-select" id="shortcut_shape">
-            <optgroup name="shortcut-shape">
-                <option value="square" name="square"></option>
-                <option value="circle" name="circle"></option>
-            </optgroup>
-        </select>
-    </div>
-    <div class="col-lg-2 mt-1 mb-1">
-        <select class="form-select" id="shortcut_size">
-            <optgroup name="shortcut-size">
-                <option value="m-0">5</option>
-                <option value="m-1">4</option>
-                <option value="m-2">3</option>
-                <option value="m-3">2</option>
-                <option value="m-4">1</option>
-                <option value="m-5">0</option>
-            </optgroup>
-        </select>
-    </div>
-    <div class="col-lg-2 mt-1 mb-1">
-        <select class="form-select" id="shortcut_width">
-            <optgroup name="shortcut-width">
-                <option value="col-sm-1">12 (8.3%)</option>
-                <option value="col-sm-2">6 (16.6%)</option>
-                <option value="col-sm-3">4 (25%)</option>
-                <option value="col-sm-4">3 (33.3%)</option>
-                <option value="col-sm-5">2 (41.6%)</option>
-                <option value="col-sm-6">2 (50%)</option>
-                <option value="col-sm-7">1 (58.3%)</option>
-                <option value="col-sm-8">1 (66.6%)</option>
-                <option value="col-sm-9">1 (75%)</option>
-                <option value="col-sm-10">1 (83.3%)</option>
-                <option value="col-sm-11">1 (91.6%)</option>
-                <option value="col-sm-12">1 (100%)</option>
-            </optgroup>
-        </select>
-    </div>
-</div>
 </div>
 <!-- Shortcut settings -->
-<div class="row flex-column m-0 mb-1" id="shortcut-settings-container">
-    <div class="col rounded p-1 mx-0 my-1" id="shortcut-setting" hidden>
+<div class="row flex-column m-0" id="shortcut-settings-container">
+    <div class="col rounded my-1" id="shortcut-setting" hidden>
         <div class="row">
-            <div class="col-1">
-                <button class="btn btn-danger border-dark fw-bold w-100" type="button" id="remove_">
+            <div class="col-lg-1 my-1">
+                <button class="btn btn-danger border-dark w-100" type="button" id="remove_">
                     <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#trash-fill"/></svg>
                 </button>
             </div>
-            <div class="col-3">
+            <div class="col-lg-3 my-1">
                 <div class="input-group">
                     <span class="input-group-text" name="link-label"></span>
                     <input type="text" class="form-control" id="select_link_" list="suggestions">
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-lg-3 my-1">
                 <div class="input-group">
                     <span class="input-group-text" name="name-label"></span>
                     <input type="text" class="form-control" id="select_name_">
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-lg-3 my-1">
                 <input class="form-control" type="file" id="select_img_" accept=".jpg, .jpeg, .png, .gif"/>
             </div>
-            <div class="col-1">
-                <button class="btn btn-primary border-dark fw-bold w-100" type="button" id="set_back_">
+            <div class="col-lg-1 my-1">
+                <button class="btn btn-primary border-dark w-100" type="button" id="set_back_">
                     <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#fallback-fill"/></svg>
                 </button>
             </div>
-            <div class="col-1">
-                <button class="btn btn-primary border-dark fw-bold w-100" type="button" id="reset_img_">
+            <div class="col-lg-1 my-1">
+                <button class="btn btn-primary border-dark w-100" type="button" id="reset_img_">
                     <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#reset-fill"/></svg>
                 </button>
             </div>
@@ -287,8 +288,8 @@
 </div>
 <!-- Add Shortcut Button -->
 <div class="row rounded p-1 mx-0 my-1 mb-2 bg-primary">
-    <div class="col-12 d-flex justify-content-center">
-        <button type="button" id="add_shortcut" class="btn btn-success border-dark fw-bold w-25">
+    <div class="col-12 text-center">
+        <button type="button" id="add_shortcut" class="btn btn-success border-dark w-25">
             <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#plus-fill"/></svg>
         </button>
     </div>
@@ -297,19 +298,19 @@
 <div class="row g-2">
     <div class="col-lg-12">
         <div class="alert alert-primary d-flex flex-row m-0" role="alert">
-            <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+            <svg width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
             <div name="reset-default-icon-info"></div>
         </div>
     </div>
     <div class="col-lg-6">
         <div class="alert alert-primary d-flex flex-row m-0" role="alert">
-            <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+            <svg width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
             <div name="delete-link"></div>
         </div>
     </div>
     <div class="col-lg-6">
         <div class="alert alert-primary d-flex flex-row m-0" role="alert">
-            <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+            <svg width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
             <div name="image-link"></div>
         </div>
     </div>
@@ -317,18 +318,18 @@
 <hr class="border-2 border-primary">
 <!-- Background settings -->
 <div class="row bg-success rounded m-0 mb-2 d-flex flex-row align-items-center">
-    <div class="col-4 fw-bold text-white" name="bg-settings"></div>
-    <div class="col-4">
+    <div class="col-lg-4 fw-bold text-white my-1" name="bg-settings"></div>
+    <div class="col-lg-4 my-1">
         <div class="input-group">
             <span class="input-group-text" name="bg-fallback-color-label"></span>
             <input type="color" class="form-control form-control-color" id="bg_color">
         </div>
     </div>
-    <div class="col-3 mt-1 mb-1">
+    <div class="col-lg-3 my-1">
         <input class="form-control" type="file" id="select_bg" accept=".jpg, .jpeg, .png, .gif"/>
     </div>
-    <div class="col-1">
-        <button type="button" class="btn btn-danger border-dark fw-bold w-100" id="delete_bg">
+    <div class="col-lg-1 my-1">
+        <button type="button" class="btn btn-danger border-dark w-100" id="delete_bg">
             <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#trash-fill"/></svg>
         </button>
     </div>
@@ -336,22 +337,22 @@
 <div class="row g-2">
     <div class="col-lg-12">
         <div class="alert alert-primary d-flex flex-row m-0" role="alert">
-            <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
+            <svg width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
             <div name="bg-img-upload-info"></div>
         </div>
     </div>
 </div>
 <hr class="border-2 border-primary">
 <!-- Firefox Watermark Settings  -->
-<div class="row bg-warning text-white rounded m-0 mb-2 d-flex flex-row align-items-center">
-    <div class="col-lg-3 mt-1 mb-1">
-        <div class="form-check form-switch mt-1 mb-1">
+<div class="row bg-warning rounded m-0 mb-2 d-flex flex-row align-items-center">
+    <div class="col-lg-3 my-1">
+        <div class="form-check form-switch my-1">
             <input class="form-check-input" type="checkbox" id="enable_firefox_watermark">
             <label class="form-check-label fw-bold text-black" for="enable_firefox_watermark" name="enable-firefox-label"></label>
         </div>
     </div>
     <div class="col"></div>
-    <div class="col-lg-2 mt-1 mb-1">
+    <div class="col-lg-2 my-1">
         <select class="form-select" id="firefox_color">
             <optgroup name="color-label">
                 <option name="white" value="text-white"></option>
@@ -366,14 +367,14 @@
 </div>
 <!-- Clock Settings  -->
 <div class="row bg-primary text-white rounded m-0 mb-2 d-flex flex-row align-items-center" id="clock_settings">
-    <div class="col-lg-3 mt-1 mb-1">
-        <div class="form-check form-switch mt-1 mb-1">
+    <div class="col-lg-3 my-1">
+        <div class="form-check form-switch my-1">
             <input class="form-check-input" type="checkbox" id="enable_clock">
             <label class="form-check-label fw-bold" for="enable_clock" name="enable-clock-label"></label>
         </div>
     </div>
     <div class="col"></div>
-    <div class="col-lg-1 mt-1 mb-1">
+    <div class="col-lg-1 my-1">
         <select class="form-select" id="clock_time_format">
             <!-- <optgroup name="clock-time-format-label"> -->
                 <option value="true">12</option>
@@ -381,7 +382,7 @@
             <!-- </optgroup> -->
         </select>
     </div>
-    <div class="col-lg-3 mt-1 mb-1">
+    <div class="col-lg-3 my-1">
         <select class="form-select" id="clock_format">
             <!-- <optgroup name="clock-format-label"> -->
                 <option value="h:m">h:m</option>
@@ -397,7 +398,7 @@
             <!-- </optgroup> -->
         </select>
     </div>
-    <div class="col-lg-2 mt-1 mb-1">
+    <div class="col-lg-2 my-1">
         <select class="form-select" id="clock_color">
             <optgroup name="color-label">
                 <option name="white" value="text-white"></option>
@@ -412,8 +413,8 @@
 </div>
 <!-- Note Settings  -->
 <div class="row bg-danger text-white rounded m-0 mb-2 d-flex flex-row align-items-center">
-    <div class="col-lg-3 mt-1 mb-1">
-        <div class="form-check form-switch mt-1 mb-1">
+    <div class="col-lg-3 my-1">
+        <div class="form-check form-switch my-1">
             <input class="form-check-input" type="checkbox" id="enable_notes">
             <label class="form-check-label fw-bold" for="enable_notes" name="enable-notes-label"></label>
         </div>
@@ -421,32 +422,32 @@
 </div>
 <!-- Currency API settings -->
 <div class="row bg-success rounded m-0 mb-2 d-flex flex-row align-items-center" id="currency_setting">
-    <div class="col-lg-5 mt-1 mb-1">
+    <div class="col-lg-5 my-1">
         <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" id="enable_api">
             <label class="form-check-label fw-bold text-white" for="enable_api" name="enable-api-label"></label>
         </div>
     </div>
-    <div class="col-lg-1 mt-1 mb-1">
+    <div class="col-lg-1 my-1">
         <select class="form-select" id="base_currency">
             <optgroup name="base-currency-label"></optgroup>
         </select>
     </div>
-    <div class="col-lg-1 fw-bold text-center text-white mt-1 mb-1" name="currencies-label">
+    <div class="col-lg-1 fw-bold text-center text-white my-1" name="currencies-label">
     </div>
-    <div class="col-lg-1 mt-1 mb-1">
+    <div class="col-lg-1 my-1">
         <select class="form-select" id="currency_option_0">
         </select>
     </div>
-    <div class="col-lg-1 mt-1 mb-1">
+    <div class="col-lg-1 my-1">
         <select class="form-select" id="currency_option_1">
         </select>
     </div>
-    <div class="col-lg-1 mt-1 mb-1">
+    <div class="col-lg-1 my-1">
         <select class="form-select" id="currency_option_2">
         </select>
     </div>
-    <div class="col-lg-2 mt-1 mb-1">
+    <div class="col-lg-2 my-1">
         <select class="form-select" id="currency_container_color">
             <optgroup name="color-label">
                 <option name="white" value="bg-white"></option>
