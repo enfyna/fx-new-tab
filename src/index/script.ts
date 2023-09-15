@@ -105,6 +105,12 @@ function set_local_save(){
 	}
 	catch{
 		console.error('Caching cant be used!\nExceeded 5MB limit.');
+		console.info('\
+To optimize loading times through caching, consider the following steps:\n\
+1) Compress high-resolution background images to reduce their size.\n\
+2) Remove unnecessary shortcuts if you have an excessive number of them.\n\
+3) Increase the localStorage storage limit by adjusting the value of \"dom.storage.default_quota\" in about:config. Please note: Increasing the localStorage storage limit using \"dom.storage.default_quota\" in about:config will affect all websites. Be cautious when adjusting this setting."\
+		');
 		clear_local_save();
 	}
 }
