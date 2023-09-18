@@ -76,6 +76,19 @@
 	<option value="LTC">LTC</option>
 </optgroup>
 
+<select class="col form-select m-1" id="shortcut_col_color" hidden>
+    <optgroup name="shortcut-col-color">
+        <option name="blue" value="bg-primary">Blue</option>
+        <option name="red" value="bg-danger">Red</option>
+        <option name="green" value="bg-success">Green</option>
+        <option name="yellow" value="bg-warning">Yellow</option>
+        <option name="black" value="bg-black">Black</option>
+        <option name="dark" value="bg-dark">Dark</option>
+        <option name="white" value="bg-white">White</option>
+        <option name="transparent" value="bg-transparent">Transparent</option>
+    </optgroup>
+</select>
+
 <body>
 
 <div class="container-fluid bg-black">
@@ -95,8 +108,7 @@
 <div id="shortcut_shape_settings">
     <!-- Shortcut Container settings -->
     <div class="row bg-success rounded m-0 mb-1 d-flex flex-row align-items-center">
-        <div class="col-lg-4 my-1 text-black fw-bold" name="shortcut-container-settings"></div>
-        <div class="col"></div>
+        <div class="col-lg-6 my-1 text-black fw-bold" name="shortcut-container-settings"></div>
         <div class="col-lg-2 my-1">
             <select class="form-select" id="shortcut_container_width">
                 <optgroup name="shortcut-width">
@@ -136,65 +148,7 @@
     </div>
     <!-- Shortcut Shape settings -->
     <div class="row bg-warning rounded m-0 mb-1 d-flex flex-row align-items-center">
-        <div class="col-lg-3 my-1 fw-bold text-black" name="shortcut-settings"></div>
-        <div class="col-lg-1"></div>
-        <div class="col-lg-2 my-1">
-            <select class="form-select" id="shortcut_col_color_0">
-                <optgroup name="shortcut-col-color">
-                    <option name="blue" value="bg-primary">Blue</option>
-                    <option name="red" value="bg-danger">Red</option>
-                    <option name="green" value="bg-success">Green</option>
-                    <option name="yellow" value="bg-warning">Yellow</option>
-                    <option name="black" value="bg-black">Black</option>
-                    <option name="dark" value="bg-dark">Dark</option>
-                    <option name="white" value="bg-white">White</option>
-                    <option name="transparent" value="bg-transparent">Transparent</option>
-                </optgroup>
-            </select>
-        </div>
-        <div class="col-lg-2 my-1">
-            <select class="form-select" id="shortcut_col_color_1">
-                <optgroup name="shortcut-col-color">
-                    <option name="blue" value="bg-primary">Blue</option>
-                    <option name="red" value="bg-danger">Red</option>
-                    <option name="green" value="bg-success">Green</option>
-                    <option name="yellow" value="bg-warning">Yellow</option>
-                    <option name="black" value="bg-black">Black</option>
-                    <option name="dark" value="bg-dark">Dark</option>
-                    <option name="white" value="bg-white">White</option>
-                    <option name="transparent" value="bg-transparent">Transparent</option>
-                </optgroup>
-            </select>
-        </div>
-        <div class="col-lg-2 my-1">
-            <select class="form-select" id="shortcut_col_color_2">
-                <optgroup name="shortcut-col-color">
-                    <option name="blue" value="bg-primary">Blue</option>
-                    <option name="red" value="bg-danger">Red</option>
-                    <option name="green" value="bg-success">Green</option>
-                    <option name="yellow" value="bg-warning">Yellow</option>
-                    <option name="black" value="bg-black">Black</option>
-                    <option name="dark" value="bg-dark">Dark</option>
-                    <option name="white" value="bg-white">White</option>
-                    <option name="transparent" value="bg-transparent">Transparent</option>
-                </optgroup>
-            </select>
-        </div>
-        <div class="col-lg-2 my-1">
-            <select class="form-select" id="shortcut_col_color_3">
-                <optgroup name="shortcut-col-color">
-                    <option name="blue" value="bg-primary">Blue</option>
-                    <option name="red" value="bg-danger">Red</option>
-                    <option name="green" value="bg-success">Green</option>
-                    <option name="yellow" value="bg-warning">Yellow</option>
-                    <option name="black" value="bg-black">Black</option>
-                    <option name="dark" value="bg-dark">Dark</option>
-                    <option name="white" value="bg-white">White</option>
-                    <option name="transparent" value="bg-transparent">Transparent</option>
-                </optgroup>
-            </select>
-        </div>
-        <div class="col"></div>
+        <div class="col-lg-4 my-1 fw-bold text-black" name="shortcut-settings"></div>
         <div class="col-lg-2 my-1">
             <select class="form-select" id="shortcut_transition">
                 <optgroup name="shortcut-transition">
@@ -246,6 +200,23 @@
                     <option value="col-sm-12">1 (100%)</option>
                 </optgroup>
             </select>
+        </div>
+    </div>
+    <!-- Shortcut Color settings -->
+    <div class="row bg-primary rounded m-0 mb-1 d-flex flex-row align-items-center">
+        <div class="col-lg-10 my-1 fw-bold text-black" name="shortcut-color-settings"></div>
+        <div class="col-lg-1 my-1">
+            <button class="btn btn-success border-dark w-100" type="button" id="add_shortcut_col_color">
+                <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#plus-fill"/></svg>
+            </button>
+        </div>
+        <div class="col-lg-1 my-1">
+            <button class="btn btn-danger border-dark w-100" type="button" id="remove_shortcut_col_color">
+                <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#trash-fill"/></svg>
+            </button>
+        </div>
+        <div class="col-lg-12">
+            <div class="row m-0" id="shortcut_color_container"></div>
         </div>
     </div>
 </div>

@@ -173,7 +173,7 @@ async function configure_shortcuts(){
 
 		const shortcut_node = shortcut_base_node.cloneNode(true) as HTMLDivElement;
 		const link = shortcut_node.getElementsByTagName('a')[0] as HTMLAnchorElement;
-		link.classList.add(colors[i % 4]);
+		link.classList.add(colors[i % colors.length]);
 		link.href = shortcut.link;
 
 		if (!circle){

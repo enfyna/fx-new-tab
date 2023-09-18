@@ -119,12 +119,13 @@ function get_bg_color() : string{
 let topSites : shortcut[];
 
 async function configure_shortcut_settings(){
+	const colors = get_shortcut_col_colors();
+
 	const shortcut_shape_settings = document.getElementById('shortcut_shape_settings');
 	shortcut_shape_settings.addEventListener('change',(event)=>{
 		const input = event.target as HTMLSelectElement;
 		switch (true) {
 			case input.id.startsWith('shortcut_col_color'):
-				const colors = get_shortcut_col_colors();
 				colors[input.id.split('_')[3]] = input.value.trim();
 				save.shortcut_col_colors = colors;
 				break;
@@ -134,14 +135,9 @@ async function configure_shortcut_settings(){
 			}
 		set_save();
 	});
-	const colors = get_shortcut_col_colors();
 	const selects = shortcut_shape_settings.getElementsByTagName('select');
 	for (const select of selects) {
-		const id = select.id.split('_')[3];
 		switch (select.id) {
-			case 'shortcut_col_color_' + id:
-				select.value = colors[id];
-				break;
 			case 'shortcut_transition':
 				select.value = get_shortcut_transition();
 				break;
@@ -165,6 +161,45 @@ async function configure_shortcut_settings(){
 				break;
 		}
 	}
+	const shortcut_color_container = document.getElementById('shortcut_color_container') as HTMLDivElement;
+	const shortcut_col_color_select = document.getElementById('shortcut_col_color');
+
+	function add_shortcut_col_color(idx : number) {
+		const select = shortcut_col_color_select.cloneNode(true) as HTMLSelectElement;
+
+		for (let i = idx; i >= colors.length; i--) {
+			colors.push('bg-primary');
+		}
+
+		select.value = colors[idx];
+
+		select.id = select.id + '_' + idx; 
+		select.hidden = false;
+		shortcut_color_container.append(select);
+	}
+
+	function remove_shortcut_col_color() {
+		colors.pop();
+		shortcut_color_container.lastChild.remove();
+	}
+
+	for (let i = 0; i < colors.length; i++) {
+		add_shortcut_col_color(i);
+	}
+
+	shortcut_shape_settings.addEventListener('click',(event)=>{
+		const inp = event.target as HTMLInputElement;
+			switch (inp.id) {
+				case 'add_shortcut_col_color':
+					add_shortcut_col_color(colors.length);
+					break;
+				case 'remove_shortcut_col_color':
+					remove_shortcut_col_color();
+					break;
+			}
+			set_save();
+	});
+
 	const shortcut_container = document.getElementById("shortcut-settings-container") as HTMLDivElement;
 
 	const suggestions = document.createElement('datalist');
@@ -200,7 +235,8 @@ async function configure_shortcut_settings(){
 
 function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivElement{
 	elm = elm.cloneNode(true) as HTMLDivElement;
-	const color = get_shortcut_col_colors()[id % 4];
+	const colors = get_shortcut_col_colors()
+	const color = colors[id % colors.length];
 	elm.classList.add(color);
 	elm.hidden = false;
 	let shortcut = save.shortcuts[id] as shortcut;
@@ -586,6 +622,13 @@ function translate() : void {
 			"de": "Verknüpfungscontainer-Einstellungen",
 			"es": "Configuración del contenedor de accesos directos"
 		},
+		{
+			"name": "shortcut-color-settings",
+			"tr": "Kısayol Sütun Renkleri",
+			"en": "Shortcut Column Colors",
+			"de": "Verknüpfungsspaltenfarben",
+			"es": "Colores de Columnas de Acceso Directo"
+		},		
 		{
 			"name": "shortcut-v-align",
 			"tr": "Dikey Hizalanma",
