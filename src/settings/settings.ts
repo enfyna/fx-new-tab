@@ -196,6 +196,8 @@ async function configure_shortcut_settings(){
 				case 'remove_shortcut_col_color':
 					remove_shortcut_col_color();
 					break;
+				default:
+					return;
 			}
 			set_save();
 	});
