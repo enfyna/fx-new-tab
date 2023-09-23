@@ -223,11 +223,23 @@ async function configure_shortcut_settings(){
 	}
 	shortcut_setting.remove();
 
-	const add_shortcut_button = document.getElementById('add_shortcut');
-	add_shortcut_button.addEventListener('click',()=>{
+	let random_recommend_idx = Date.now();
+
+	const add_shortcut_container = document.getElementById('add_shortcut_container');
+	add_shortcut_container.addEventListener('click',(event)=>{
+		const inp = event.target as HTMLInputElement;
+		let sh : shortcut;
+			switch (inp.id) {
+				case 'add_shortcut':
+					sh = {link: '',name: '',img: ''};
+					break;
+				case 'add_shortcut_fill':
+					sh = topSites[random_recommend_idx++ % topSites.length];
+					break;
+			}
 		shortcut_container.appendChild(
 			create_shortcut_setting(
-				save.shortcuts.push({link: '',name: '',img: ''}) - 1,
+				save.shortcuts.push(sh) - 1,
 				shortcut_setting
 			)
 		);
@@ -242,6 +254,12 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 	elm.classList.add(color);
 	elm.hidden = false;
 	let shortcut = save.shortcuts[id] as shortcut;
+
+	if(!shortcut){
+		shortcut = {name:'',link:'',img:''};
+		save.shortcuts[id] = shortcut;
+		set_save();
+	}
 
 	const inputs = elm.getElementsByTagName('input');
 	for(let i = 0; i < inputs.length; i++){
