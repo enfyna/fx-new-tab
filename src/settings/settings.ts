@@ -236,6 +236,8 @@ async function configure_shortcut_settings(){
 				case 'add_shortcut_fill':
 					sh = topSites[random_recommend_idx++ % topSites.length];
 					break;
+				default:
+					return;
 			}
 		shortcut_container.appendChild(
 			create_shortcut_setting(
