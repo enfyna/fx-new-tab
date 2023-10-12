@@ -56,6 +56,18 @@ function minifySettingsJS() {
         .pipe(gulp.dest('build'));
 }
 
+function minifyBackgroundJS() {
+    return gulp.src('tsc/background.js')
+        .pipe(terser({
+            keep_fnames: false,
+            mangle: {
+                toplevel: true,
+                keep_fnames: false,
+            },
+        }))
+        .pipe(gulp.dest('build'));
+}
+
 function minifyIndexBootstrapCSS() {
     return gulp.src('bootstrap/bootstrap.css')
         .pipe(purify(['src/index/index.html'], {
@@ -104,6 +116,7 @@ exports.minify = series(
     minifyIndexCSS,
     minifySettings,
     minifySettingsJS,
+    minifyBackgroundJS,
 );
 exports.minifyCSS = series(
     minifyIndexBootstrapCSS,
