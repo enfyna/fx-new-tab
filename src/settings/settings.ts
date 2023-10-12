@@ -954,10 +954,10 @@ function translate() : void {
 		},
 		{
 			"name": "github-repo-info",
-			"tr": "Herhangi bir hata ile karşılaşırsanız veya yeni bir özellik isterseniz, buradan yeni bir issue açabilirsiniz: https://github.com/enfyna/fx-new-tab/issues",
-			"en": "If you encounter any issues or have a feature request, you can open a new issue at: https://github.com/enfyna/fx-new-tab/issues",
-			"de": "Wenn Sie auf einen Fehler gestoßen sind oder ein neues Feature wünschen, können Sie hier eine neue Issue öffnen: https://github.com/enfyna/fx-new-tab/issues",
-			"es": "Si has encontrado algún error o deseas una nueva función, puedes abrir un issue aquí: https://github.com/enfyna/fx-new-tab/issues",
+			"tr": "Herhangi bir hata ile karşılaşırsanız veya yeni bir özellik isterseniz, buradan yeni bir issue açabilirsiniz:",
+			"en": "If you encounter any issues or have a feature request, you can open a new issue at:",
+			"de": "Wenn Sie auf einen Fehler gestoßen sind oder ein neues Feature wünschen, können Sie hier eine neue Issue öffnen:",
+			"es": "Si has encontrado algún error o deseas una nueva función, puedes abrir un issue aquí:",
 		},
 		{
 			"name": "national-currencies",
