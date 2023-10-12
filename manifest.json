@@ -10,12 +10,20 @@
   },  
   "permissions": [
     "storage",
-    "topSites"
+    "topSites",
+    "tabs"
   ],
   "chrome_url_overrides": { 
     "newtab": "index.html" 
   },
   "chrome_settings_overrides": {
     "homepage": "index.html"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon.svg",
+    "default_title": "Add shortcut"
+  },
+  "background": {
+    "scripts": ["build/background.js"]
   }
 }
