@@ -349,7 +349,7 @@ function get_notes() : note[] {
 }
 
 function is_notes_enabled() : boolean {
-	return save.is_notes_enabled ?? false;
+	return save.is_notes_enabled ?? true;
 }
 
 function configure_notes(){
@@ -416,7 +416,7 @@ function get_base_currency() : string{
 }
 
 function is_currency_rates_enabled() : boolean {
-	return save.is_currency_rates_enabled ?? false;
+	return save.is_currency_rates_enabled ?? true;
 }
 
 function did_a_day_pass() : boolean {
@@ -510,7 +510,7 @@ function get_currency_container_color() : string{
 
 /// Clock
 function is_clock_enabled() : boolean{
-	return save.is_clock_enabled ?? false;
+	return save.is_clock_enabled ?? true;
 }
 
 function configure_clock() {

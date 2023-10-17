@@ -414,7 +414,7 @@ function configure_note_settings() {
 }
 
 function is_notes_enabled() : boolean {
-	return save.is_notes_enabled ?? false;
+	return save.is_notes_enabled ?? true;
 }
 
 /// Clock
@@ -454,7 +454,7 @@ function configure_clock_settings(){
 }
 
 function is_clock_enabled() : boolean{
-	return save.is_clock_enabled ?? false;
+	return save.is_clock_enabled ?? true;
 }
 
 function get_clock_color() : string{
@@ -541,7 +541,7 @@ function configure_currency_settings(){
 }
 
 function is_currency_rates_enabled() : boolean {
-	return save.is_currency_rates_enabled ?? false;
+	return save.is_currency_rates_enabled ?? true;
 }
 
 function get_currencies() : currency[]{
