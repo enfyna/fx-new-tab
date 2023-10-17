@@ -5,6 +5,37 @@ body {
     background-position: center center;
 }
 
+/* Additional Shortcut Sizes */
+
+.twenty_w {
+    width: 5%;
+    flex: 0 0 auto;
+}
+.fifteen_w {
+    width: 6.6%;
+    flex: 0 0 auto;
+}
+.ten_w {
+    width: 10%;
+    flex: 0 0 auto;
+}
+.nine_w {
+    width: 11.1%;
+    flex: 0 0 auto;
+}
+.eight_w {
+    width: 12.5%;
+    flex: 0 0 auto;
+}
+.seven_w {
+    width: 14.2%;
+    flex: 0 0 auto;
+}
+.five_w {
+    width: 20%;
+    flex: 0 0 auto;
+}
+
 /* Transitions */
 
 .move_up {
