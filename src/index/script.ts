@@ -214,6 +214,20 @@ async function find_user_sites() {
 		};
 		shortcuts.push(shortcut);
 	});
+
+	if(shortcuts.length == 0){
+		// If the user's browsing history contains 
+		// no shortcuts, add the repo URL.
+		// This ensures that when a user installs the addon 
+		// for the first time, the main page is not empty.
+		const shortcut : shortcut = {
+			name: 'Github Repo',
+			link: 'https://github.com/enfyna/fx-new-tab',
+			img: '',
+		};
+		shortcuts.push(shortcut);
+	}
+
 	return shortcuts;
 }
 
