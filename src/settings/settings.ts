@@ -672,10 +672,10 @@ function translate() : void {
 		},
 		{
 			"name": "delete-link",
-			"tr": "Bir kısayolun linkini silerek ana menüden kaldırabilirsin.",
-			"en": "Delete shortcut link to remove it from the main menu.",
-			"de": "Entfernen Sie die URL, um sie aus dem Hauptmenü zu löschen.",
-			"es": "Elimina el URL para quitarlo del menú principal.",
+			"tr": "Kısayollarını sürükleyerek yerini değiştirebilirsin.",
+			"en": "You can drag a shortcut to change its place.",
+			"de": "Du kannst eine Verknüpfung ziehen, um ihren Platz zu ändern.",
+			"es": "Puedes arrastrar un acceso directo para cambiar su ubicación.",
 		},
 		{
 			"name": "image-link",
