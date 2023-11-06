@@ -34,6 +34,9 @@
     <symbol id="fallback-fill" fill="currentColor" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
     </symbol>
+    <symbol id="dots-horizontal" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M2 8a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+    </symbol>
 </svg>
 
 <optgroup id="national-currencies" name="national-currencies" hidden>
@@ -264,7 +267,7 @@
                     <input type="text" class="form-control" id="select_name_">
                 </div>
             </div>
-            <div class="col-lg-3 my-1">
+            <div class="col-lg-2 my-1">
                 <input class="form-control" type="file" id="select_img_" accept=".jpg, .jpeg, .png, .gif"/>
             </div>
             <div class="col-lg-1 my-1">
@@ -276,6 +279,9 @@
                 <button class="btn btn-primary border-dark w-100" type="button" id="reset_img_">
                     <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#reset-fill"/></svg>
                 </button>
+            </div>
+            <div class="col-lg-1 my-1 text-center">
+                <svg width="24" height="24" role="img" class="h-100 text-white"><use xlink:href="#dots-horizontal"/></svg>
             </div>
         </div>
     </div>

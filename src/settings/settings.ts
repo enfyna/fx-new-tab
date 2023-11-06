@@ -61,6 +61,7 @@ get_save().then(ready)
 
 async function ready(){
 	configure_shortcut_settings();
+	configure_drag_and_drop();
 	configure_background_settings();
 	configure_clock_settings();
 	configure_note_settings();
@@ -79,6 +80,7 @@ const save_info = document.getElementById('save-info');
 async function set_save(){
 	saving = true;
 	save_info.hidden = false;
+	localStorage.clear();
 	await browser.storage.local.set(save);
 	saving = false;
 	save_info.hidden = true;
@@ -217,8 +219,9 @@ async function configure_shortcut_settings(){
 
 	let shortcut_setting = document.getElementById("shortcut-setting") as HTMLDivElement;
 	for (let i = 0; i < save.shortcuts.length; i++) {
-		shortcut_container.appendChild(
-			create_shortcut_setting(i, shortcut_setting)
+		shortcut_container.insertBefore(
+			create_shortcut_setting(i, shortcut_setting),
+			suggestions
 		);
 	}
 	shortcut_setting.remove();
@@ -401,6 +404,76 @@ function get_shortcut_container_h_align() : string{
 
 function get_shortcut_container_width() : string{
 	return save.shortcut_container_width ?? 'col-md-6';
+}
+
+/// Drag & Drop
+let draggedItem : HTMLElement = null;
+let did_change_place : boolean = false;
+
+function configure_drag_and_drop(){	
+	function move_shortcut(elm : HTMLElement){
+		for (; elm; elm = elm.parentElement){		
+			if (elm.draggable) {
+				if (draggedItem != elm) {
+					const parent = elm.parentNode;
+					if(parent.firstChild == elm){
+						parent.insertBefore(draggedItem, parent.firstChild);
+					}
+					else{
+						parent.insertBefore(draggedItem, elm.nextSibling);
+					}
+					did_change_place = true;
+					return;
+				}
+				return;
+			}
+			if(!elm.parentElement) 
+				return;
+		}
+	}
+
+	document.addEventListener('dragstart', (e) => {
+		draggedItem = e.target as HTMLElement;
+		var parent = draggedItem.parentElement;
+		for(let i = 0; i < parent.childNodes.length; i++){
+			if(parent.childNodes[i] == draggedItem){
+				e.dataTransfer.setData('text', i.toString());
+				break;
+			}
+		}
+	});
+
+	document.addEventListener('dragover', (e) => {
+		e.preventDefault();
+		move_shortcut(e.target as HTMLElement);
+	});
+
+	document.addEventListener('drop', (e) => {
+		e.preventDefault();
+		var elm = e.target as HTMLElement;
+		move_shortcut(elm)
+		if(did_change_place){
+			const start_id = parseInt(e.dataTransfer.getData('text'));
+			var parent = draggedItem.parentElement;
+			let end_id = -1;
+			for(let i = 0; i < parent.childNodes.length; i++){
+				if(parent.childNodes[i] == draggedItem){
+					end_id = i;
+					break;
+				}
+			}
+			if (end_id == -1 || start_id == end_id) return;
+			const sh = save.shortcuts[start_id];
+			save.shortcuts.splice(start_id,1);
+			save.shortcuts.splice(end_id, 0, sh);
+			set_save();	
+		}
+	});
+	
+	document.addEventListener('dragend', (e) => {
+		draggedItem = null;
+		did_change_place = false;
+	});
 }
 
 /// Notes
