@@ -409,6 +409,7 @@ function get_shortcut_container_width() : string{
 /// Drag & Drop
 let draggedItem : HTMLElement = null;
 let did_change_place : boolean = false;
+let start_id : number = -1;
 
 function configure_drag_and_drop(){	
 	function move_shortcut(elm : HTMLElement){
@@ -434,10 +435,10 @@ function configure_drag_and_drop(){
 
 	document.addEventListener('dragstart', (e) => {
 		draggedItem = e.target as HTMLElement;
-		var parent = draggedItem.parentElement;
-		for(let i = 0; i < parent.childNodes.length; i++){
-			if(parent.childNodes[i] == draggedItem){
-				e.dataTransfer.setData('text', i.toString());
+		var siblings = draggedItem.parentElement.childNodes;
+		for(let i = 0; i < siblings.length; i++){
+			if(siblings[i] == draggedItem){
+				start_id = i;
 				break;
 			}
 		}
@@ -453,7 +454,6 @@ function configure_drag_and_drop(){
 		var elm = e.target as HTMLElement;
 		move_shortcut(elm)
 		if(did_change_place){
-			const start_id = parseInt(e.dataTransfer.getData('text'));
 			var parent = draggedItem.parentElement;
 			let end_id = -1;
 			for(let i = 0; i < parent.childNodes.length; i++){
@@ -464,7 +464,7 @@ function configure_drag_and_drop(){
 			}
 			if (end_id == -1 || start_id == end_id) return;
 			const sh = save.shortcuts[start_id];
-			save.shortcuts.splice(start_id,1);
+			save.shortcuts.splice(start_id, 1);
 			save.shortcuts.splice(end_id, 0, sh);
 			set_save();	
 		}
