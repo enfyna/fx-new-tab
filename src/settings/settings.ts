@@ -413,23 +413,20 @@ let start_id : number = -1;
 
 function configure_drag_and_drop(){	
 	function move_shortcut(elm : HTMLElement){
-		for (; elm; elm = elm.parentElement){		
+		for (; elm.parentElement; elm = elm.parentElement){		
 			if (elm.draggable) {
 				if (draggedItem != elm) {
-					const parent = elm.parentNode;
+					const parent = elm.parentElement;
 					if(parent.firstChild == elm){
 						parent.insertBefore(draggedItem, parent.firstChild);
 					}
 					else{
-						parent.insertBefore(draggedItem, elm.nextSibling);
+						elm.after(draggedItem);
 					}
 					did_change_place = true;
-					return;
 				}
 				return;
 			}
-			if(!elm.parentElement) 
-				return;
 		}
 	}
 
@@ -451,8 +448,6 @@ function configure_drag_and_drop(){
 
 	document.addEventListener('drop', (e) => {
 		e.preventDefault();
-		var elm = e.target as HTMLElement;
-		move_shortcut(elm)
 		if(did_change_place){
 			var parent = draggedItem.parentElement;
 			let end_id = -1;
