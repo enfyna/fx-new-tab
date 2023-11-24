@@ -111,12 +111,8 @@ To optimize loading times through caching, consider the following steps:\n\
 2) Remove unnecessary shortcuts if you have an excessive number of them.\n\
 3) Increase the localStorage storage limit by adjusting the value of \"dom.storage.default_quota\" in about:config. Please note: Increasing the localStorage storage limit using \"dom.storage.default_quota\" in about:config will affect all websites. Be cautious when adjusting this setting."\
 		');
-		clear_local_save();
+		localStorage.clear();
 	}
-}
-
-function clear_local_save(){
-	localStorage.clear();
 }
 
 /// Background
@@ -134,7 +130,7 @@ async function configure_shortcuts(){
 		load_text.innerText = 'Finding Shortcuts Please Wait...';
 		save.shortcuts = await find_user_sites();
 		await set_save();
-		clear_local_save();
+		localStorage.clear();
 		load_text.innerText = '';
 	}
 
@@ -257,7 +253,7 @@ async function get_shortcut_img(i : number, node : HTMLImageElement){
 			save.shortcuts[i].img = dataurl;
 			node.src = dataurl;
 			set_save();
-			clear_local_save();
+			localStorage.clear();
 		};
 		img.src = b64;
 	} catch (error) {
@@ -279,7 +275,7 @@ async function get_shortcut_img(i : number, node : HTMLImageElement){
 		node.src = image;
 		save.shortcuts[i].img = image;
 		set_save();
-		clear_local_save();
+		localStorage.clear();
 	}
 }
 
@@ -368,7 +364,7 @@ function configure_notes(){
 				notes[index].note = new_note;
 				save.notes = notes;
 				await set_save();
-				clear_local_save();
+				localStorage.clear();
 				button.hidden = false;
 				break;
 			}
@@ -421,7 +417,7 @@ async function configure_currencies(){
 			save.currencies = currencies;
 			save.date = Date.now();
 			set_save();
-			clear_local_save();
+			localStorage.clear();
 		}
 		catch (err) {
 			console.error(err);
@@ -529,7 +525,7 @@ function configure_firefox_watermark() {
 function set_settings_button(){
 	const nav = document.getElementById('nav-button') as HTMLButtonElement;
 	nav.addEventListener('click', () => {
-		clear_local_save();
+		localStorage.clear();
 		location.href = 'settings.html';
 	});
 	nav.hidden = false;
