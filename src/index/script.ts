@@ -166,7 +166,7 @@ async function configure_shortcuts(){
 	const container_h_align = save.shortcut_container_h_align ?? 'justify-content-center';
 	const container_v_align = save.shortcut_v_align ?? 'align-items-center';
 	const container_width = save.shortcut_container_width ?? 'col-md-6';
-	
+
 	container.classList.add(container_width, container_h_align, container_v_align);
 	container.parentElement.classList.add(container_v_align, container_h_align);
 
@@ -416,7 +416,7 @@ async function configure_currencies(){
 			for (let i = 0; i < 3; i++) {
 				const currency = currencies[i];
 				currency.rate = (1.0 / rates[currency.name.toLowerCase()]).toFixed(2);
-			};
+			}
 			save.currencies = currencies;
 			save.date = Date.now();
 			set_save();

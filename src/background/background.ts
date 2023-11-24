@@ -21,7 +21,7 @@ async function translate(){
 		default:
 			lang = "en";
 			break;
-	};
+	}
 	await browser.browserAction.setTitle({
 		title:translations[lang]
 	});
