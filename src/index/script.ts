@@ -133,11 +133,6 @@ async function configure_shortcuts(){
 		localStorage.clear();
 		load_text.innerText = '';
 	}
-
-	const colors = save.shortcut_col_colors ?? ['bg-primary','bg-danger','bg-success','bg-warning'];
-	const transition = save.shortcut_transition ?? 'glow';
-	const is_circle = save.shortcut_shape == 'circle';
-
 	const shortcut_base_node = document.getElementById('shortcut');
 	shortcut_base_node.hidden = false;
 
@@ -145,13 +140,18 @@ async function configure_shortcuts(){
 	shortcut_base_node.classList.add(size);
 
 	const link = shortcut_base_node.getElementsByTagName('a')[0] as HTMLAnchorElement;
-	if(!save.shortcut_size){
+
+	const sh_size = save.shortcut_size ?? 'm-0';
+	if(sh_size != 'm-0'){
 		link.classList.replace('m-0',  save.shortcut_size);
 	}
+
+	const transition = save.shortcut_transition ?? 'glow';
 	if (transition != 'none'){
 		link.classList.add(transition);
 	}
 
+	const is_circle = save.shortcut_shape == 'circle';
 	if (is_circle){
 		const img = shortcut_base_node.getElementsByTagName('img')[0] as HTMLImageElement;
 		img.classList.replace('rounded-3','rounded-circle');
@@ -165,9 +165,12 @@ async function configure_shortcuts(){
 
 	const container_h_align = save.shortcut_container_h_align ?? 'justify-content-center';
 	const container_v_align = save.shortcut_v_align ?? 'align-items-center';
+	const container_width = save.shortcut_container_width ?? 'col-md-6';
 	
-	container.classList.add(save.shortcut_container_width ?? 'col-md-6', container_h_align, container_v_align);
+	container.classList.add(container_width, container_h_align, container_v_align);
 	container.parentElement.classList.add(container_v_align, container_h_align);
+
+	const colors = save.shortcut_col_colors ?? ['bg-primary','bg-danger','bg-success','bg-warning'];
 
 	for(let i = 0; i < save.shortcuts.length; i++){
 		const shortcut : shortcut = save.shortcuts[i];
