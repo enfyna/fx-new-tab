@@ -28,11 +28,6 @@
     <img src="https://github.com/enfyna/fx-new-tab/assets/91965312/3364e8d9-8220-4379-8822-289f142b7543" />
   </a>
 </h3>
-<h5 align="center">
-  <a href="https://enfyna.github.io/fx-new-tab">
-    or test it here
-  </a>
-</h5>
 
 
 <br>
