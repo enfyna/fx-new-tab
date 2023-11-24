@@ -138,23 +138,25 @@ async function configure_shortcuts(){
 		load_text.innerText = '';
 	}
 
-	const colors = get_shortcut_col_colors();
-	const transition = get_shortcut_transition();
-	const circle = is_circle();
+	const colors = save.shortcut_col_colors ?? ['bg-primary','bg-danger','bg-success','bg-warning'];
+	const transition = save.shortcut_transition ?? 'glow';
+	const is_circle = save.shortcut_shape == 'circle';
 
 	const shortcut_base_node = document.getElementById('shortcut');
 	shortcut_base_node.hidden = false;
 
-	const size = get_shortcut_width();
+	const size = save.shortcut_width ?? 'col-sm-3';
 	shortcut_base_node.classList.add(size);
 
 	const link = shortcut_base_node.getElementsByTagName('a')[0] as HTMLAnchorElement;
-	link.classList.replace('m-0',get_shortcut_size());
+	if(!save.shortcut_size){
+		link.classList.replace('m-0',  save.shortcut_size);
+	}
 	if (transition != 'none'){
 		link.classList.add(transition);
 	}
 
-	if (circle){
+	if (is_circle){
 		const img = shortcut_base_node.getElementsByTagName('img')[0] as HTMLImageElement;
 		img.classList.replace('rounded-3','rounded-circle');
 		link.classList.add('rounded-circle');
@@ -164,11 +166,16 @@ async function configure_shortcuts(){
 	}
 
 	const container = shortcut_base_node.parentElement as HTMLElement;
-	container.classList.add(get_shortcut_container_width(),get_shortcut_container_h_align(),get_shortcut_v_align());
+
+	const container_h_align = save.shortcut_container_h_align ?? 'justify-content-center';
+	const container_v_align = save.shortcut_v_align ?? 'align-items-center';
+	
+	container.classList.add(save.shortcut_container_width ?? 'col-md-6', container_h_align, container_v_align);
+	container.parentElement.classList.add(container_v_align, container_h_align);
 
 	for(let i = 0; i < save.shortcuts.length; i++){
-		var shortcut : shortcut = save.shortcuts[i];
-		if (shortcut == null || shortcut.link.length == 0)
+		const shortcut : shortcut = save.shortcuts[i];
+		if (!shortcut || shortcut.link.length == 0)
 			continue;
 
 		const shortcut_node = shortcut_base_node.cloneNode(true) as HTMLDivElement;
@@ -176,7 +183,7 @@ async function configure_shortcuts(){
 		link.classList.add(colors[i % colors.length]);
 		link.href = shortcut.link;
 
-		if (!circle){
+		if (!is_circle){
 			const name = shortcut_node.getElementsByTagName('h7')[0] as HTMLDivElement;
 			if(shortcut.name)
 				name.innerText = shortcut.name;
@@ -190,12 +197,10 @@ async function configure_shortcuts(){
 		if(shortcut.img == "") {
 			get_shortcut_img(i, img);
 			continue;
-		};
+		}
 		img.src = shortcut.img;
-	};
+	}
 	shortcut_base_node.remove();
-
-	container.parentElement.classList.add(get_shortcut_v_align(),get_shortcut_container_h_align());
 }
 
 async function find_user_sites() {
@@ -241,14 +246,14 @@ async function get_shortcut_img(i : number, node : HTMLImageElement){
 		}
 		const blob = await response.blob()
 		const b64 =  URL.createObjectURL(blob);
-		let img = new Image();
+		const img = new Image();
 		img.onload = () => {
-			var canvas = document.createElement("canvas")
+			const canvas = document.createElement("canvas")
 			canvas.width = img.width;
 			canvas.height = img.height;
-			var context = canvas.getContext("2d");
+			const context = canvas.getContext("2d");
 			context.drawImage(img, 0, 0);
-			var dataurl = canvas.toDataURL(img_type);
+			const dataurl = canvas.toDataURL(img_type);
 			save.shortcuts[i].img = dataurl;
 			node.src = dataurl;
 			set_save();
@@ -259,8 +264,8 @@ async function get_shortcut_img(i : number, node : HTMLImageElement){
 		console.error(error);
 		// We couldnt get a favicon from the api
 		// so we will try to create a basic replacement
-		let canvas = document.createElement("canvas");
-		let context = canvas.getContext("2d") as CanvasRenderingContext2D;
+		const canvas = document.createElement("canvas");
+		const context = canvas.getContext("2d") as CanvasRenderingContext2D;
 		canvas.width = 64;
 		canvas.height = 64;
 		context.fillStyle = "#442288aa";
@@ -270,7 +275,7 @@ async function get_shortcut_img(i : number, node : HTMLImageElement){
 		context.fillStyle = "white";
 		context.textBaseline = "middle";
 		context.fillText(save.shortcuts[i].link.replace("https://","").replace("http://","").replace("www.","").toUpperCase().slice(0,2), canvas.width/2, canvas.height/2);
-		var image = canvas.toDataURL();
+		const image = canvas.toDataURL();
 		node.src = image;
 		save.shortcuts[i].img = image;
 		set_save();
@@ -281,10 +286,10 @@ async function get_shortcut_img(i : number, node : HTMLImageElement){
 async function get_favicon_from_url(url : string){
 	if(navigator.onLine == false){
 		throw new Error("No internet connection. Cant get favicon.");
-	};
+	}
 	if(!url.startsWith("http")){
 		throw new Error("Invalid URL format");
-	};
+	}
 	url = url.split('/')[2];
 	const response = await Promise.race([
 		fetch(img_api.concat(url), {method: "GET", mode: 'cors'}),
@@ -304,38 +309,6 @@ async function get_favicon_from_url(url : string){
 function center_shortcuts() {
 	document.getElementById('ShortcutContainer').parentElement.classList.replace('col-md-8','col-md-12');
 	document.getElementById('NCContainer').remove();
-}
-
-function is_circle() : boolean {
-	return save.shortcut_shape == 'circle';
-}
-
-function get_shortcut_width() : string {
-	return save.shortcut_width ?? 'col-sm-3';
-}
-
-function get_shortcut_v_align() : string {
-	return save.shortcut_v_align ?? 'align-items-center';
-}
-
-function get_shortcut_size() : string {
-	return save.shortcut_size ?? 'm-0';
-}
-
-function get_shortcut_transition() : string {
-	return save.shortcut_transition ?? 'glow';
-}
-
-function get_shortcut_col_colors() : string[]{
-	return save.shortcut_col_colors ?? ['bg-primary','bg-danger','bg-success','bg-warning'];
-}
-
-function get_shortcut_container_h_align() : string{
-	return save.shortcut_container_h_align ?? 'justify-content-center';
-}
-
-function get_shortcut_container_width() : string{
-	return save.shortcut_container_width ?? 'col-md-6';
 }
 
 /// Notes
@@ -378,14 +351,15 @@ function configure_notes(){
 		const elm = event.target as HTMLElement;
 		const index = elm.id.charAt(elm.id.length - 1);
 		switch (elm.id) {
-			case node.note.note + index:
+			case node.note.note + index:{
 				const input = inputs[index] as HTMLInputElement;
 				input.value = elm.innerText;
 				input.hidden = false;
 				input.focus();
 				elm.hidden = true;
 				break;
-			case node.note.input + index:
+			}
+			case node.note.input + index:{
 				if(event.type == 'click') return;
 				elm.hidden = true;
 				const button = buttons[index] as HTMLButtonElement;
@@ -397,6 +371,7 @@ function configure_notes(){
 				clear_local_save();
 				button.hidden = false;
 				break;
+			}
 		}
 	}
 	container.classList.replace('d-none','d-list');
@@ -409,10 +384,6 @@ function get_currencies() : currency[] {
 		{name:'EUR',rate:'-'},
 		{name:'GBP',rate:'-'},
 	];
-}
-
-function get_base_currency() : string{
-	return save.base_currency ?? 'TRY';
 }
 
 function is_currency_rates_enabled() : boolean {
@@ -437,7 +408,7 @@ async function configure_currencies(){
 			if (currencies[i].rate == '-'){
 				fetch_currencies = true;
 				break;
-			};
+			}
 		}
 	}
 	if(fetch_currencies){
@@ -462,14 +433,14 @@ async function configure_currencies(){
 	const name_nodes = currency_container.getElementsByTagName('h5');
 	const rate_nodes = currency_container.getElementsByTagName('p');
 
-	const color = get_currency_container_color();
+	const color = save.currency_container_color ?? 'bg-primary';
 
 	for (let i = 0; i < 3; i++) {
 		const currency = currencies[i];
 		card_nodes[i].classList.add(color);
 		name_nodes[i].innerText = currency.name;
 		rate_nodes[i].innerText = currency.rate;
-	};
+	}
 
 	currency_container.classList.replace('d-none','d-list');
 }
@@ -478,8 +449,8 @@ function get_rates(){
 	return new Promise<object>((resolve, reject) => {
 		if(navigator.onLine == false){
 			return reject("No internet connection. Cant get currency rates.");
-		};
-		const base_currency = get_base_currency().toLowerCase();
+		}
+		const base_currency = save.base_currency ?? 'TRY'.toLowerCase();
 		const req : XMLHttpRequest = new XMLHttpRequest();
 		req.onreadystatechange = () => {
 			if (req.readyState == 4) {
@@ -488,8 +459,8 @@ function get_rates(){
 					return resolve(res);
 				}else{
 					return reject("HTTP request failed");
-				};
-			};
+				}
+			}
 		};
 		req.ontimeout = () => {
 			return reject("Request timed out");
@@ -504,10 +475,6 @@ function get_rates(){
 	});
 }
 
-function get_currency_container_color() : string{
-	return save.currency_container_color ?? 'bg-primary';
-}
-
 /// Clock
 function is_clock_enabled() : boolean{
 	return save.is_clock_enabled ?? true;
@@ -518,10 +485,12 @@ function configure_clock() {
 		return;
 	}
 	const clock = document.getElementById('clock') as HTMLHeadingElement;
-	clock.classList.add(get_clock_color());
 
-	const clock_format = get_clock_format();
-	const time_format = get_clock_time_format();
+	const color = save.clock_color ?? 'text-white';
+	clock.classList.add(color);
+
+	const clock_format = save.clock_format ?? 'h:m'; 
+	const time_format = save.clock_time_format ?? false; // 12 or 24 hour time format
 
 	function updateTime() {
 		const date = new Date();
@@ -540,33 +509,20 @@ function configure_clock() {
 	setInterval(updateTime, 1000);
 }
 
-function get_clock_color() : string {
-	return save.clock_color ?? 'text-white';
-}
-
-function get_clock_format() : string {
-	return save.clock_format ?? 'h:m';
-}
-
-function get_clock_time_format() : boolean {
-	return save.clock_time_format ?? false;
-}
-
 /// Firefox Watermark
-function is_firefox_watermark_enabled() : boolean{
-	return save.is_firefox_watermark_enabled ?? true;
-}
-
 function configure_firefox_watermark() {
-	if(!is_firefox_watermark_enabled())
-		return
-	const fx = document.getElementById('firefox_watermark') as HTMLDivElement;
-	fx.classList.add(get_firefox_watermark_color());
-	fx.classList.replace('d-none','d-flex');
-}
+	const isFirefoxWatermarkEnabled = save.is_firefox_watermark_enabled ?? true;
 
-function get_firefox_watermark_color() : string{
-	return save.firefox_watermark_color ?? 'text-warning';
+    if (!isFirefoxWatermarkEnabled) {
+        return;
+    }
+
+	const fx = document.getElementById('firefox_watermark') as HTMLDivElement;
+
+	const color = save.firefox_watermark_color ?? 'text-warning';
+
+	fx.classList.add(color);
+	fx.classList.replace('d-none','d-flex');
 }
 
 /// Settings Button
@@ -604,19 +560,19 @@ function translate() : void {
 		default:
 			lang = "en";
 			break;
-	};
+	}
 	for (const dict of translations) {
 		const elm_name : string = dict.name;
 		const translation : string = dict[lang];
 		if(elm_name == "note-input"){
 			for (const element of document.getElementsByName(elm_name)){
 				(element as HTMLInputElement).placeholder = translation;
-			};
+			}
 		}
 		else{
 			for (const element of document.getElementsByName(elm_name)){
 				element.innerText = translation;
-			};
-		};
-	};
+			}
+		}
+	}
 }
