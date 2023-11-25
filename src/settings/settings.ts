@@ -600,7 +600,8 @@ function configure_import_export(){
 		const target = event.target as HTMLElement;
 		switch (target.id) {
 			case "import-settings":{
-				const fileInput = document.getElementById('fileInput');
+				const fileInput = document.createElement("input");
+				fileInput.type = "file";
 				fileInput.click();
 				fileInput.addEventListener('change', handleFileSelect);
 
@@ -627,16 +628,17 @@ function configure_import_export(){
 						catch (error) {
 							console.error('Error parsing JSON: ', error);
 						}
+						fileInput.remove();
 					};
 					reader.readAsText(file);
 				}
 				break;
 			}
 			case "export-settings":{
-				const data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(save, null, 2));
+				const data = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(save, null, 2));
 
 				const a = document.createElement('a');
-				a.href = 'data:' + data;
+				a.href = data;
 				a.download = 'settings.json';
 
 				parent.appendChild(a);
