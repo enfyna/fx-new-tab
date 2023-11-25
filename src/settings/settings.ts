@@ -815,6 +815,55 @@ function translate() : void {
 			"es": "Blanco"
 		},
 		{
+			"name": "gray",
+			"tr": "Gri",
+			"en": "Gray",
+			"de": "Grau",
+			"es": "Gris"
+		},
+		{
+			"name": "lime",
+			"tr": "Limon Yeşili",
+			"en": "Lime",
+			"de": "Limettengrün",
+			"es": "Verde Lima"
+		},
+		{
+			"name": "orange",
+			"tr": "Turuncu",
+			"en": "Orange",
+			"de": "Orange",
+			"es": "Naranja"
+		},
+		{
+			"name": "violet",
+			"tr": "Menekşe",
+			"en": "Violet",
+			"de": "Violett",
+			"es": "Violeta"
+		},
+		{
+			"name": "scarletred",
+			"tr": "Alaca Kırmızı",
+			"en": "Scarlet Red",
+			"de": "Scharlachrot",
+			"es": "Rojo Escarlata"
+		},
+		{
+			"name": "aqua",
+			"tr": "Aqua",
+			"en": "Aqua",
+			"de": "Aqua",
+			"es": "Aqua"
+		},
+		{
+			"name": "navyblue",
+			"tr": "Lacivert",
+			"en": "Navy Blue",
+			"de": "Marineblau",
+			"es": "Azul Marino"
+		},
+		{
 			"name": "transparent",
 			"tr": "Saydam",
 			"en": "Transparent",
