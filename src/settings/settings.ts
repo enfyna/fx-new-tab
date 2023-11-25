@@ -62,6 +62,9 @@ let save : save;
 get_save().then(ready)
 
 async function ready(){
+	if(save.is_settings_disabled ?? false){
+		location.href = 'index.html';
+	}
 	configure_shortcut_settings();
 	configure_drag_and_drop();
 	configure_background_settings();
