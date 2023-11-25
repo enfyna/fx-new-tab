@@ -65,6 +65,7 @@ async function ready(){
 	if(save.is_settings_disabled ?? false){
 		location.href = 'index.html';
 	}
+	translate();
 	configure_shortcut_settings();
 	configure_drag_and_drop();
 	configure_background_settings();
@@ -74,7 +75,6 @@ async function ready(){
 	configure_firefox_watermark_settings();
 	configure_import_export();
 	configure_home_button();
-	translate();
 }
 
 /// Save
@@ -167,7 +167,12 @@ async function configure_shortcut_settings(){
 		}
 	}
 	const shortcut_color_container = document.getElementById('shortcut_color_container') as HTMLDivElement;
-	const shortcut_col_color_select = document.getElementById('shortcut_col_color');
+	const shortcut_col_color_select = document.createElement('select');
+	shortcut_col_color_select.classList.add('col', 'form-select', 'm-1')
+
+	const color_group = document.getElementById('colors').cloneNode(true) as HTMLOptGroupElement;
+	color_group.hidden = false;
+	shortcut_col_color_select.appendChild(color_group);
 
 	function add_shortcut_col_color(idx : number) {
 		const select = shortcut_col_color_select.cloneNode(true) as HTMLSelectElement;
@@ -178,8 +183,7 @@ async function configure_shortcut_settings(){
 
 		select.value = colors[idx];
 
-		select.id = select.id + '_' + idx; 
-		select.hidden = false;
+		select.id = 'shortcut_col_color_' + idx; 
 		shortcut_color_container.append(select);
 	}
 
@@ -473,7 +477,10 @@ function configure_clock_settings(){
 				(elm as HTMLInputElement).checked = save.is_clock_enabled ?? true;
 				break;
 			case 'clock_color':
-				(elm as HTMLSelectElement).value = save.clock_color ?? 'text-white';
+				const color = document.getElementById('colors').cloneNode(true) as HTMLOptGroupElement;
+				color.hidden = false;
+				elm.appendChild(color);
+				(elm as HTMLSelectElement).value = save.clock_color ?? 'bg-white';
 				break;
 			case 'clock_format':
 				(elm as HTMLSelectElement).value = save.clock_format ?? 'h:m';
@@ -507,13 +514,14 @@ function configure_currency_settings(){
 
 	const national = national_node.cloneNode(true) as HTMLOptGroupElement;
 	const crypto = crypto_node.cloneNode(true) as HTMLOptGroupElement;
-
+	const color_group = document.getElementById('colors').cloneNode(true) as HTMLOptGroupElement;
 	national_node.remove();
 	crypto_node.remove();
-
+	
 	national.hidden = false;
 	crypto.hidden = false;
-
+	color_group.hidden = false;
+	
 	const currencies = get_currencies();
 
 	const container = document.getElementById('currency_setting');
@@ -530,6 +538,7 @@ function configure_currency_settings(){
 				(elm as HTMLInputElement).checked = save.is_currency_rates_enabled ?? true;
 				break;
 			case 'currency_container_color':
+				elm.appendChild(color_group);
 				elm.value = save.currency_container_color ?? 'bg-primary';
 				break;
 			default:
@@ -589,7 +598,10 @@ function configure_firefox_watermark_settings() {
 		await set_save();
 	});
 	const color = document.getElementById('firefox_color') as HTMLSelectElement;
-	color.value = save.firefox_watermark_color ?? 'text-warning';
+	const opt = document.getElementById('colors').cloneNode(true) as HTMLOptGroupElement;
+	opt.hidden = false;
+	color.appendChild(opt);
+	color.value = save.firefox_watermark_color ?? 'bg-orange';
 	color.addEventListener('change', async()=>{
 		save.firefox_watermark_color = color.value.trim();
 		await set_save();
@@ -701,13 +713,6 @@ function translate() : void {
 			"en": "Shortcut Settings",
 			"de": "Verknüpfungseinstellungen",
 			"es": "Configuración de Accesos Directos"
-		},
-		{
-			"name": "shortcut-col-color",
-			"tr": "Sütun Rengi",
-			"en": "Column Color",
-			"de": "Spaltenfarbe",
-			"es": "Color de Columna"
 		},
 		{
 			"name": "shortcut-size",
@@ -1153,7 +1158,7 @@ function translate() : void {
 				(element as HTMLInputElement).placeholder = translation;
 			}
 		}
-		else if(elm_name == "base-currency-label" || elm_name == "crypto-currencies" || elm_name == "national-currencies" || elm_name == "shortcut-shape" || elm_name == "shortcut-size" || elm_name == "shortcut-transition" || elm_name == "shortcut-col-color" || elm_name == "shortcut-width" || elm_name == "shortcut-v-align" || elm_name == "shortcut-h-align" || elm_name == "color-label"){
+		else if(elm_name == "base-currency-label" || elm_name == "crypto-currencies" || elm_name == "national-currencies" || elm_name == "shortcut-shape" || elm_name == "shortcut-size" || elm_name == "shortcut-transition" || elm_name == "shortcut-width" || elm_name == "shortcut-v-align" || elm_name == "shortcut-h-align" || elm_name == "color-label"){
 			for (const element of document.getElementsByName(elm_name)){
 				(element as HTMLOptGroupElement).label = translation;
 			}

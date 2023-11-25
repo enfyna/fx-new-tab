@@ -28,31 +28,40 @@
 
 /* Custom color classes that are not included with bootstrap */
 
-.bg-orange {
-    background-color: #f70 !important;
-    --glow-clr: #f70;
+.bg-orange { 
+    --glow-clr: #f70; 
 }
-.bg-aqua {
-    background-color: #0fa !important;
-    --glow-clr: #0fa;
+.bg-aqua { 
+    --glow-clr: #0fa; 
 }
-.bg-violet {
-    background-color: #80f !important;
-    --glow-clr: #80f;
+.bg-violet { 
+    --glow-clr: #80f; 
 }
-.bg-scarletred {
-    background-color: #f20 !important;
-    --glow-clr: #f20;
+.bg-scarletred { 
+    --glow-clr: #f20; 
 }
-.bg-lime {
-    background-color: #3d3 !important;
-    --glow-clr: #3d3;
+.bg-lime { 
+    --glow-clr: #3d3; 
 }
-.bg-navyblue {
-    background-color: #008 !important;
-    --glow-clr: #008;
+.bg-navyblue { 
+    --glow-clr: #008; 
 }
-.bg-gray {
-    background-color: #888 !important;
-    --glow-clr: #888;
+.bg-gray { 
+    --glow-clr: #888; 
+}
+
+.bg-orange, .bg-aqua, .bg-violet, 
+.bg-scarletred, .bg-lime, .bg-navyblue, .bg-gray {
+    background-color: var(--glow-clr) !important;
+}
+
+/* Make these compatible with the clock and firefox logo */
+
+.bg-primary.color-text, .bg-danger.color-text, .bg-warning.color-text, 
+.bg-success.color-text, .bg-dark.color-text, .bg-black.color-text, 
+.bg-transparent.color-text, .bg-white.color-text, .bg-orange.color-text, 
+.bg-aqua.color-text, .bg-violet.color-text, .bg-scarletred.color-text, 
+.bg-lime.color-text, .bg-navyblue.color-text, .bg-gray.color-text {
+    background-color: transparent !important;
+    color: var(--glow-clr) !important;
 }
