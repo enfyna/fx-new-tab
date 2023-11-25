@@ -479,8 +479,23 @@
     </div>
 </div>
 <hr class="border-2 border-primary mt-5">
+<!-- Remove Settings Button Warning -->
+<div class="alert alert-danger d-flex flex-row m-0" role="alert">
+    <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#exclamation-triangle-fill"/></svg>
+    <div name="remove-settings-button-info"></div>
 </div>
-
+<!-- Remove Settings Button -->
+<div class="row bg-danger text-white rounded m-0 my-2 d-flex flex-row align-items-center">
+    <div class="col-lg-11 my-1 fw-bold" name="remove-settings-button-label"></div>
+    <div class="col-lg-1 my-1">
+        <button type="button" class="btn btn-danger border-dark w-100 fw-bold" id="remove-settings-button">
+            <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#trash-fill"/></svg>
+        </button>
+    </div>
+</div>
+<hr class="border-2 border-primary mt-5">
+</div>
+<!-- Navbar -->
 <nav id="navbar" class="navbar fixed-bottom navbar-dark bg-black">
 	<div class="container-fluid justify-content-end">
         <div id="save-info" name="save-info" class="fw-bold text-white" hidden></div>

@@ -28,6 +28,8 @@ interface save{
 
 	is_firefox_watermark_enabled:boolean;
 	firefox_watermark_color:string;
+
+	is_settings_disabled:boolean;
 }
 interface shortcut {
 	name:string;
@@ -591,7 +593,17 @@ function configure_firefox_watermark_settings() {
 }
 
 /// Nav Button
+let countdown = 4;
 function configure_home_button(){
+	const removeButton = document.getElementById("remove-settings-button") as HTMLButtonElement;
+	removeButton.addEventListener('click', async() => {
+		if (--countdown == 0){
+			save.is_settings_disabled = true;
+			await set_save();
+			location.href = 'index.html';
+		}
+		removeButton.innerText = countdown.toString();
+	});
 	document.getElementById('nav-button').addEventListener('click',()=>{
 		if(!saving)
 			location.href = 'index.html';
@@ -978,6 +990,20 @@ function translate() : void {
 			"en": "Cryptocurrencies",
 			"de": "Kryptowährungen",
 			"es": "Criptomonedas",
+		},
+		{
+			"name": "remove-settings-button-info",
+			"tr": "Bu ayar ofis veya okul bilgisayarları için kullanılabilir. Çalışma veya okula ait bazı URL'leri veya bir arkaplanı ayarlayabilir ve kullanıcı bunları değiştiremez. Ayrıca araç çubuğu eylemini devre dışı bırakır.",
+			"en": "This setting could be used for office or school computers. You can set up some work or school related URLs or a background, and the user will not be able to change it. This will also disable the toolbar action.",
+			"de": "Diese Einstellung kann für Büro- oder Schulcomputer verwendet werden. Sie können einige Arbeits- oder schulbezogene URLs oder einen Hintergrund einrichten, den der Benutzer nicht ändern kann. Dadurch wird auch die Symbolleistenaktion deaktiviert.",
+			"es": "Esta configuración se puede utilizar para computadoras de oficina o escuela. Puede establecer algunas URL o un fondo relacionados con el trabajo o la escuela, y el usuario no podrá cambiarlo. Esto también desactivará la acción de la barra de herramientas."
+		},	
+		{
+			"name": "remove-settings-button-label",
+			"tr": "Ana Sayfadaki Ayarlar Butonunu Kaldır",
+			"en": "Remove Settings Button From Main Page",
+			"de": "Einstellungsbutton von der Hauptseite entfernen",
+			"es": "Eliminar botón de configuración de la página principal"
 		},
 		{
 			"name": "save-info",

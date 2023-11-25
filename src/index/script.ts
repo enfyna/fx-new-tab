@@ -30,6 +30,8 @@ interface save{
 
 	is_firefox_watermark_enabled:boolean;
 	firefox_watermark_color:string;
+
+	is_settings_disabled:boolean;
 }
 interface shortcut {
 	name:string;
@@ -521,6 +523,8 @@ function configure_firefox_watermark() {
 /// Settings Button
 function set_settings_button(){
 	const nav = document.getElementById('nav-button') as HTMLButtonElement;
+	const is_settings_disabled = save.is_settings_disabled ?? false;
+	if(is_settings_disabled) return;
 	nav.addEventListener('click', () => {
 		localStorage.clear();
 		location.href = 'settings.html';
