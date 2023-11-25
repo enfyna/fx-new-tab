@@ -90,27 +90,27 @@ async function set_save(){
 function configure_background_settings() {
 	const fb_clr_node = document.getElementById("bg_color") as HTMLInputElement;
 	fb_clr_node.value = save.bg_color ?? 'black';
-	fb_clr_node.onchange = () => {
+	fb_clr_node.onchange = async() => {
 		save.bg_color = fb_clr_node.value.trim();
-		set_save();
+		await set_save();
 	}
 
 	const img_node = document.getElementById("select_bg") as HTMLInputElement
 	img_node.addEventListener("input",()=>{
 		const reader = new FileReader();
-		reader.addEventListener("loadend", (event) => {
+		reader.addEventListener("loadend", async(event) => {
 			if(!event.target) return;
 			save.bg_img = ''.concat("url(", (event.target.result as string), ")");
-			set_save();
+			await set_save();
 		});
 		const image = img_node.files.item(0);
 		if(!image) return;
 		reader.readAsDataURL(image);
 	});
 	const delete_bg = document.getElementById("delete_bg") as HTMLInputElement;
-	delete_bg.onclick = () => {
+	delete_bg.onclick = async() => {
 		save.bg_img = null;
-		set_save();
+		await set_save();
 	}
 }
 
@@ -121,7 +121,7 @@ async function configure_shortcut_settings(){
 	const colors = save.shortcut_col_colors ?? ['bg-primary','bg-danger','bg-success','bg-warning'];
 
 	const shortcut_shape_settings = document.getElementById('shortcut_shape_settings');
-	shortcut_shape_settings.addEventListener('change',(event)=>{
+	shortcut_shape_settings.addEventListener('change', async(event)=>{
 		const input = event.target as HTMLSelectElement;
 		switch (true) {
 			case input.id.startsWith('shortcut_col_color'):
@@ -132,7 +132,7 @@ async function configure_shortcut_settings(){
 				save[input.id] = input.value.trim();
 				break;
 			}
-		set_save();
+		await set_save();
 	});
 	const selects = shortcut_shape_settings.getElementsByTagName('select');
 	for (const select of selects) {
@@ -186,7 +186,7 @@ async function configure_shortcut_settings(){
 		add_shortcut_col_color(i);
 	}
 
-	shortcut_shape_settings.addEventListener('click',(event)=>{
+	shortcut_shape_settings.addEventListener('click', async(event)=>{
 		const inp = event.target as HTMLInputElement;
 			switch (inp.id) {
 				case 'add_shortcut_col_color':
@@ -198,7 +198,7 @@ async function configure_shortcut_settings(){
 				default:
 					return;
 			}
-			set_save();
+			await set_save();
 	});
 
 	const shortcut_container = document.getElementById("shortcut-settings-container") as HTMLDivElement;
@@ -226,7 +226,7 @@ async function configure_shortcut_settings(){
 	let random_recommend_idx = Date.now();
 
 	const add_shortcut_container = document.getElementById('add_shortcut_container');
-	add_shortcut_container.addEventListener('click',(event)=>{
+	add_shortcut_container.addEventListener('click', async(event)=>{
 		const inp = event.target as HTMLInputElement;
 		let sh : shortcut;
 			switch (inp.id) {
@@ -245,7 +245,7 @@ async function configure_shortcut_settings(){
 				shortcut_setting
 			)
 		);
-		set_save();
+		await set_save();
 	});
 }
 
@@ -275,7 +275,7 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 				break;
 		}
 	}
-	elm.addEventListener('input',(event)=>{
+	elm.addEventListener('input', async(event)=>{
 		const input = event.target as HTMLInputElement;
 		switch(input.id){
 			case node.shortcut.link:{
@@ -285,21 +285,21 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 					shortcut.img = '';
 					shortcut.name = '';
 				}
-				set_save();
+				await set_save();
 				break;
 			}
 			case node.shortcut.name:{
 				const name = input.value.trim();
 				shortcut.name = name.length > 0 ? name : null;
-				set_save();
+				await set_save();
 				break;
 			}
 			case node.shortcut.img:{
 				const reader = new FileReader();
-				reader.addEventListener("loadend", (event) => {
+				reader.addEventListener("loadend", async(event) => {
 					if(!event.target) return;
 					shortcut.img = event.target.result as string;
-					set_save();
+					await set_save();
 				});
 				const image = input.files.item(0);
 				if(!image) return;
@@ -308,7 +308,7 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 			}
 		}
 	});
-	elm.addEventListener('click',(event)=>{
+	elm.addEventListener('click', async(event)=>{
 		const button = event.target as HTMLButtonElement;
 		switch (button.id){
 			case node.shortcut.reset:
@@ -316,7 +316,7 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 					const site = topSites[i];
 					if (site.link == shortcut.link){
 						shortcut.img = site.img;
-						set_save();
+						await set_save();
 						return;
 					}
 				}
@@ -324,7 +324,7 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 					return;
 				}
 				shortcut.img = '';
-				set_save();
+				await set_save();
 				break;
 			case node.shortcut.remove:
 				for (let i = 0; i < save.shortcuts.length; i++) {
@@ -334,7 +334,7 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 					}
 				}
 				elm.remove();
-				set_save();
+				await set_save();
 				break;
 			case node.shortcut.default:{
 				if(shortcut.link == ''){
@@ -352,7 +352,7 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 				context.textBaseline = "middle";
 				context.fillText(shortcut.link.replace('https://','').replace('http://','').replace('www.','').toUpperCase().slice(0,2), canvas.width/2, canvas.height/2);
 				shortcut.img = canvas.toDataURL();
-				set_save();
+				await set_save();
 				break;
 			}
 		}
@@ -419,7 +419,7 @@ function configure_drag_and_drop(){
 		move_shortcut(e.target as HTMLElement);
 	});
 
-	document.addEventListener('drop', (e) => {
+	document.addEventListener('drop', async(e) => {
 		e.preventDefault();
 		if(did_change_place){
 			const parent = draggedItem.parentElement;
@@ -434,7 +434,7 @@ function configure_drag_and_drop(){
 			const sh = save.shortcuts[start_id];
 			save.shortcuts.splice(start_id, 1);
 			save.shortcuts.splice(end_id, 0, sh);
-			set_save();	
+			await set_save();	
 		}
 	});
 	
@@ -448,9 +448,9 @@ function configure_drag_and_drop(){
 function configure_note_settings() {
 	const check = document.getElementById('enable_notes') as HTMLInputElement;
 	check.checked = is_notes_enabled();
-	check.addEventListener('change', () => {
+	check.addEventListener('change', async() => {
 		save.is_notes_enabled = check.checked;
-		set_save();
+		await set_save();
 	});
 }
 
@@ -477,7 +477,7 @@ function configure_clock_settings(){
 				break;
 		}
 	});
-	settings.addEventListener('change',(event)=>{
+	settings.addEventListener('change', async(event)=>{
 		const id = (event.target as HTMLElement).id;
 		switch (id) {
 			case 'enable_clock':
@@ -490,7 +490,7 @@ function configure_clock_settings(){
 				save[id] = (event.target as HTMLSelectElement).value.trim();
 				break;
 		}
-		set_save();
+		await set_save();
 	});
 }
 
@@ -538,7 +538,7 @@ function configure_currency_settings(){
 				break;
 		}
 	}
-	container.addEventListener('change',(event)=>{
+	container.addEventListener('change', async(event)=>{
 		const elm = event.target as HTMLInputElement | HTMLSelectElement;
 		switch (elm.id) {
 			case 'enable_api':
@@ -562,7 +562,7 @@ function configure_currency_settings(){
 				break;
 			}
 		}
-		set_save();
+		await set_save();
 	});
 }
 
@@ -578,15 +578,15 @@ function get_currencies() : currency[]{
 function configure_firefox_watermark_settings() {
 	const check = document.getElementById('enable_firefox_watermark') as HTMLInputElement;
 	check.checked = save.is_firefox_watermark_enabled ?? true;
-	check.addEventListener('change',()=>{
+	check.addEventListener('change', async()=>{
 		save.is_firefox_watermark_enabled = check.checked;
-		set_save();
+		await set_save();
 	});
 	const color = document.getElementById('firefox_color') as HTMLSelectElement;
 	color.value = save.firefox_watermark_color ?? 'text-warning';
-	color.addEventListener('change',()=>{
+	color.addEventListener('change', async()=>{
 		save.firefox_watermark_color = color.value.trim();
-		set_save();
+		await set_save();
 	})
 }
 

@@ -95,10 +95,6 @@ async function get_save(){
 	}
 }
 
-async function set_save(){
-	await browser.storage.local.set(save);
-}
-
 function set_local_save(){
 	try{
 		localStorage.setItem('save', JSON.stringify(save));
@@ -129,7 +125,7 @@ async function configure_shortcuts(){
 		const load_text = document.getElementById('loading') as HTMLDivElement;
 		load_text.innerText = 'Finding Shortcuts Please Wait...';
 		save.shortcuts = await find_user_sites();
-		await set_save();
+		await browser.storage.local.set(save);
 		localStorage.clear();
 		load_text.innerText = '';
 	}
@@ -255,8 +251,6 @@ async function get_shortcut_img(i : number, node : HTMLImageElement){
 			const dataurl = canvas.toDataURL(img_type);
 			save.shortcuts[i].img = dataurl;
 			node.src = dataurl;
-			set_save();
-			localStorage.clear();
 		};
 		img.src = b64;
 	} catch (error) {
@@ -277,9 +271,9 @@ async function get_shortcut_img(i : number, node : HTMLImageElement){
 		const image = canvas.toDataURL();
 		node.src = image;
 		save.shortcuts[i].img = image;
-		set_save();
-		localStorage.clear();
 	}
+	await browser.storage.local.set(save);
+	localStorage.clear();
 }
 
 async function get_favicon_from_url(url : string){
@@ -366,7 +360,7 @@ function configure_notes(){
 				button.innerText = new_note;
 				notes[index].note = new_note;
 				save.notes = notes;
-				await set_save();
+				await browser.storage.local.set(save);
 				localStorage.clear();
 				button.hidden = false;
 				break;
@@ -419,7 +413,7 @@ async function configure_currencies(){
 			}
 			save.currencies = currencies;
 			save.date = Date.now();
-			set_save();
+			await browser.storage.local.set(save);
 			localStorage.clear();
 		}
 		catch (err) {
