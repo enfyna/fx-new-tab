@@ -87,30 +87,6 @@ body {
 .spin:hover > div > img {
     transform: rotateY(0deg);
 }
-.bg-primary {
-    --glow-clr: #00f;
-}
-.bg-danger {
-    --glow-clr: #f00;
-}
-.bg-warning {
-    --glow-clr: #ff0;
-}
-.bg-success {
-    --glow-clr: #0a0;
-}
-.bg-dark {
-    --glow-clr: #222;
-}
-.bg-black {
-    --glow-clr: #000;
-}
-.bg-transparent {
-    --glow-clr: #777;
-}
-.bg-white {
-    --glow-clr: #fff;
-}
 .bg-white > .text-white {
     color: #000 !important;
 }
