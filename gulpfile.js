@@ -88,6 +88,13 @@ function minifyIndexCSS() {
         .pipe(gulp.dest('build'));
 }
 
+function minifyColorsCSS() {
+    return gulp.src('src/colors.css')
+        .pipe(cleanCSS({ level: { 1: { all: true }, 2: { all: true } } }))
+        .pipe(rename('colors.css'))
+        .pipe(gulp.dest('build'));
+}
+
 function minifySettingsCSS() {
     return gulp.src('bootstrap/bootstrap.css')
         .pipe(purify(['src/settings/settings.html'], {
@@ -120,5 +127,6 @@ exports.minify = series(
 );
 exports.minifyCSS = series(
     minifyIndexBootstrapCSS,
+    minifyColorsCSS,
     minifySettingsCSS,
 );

@@ -1,0 +1,31 @@
+
+/* Custom color classes that are not included with bootstrap */
+
+.bg-orange {
+    background-color: #f70 !important;
+    --glow-clr: #f70;
+}
+.bg-aqua {
+    background-color: #0fa !important;
+    --glow-clr: #0fa;
+}
+.bg-violet {
+    background-color: #80f !important;
+    --glow-clr: #80f;
+}
+.bg-scarletred {
+    background-color: #f20 !important;
+    --glow-clr: #f20;
+}
+.bg-lime {
+    background-color: #3d3 !important;
+    --glow-clr: #3d3;
+}
+.bg-navyblue {
+    background-color: #008 !important;
+    --glow-clr: #008;
+}
+.bg-gray {
+    background-color: #888 !important;
+    --glow-clr: #888;
+}
