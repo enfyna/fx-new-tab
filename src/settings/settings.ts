@@ -69,6 +69,7 @@ async function ready(){
 	configure_note_settings();
 	configure_currency_settings();
 	configure_firefox_watermark_settings();
+	configure_import_export();
 	configure_home_button();
 	translate();
 }
@@ -592,6 +593,61 @@ function configure_firefox_watermark_settings() {
 	})
 }
 
+/// Import / Export
+function configure_import_export(){
+	const parent = document.getElementById('import_export_settings') as HTMLDivElement;
+	parent.addEventListener('click', (event)=>{
+		const target = event.target as HTMLElement;
+		switch (target.id) {
+			case "import-settings":{
+				const fileInput = document.getElementById('fileInput');
+				fileInput.click();
+				fileInput.addEventListener('change', handleFileSelect);
+
+				function handleFileSelect(event) {
+					const file = event.target.files[0];
+
+					if (!file) {
+						console.error('No file selected');
+						return;
+					}
+
+					const reader = new FileReader();
+
+					reader.onload = async(e) => {
+						try {
+							const jsonData = JSON.parse(e.target.result as string);
+
+							await browser.storage.local.clear();
+							localStorage.clear();
+							save = jsonData;
+							await set_save();
+							location.href = "index.html";
+						} 
+						catch (error) {
+							console.error('Error parsing JSON: ', error);
+						}
+					};
+					reader.readAsText(file);
+				}
+				break;
+			}
+			case "export-settings":{
+				const data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(save, null, 2));
+
+				const a = document.createElement('a');
+				a.href = 'data:' + data;
+				a.download = 'settings.json';
+
+				parent.appendChild(a);
+				a.click();
+				a.remove();
+				break;
+			}
+		}
+	});
+}
+
 /// Nav Button
 let countdown = 4;
 function configure_home_button(){
@@ -1005,6 +1061,13 @@ function translate() : void {
 			"de": "Einstellungsbutton von der Hauptseite entfernen",
 			"es": "Eliminar botón de configuración de la página principal"
 		},
+		{
+			"name": "import-export-settings",
+			"tr": "Ayarları Dışa Aktar / İçe Aktar",
+			"en": "Export / Import Settings",
+			"de": "Einstellungen exportieren / importieren",
+			"es": "Exportar / Importar Configuraciones"
+		},		
 		{
 			"name": "save-info",
 			"tr": "Lütfen bekleyiniz...",
