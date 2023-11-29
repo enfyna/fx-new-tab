@@ -32,6 +32,7 @@ interface save{
 	firefox_watermark_color:string;
 
 	is_settings_disabled:boolean;
+	is_settings_button_hiding:boolean;
 }
 interface shortcut {
 	name:string;
@@ -525,6 +526,13 @@ function set_settings_button(){
 	const nav = document.getElementById('nav-button') as HTMLButtonElement;
 	const is_settings_disabled = save.is_settings_disabled ?? false;
 	if(is_settings_disabled) return;
+	const is_settings_button_hiding = save.is_settings_button_hiding ?? false;
+	if(is_settings_button_hiding){
+		nav.style.opacity = "0%";
+		nav.addEventListener("mouseenter",()=>{
+			nav.style.opacity = "100%";
+		});
+	}
 	nav.addEventListener('click', () => {
 		localStorage.clear();
 		location.href = 'settings.html';

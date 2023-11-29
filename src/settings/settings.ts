@@ -30,6 +30,7 @@ interface save{
 	firefox_watermark_color:string;
 
 	is_settings_disabled:boolean;
+	is_settings_button_hiding:boolean;
 }
 interface shortcut {
 	name:string;
@@ -74,6 +75,7 @@ async function ready(){
 	configure_currency_settings();
 	configure_firefox_watermark_settings();
 	configure_import_export();
+	configure_nav_settings();
 	configure_home_button();
 }
 
@@ -466,6 +468,16 @@ function configure_note_settings() {
 
 function is_notes_enabled() : boolean {
 	return save.is_notes_enabled ?? true;
+}
+
+/// Settings Button
+function configure_nav_settings() {
+	const check = document.getElementById('hide_settings_button') as HTMLInputElement;
+	check.checked = save.is_settings_button_hiding ?? false;
+	check.addEventListener('change', async() => {
+		save.is_settings_button_hiding = check.checked;
+		await set_save();
+	});
 }
 
 /// Clock
