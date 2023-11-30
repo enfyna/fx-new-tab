@@ -1119,6 +1119,13 @@ function translate() : void {
 			"es": "Criptomonedas",
 		},
 		{
+			"name": "hide-settings-button",
+			"tr": "Ayarlar Butonunu Gizle",
+			"en": "Hide Settings Button",
+			"de": "Einstellungsbutton verbergen",
+			"es": "Ocultar botón de configuración"
+		},		
+		{
 			"name": "remove-settings-button-info",
 			"tr": "Bu ayar ofis veya okul bilgisayarları için kullanılabilir. Çalışma veya okula ait bazı URL'leri veya bir arkaplanı ayarlayabilir ve kullanıcı bunları değiştiremez. Ayrıca araç çubuğu eylemini devre dışı bırakır.",
 			"en": "This setting could be used for office or school computers. You can set up some work or school related URLs or a background, and the user will not be able to change it. This will also disable the toolbar action.",
