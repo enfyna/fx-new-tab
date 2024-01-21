@@ -398,25 +398,24 @@ let start_id : number = -1;
 
 function configure_drag_and_drop(){	
 	function move_shortcut(elm : HTMLElement){
-		for (; elm.parentElement; elm = elm.parentElement){		
-			if (elm.draggable) {
-				if (draggedItem != elm) {
-					const parent = elm.parentElement;
-					if(parent.firstChild == elm){
-						parent.insertBefore(draggedItem, parent.firstChild);
-					}
-					else{
-						elm.after(draggedItem);
-					}
-					did_change_place = true;
-				}
-				return;
+		for (; elm; elm = elm.parentElement) {
+			const parent = elm.parentElement;
+			if(elm.parentElement != draggedItem.parentElement){
+				continue;
+			}		
+			if(parent.firstChild == elm){
+				parent.insertBefore(draggedItem, parent.firstChild);
 			}
+			else{
+				elm.after(draggedItem);
+			}
+			did_change_place = true;
+			return;
 		}
 	}
 
 	document.addEventListener('dragstart', (e) => {
-		draggedItem = e.target as HTMLElement;
+		draggedItem = (e.target as HTMLElement).parentElement.parentElement;
 		const siblings = draggedItem.parentElement.childNodes;
 		for(let i = 0; i < siblings.length; i++){
 			if(siblings[i] == draggedItem){
@@ -428,7 +427,8 @@ function configure_drag_and_drop(){
 
 	document.addEventListener('dragover', (e) => {
 		e.preventDefault();
-		move_shortcut(e.target as HTMLElement);
+		const elm = (e.target as HTMLElement).parentElement.parentElement;
+		move_shortcut(elm);
 	});
 
 	document.addEventListener('drop', async(e) => {
