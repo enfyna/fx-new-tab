@@ -95,8 +95,6 @@ body {
 
 .clock {
     font-size: calc(1.375rem + 1.5vw * 2.5) !important;
-    font-weight: bolder;
-    font-family: monospace;
     text-align: center;
     white-space: nowrap;
 }
