@@ -22,8 +22,13 @@ interface save{
 	currency_container_color:string;
 	
 	is_clock_enabled:boolean;
+	clock_font:string;
 	clock_color:string;
 	clock_format:string;
+	clock_boldness:string;
+	clock_border_style:string;
+	clock_border_color:string;
+	clock_border_radius:string;
 	clock_time_format:boolean;
 
 	is_firefox_watermark_enabled:boolean;
@@ -400,7 +405,7 @@ function configure_drag_and_drop(){
 	function move_shortcut(elm : HTMLElement){
 		for (; elm; elm = elm.parentElement) {
 			const parent = elm.parentElement;
-			if(elm.parentElement != draggedItem.parentElement){
+			if(parent != draggedItem.parentElement){
 				continue;
 			}		
 			if(parent.firstChild == elm){
@@ -482,6 +487,36 @@ function configure_nav_settings() {
 
 /// Clock
 function configure_clock_settings(){
+	function configure_clock() {
+		const clock = document.getElementById('clock_preview') as HTMLHeadingElement;
+		clock.classList.remove(...clock.classList);
+
+		const color = save.clock_color ?? 'text-white';
+		clock.classList.add("color-text", color);
+		clock.style.fontFamily = save.clock_font ?? "Arial";
+		clock.style.fontWeight = save.clock_boldness ?? "bold";
+
+		clock.style.borderStyle = save.clock_border_style ?? "hidden";
+		clock.style.borderColor = (save.clock_border_color ?? "none").replace("bg-","");
+		clock.style.borderRadius = save.clock_border_radius ?? "0px";
+
+		const clock_format = save.clock_format ?? 'h:m'; 
+		const time_format = save.clock_time_format ?? false; // 12 or 24 hour time format
+	
+		const date = new Date();
+		const hour = date.getHours();
+
+		clock.innerText = clock_format
+			.replace('yy',date.getFullYear().toString().slice(2,4))
+			.replace('mm',(date.getMonth() + 1).toString().padStart(2, '0'))
+			.replace('dd',date.getDate().toString().padStart(2, '0'))
+			.replace('h',(!time_format || hour <= 12 ? hour : hour - 12).toString().padStart(2, '0'))
+			.replace('m',date.getMinutes().toString().padStart(2, '0'))
+			.replace('s',date.getSeconds().toString().padStart(2, '0'))
+			.replace('&n','\n');
+	}
+	configure_clock();
+	
 	const settings = document.getElementById('clock_settings') as HTMLDivElement;
 	settings.querySelectorAll('select , input').forEach(elm => {
 		switch(elm.id){
@@ -493,6 +528,24 @@ function configure_clock_settings(){
 				color.hidden = false;
 				elm.appendChild(color);
 				(elm as HTMLSelectElement).value = save.clock_color ?? 'bg-white';
+				break;
+			case 'clock_border_color':
+				const border_color = document.getElementById('colors').cloneNode(true) as HTMLOptGroupElement;
+				border_color.hidden = false;
+				elm.appendChild(border_color);
+				(elm as HTMLSelectElement).value = save.clock_border_color ?? 'bg-white';
+				break;
+			case 'clock_font':
+				(elm as HTMLSelectElement).value = save.clock_font ?? 'monospace';
+				break;
+			case 'clock_border_style':
+				(elm as HTMLSelectElement).value = save.clock_border_style ?? 'hidden';
+				break;
+			case 'clock_boldness':
+				(elm as HTMLInputElement).checked = (save.clock_boldness ?? "bold") == "bold";
+				break;
+			case 'clock_border_radius':
+				(elm as HTMLInputElement).value = (save.clock_border_radius ?? "0");
 				break;
 			case 'clock_format':
 				(elm as HTMLSelectElement).value = save.clock_format ?? 'h:m';
@@ -511,11 +564,18 @@ function configure_clock_settings(){
 			case 'clock_time_format':
 				save.clock_time_format = (event.target as HTMLSelectElement).value == 'true';
 				break;
+			case 'clock_boldness':
+				save.clock_boldness = (event.target as HTMLInputElement).checked ? "bold" : "normal";
+				break
+			case 'clock_border_radius':
+				save.clock_border_radius = (event.target as HTMLInputElement).value + "px";
+				break;
 			default:
 				save[id] = (event.target as HTMLSelectElement).value.trim();
 				break;
 		}
 		await set_save();
+		configure_clock();
 	});
 }
 

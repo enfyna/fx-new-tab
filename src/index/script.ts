@@ -24,8 +24,13 @@ interface save{
 	currency_container_color:string;
 	
 	is_clock_enabled:boolean;
+	clock_font:string;
 	clock_color:string;
 	clock_format:string;
+	clock_boldness:string;
+	clock_border_color:string;
+	clock_border_style:string;
+	clock_border_radius:string;
 	clock_time_format:boolean;
 
 	is_firefox_watermark_enabled:boolean;
@@ -484,6 +489,12 @@ function configure_clock() {
 
 	const color = save.clock_color ?? 'text-white';
 	clock.classList.add(color);
+	clock.style.fontFamily = save.clock_font ?? "monospace";
+	clock.style.fontWeight = save.clock_boldness ?? "bold";
+
+	clock.style.borderStyle = save.clock_border_style ?? "hidden";
+	clock.style.borderColor = (save.clock_border_color ?? "none").replace("bg-","");
+	clock.style.borderRadius = save.clock_border_radius ?? "0px";
 
 	const clock_format = save.clock_format ?? 'h:m'; 
 	const time_format = save.clock_time_format ?? false; // 12 or 24 hour time format

@@ -383,15 +383,35 @@
         </select>
     </div>
 </div>
+<!-- Clock preview -->
+<div class="row m-0 mb-2 d-flex flex-row align-items-center">
+    <h1 id="clock_preview" class="color-text" style="font-size: calc(1.375rem + 1.5vw * 2.5) !important;text-align: center;white-space: nowrap;">
+    </h1>
+</div>
 <!-- Clock Settings  -->
 <div class="row bg-primary text-white rounded m-0 mb-2 d-flex flex-row align-items-center" id="clock_settings">
-    <div class="col-lg-3 my-1">
+    <div class="col-lg-4 my-1">
         <div class="form-check form-switch my-1">
             <input class="form-check-input" type="checkbox" id="enable_clock">
             <label class="form-check-label fw-bold" for="enable_clock" name="enable-clock-label"></label>
         </div>
     </div>
-    <div class="col-lg-4"></div>
+    <div class="col-lg-1 my-1">
+        <div class="form-check form-switch my-1">
+            <input type="checkbox" class="form-check-input" id="clock_boldness">
+        </div>
+    </div>
+    <div class="col-lg-2 my-1">
+        <select class="form-select" name="" id="clock_font">
+            <optgroup label="Fonts">
+                <option value="Arial">Arial</option>
+                <option value="Courier New">Courier New</option>
+                <option value="Calibri">Calibri</option>
+                <option value="monospace">Monospace</option>
+                <option value="Times New Roman">Times New Roman</option>
+            </optgroup>
+        </select>
+    </div>
     <div class="col-lg-1 my-1">
         <select class="form-select" id="clock_time_format">
             <!-- <optgroup name="clock-time-format-label"> -->
@@ -418,6 +438,25 @@
     </div>
     <div class="col-lg-2 my-1">
         <select class="form-select" id="clock_color">
+        </select>
+    </div>
+    <div class="col-lg-6 my-1"></div>
+    <div class="col-lg-2 my-1">
+        <div class="form-range">
+            <input type="range" class="form-range" min="0" max="25" step="1" id="clock_border_radius">
+        </div>
+    </div>
+    <div class="col-lg-2 my-1">
+        <select class="form-select" id="clock_border_style">
+            <option value="hidden">hidden</option>
+            <option value="solid">solid</option>
+            <option value="dotted">dotted</option>
+            <option value="double">double</option>
+            <option value="dashed">dashed</option>
+        </select>
+    </div>
+    <div class="col-lg-2 my-1">
+        <select class="form-select" id="clock_border_color">
         </select>
     </div>
 </div>
