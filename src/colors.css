@@ -2,57 +2,114 @@
 /* Add glow to bootstrap colors */
 
 .bg-primary {
-    --glow-clr: #00f;
+    --c1: rgb(13, 110, 253);
 }
+.bd-primary{
+    --c2: #00f;
+}
+
 .bg-danger {
-    --glow-clr: #f00;
+    --c1: rgb(220, 53, 69);
 }
+.bd-danger{
+    --c2: #f00;
+}
+
 .bg-warning {
-    --glow-clr: #ff0;
+    --c1: rgb(255, 193, 7);
 }
+.bd-warning{
+    --c2: #ff0;
+}
+
 .bg-success {
-    --glow-clr: #0a0;
+    --c1: rgb(25, 135, 84);
 }
+.bd-success{
+    --c2: #0a0;
+}
+
 .bg-dark {
-    --glow-clr: #222;
+    --c1: #222;
 }
+.bd-dark{
+    --c2: #222;
+}
+
 .bg-black {
-    --glow-clr: #000;
+    --c1: #000;
 }
+.bd-black{
+    --c2: #000;
+}
+
 .bg-transparent {
-    --glow-clr: #777;
+    --c1: #7770;
 }
+.bd-transparent{
+    --c2: #777;
+}
+
 .bg-white {
-    --glow-clr: #fff;
+    --c1: #fff;
+}
+.bd-white{
+    --c2: #fff;
 }
 
 /* Custom color classes that are not included with bootstrap */
 
-.bg-orange { 
-    --glow-clr: #f70; 
+.bg-orange {
+    --c1: #f70;
 }
-.bg-aqua { 
-    --glow-clr: #0fa; 
-}
-.bg-violet { 
-    --glow-clr: #80f; 
-}
-.bg-scarletred { 
-    --glow-clr: #f20; 
-}
-.bg-lime { 
-    --glow-clr: #3d3; 
-}
-.bg-navyblue { 
-    --glow-clr: #008; 
-}
-.bg-gray { 
-    --glow-clr: #888; 
+.bd-orange{
+    --c2:  #f70;
 }
 
-.bg-orange, .bg-aqua, .bg-violet, 
-.bg-scarletred, .bg-lime, .bg-navyblue, .bg-gray {
-    background-color: var(--glow-clr) !important;
+.bg-aqua {
+    --c1: #0fa;
+}
+.bd-aqua{
+    --c2:  #0fa;
+}
+
+.bg-violet {
+    --c1: #80f;
+}
+.bd-violet{
+    --c2:  #80f;
+}
+
+.bg-scarletred {
+    --c1: #f20;
+}
+.bd-scarletred{
+    --c2:  #f20;
+}
+
+.bg-lime {
+    --c1: #3d3;
+}
+.bd-lime{
+    --c2:  #3d3;
+}
+
+.bg-navyblue {
+    --c1: #008;
+}
+.bd-navyblue{
+    --c2:  #008;
+}
+
+.bg-gray {
+    --c1: #888;
+}
+.bd-gray{
+    --c2:  #888;
+}
+
+[class*="bg-"] {
+    background-color: var(--c1) !important;
 }
 
 /* Make these compatible with the clock and firefox logo */
@@ -63,5 +120,6 @@
 .bg-aqua.color-text, .bg-violet.color-text, .bg-scarletred.color-text, 
 .bg-lime.color-text, .bg-navyblue.color-text, .bg-gray.color-text {
     background-color: transparent !important;
-    color: var(--glow-clr) !important;
+    color: var(--c1) !important;
+    border-color: var(--c2) !important;
 }

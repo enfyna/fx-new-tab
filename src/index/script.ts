@@ -183,7 +183,8 @@ async function configure_shortcuts(){
 
 		const shortcut_node = shortcut_base_node.cloneNode(true) as HTMLDivElement;
 		const link = shortcut_node.getElementsByTagName('a')[0] as HTMLAnchorElement;
-		link.classList.add(colors[i % colors.length]);
+		const color = colors[i % colors.length];
+		link.classList.add(color, 'bd-' + color.split("-")[1]);
 		link.href = shortcut.link;
 
 		if (!is_circle){
@@ -487,13 +488,14 @@ function configure_clock() {
 	}
 	const clock = document.getElementById('clock') as HTMLHeadingElement;
 
-	const color = save.clock_color ?? 'text-white';
-	clock.classList.add(color);
+	const bg_color = save.clock_color ?? 'bg-white';
+	const bd_color = save.clock_border_color ?? 'bd-white';
+	clock.classList.add(bg_color, bd_color);
+
 	clock.style.fontFamily = save.clock_font ?? "monospace";
 	clock.style.fontWeight = save.clock_boldness ?? "bold";
 
 	clock.style.borderStyle = save.clock_border_style ?? "hidden";
-	clock.style.borderColor = (save.clock_border_color ?? "none").replace("bg-","");
 	clock.style.borderRadius = save.clock_border_radius ?? "0px";
 
 	const clock_format = save.clock_format ?? 'h:m'; 
@@ -526,7 +528,7 @@ function configure_firefox_watermark() {
 
 	const fx = document.getElementById('firefox_watermark') as HTMLDivElement;
 
-	const color = save.firefox_watermark_color ?? 'text-warning';
+	const color = save.firefox_watermark_color ?? 'bg-orange';
 
 	fx.classList.add(color);
 	fx.classList.replace('d-none','d-flex');

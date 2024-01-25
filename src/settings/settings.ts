@@ -138,7 +138,7 @@ async function configure_shortcut_settings(){
 		const input = event.target as HTMLSelectElement;
 		switch (true) {
 			case input.id.startsWith('shortcut_col_color'):
-				colors[input.id.split('_')[3]] = input.value.trim();
+				colors[input.id.split('_')[3]] = 'bg-' + input.value.trim();
 				save.shortcut_col_colors = colors;
 				break;
 			default:
@@ -188,7 +188,7 @@ async function configure_shortcut_settings(){
 			colors.push('bg-primary');
 		}
 
-		select.value = colors[idx];
+		select.value = colors[idx].split('-')[1];
 
 		select.id = 'shortcut_col_color_' + idx; 
 		shortcut_color_container.append(select);
@@ -491,13 +491,14 @@ function configure_clock_settings(){
 		const clock = document.getElementById('clock_preview') as HTMLHeadingElement;
 		clock.classList.remove(...clock.classList);
 
-		const color = save.clock_color ?? 'text-white';
-		clock.classList.add("color-text", color);
-		clock.style.fontFamily = save.clock_font ?? "Arial";
+		const bg_color = save.clock_color ?? 'bg-white';
+		const bd_color = save.clock_border_color ?? 'bd-white';
+		clock.classList.add("clock", bd_color, bg_color);
+
+		clock.style.fontFamily = save.clock_font ?? "monospace";
 		clock.style.fontWeight = save.clock_boldness ?? "bold";
 
 		clock.style.borderStyle = save.clock_border_style ?? "hidden";
-		clock.style.borderColor = (save.clock_border_color ?? "none").replace("bg-","");
 		clock.style.borderRadius = save.clock_border_radius ?? "0px";
 
 		const clock_format = save.clock_format ?? 'h:m'; 
@@ -527,13 +528,13 @@ function configure_clock_settings(){
 				const color = document.getElementById('colors').cloneNode(true) as HTMLOptGroupElement;
 				color.hidden = false;
 				elm.appendChild(color);
-				(elm as HTMLSelectElement).value = save.clock_color ?? 'bg-white';
+				(elm as HTMLSelectElement).value = (save.clock_color ?? 'bg-white').split('-')[1];
 				break;
 			case 'clock_border_color':
 				const border_color = document.getElementById('colors').cloneNode(true) as HTMLOptGroupElement;
 				border_color.hidden = false;
 				elm.appendChild(border_color);
-				(elm as HTMLSelectElement).value = save.clock_border_color ?? 'bg-white';
+				(elm as HTMLSelectElement).value = (save.clock_border_color ?? 'bg-white').split('-')[1];
 				break;
 			case 'clock_font':
 				(elm as HTMLSelectElement).value = save.clock_font ?? 'monospace';
@@ -569,6 +570,12 @@ function configure_clock_settings(){
 				break
 			case 'clock_border_radius':
 				save.clock_border_radius = (event.target as HTMLInputElement).value + "px";
+				break;
+			case 'clock_color':
+				save.clock_color = 'bg-' + (event.target as HTMLSelectElement).value.trim(); 
+				break;
+			case 'clock_border_color':
+				save.clock_border_color = 'bd-' + (event.target as HTMLSelectElement).value.trim();
 				break;
 			default:
 				save[id] = (event.target as HTMLSelectElement).value.trim();
@@ -611,7 +618,7 @@ function configure_currency_settings(){
 				break;
 			case 'currency_container_color':
 				elm.appendChild(color_group);
-				elm.value = save.currency_container_color ?? 'bg-primary';
+				elm.value = (save.currency_container_color ?? 'bg-primary').split('-')[1];
 				break;
 			default:
 				elm.appendChild(national.cloneNode(true));
@@ -632,7 +639,7 @@ function configure_currency_settings(){
 				save.is_currency_rates_enabled = (elm as HTMLInputElement).checked;
 				break;
 			case 'currency_container_color':
-				save.currency_container_color = elm.value.trim();
+				save.currency_container_color = 'bg-' + elm.value.trim();
 				break;
 			case 'base_currency':
 				save.base_currency = elm.value.trim();
@@ -673,9 +680,9 @@ function configure_firefox_watermark_settings() {
 	const opt = document.getElementById('colors').cloneNode(true) as HTMLOptGroupElement;
 	opt.hidden = false;
 	color.appendChild(opt);
-	color.value = save.firefox_watermark_color ?? 'bg-orange';
+	color.value = (save.firefox_watermark_color ?? 'bg-orange').split('-')[1];
 	color.addEventListener('change', async()=>{
-		save.firefox_watermark_color = color.value.trim();
+		save.firefox_watermark_color = 'bg-' + color.value.trim();
 		await set_save();
 	})
 }

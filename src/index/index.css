@@ -77,7 +77,7 @@ body {
     transition: 0.1s;
 }
 .glow:hover {
-    box-shadow: 0 0px 10px 10px var(--glow-clr);
+    box-shadow: 0 0px 10px 10px var(--c2);
     scale: 1.05;
 }
 .spin > div > img {
