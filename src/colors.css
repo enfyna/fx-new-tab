@@ -114,11 +114,7 @@
 
 /* Make these compatible with the clock and firefox logo */
 
-.bg-primary.color-text, .bg-danger.color-text, .bg-warning.color-text, 
-.bg-success.color-text, .bg-dark.color-text, .bg-black.color-text, 
-.bg-transparent.color-text, .bg-white.color-text, .bg-orange.color-text, 
-.bg-aqua.color-text, .bg-violet.color-text, .bg-scarletred.color-text, 
-.bg-lime.color-text, .bg-navyblue.color-text, .bg-gray.color-text {
+.clock, .firefox {
     background-color: transparent !important;
     color: var(--c1) !important;
     border-color: var(--c2) !important;
