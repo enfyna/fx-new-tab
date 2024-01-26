@@ -30,6 +30,7 @@ interface save{
 	clock_boldness:string;
 	clock_border_color:string;
 	clock_border_style:string;
+	clock_border_width:string;
 	clock_border_radius:string;
 	clock_time_format:boolean;
 
@@ -496,7 +497,8 @@ function configure_clock() {
 	clock.style.fontWeight = save.clock_boldness ?? "bold";
 
 	clock.style.borderStyle = save.clock_border_style ?? "hidden";
-	clock.style.borderRadius = save.clock_border_radius ?? "0px";
+	clock.style.borderRadius = (save.clock_border_radius ?? "0") + "px";
+	clock.style.borderWidth = (save.clock_border_width ?? "0") + "px";
 
 	const clock_format = save.clock_format ?? 'h:m'; 
 	const time_format = save.clock_time_format ?? false; // 12 or 24 hour time format

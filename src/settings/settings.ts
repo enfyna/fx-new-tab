@@ -29,6 +29,7 @@ interface save{
 	clock_border_style:string;
 	clock_border_color:string;
 	clock_border_radius:string;
+	clock_border_width:string;
 	clock_time_format:boolean;
 
 	is_firefox_watermark_enabled:boolean;
@@ -499,7 +500,8 @@ function configure_clock_settings(){
 		clock.style.fontWeight = save.clock_boldness ?? "bold";
 
 		clock.style.borderStyle = save.clock_border_style ?? "hidden";
-		clock.style.borderRadius = save.clock_border_radius ?? "0px";
+		clock.style.borderRadius = (save.clock_border_radius ?? "0") + "px";
+		clock.style.borderWidth = (save.clock_border_width ?? "0") + "px";
 
 		const clock_format = save.clock_format ?? 'h:m'; 
 		const time_format = save.clock_time_format ?? false; // 12 or 24 hour time format
@@ -545,9 +547,6 @@ function configure_clock_settings(){
 			case 'clock_boldness':
 				(elm as HTMLInputElement).checked = (save.clock_boldness ?? "bold") == "bold";
 				break;
-			case 'clock_border_radius':
-				(elm as HTMLInputElement).value = (save.clock_border_radius ?? "0");
-				break;
 			case 'clock_format':
 				(elm as HTMLSelectElement).value = save.clock_format ?? 'h:m';
 				break;
@@ -568,9 +567,6 @@ function configure_clock_settings(){
 			case 'clock_boldness':
 				save.clock_boldness = (event.target as HTMLInputElement).checked ? "bold" : "normal";
 				break
-			case 'clock_border_radius':
-				save.clock_border_radius = (event.target as HTMLInputElement).value + "px";
-				break;
 			case 'clock_color':
 				save.clock_color = 'bg-' + (event.target as HTMLSelectElement).value.trim(); 
 				break;
