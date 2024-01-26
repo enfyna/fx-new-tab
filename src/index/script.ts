@@ -405,16 +405,7 @@ async function configure_currencies(){
 
 	// Update the currency if a day has passed
 	// or if we have reset the currency values
-	let fetch_currencies = did_a_day_pass();
-	if(!fetch_currencies){
-		for (let i = 0; i < currencies.length; i++) {
-			if (currencies[i].rate == '-'){
-				fetch_currencies = true;
-				break;
-			}
-		}
-	}
-	if(fetch_currencies){
+	if(did_a_day_pass() || currencies.some(currency => currency.rate === '-')){
 		try {
 			const rates = await get_rates();
 			for (let i = 0; i < 3; i++) {
