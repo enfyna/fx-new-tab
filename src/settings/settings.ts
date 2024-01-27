@@ -538,20 +538,14 @@ function configure_clock_settings(){
 				elm.appendChild(border_color);
 				(elm as HTMLSelectElement).value = (save.clock_border_color ?? 'bg-white').split('-')[1];
 				break;
-			case 'clock_font':
-				(elm as HTMLSelectElement).value = save.clock_font ?? 'monospace';
-				break;
-			case 'clock_border_style':
-				(elm as HTMLSelectElement).value = save.clock_border_style ?? 'hidden';
-				break;
 			case 'clock_boldness':
 				(elm as HTMLInputElement).checked = (save.clock_boldness ?? "bold") == "bold";
 				break;
-			case 'clock_format':
-				(elm as HTMLSelectElement).value = save.clock_format ?? 'h:m';
-				break;
 			case 'clock_time_format':
 				(elm as HTMLSelectElement).value = save.clock_time_format ?? false ? 'true' : 'false';
+				break;
+			default:
+				(elm as HTMLInputElement).value = save[elm.id] ?? (elm as HTMLInputElement).value;
 				break;
 		}
 	});
