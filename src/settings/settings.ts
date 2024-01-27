@@ -594,14 +594,12 @@ function configure_currency_settings(){
 	const currencies = get_currencies();
 
 	const container = document.getElementById('currency_setting');
-	const selects = container.getElementsByTagName('select');
-	const inputs = container.getElementsByTagName('input');
-	for (let i = 0; i < selects.length + inputs.length; i++) {
-		let elm : HTMLInputElement | HTMLSelectElement;
-		if(i < selects.length)
-			elm = selects[i];
-		else
-			elm = inputs[i - selects.length];
+	const elements = Array.from(
+		container.querySelectorAll('select, input')
+	) as (HTMLInputElement | HTMLSelectElement)[];
+	
+	for (let i = 0; i < elements.length; i++) {
+		const elm = elements[i];
 		switch (elm.id){
 			case 'enable_api':
 				(elm as HTMLInputElement).checked = save.is_currency_rates_enabled ?? true;
