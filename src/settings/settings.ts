@@ -1217,41 +1217,28 @@ function translate() : void {
 			"es": "Por favor, espere...",
 		}
 	];
-	let lang : string;
-	switch (navigator.language.toLowerCase().split('-')[0]){
-		case 'tr':
-			lang = 'tr';
-			break;
-		case 'de':
-			lang = 'de';
-			break;
-		case 'es':
-			lang = 'es';
-			break;
-		default:
-			lang = 'en';
-			break;
-	}
+
+	const lang = ["en", "tr", "es", "de"].find(lang => navigator.language.startsWith(lang)) || "en";
 	for (const dict of translations) {
-		const elm_name : string = dict.name;
-		const translation : string = dict[lang];
-		if(elm_name == "note-input"){
-			for (const element of document.getElementsByName(elm_name)){
+		const name = dict.name;
+		const translation = dict[lang];
+		if(name == "note-input"){
+			for (const element of document.getElementsByName(name)){
 				(element as HTMLInputElement).placeholder = translation;
 			}
 		}
-		else if(elm_name == "base-currency-label" || elm_name == "crypto-currencies" || elm_name == "national-currencies" || elm_name == "shortcut-shape" || elm_name == "shortcut-size" || elm_name == "shortcut-transition" || elm_name == "shortcut-width" || elm_name == "shortcut-v-align" || elm_name == "shortcut-h-align" || elm_name == "color-label"){
-			for (const element of document.getElementsByName(elm_name)){
+		else if(["base-currency-label", "crypto-currencies", "national-currencies", "shortcut-shape", "shortcut-size", "shortcut-transition", "shortcut-width", "shortcut-v-align", "shortcut-h-align", "color-label"].includes(name)){
+			for (const element of document.getElementsByName(name)){
 				(element as HTMLOptGroupElement).label = translation;
 			}
 		}
-		else if(elm_name == "delete-bg-button" || elm_name == "set-default-button"){
-			for (const element of document.getElementsByName(elm_name)){
+		else if(["delete-bg-button", "set-default-button"].includes(name)){
+			for (const element of document.getElementsByName(name)){
 				(element as HTMLInputElement).value = translation;
 			}
 		}
 		else{
-			for (const element of document.getElementsByName(elm_name)){
+			for (const element of document.getElementsByName(name)){
 				element.innerText = translation;
 			}
 		}
