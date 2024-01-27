@@ -398,6 +398,7 @@
     </div>
     <div class="col-lg-1 my-1">
         <div class="form-check form-switch my-1">
+            <label class="form-check-label fw-bold" for="clock_boldness" name="clock-boldness-label"></label>
             <input type="checkbox" class="form-check-input" id="clock_boldness">
         </div>
     </div>
@@ -439,24 +440,26 @@
         <select class="form-select" id="clock_color">
         </select>
     </div>
-    <div class="col-lg-6 my-1"></div>
-    <div class="col-lg-1 my-1">
+    <div class="col-lg-4 my-1"></div>
+    <div class="col-lg-2 my-1">
+        <label class="form-check-label fw-bold" for="clock_border_radius" name="clock-border-radius-label"></label>
         <div class="form-range">
             <input type="range" class="form-range" min="0" max="75" step="1" id="clock_border_radius">
         </div>
     </div>
-    <div class="col-lg-1 my-1">
+    <div class="col-lg-2 my-1">
+        <label class="form-check-label fw-bold" for="clock_border_width" name="clock-border-width-label"></label>
         <div class="form-range">
             <input type="range" class="form-range" min="0" max="10" step="1" id="clock_border_width">
         </div>
     </div>
     <div class="col-lg-2 my-1">
         <select class="form-select" id="clock_border_style">
-            <option value="hidden">hidden</option>
-            <option value="solid">solid</option>
-            <option value="dotted">dotted</option>
-            <option value="double">double</option>
-            <option value="dashed">dashed</option>
+            <option value="hidden" name="clock_style_hidden">hidden</option>
+            <option value="solid" name="clock_style_solid">solid</option>
+            <option value="dotted" name="clock_style_dotted">dotted</option>
+            <option value="double" name="clock_style_double">double</option>
+            <option value="dashed" name="clock_style_dashed">dashed</option>
         </select>
     </div>
     <div class="col-lg-2 my-1">

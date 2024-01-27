@@ -1209,6 +1209,62 @@ function translate() : void {
 			"en": "Please Wait...",
 			"de": "Bitte Warten...",
 			"es": "Por favor, espere...",
+		},		
+		{
+			"name": "clock-boldness-label",
+			"tr": "Kalın",
+			"en": "Bold",
+			"de": "Fett",
+			"es": "Negrita"
+		},
+		{
+			"name": "clock-border-width-label",
+			"tr": "Çerçeve Kalınlığı",
+			"en": "Border Width",
+			"de": "Rahmenbreite",
+			"es": "Ancho del Borde"
+		},
+		{
+			"name": "clock-border-radius-label",
+			"tr": "Çerçeve Yarıçapı",
+			"en": "Border Radius",
+			"de": "Rahmenradius",
+			"es": "Radio del Borde"
+		},
+		{
+			"name": "clock_style_hidden",
+			"tr": "Gizli",
+			"en": "Hidden",
+			"de": "Versteckt",
+			"es": "Oculto"
+		},
+		{
+			"name": "clock_style_solid",
+			"tr": "Çizgi",
+			"en": "Solid",
+			"de": "Durchgezogen",
+			"es": "Sólido"
+		},
+		{
+			"name": "clock_style_dotted",
+			"tr": "Noktalı",
+			"en": "Dotted",
+			"de": "Gepunktet",
+			"es": "Punteado"
+		},
+		{
+			"name": "clock_style_double",
+			"tr": "Çift Çizgi",
+			"en": "Double",
+			"de": "Doppelt",
+			"es": "Doble"
+		},
+		{
+			"name": "clock_style_dashed",
+			"tr": "Kesikli Çizgi",
+			"en": "Dashed",
+			"de": "Gestrichelt",
+			"es": "Guión"
 		}
 	];
 
