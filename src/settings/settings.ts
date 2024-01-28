@@ -50,19 +50,15 @@ interface currency {
 interface note {
 	note:string;
 }
-const node = {
-	currency:{
-		option:"currency_option_",
-	},
-	shortcut:{
-		link:"select_link_",
-		name:"select_name_",
-		img:"select_img_",
-		reset:"reset_img_",
-		default:"set_back_",
-		remove:"remove_",
-	},
-}
+
+enum node{
+	sh_link = "select_link_", 
+	sh_name = "select_name_",
+	sh_img = "select_img_",
+	sh_reset = "reset_img_",
+	sh_default = "set_back_",
+	sh_remove = "remove_",
+};
 
 let save : save;
 
@@ -285,10 +281,10 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 	for(let i = 0; i < inputs.length; i++){
 		const inp = inputs[i];
 		switch (inp.id) {
-			case node.shortcut.link:
+			case node.sh_link:
 				inp.value = shortcut.link;
 				break;
-			case node.shortcut.name:
+			case node.sh_name:
 				inp.value = shortcut.name;
 				break;
 		}
@@ -296,7 +292,7 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 	elm.addEventListener('input', async(event)=>{
 		const input = event.target as HTMLInputElement;
 		switch(input.id){
-			case node.shortcut.link:{
+			case node.sh_link:{
 				const link = input.value.trim();
 				shortcut.link = link;
 				if(link.length == 0){
@@ -306,13 +302,13 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 				await set_save();
 				break;
 			}
-			case node.shortcut.name:{
+			case node.sh_name:{
 				const name = input.value.trim();
 				shortcut.name = name.length > 0 ? name : null;
 				await set_save();
 				break;
 			}
-			case node.shortcut.img:{
+			case node.sh_img:{
 				const reader = new FileReader();
 				reader.addEventListener("loadend", async(event) => {
 					if(!event.target) return;
@@ -329,7 +325,7 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 	elm.addEventListener('click', async(event)=>{
 		const button = event.target as HTMLButtonElement;
 		switch (button.id){
-			case node.shortcut.reset:
+			case node.sh_reset:
 				for (let i = 0; i < topSites.length; i++) {
 					const site = topSites[i];
 					if (site.link == shortcut.link){
@@ -344,7 +340,7 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 				shortcut.img = '';
 				await set_save();
 				break;
-			case node.shortcut.remove:
+			case node.sh_remove:
 				for (let i = 0; i < save.shortcuts.length; i++) {
 					if (save.shortcuts[i] == shortcut){
 						save.shortcuts.splice(i,1);
@@ -354,7 +350,7 @@ function create_shortcut_setting(id : number, elm : HTMLDivElement) : HTMLDivEle
 				elm.remove();
 				await set_save();
 				break;
-			case node.shortcut.default:{
+			case node.sh_default:{
 				if(shortcut.link == ''){
 					return
 				}

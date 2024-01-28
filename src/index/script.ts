@@ -52,21 +52,12 @@ interface currency {
 interface note {
 	note:string;
 }
-const node = {
-	currency:{
-		name:"currency_name_",
-		value:"currency_value_",
-	},
-	shortcut:{
-		link:"link_",
-		name:"name_",
-		img:"img_",
-	},
-	note:{
-		note:"note_",
-		input:"note_input_",
-	},
-};
+
+enum node{
+	nt_note = "note_",
+	nt_input = "nt_input_",
+}
+
 
 let save : save;
 let using_local_save : boolean = true;
@@ -354,7 +345,7 @@ function configure_notes(){
 		const elm = event.target as HTMLElement;
 		const index = elm.id.charAt(elm.id.length - 1);
 		switch (elm.id) {
-			case node.note.note + index:{
+			case node.nt_note + index:{
 				const input = inputs[index] as HTMLInputElement;
 				input.value = elm.innerText;
 				input.hidden = false;
@@ -362,7 +353,7 @@ function configure_notes(){
 				elm.hidden = true;
 				break;
 			}
-			case node.note.input + index:{
+			case node.nt_input + index:{
 				if(event.type == 'click') return;
 				elm.hidden = true;
 				const button = buttons[index] as HTMLButtonElement;
