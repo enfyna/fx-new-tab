@@ -51,10 +51,11 @@ interface currency {
 }
 interface note {
 	note:string;
+	color:string;
 }
 
 enum node{
-	nt_note = "note_",
+	nt_note = "nt_nt_",
 	nt_input = "nt_input_",
 }
 
@@ -308,10 +309,10 @@ function center_shortcuts() {
 /// Notes
 function get_notes() : note[] {
 	return save.notes ?? [
-		{note: ""},
-		{note: ""},
-		{note: ""},
-		{note: ""},
+		{note: "", color: "bg-primary"},
+		{note: "", color: "bg-danger"},
+		{note: "", color: "bg-success"},
+		{note: "", color: "bg-warning"},
 	];
 }
 
@@ -326,49 +327,52 @@ function configure_notes(){
 	const notes : note[] = get_notes();
 
 	const container = document.getElementById('notes') as HTMLDivElement;
-	const buttons = container.getElementsByTagName('button');
-	const inputs = container.getElementsByTagName('input');
+	const note = document.getElementById('note') as HTMLDivElement;
 
 	for (let i = 0; i < notes.length; i++) {
-		const button = buttons[i];
-		const input = inputs[i];
-
+		const new_note = note.cloneNode(true) as HTMLDivElement;
+		const button = new_note.getElementsByTagName('button')[0];
+		const input = new_note.getElementsByTagName('input')[0];
+		
+		input.id = node.nt_input + i;
+		button.id = node.nt_note + i;
+		button.classList.add(notes[i].color ?? 'bg-primary');
+		
 		button.innerText = notes[i].note;
 		button.hidden = false;
 
 		input.addEventListener('blur', note_interaction);
+		container.append(new_note);
 	}
 	container.addEventListener('change', note_interaction);
 	container.addEventListener('click', note_interaction);
 
 	async function note_interaction(event : Event){
 		const elm = event.target as HTMLElement;
-		const index = elm.id.charAt(elm.id.length - 1);
-		switch (elm.id) {
-			case node.nt_note + index:{
-				const input = inputs[index] as HTMLInputElement;
-				input.value = elm.innerText;
-				input.hidden = false;
-				input.focus();
-				elm.hidden = true;
-				break;
-			}
-			case node.nt_input + index:{
-				if(event.type == 'click') return;
-				elm.hidden = true;
-				const button = buttons[index] as HTMLButtonElement;
-				const new_note = (elm as HTMLInputElement).value.trim();
-				button.innerText = new_note;
-				notes[index].note = new_note;
-				save.notes = notes;
-				await browser.storage.local.set(save);
-				localStorage.clear();
-				button.hidden = false;
-				break;
-			}
+		if (elm.id.startsWith(node.nt_note)){
+			const index = elm.id.slice(node.nt_note.length);
+			const input = document.getElementById(node.nt_input + index) as HTMLInputElement;
+			input.value = elm.innerText;
+			input.hidden = false;
+			input.focus();
+			elm.hidden = true;
+		}
+		else if (elm.id.startsWith(node.nt_input)){
+			if(event.type == 'click') return;
+			elm.hidden = true;
+			const index = elm.id.slice(node.nt_input.length);
+			const button = document.getElementById(node.nt_note + index) as HTMLButtonElement;
+			const new_note = (elm as HTMLInputElement).value.trim();
+			button.innerText = new_note;
+			notes[index].note = new_note;
+			save.notes = notes;
+			await browser.storage.local.set(save);
+			localStorage.clear();
+			button.hidden = false;
 		}
 	}
 	container.classList.replace('d-none','d-list');
+	note.remove();
 }
 
 /// Currencies

@@ -49,6 +49,7 @@ interface currency {
 }
 interface note {
 	note:string;
+	color:string;
 }
 
 enum node{
@@ -58,6 +59,8 @@ enum node{
 	sh_reset = "reset_img_",
 	sh_default = "set_back_",
 	sh_remove = "remove_",
+
+	nt_color = "nt_color_",
 };
 
 let save : save;
@@ -172,7 +175,7 @@ async function configure_shortcut_settings(){
 	}
 	const shortcut_color_container = document.getElementById('shortcut_color_container') as HTMLDivElement;
 	const shortcut_col_color_select = document.createElement('select');
-	shortcut_col_color_select.classList.add('col', 'form-select', 'm-1')
+	shortcut_col_color_select.classList.add('col', 'form-select', 'm-1');
 
 	const color_group = document.getElementById('colors').cloneNode(true) as HTMLOptGroupElement;
 	color_group.hidden = false;
@@ -460,16 +463,83 @@ function configure_drag_and_drop(){
 
 /// Notes
 function configure_note_settings() {
-	const check = document.getElementById('enable_notes') as HTMLInputElement;
-	check.checked = is_notes_enabled();
-	check.addEventListener('change', async() => {
-		save.is_notes_enabled = check.checked;
+	const notes = get_notes();
+
+	const container = document.getElementById('note_settings') as HTMLDivElement;
+
+	const note_color_container = document.getElementById('note_color_container') as HTMLDivElement;
+	const note_col_color_select = document.createElement('select');
+	note_col_color_select.classList.add('col', 'form-select', 'm-1');
+	
+	const color_group = document.getElementById('colors').cloneNode(true) as HTMLOptGroupElement;
+	color_group.hidden = false;
+	note_col_color_select.appendChild(color_group);
+
+	function add_note(idx : number) {
+		const select = note_col_color_select.cloneNode(true) as HTMLSelectElement;
+
+		for (let i = idx; i >= notes.length; i--) {
+			notes.push({note:"",color:'bg-primary'});
+		}
+
+		select.value = (notes[idx].color ?? 'bg-primary').split('-')[1];
+
+		select.id = node.nt_color + idx; 
+		note_color_container.append(select);
+	}
+
+	function remove_note() {
+		notes.pop();
+		note_color_container.lastChild.remove();
+	}
+
+	for (let i = 0; i < notes.length; i++) {
+		add_note(i);
+	}
+
+	container.querySelectorAll('input').forEach(elm => {
+		switch(elm.id){
+			case 'enable_notes':
+				(elm as HTMLInputElement).checked = is_notes_enabled();
+				break;
+		}
+	});
+	
+	container.addEventListener('click', async(event)=>{
+		const elm = event.target as HTMLInputElement;
+		if(elm.id == 'add_note')
+			add_note(get_notes().length);
+		else if(elm.id =='remove_note')
+			remove_note();
+		await set_save();
+	});
+
+	container.addEventListener('change', async(event)=>{
+		const elm = event.target as HTMLInputElement;
+		if(elm.id == 'enable_notes')
+			save.is_notes_enabled = elm.checked;
+		else if(elm.id.startsWith(node.nt_color)){
+			const idx = elm.id.slice(node.nt_color.length);
+			const note = notes[idx] as note;
+			note.color = 'bg-' + elm.value.trim();
+			notes[idx] = note;
+			save.notes = notes;
+		}
 		await set_save();
 	});
 }
 
 function is_notes_enabled() : boolean {
 	return save.is_notes_enabled ?? true;
+}
+
+function get_notes() : note[] {
+	return save.notes ?? [
+		{note: "", color: "bg-primary"},
+		{note: "", color: "bg-danger"},
+		{note: "", color: "bg-success"},
+		{note: "", color: "bg-warning"},
+	];
 }
 
 /// Settings Button

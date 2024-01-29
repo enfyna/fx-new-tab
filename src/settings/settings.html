@@ -468,12 +468,25 @@
     </div>
 </div>
 <!-- Note Settings  -->
-<div class="row bg-danger text-white rounded m-0 mb-2 d-flex flex-row align-items-center">
-    <div class="col-lg-3 my-1">
+<div class="row bg-danger text-white rounded m-0 mb-2 d-flex flex-row align-items-center" id="note_settings">
+    <div class="col-lg-10 my-1">
         <div class="form-check form-switch my-1">
             <input class="form-check-input" type="checkbox" id="enable_notes">
             <label class="form-check-label fw-bold" for="enable_notes" name="enable-notes-label"></label>
         </div>
+    </div>
+    <div class="col-lg-1 my-1">
+        <button class="btn btn-success border-dark w-100" type="button" id="add_note">
+            <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#plus-fill"/></svg>
+        </button>
+    </div>
+    <div class="col-lg-1 my-1">
+        <button class="btn btn-danger border-dark w-100" type="button" id="remove_note">
+            <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#trash-fill"/></svg>
+        </button>
+    </div>
+    <div class="col-lg-12">
+        <div class="row m-0" id="note_color_container"></div>
     </div>
 </div>
 <!-- Currency API settings -->
