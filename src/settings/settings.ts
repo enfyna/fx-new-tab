@@ -504,13 +504,15 @@ function configure_note_settings() {
 				break;
 		}
 	});
-	
+
 	container.addEventListener('click', async(event)=>{
 		const elm = event.target as HTMLInputElement;
 		if(elm.id == 'add_note')
 			add_note(get_notes().length);
 		else if(elm.id =='remove_note')
 			remove_note();
+		else
+			return;
 		await set_save();
 	});
 
@@ -525,6 +527,8 @@ function configure_note_settings() {
 			notes[idx] = note;
 			save.notes = notes;
 		}
+		else
+			return;
 		await set_save();
 	});
 }
