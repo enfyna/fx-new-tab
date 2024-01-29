@@ -87,7 +87,7 @@ body {
 .spin:hover > div > img {
     transform: rotateY(0deg);
 }
-.bg-white > .text-white {
+.bg-white > .text-white, .text-white.bg-white {
     color: #000 !important;
 }
 
