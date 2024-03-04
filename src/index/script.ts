@@ -1,4 +1,4 @@
-const currency_api = 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/';
+const currency_api = 'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/';
 const img_api = 'https://icon.horse/icon/';
 interface save{
 	bg_img:string;
