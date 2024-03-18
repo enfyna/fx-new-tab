@@ -10,54 +10,58 @@
 	<script src="build/script.js" async></script>
 </head>
 
-<body class="container-fluid row d-flex vh-100 m-0 p-0 justify-content-center">
+<body>
 
-<div class="col-md-8 m-0 p-0 row d-flex">
-	<div id="ShortcutContainer" class="row p-0 g-3 pb-3 m-0 d-flex">
-		<div id="shortcut" hidden>
-			<a class="card text-decoration-none m-0">
-				<div class="ratio ratio-1x1">
-					<img class="card-img-top rounded-3 p-1">
-				</div>
-				<h7 class="card-title text-center text-white fw-bold text-truncate"></h7>
-			</a>
-		</div>
-	</div>
-</div>
+<div class="container-fluid row d-flex min-vh-100 m-0 p-0 justify-content-center"
+    style="scroll-snap-type:y mandatory;overflow-y:scroll;">
+    <section class="col-md-8 m-0 p-0 row d-flex min-vh-100" style="scroll-snap-align:start;">
+        <div id="ShortcutContainer" class="row p-0 g-3 pb-3 m-0 d-flex">
+            <div id="shortcut" hidden>
+                <a class="card text-decoration-none m-0">
+                    <div class="ratio ratio-1x1">
+                        <img class="card-img-top rounded-3 p-1">
+                    </div>
+                    <h7 class="card-title text-center text-white fw-bold text-truncate"></h7>
+                </a>
+            </div>
+        </div>
+    </section>
 
-<div class="col-md-4 min-vh-100 m-0 p-0 row d-flex flex-column justify-content-center align-items-start" id="NCContainer">
-	<!-- Currency rates -->
-	<div class="col-12 m-0 p-0 g-3 row d-none" id="currencies">
-		<div class="col-sm-4">
-			<div class="card text-center fw-bold">
-				<h5 class="card-header p-1 text-white"></h5>
-				<p class="card-text text-white"></p>
-			</div>
-		</div>
-		<div class="col-sm-4">
-			<div class="card text-center fw-bold">
-				<h5 class="card-header p-1 text-white"></h5>
-				<p class="card-text text-white"></p>
-			</div>
-		</div>
-		<div class="col-sm-4">
-			<div class="card text-center fw-bold">
-				<h5 class="card-header p-1 text-white"></h5>
-				<p class="card-text text-white"></p>
-			</div>
-		</div>
-	</div>
-	<!-- Notes -->
-	<div class="col-12 g-1 p-1 row d-none flex-column" id="notes">
-		<div class="col d-flex justify-content-end" id="note">
-			<button class="btn fw-bold text-white"></button>
-			<input type="text" class="rounded" name="note-input" hidden>
-		</div>
-	</div>
-	<!-- Clock -->
-	<div class="col-12 g-1 p-2 row d-flex flex-grow-1 justify-content-center align-items-end">
-		<h1 class="col clock" id="clock"></h1>
-	</div>
+    <section class="col-md-4 min-vh-100 m-0 p-0 row d-flex flex-column justify-content-center align-items-start" id="NCContainer"
+        style="scroll-snap-align:start;">
+        <!-- Currency rates -->
+        <div class="col-12 m-0 p-0 g-3 row d-none" id="currencies">
+            <div class="col-sm-4">
+                <div class="card text-center fw-bold">
+                    <h5 class="card-header p-1 text-white"></h5>
+                    <p class="card-text text-white"></p>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card text-center fw-bold">
+                    <h5 class="card-header p-1 text-white"></h5>
+                    <p class="card-text text-white"></p>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card text-center fw-bold">
+                    <h5 class="card-header p-1 text-white"></h5>
+                    <p class="card-text text-white"></p>
+                </div>
+            </div>
+        </div>
+        <!-- Notes -->
+        <div class="col-12 g-1 p-1 row d-none flex-column" id="notes">
+            <div class="col d-flex justify-content-end" id="note">
+                <button class="btn fw-bold text-white"></button>
+                <input type="text" class="rounded" name="note-input" hidden>
+            </div>
+        </div>
+        <!-- Clock -->
+        <div class="col-12 g-1 p-2 row d-flex flex-grow-1 justify-content-center align-items-end">
+            <h1 class="col clock" id="clock"></h1>
+        </div>
+    </section>
 </div>
 
 <nav id="navbar" class="navbar fixed-bottom bg-transparent pe-none">
