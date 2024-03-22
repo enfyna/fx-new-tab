@@ -4,9 +4,9 @@ html {
 }
 
 body {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
+    background-size: cover !important;
+    background-position: center !important;
+    background-attachment: fixed !important;
 }
 
 /* Additional Shortcut Sizes */
