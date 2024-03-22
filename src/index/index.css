@@ -1,3 +1,7 @@
+html {
+    scroll-snap-type: y mandatory; 
+    overflow-y: scroll;
+}
 
 body {
     background-size: cover;
