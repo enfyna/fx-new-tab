@@ -147,6 +147,8 @@ async function configure_shortcut_settings(){
 			}
 		await set_save();
 	});
+    const width_opt_group = document.getElementById('shortcut-width-opt') as HTMLOptGroupElement;
+
 	const selects = shortcut_shape_settings.getElementsByTagName('select');
 	for (const select of selects) {
 		switch (select.id) {
@@ -157,7 +159,9 @@ async function configure_shortcut_settings(){
 				select.value = save.shortcut_size ?? 'm-0';
 				break;
 			case 'shortcut_width':
-				select.value = save.shortcut_width ?? 'col-sm-3';
+                const ch1 = width_opt_group.cloneNode(true);
+                select.appendChild(ch1);
+				select.value = save.shortcut_width ?? 'col-3';
 				break;
 			case 'shortcut_v_align':
 				select.value = save.shortcut_v_align ?? 'align-items-center';
@@ -166,13 +170,17 @@ async function configure_shortcut_settings(){
 				select.value = save.shortcut_container_h_align ?? 'justify-content-center';
 				break;
 			case 'shortcut_container_width':
-				select.value = save.shortcut_container_width ?? 'col-md-6';
+                const ch2 = width_opt_group.cloneNode(true);
+                select.appendChild(ch2);
+				select.value = save.shortcut_container_width ?? 'col-6';
 				break;
 			default:
 				select.value = save[select.id] ?? select.options[0].value;
 				break;
 		}
 	}
+    width_opt_group.remove();
+
 	const shortcut_color_container = document.getElementById('shortcut_color_container') as HTMLDivElement;
 	const shortcut_col_color_select = document.createElement('select');
 	shortcut_col_color_select.classList.add('col', 'form-select', 'm-1');
