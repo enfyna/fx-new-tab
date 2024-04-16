@@ -332,7 +332,7 @@ function configure_notes(){
 	for (let i = 0; i < notes.length; i++) {
 		const new_note = note.cloneNode(true) as HTMLDivElement;
 		const button = new_note.getElementsByTagName('button')[0];
-		const input = new_note.getElementsByTagName('input')[0];
+		const input = new_note.getElementsByTagName('textarea')[0];
 		
 		input.id = node.nt_input + i;
 		button.id = node.nt_note + i;
