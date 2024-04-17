@@ -342,6 +342,7 @@ function configure_notes(){
 		button.hidden = false;
 
 		input.addEventListener('blur', note_interaction);
+        input.addEventListener('keydown', note_interaction);
 		container.append(new_note);
 	}
 	container.addEventListener('change', note_interaction);
@@ -359,6 +360,7 @@ function configure_notes(){
 		}
 		else if (elm.id.startsWith(node.nt_input)){
 			if(event.type == 'click') return;
+            if(event instanceof KeyboardEvent && event.key != 'Enter') return;
 			elm.hidden = true;
 			const index = elm.id.slice(node.nt_input.length);
 			const button = document.getElementById(node.nt_note + index) as HTMLButtonElement;
