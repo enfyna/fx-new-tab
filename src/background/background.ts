@@ -7,21 +7,11 @@ async function translate(){
 		"en": "Save this page as a shortcut",
 		"es": "Guardar esta página como acceso directo"
 	};	  
-	let lang : string;
-	switch (navigator.language.toLowerCase().split("-")[0]){
-		case "tr":
-			lang = "tr";
-			break;
-		case "de":
-			lang = "de";
-			break;
-		case "es":
-			lang = "es";
-			break;
-		default:
-			lang = "en";
-			break;
-	}
+
+	const lang = ["en", "tr", "es", "de"].find(
+        lang => navigator.language.startsWith(lang)
+    ) || "en";
+
 	await browser.browserAction.setTitle({
 		title:translations[lang]
 	});
