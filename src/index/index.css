@@ -84,11 +84,11 @@ body {
     box-shadow: 0 0px 10px 10px var(--c2);
     scale: 1.05;
 }
-.spin > div > img {
+.spin > img {
     transition: 0.35s;
     transform: rotateY(180deg);
 }
-.spin:hover > div > img {
+.spin:hover > img {
     transform: rotateY(0deg);
 }
 .bg-white > .text-white, .text-white.bg-white {

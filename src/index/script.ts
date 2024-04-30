@@ -91,7 +91,8 @@ async function get_save(){
 	if(!save){
 		using_local_save = false;
 		save = await browser.storage.local.get(null) as save;
-	}else{
+	}
+    else{
 		console.info('ok!');
 	}
 }
@@ -130,74 +131,78 @@ async function configure_shortcuts(){
 		localStorage.clear();
 		load_text.innerText = '';
 	}
-	const shortcut_base_node = document.getElementById('shortcut');
-	shortcut_base_node.hidden = false;
+	const container_h_align = save.shortcut_container_h_align ?? 'justify-content-center';
+    const container_v_align = save.shortcut_v_align ?? 'align-items-center';
 
-	const size = save.shortcut_width ?? 'col-sm-3';
-	shortcut_base_node.classList.add(size);
+	const container = document.getElementById('ShortcutContainer') as HTMLDivElement;
+	container.classList.add(
+        save.shortcut_container_width ?? 'col-6', 
+        container_h_align, container_v_align,
+    );
+	container.parentElement.classList.add(
+        container_h_align, container_v_align,
+    );
 
-	const link = shortcut_base_node.getElementsByTagName('a')[0] as HTMLAnchorElement;
+	const base_shortcut = container.firstChild as HTMLAnchorElement; 
+	base_shortcut.classList.add(
+        save.shortcut_width ?? 'col-3',
+        save.shortcut_size ?? 'p-2',
+    );
 
-	const sh_size = save.shortcut_size ?? 'm-0';
-	if(sh_size != 'm-0'){
-		link.classList.replace('m-0',  save.shortcut_size);
-	}
+    const base_div = base_shortcut.firstChild as HTMLDivElement;
+    base_div.classList.add(
+        save.shortcut_transition ?? 'glow',
+    );
 
-	const transition = save.shortcut_transition ?? 'glow';
-	if (transition != 'none'){
-		link.classList.add(transition);
-	}
-
-	const is_circle = save.shortcut_shape == 'circle';
+	const is_circle = save.shortcut_shape == 'rounded-circle';
 	if (is_circle){
-		const img = shortcut_base_node.getElementsByTagName('img')[0] as HTMLImageElement;
-		img.classList.replace('rounded-3','rounded-circle');
-		link.classList.add('rounded-circle');
-
-		const name = shortcut_base_node.getElementsByTagName('h7')[0] as HTMLDivElement;
+		const name = base_div.getElementsByTagName('h7')[0] as HTMLDivElement;
 		name.remove();
 	}
 
-	const container = shortcut_base_node.parentElement as HTMLElement;
+    const img = base_div.getElementsByTagName('img')[0] as HTMLImageElement;
+    img.classList.add(save.shortcut_shape ?? 'rounded-3');
+    base_div.classList.add(save.shortcut_shape ?? 'rounded-3');
 
-	const container_h_align = save.shortcut_container_h_align ?? 'justify-content-center';
-	const container_v_align = save.shortcut_v_align ?? 'align-items-center';
-	const container_width = save.shortcut_container_width ?? 'col-md-6';
 
-	container.classList.add(container_width, container_h_align, container_v_align);
-	container.parentElement.classList.add(container_v_align, container_h_align);
-
-	const colors = save.shortcut_col_colors ?? ['bg-primary','bg-danger','bg-success','bg-warning'];
+	const colors = save.shortcut_col_colors ?? [
+        'bg-primary','bg-danger','bg-success','bg-warning'
+    ];
 
 	for(let i = 0; i < save.shortcuts.length; i++){
-		const shortcut : shortcut = save.shortcuts[i];
-		if (!shortcut || shortcut.link.length == 0)
+		const sh_data : shortcut = save.shortcuts[i];
+		if (!sh_data || sh_data.link.length == 0)
 			continue;
 
-		const shortcut_node = shortcut_base_node.cloneNode(true) as HTMLDivElement;
-		const link = shortcut_node.getElementsByTagName('a')[0] as HTMLAnchorElement;
+		const sh = base_shortcut.cloneNode(true) as HTMLAnchorElement;
+		sh.href = sh_data.link;
+
+        const sh_div = sh.firstChild as HTMLDivElement;
+
 		const color = colors[i % colors.length];
-		link.classList.add(color, 'bd-' + color.split("-")[1]);
-		link.href = shortcut.link;
+		sh_div.classList.add(
+            color, 'bd-' + color.split("-")[1],
+        );
 
 		if (!is_circle){
-			const name = shortcut_node.getElementsByTagName('h7')[0] as HTMLDivElement;
-			if(shortcut.name)
-				name.innerText = shortcut.name;
+			const name = sh_div.getElementsByTagName('h7')[0] as HTMLDivElement;
+			if(sh_data.name)
+				name.innerText = sh_data.name;
 			else{
 				name.hidden = true;
 			}
 		}
-		container.appendChild(shortcut_node);
+		container.appendChild(sh);
 
-		const img = shortcut_node.getElementsByTagName('img')[0] as HTMLImageElement;
-		if(shortcut.img == "") {
+		const img = sh_div.getElementsByTagName('img')[0] as HTMLImageElement;
+		if(sh_data.img.length == 0) {
 			get_shortcut_img(i, img);
-			continue;
 		}
-		img.src = shortcut.img;
+        else{
+            img.src = sh_data.img;
+        }
 	}
-	shortcut_base_node.remove();
+	base_shortcut.remove();
 }
 
 async function find_user_sites() {
@@ -429,6 +434,9 @@ async function configure_currencies(){
 	for (let i = 0; i < 3; i++) {
 		const currency = currencies[i];
 		card_nodes[i].classList.add(color);
+        card_nodes[i].classList.add(
+            'mt-' + (save.shortcut_size ?? 'p-0').split("-")[1]
+        );
 		name_nodes[i].innerText = currency.name;
 		rate_nodes[i].innerText = currency.rate;
 	}
@@ -555,8 +563,10 @@ function translate() : void {
 		},
 	];
 
-	const lang = ["en", "tr", "es", "de"].find(lang => navigator.language.startsWith(lang)) || "en";
-	
+	const lang = ["en", "tr", "es", "de"].find(
+        lang => navigator.language.startsWith(lang)
+    ) || "en";
+
 	for (const dict of translations) {
 		const name : string = dict.name;
 		const translation : string = dict[lang];
