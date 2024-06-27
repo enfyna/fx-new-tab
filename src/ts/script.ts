@@ -1,3 +1,5 @@
+export = {};
+
 const currency_api = 'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/';
 const img_api = 'https://icon.horse/icon/';
 interface save{

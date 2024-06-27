@@ -1,3 +1,5 @@
+export = {};
+
 interface save{
 	bg_img:string;
 	bg_color:string;

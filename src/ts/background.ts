@@ -1,3 +1,5 @@
+export = {};
+
 let is_tab_saved : boolean = false;
 
 async function translate(){
@@ -38,7 +40,7 @@ async function setActiveTabAsShortcut() {
 	localStorage.clear();
 	await browser.storage.local.set(save);
 	await browser.browserAction.setIcon({
-		path:'icons/success.svg',
+		path:'success.svg',
 	});
 	is_tab_saved = true;
 }
@@ -54,7 +56,7 @@ async function resetIcon(){
 	}
 	if (is_tab_saved) {
 		await browser.browserAction.setIcon({
-			path:'icons/icon.svg',
+			path:'icon.svg',
 		});
 		is_tab_saved = false;
 	}

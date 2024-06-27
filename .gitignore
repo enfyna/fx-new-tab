@@ -2,7 +2,3 @@ node_modules
 package-lock.json
 
 build
-tsc
-
-index.html
-settings.html
