@@ -2,13 +2,11 @@
   "name": "fx-home-page",
   "version": "1.12.0",
   "description": "A new look for firefox homepage and the newtab page.",
-  "main": "tsc/script.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "gulp": "gulp"
-  },
   "author": "enfyna",
   "license": "BSD-2-Clause",
+  "scripts": {
+    "build": "tsc -p src/ts/tsconfig.json && npx gulp minifyFull"
+  },
   "devDependencies": {
     "@types/firefox-webext-browser": "^111.0.1",
     "gulp": "^4.0.2",
