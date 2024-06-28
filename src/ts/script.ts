@@ -15,6 +15,8 @@ interface save{
 	shortcut_col_colors:string[];
 	shortcut_container_h_align:string;
 	shortcut_container_width:string;
+
+    is_autoshort_enabled:boolean;
 	
 	notes:note[];
 	is_notes_enabled:boolean;
@@ -205,6 +207,26 @@ async function configure_shortcuts(){
         }
 	}
 	base_shortcut.remove();
+
+    if(!(save.is_autoshort_enabled ?? false)){
+        container.classList.remove('invisible')
+    }
+    else{
+        setTimeout(() => {
+            autosize()
+            container.classList.remove('invisible')
+        }, 1)
+
+        function autosize(){
+            if(container.offsetHeight + 100 > screen.height && save.shortcut_container_width != 'col-1'){
+                container.classList.remove(save.shortcut_container_width)
+                save.shortcut_container_width = 'col-' + (parseInt(save.shortcut_container_width.split('-')[1]) - 1).toString()
+                container.classList.add(save.shortcut_container_width)
+                console.info("autoshorting:", save.shortcut_container_width)
+                autosize()
+            }
+        }
+    }
 }
 
 async function find_user_sites() {

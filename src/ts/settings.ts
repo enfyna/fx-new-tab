@@ -14,6 +14,8 @@ interface save{
 	shortcut_container_h_align:string;
 	shortcut_container_width:string;
 	
+    is_autoshort_enabled:boolean;
+
 	notes:note[];
 	is_notes_enabled:boolean;
 	
@@ -137,8 +139,11 @@ async function configure_shortcut_settings(){
 
 	const shortcut_shape_settings = document.getElementById('shortcut_shape_settings');
 	shortcut_shape_settings.addEventListener('change', async(event)=>{
-		const input = event.target as HTMLSelectElement;
+		const input = event.target as HTMLInputElement;
 		switch (true) {
+            case 'autoshort' == input.id:
+                save.is_autoshort_enabled = input.checked;
+                break;
 			case input.id.startsWith('shortcut_col_color'):
 				colors[input.id.split('_')[3]] = 'bg-' + input.value.trim();
 				save.shortcut_col_colors = colors;
@@ -152,32 +157,37 @@ async function configure_shortcut_settings(){
     const width_opt_group = document.getElementById('shortcut-width-opt') as HTMLOptGroupElement;
 
 	const selects = shortcut_shape_settings.getElementsByTagName('select');
-	for (const select of selects) {
-		switch (select.id) {
+    const inputs = shortcut_shape_settings.getElementsByTagName('input');
+    const elements = [...selects, ...inputs];
+	for (const inp of elements) {
+		switch (inp.id) {
+            case 'autoshort':
+                (inp as HTMLInputElement).checked = save.is_autoshort_enabled;
+                break;
 			case 'shortcut_transition':
-				select.value = save.shortcut_transition ?? 'glow';
+				inp.value = save.shortcut_transition ?? 'glow';
 				break;
 			case 'shortcut_size':
-				select.value = save.shortcut_size ?? 'm-0';
+				inp.value = save.shortcut_size ?? 'm-0';
 				break;
 			case 'shortcut_width':
                 const ch1 = width_opt_group.cloneNode(true);
-                select.appendChild(ch1);
-				select.value = save.shortcut_width ?? 'col-3';
+                inp.appendChild(ch1);
+				inp.value = save.shortcut_width ?? 'col-3';
 				break;
 			case 'shortcut_v_align':
-				select.value = save.shortcut_v_align ?? 'align-items-center';
+				inp.value = save.shortcut_v_align ?? 'align-items-center';
 				break;
 			case 'shortcut_container_h_align':
-				select.value = save.shortcut_container_h_align ?? 'justify-content-center';
+				inp.value = save.shortcut_container_h_align ?? 'justify-content-center';
 				break;
 			case 'shortcut_container_width':
                 const ch2 = width_opt_group.cloneNode(true);
-                select.appendChild(ch2);
-				select.value = save.shortcut_container_width ?? 'col-6';
+                inp.appendChild(ch2);
+				inp.value = save.shortcut_container_width ?? 'col-6';
 				break;
 			default:
-				select.value = save[select.id] ?? select.options[0].value;
+				inp.value = save[inp.id] ?? (inp as HTMLSelectElement).options[0].value;
 				break;
 		}
 	}
