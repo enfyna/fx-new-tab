@@ -1,16 +1,15 @@
 const gulp = require('gulp');
-const { series } = require('gulp');
 const htmlmin = require('gulp-htmlmin');
 const terser = require('gulp-terser');
 const purify = require('gulp-purifycss');
-const rename = require('gulp-rename');
 const cleanCSS = require('gulp-clean-css');
 const replace = require('gulp-replace');
 const jsonMin = require('gulp-json-minify');
 const svgMin = require('gulp-svgmin')
 
-function minifyIndex() {
-    return gulp.src('src/html/index.html')
+function minifyHTML(page) {
+    console.log(page)
+    return gulp.src(page)
         .pipe(htmlmin({
             collapseWhitespace: true,
             removeComments: true,
@@ -22,22 +21,9 @@ function minifyIndex() {
         .pipe(gulp.dest('./build'));
 }
 
-function minifySettings() {
-    return gulp.src('src/html/settings.html')
-        .pipe(htmlmin({
-            collapseWhitespace: true,
-            removeComments: true,
-            removeTagWhitespace: true,
-            removeAttributeQuotes: true,
-            collapseBooleanAttributes: true,
-            minifyCSS: true,
-        }))
-        .pipe(gulp.dest('./build'));
-}
-
-async function minifyIndexJS() {
-    const del = await import('del')
-    return gulp.src('build/js/script.js')
+async function minifyJS(js) {
+    console.log(js)
+    return gulp.src(js)
         .pipe(replace('module.exports = {};', ''))
         .pipe(terser({
             keep_fnames: false,
@@ -47,76 +33,21 @@ async function minifyIndexJS() {
             },
         }))
         .pipe(gulp.dest('build/js'))
-        .on('end', () =>
-            del.deleteSync('build/script.js')
-        );
 }
 
-async function minifySettingsJS() {
-    const del = await import('del')
-    return gulp.src('build/js/settings.js')
-        .pipe(replace('module.exports = {};', ''))
-        .pipe(terser({
-            keep_fnames: false,
-            mangle: {
-                toplevel: true,
-                keep_fnames: false,
-            },
-        }))
-        .pipe(gulp.dest('build/js'))
-        .on('end', () =>
-            del.deleteSync('build/settings.js')
-        );
+function minifyCSS(css) {
+    console.log(css)
+    return gulp.src(css)
+        .pipe(cleanCSS({ level: { 1: { all: true }, 2: { all: true } } }))
+        .pipe(gulp.dest('build/css'));
 }
 
-async function minifyBackgroundJS() {
-    const del = await import('del')
-    return gulp.src('build/js/background.js')
-        .pipe(replace('module.exports = {};', ''))
-        .pipe(terser({
-            keep_fnames: false,
-            mangle: {
-                toplevel: true,
-                keep_fnames: false,
-            },
-        }))
-        .pipe(gulp.dest('build/js'))
-        .on('end', () =>
-            del.deleteSync('build/background.js')
-        );
-}
-
-function minifyIndexBootstrapCSS() {
+function minifyBootstrapCSS() {
     return gulp.src('bootstrap/bootstrap.css')
-        .pipe(purify(['src/html/index.html'], {
+        .pipe(purify(['src/html/settings.html', 'src/html/index.html'], {
             whitelist: [
-                'rounded-circle',
                 'bg-black',
-            ]
-        }))
-        .pipe(cleanCSS({ level: { 1: { all: true }, 2: { all: true } } }))
-        .pipe(rename('bootstrap.css'))
-        .pipe(gulp.dest('build/css'));
-}
-
-function minifyIndexCSS() {
-    return gulp.src('src/css/index.css')
-        .pipe(cleanCSS({ level: { 1: { all: true }, 2: { all: true } } }))
-        .pipe(rename('index.css'))
-        .pipe(gulp.dest('build/css'));
-}
-
-function minifyColorsCSS() {
-    return gulp.src('src/css/colors.css')
-        .pipe(cleanCSS({ level: { 1: { all: true }, 2: { all: true } } }))
-        .pipe(rename('colors.css'))
-        .pipe(gulp.dest('build/css'));
-}
-
-function minifySettingsCSS() {
-    return gulp.src('bootstrap/bootstrap.css')
-        .pipe(purify(['src/html/settings.html'], {
-            whitelist: [
+                'rounded-circle',
                 // input groups
                 'dropdown-toggle',
                 'form-select',
@@ -131,47 +62,51 @@ function minifySettingsCSS() {
             ]
         }))
         .pipe(cleanCSS({ level: { 1: { all: true }, 2: { all: true } } }))
-        .pipe(rename('settings.css'))
         .pipe(gulp.dest('build/css'));
 }
 
-function Assets() {
-    return gulp.src('./src/assets/icons/*')
+function minifySVGIcons(icon) {
+    console.log(icon)
+    return gulp.src(icon)
         .pipe(svgMin())
         .pipe(gulp.dest('./build/assets/icons'));
 }
 
-function minifyManifest() {
-    return gulp.src('./manifest.json')
+function minifyJSON(json) {
+    console.log(json)
+    return gulp.src(json)
         .pipe(jsonMin())
         .pipe(gulp.dest('./build'));
 }
 
-exports.minifyHTML = series(
-    minifyIndex,
-    minifySettings,
+const minifyHTML_Task = gulp.series(
+    () => minifyHTML('src/html/index.html'),
+    () => minifyHTML('src/html/settings.html'),
 );
-exports.minifyCSS = series(
-    minifyIndexBootstrapCSS,
-    minifyIndexCSS,
-    minifyColorsCSS,
-    minifySettingsCSS,
+
+const minifyCSS_Task = gulp.series(
+    minifyBootstrapCSS,
+    () => minifyCSS('src/css/index.css'),
+    () => minifyCSS('src/css/colors.css'),
 );
-exports.minifyJS = series(
-    minifyIndexJS,
-    minifySettingsJS,
-    minifyBackgroundJS,
+const minifyJS_Task = gulp.series(
+    () => minifyJS('build/js/script.js'),
+    () => minifyJS('build/js/settings.js'),
+    () => minifyJS('build/js/background.js'),
 );
-exports.minifyFull = series(
-    minifyManifest,
-    Assets,
-    minifyIndex,
-    minifySettings,
-    minifyIndexBootstrapCSS,
-    minifyIndexCSS,
-    minifyColorsCSS,
-    minifySettingsCSS,
-    minifyIndexJS,
-    minifySettingsJS,
-    minifyBackgroundJS,
+const minifyMisc_Task = gulp.series(
+    () => minifyJSON('./manifest.json'),
+    () => minifySVGIcons('./src/assets/icons/*'),
 );
+const minifyFull_Task = gulp.series(
+    minifyHTML_Task,
+    minifyCSS_Task,
+    minifyJS_Task,
+    minifyMisc_Task,
+);
+
+exports.minifyHTML = minifyHTML_Task;
+exports.minifyCSS = minifyCSS_Task;
+exports.minifyJS = minifyJS_Task;
+exports.minifyMisc = minifyMisc_Task;
+exports.minifyFull = minifyFull_Task;
