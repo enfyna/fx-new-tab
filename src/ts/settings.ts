@@ -911,13 +911,6 @@ function translate() : void {
 			"es": "Forma"
 		},
 		{
-			"name": "square",
-			"tr": "Kare",
-			"en": "Square",
-			"de": "Quadrat",
-			"es": "Cuadrado"
-		},
-		{
 			"name": "blue",
 			"tr": "Mavi",
 			"en": "Blue",
@@ -1021,13 +1014,6 @@ function translate() : void {
 			"en": "Transparent",
 			"de": "Durchsichtig",
 			"es": "Transparente"
-		},
-		{
-			"name": "circle",
-			"tr": "Daire",
-			"en": "Circle",
-			"de": "Kreis",
-			"es": "Círculo"
 		},
 		{
 			"name": "center",

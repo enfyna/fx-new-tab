@@ -182,7 +182,19 @@
     </div>
     <!-- Shortcut Shape settings -->
     <div class="row bg-warning rounded m-0 mb-1 d-flex flex-row align-items-center">
-        <div class="col-lg-4 my-1 fw-bold text-black" name="shortcut-settings"></div>
+        <div class="col-lg-5 my-1 fw-bold text-black" name="shortcut-settings"></div>
+        <div class="col-lg-1 my-1">
+            <select class="form-select" id="shortcut_shape">
+                <optgroup name="shortcut-shape">
+                    <option value="rounded-0">◻</option>
+                    <option value="rounded-1">1</option>
+                    <option value="rounded-2">2</option>
+                    <option value="rounded-3">3</option>
+                    <option value="rounded-4">4</option>
+                    <option value="rounded-circle">◯</option>
+                </optgroup>
+            </select>
+        </div>
         <div class="col-lg-2 my-1">
             <select class="form-select" id="shortcut_transition">
                 <optgroup name="shortcut-transition">
@@ -194,18 +206,6 @@
                     <option value="scale_down" name="scale_down"></option>
                     <option value="scale_up" name="scale_up"></option>
                     <option value="none" name="none"></option>
-                </optgroup>
-            </select>
-        </div>
-        <div class="col-lg-2 my-1">
-            <select class="form-select" id="shortcut_shape">
-                <optgroup name="shortcut-shape">
-                    <option value="rounded-0" name="square"></option>
-                    <option value="rounded-1" name="rounded1"></option>
-                    <option value="rounded-2" name="rounded2"></option>
-                    <option value="rounded-3" name="rounded3"></option>
-                    <option value="rounded-4" name="rounded4"></option>
-                    <option value="rounded-circle" name="circle"></option>
                 </optgroup>
             </select>
         </div>
