@@ -90,7 +90,7 @@ const minifyCSS_Task = gulp.series(
     () => minifyCSS('src/css/colors.css'),
 );
 const minifyJS_Task = gulp.series(
-    () => minifyJS('build/js/script.js'),
+    () => minifyJS('build/js/index.js'),
     () => minifyJS('build/js/settings.js'),
     () => minifyJS('build/js/background.js'),
 );
