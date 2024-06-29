@@ -9,6 +9,11 @@ body {
     background-attachment: fixed !important;
 }
 
+/* fix shortcut transition animations overlapping with each other (glow, scale_up, ...) */
+a:hover {
+    z-index: 999;
+}
+
 /* Additional Shortcut Sizes */
 
 .twenty_w {

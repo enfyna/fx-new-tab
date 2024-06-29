@@ -15,6 +15,8 @@ interface save{
 	shortcut_col_colors:string[];
 	shortcut_container_h_align:string;
 	shortcut_container_width:string;
+
+    is_autoshort_enabled:boolean;
 	
 	notes:note[];
 	is_notes_enabled:boolean;
@@ -205,6 +207,27 @@ async function configure_shortcuts(){
         }
 	}
 	base_shortcut.remove();
+
+    if(!(save.is_autoshort_enabled ?? false)){
+        container.classList.remove('invisible')
+    }
+    else{
+        setTimeout(() => {
+            autoshort()
+            container.classList.remove('invisible')
+        }, 1)
+
+        function autoshort(){
+            let width = parseInt(save.shortcut_container_width.split('-')[1]) - 1
+            while(container.offsetHeight + 100 > screen.height && save.shortcut_container_width != 'col-1'){
+                let current_width = save.shortcut_container_width;
+                save.shortcut_container_width = 'col-' + width.toString()
+                width -= 1
+                container.classList.replace(current_width, save.shortcut_container_width)
+            }
+            console.info("autoshort:", save.shortcut_container_width)
+        }
+    }
 }
 
 async function find_user_sites() {
