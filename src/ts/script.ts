@@ -213,18 +213,19 @@ async function configure_shortcuts(){
     }
     else{
         setTimeout(() => {
-            autosize()
+            autoshort()
             container.classList.remove('invisible')
         }, 1)
 
-        function autosize(){
-            if(container.offsetHeight + 100 > screen.height && save.shortcut_container_width != 'col-1'){
-                container.classList.remove(save.shortcut_container_width)
-                save.shortcut_container_width = 'col-' + (parseInt(save.shortcut_container_width.split('-')[1]) - 1).toString()
-                container.classList.add(save.shortcut_container_width)
-                console.info("autoshorting:", save.shortcut_container_width)
-                autosize()
+        function autoshort(){
+            let width = parseInt(save.shortcut_container_width.split('-')[1]) - 1
+            while(container.offsetHeight + 100 > screen.height && save.shortcut_container_width != 'col-1'){
+                let current_width = save.shortcut_container_width;
+                save.shortcut_container_width = 'col-' + width.toString()
+                width -= 1
+                container.classList.replace(current_width, save.shortcut_container_width)
             }
+            console.info("autoshort:", save.shortcut_container_width)
         }
     }
 }
