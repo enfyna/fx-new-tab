@@ -1312,34 +1312,6 @@ function translate() : void {
 			"de": "Versteckt",
 			"es": "Oculto"
 		},
-		{
-			"name": "clock_style_solid",
-			"tr": "Çizgi",
-			"en": "Solid",
-			"de": "Durchgezogen",
-			"es": "Sólido"
-		},
-		{
-			"name": "clock_style_dotted",
-			"tr": "Noktalı",
-			"en": "Dotted",
-			"de": "Gepunktet",
-			"es": "Punteado"
-		},
-		{
-			"name": "clock_style_double",
-			"tr": "Çift Çizgi",
-			"en": "Double",
-			"de": "Doppelt",
-			"es": "Doble"
-		},
-		{
-			"name": "clock_style_dashed",
-			"tr": "Kesikli Çizgi",
-			"en": "Dashed",
-			"de": "Gestrichelt",
-			"es": "Guión"
-		}
 	];
 
 	const lang = ["en", "tr", "es", "de"].find(lang => navigator.language.startsWith(lang)) || "en";
