@@ -35,6 +35,7 @@ interface save{
 	clock_border_radius:string;
 	clock_border_width:string;
 	clock_time_format:boolean;
+    clock_dark_bg:boolean;
 
 	is_firefox_watermark_enabled:boolean;
 	firefox_watermark_color:string;
@@ -628,6 +629,9 @@ function configure_clock_settings(){
 				elm.appendChild(border_color);
 				(elm as HTMLSelectElement).value = (save.clock_border_color ?? 'bg-white').split('-')[1];
 				break;
+            case 'clock_dark_bg':
+				(elm as HTMLInputElement).checked = save.clock_dark_bg ?? false;
+                break;
 			case 'clock_boldness':
 				(elm as HTMLInputElement).checked = (save.clock_boldness ?? "bold") == "bold";
 				break;
@@ -648,6 +652,9 @@ function configure_clock_settings(){
 			case 'clock_time_format':
 				save.clock_time_format = (event.target as HTMLSelectElement).value == 'true';
 				break;
+			case 'clock_dark_bg':
+				save.clock_dark_bg = (event.target as HTMLInputElement).checked;
+				break
 			case 'clock_boldness':
 				save.clock_boldness = (event.target as HTMLInputElement).checked ? "bold" : "normal";
 				break
@@ -1304,6 +1311,13 @@ function translate() : void {
 			"en": "Border Radius",
 			"de": "Rahmenradius",
 			"es": "Radio del Borde"
+		},
+		{
+			"name": 'clock-darkness-label',
+			"tr": "Karart",
+			"en": "Darken",
+			"de": "Verdunkeln",
+			"es": "Oscurecer"
 		},
 		{
 			"name": "clock_style_hidden",

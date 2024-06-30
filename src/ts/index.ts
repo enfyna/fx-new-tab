@@ -37,6 +37,7 @@ interface save{
 	clock_border_width:string;
 	clock_border_radius:string;
 	clock_time_format:boolean;
+    clock_dark_bg:boolean;
 
 	is_firefox_watermark_enabled:boolean;
 	firefox_watermark_color:string;
@@ -512,7 +513,7 @@ function configure_clock() {
 
 	const bg_color = save.clock_color ?? 'bg-white';
 	const bd_color = save.clock_border_color ?? 'bd-white';
-	clock.classList.add(bg_color, bd_color);
+	clock.classList.add(bg_color, bd_color, save.clock_dark_bg ? "darken" : null);
 
 	clock.style.fontFamily = save.clock_font ?? "monospace";
 	clock.style.fontWeight = save.clock_boldness ?? "bold";

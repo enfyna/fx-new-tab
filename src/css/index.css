@@ -107,3 +107,7 @@ a:hover {
     text-align: center;
     white-space: nowrap;
 }
+
+.darken {
+    backdrop-filter: brightness(25%);
+}
