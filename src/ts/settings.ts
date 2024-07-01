@@ -510,8 +510,20 @@ function configure_note_settings() {
 	}
 
 	function remove_note() {
-		notes.pop();
-		note_color_container.lastChild.remove();
+        if(notes.length == 0) 
+            return;
+        const lang = ["en", "tr", "es", "de"].find(lang => navigator.language.startsWith(lang)) || "en";
+        const translation = {
+            "tr": "Not boş değil! Yine de silinsin mi?",
+            "en": "Note is not empty! Remove anyway?",
+            "de": "Notiz ist nicht leer! Trotzdem entfernen?",
+            "es": "La nota no está vacía. ¿Eliminar de todos modos?"
+        };
+        if(notes[notes.length - 1].note.length > 0 && !confirm(translation[lang])){
+            return;
+        }
+        notes.pop();
+        note_color_container.lastChild.remove();
 	}
 
 	for (let i = 0; i < notes.length; i++) {
