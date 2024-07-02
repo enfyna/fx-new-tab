@@ -810,9 +810,42 @@ function configure_import_export(){
 						try {
 							const jsonData = JSON.parse(e.target.result as string);
 
+                            const lang = ["en", "tr", "es", "de"].find(lang => navigator.language.startsWith(lang)) || "en";
+                            const translations = [
+                                {
+                                    "en": "Keep current shortcuts?",
+                                    "tr": "Mevcut kısayolları koru?",
+                                    "es": "¿Mantener los accesos directos actuales?",
+                                    "de": "Aktuelle Verknüpfungen beibehalten?"
+                                },
+                                {
+                                    "en": "Keep current notes?",
+                                    "tr": "Mevcut notları koru?",
+                                    "es": "¿Mantener las notas actuales?",
+                                    "de": "Aktuelle Notizen beibehalten?"
+                                },
+                                {
+                                    "en": "Keep current currencies?",
+                                    "tr": "Mevcut para birimlerini koru?",
+                                    "es": "¿Mantener las monedas actuales?",
+                                    "de": "Aktuelle Währungen beibehalten?"
+                                }
+                            ]
+                            let save_sh = confirm(translations[0][lang]);
+                            let save_nt = confirm(translations[1][lang]);
+                            let save_cr = confirm(translations[2][lang]);
+                            let sh = save.shortcuts;
+                            let nt = save.notes;
+                            let cr = save.currencies;
+
 							await browser.storage.local.clear();
 							localStorage.clear();
 							save = jsonData;
+
+                            if(save_sh) save.shortcuts = sh;
+                            if(save_nt) save.notes = nt;
+                            if(save_cr) save.currencies = cr;
+
 							await set_save();
 							location.href = "index.html";
 						} 
