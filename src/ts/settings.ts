@@ -169,7 +169,7 @@ async function configure_shortcut_settings(){
 				inp.value = save.shortcut_transition ?? 'glow';
 				break;
 			case 'shortcut_size':
-				inp.value = save.shortcut_size ?? 'm-0';
+				inp.value = save.shortcut_size ?? 'p-2';
 				break;
 			case 'shortcut_width':
                 const ch1 = width_opt_group.cloneNode(true);
@@ -651,7 +651,7 @@ function configure_clock_settings(){
 				(elm as HTMLSelectElement).value = save.clock_time_format ?? false ? 'true' : 'false';
 				break;
 			default:
-				(elm as HTMLInputElement).value = save[elm.id] ?? (elm as HTMLInputElement).value;
+				(elm as HTMLInputElement).value = save[elm.id] ?? (elm as HTMLInputElement).value ?? 0;
 				break;
 		}
 	});
