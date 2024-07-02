@@ -12,7 +12,7 @@
 </p>
 <br><br>
 <p align="center">
-  My firefox addon for changing the firefox homepage and new tab page. 
+  A new look for firefox homepage and the newtab page.
 </p>
 <br>
 
@@ -48,7 +48,7 @@ To quickly add the current page as a shortcut:
 
 ## Themes
 
-Enhance your new tab experience with our curated themes. Simply click on the "Download" link to get the settings file, then import it into your extension.
+Enhance your new tab experience with our curated themes. Simply right click on the "Download" link > `Save Link As...` to get the settings file, then import it into your extension.
 
 > [!NOTE]
 > Shortcuts are for reference only.
