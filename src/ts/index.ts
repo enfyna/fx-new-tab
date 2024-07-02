@@ -460,9 +460,7 @@ async function configure_currencies(){
 	for (let i = 0; i < 3; i++) {
 		const currency = currencies[i];
 		card_nodes[i].classList.add(color);
-        card_nodes[i].classList.add(
-            'mt-' + (save.shortcut_size ?? 'p-0').split("-")[1]
-        );
+
 		name_nodes[i].innerText = currency.name;
 		rate_nodes[i].innerText = currency.rate;
 	}
