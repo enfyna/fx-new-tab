@@ -1288,6 +1288,13 @@ function translate() : void {
 			"es": "Si has encontrado algún error o deseas una nueva función, puedes abrir un issue aquí:",
 		},
 		{
+            "name": "theme-info",
+            "tr": "Temaları şuradan indirebilirsiniz: ",
+            "en": "You can download themes from: ",
+            "de": "Sie können Themen herunterladen von: ",
+            "es": "Puedes descargar temas de: "
+        },
+		{
 			"name": "national-currencies",
 			"tr": "Ulusal para birimleri",
 			"en": "National currencies",
