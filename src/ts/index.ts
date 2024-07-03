@@ -12,6 +12,7 @@ interface save{
 	shortcut_v_align:string;
 	shortcut_size:string;
 	shortcut_transition:string;
+	shortcut_borderless:boolean;
 	shortcut_col_colors:string[];
 	shortcut_container_h_align:string;
 	shortcut_container_width:string;
@@ -157,6 +158,7 @@ async function configure_shortcuts(){
     const base_div = base_shortcut.firstChild as HTMLDivElement;
     base_div.classList.add(
         save.shortcut_transition ?? 'glow',
+        save.shortcut_borderless ? 'border-0' : null
     );
 
 	const is_circle = save.shortcut_shape == 'rounded-circle';

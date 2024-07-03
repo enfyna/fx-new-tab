@@ -48,6 +48,7 @@ function minifyBootstrapCSS() {
             whitelist: [
                 'bg-black',
                 'rounded-circle',
+                'border-0',
                 // input groups
                 'dropdown-toggle',
                 'form-select',

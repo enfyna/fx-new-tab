@@ -10,6 +10,7 @@ interface save{
 	shortcut_v_align:string;
 	shortcut_size:string;
 	shortcut_transition:string;
+	shortcut_borderless:boolean;
 	shortcut_col_colors:string[];
 	shortcut_container_h_align:string;
 	shortcut_container_width:string;
@@ -142,6 +143,9 @@ async function configure_shortcut_settings(){
 	shortcut_shape_settings.addEventListener('change', async(event)=>{
 		const input = event.target as HTMLInputElement;
 		switch (true) {
+            case 'shortcut_borderless' == input.id:
+                save.shortcut_borderless = input.checked;
+                break;
             case 'autoshort' == input.id:
                 save.is_autoshort_enabled = input.checked;
                 break;
@@ -164,6 +168,9 @@ async function configure_shortcut_settings(){
 		switch (inp.id) {
             case 'autoshort':
                 (inp as HTMLInputElement).checked = save.is_autoshort_enabled;
+                break;
+            case 'shortcut_borderless':
+                (inp as HTMLInputElement).checked = save.shortcut_borderless;
                 break;
 			case 'shortcut_transition':
 				inp.value = save.shortcut_transition ?? 'glow';
