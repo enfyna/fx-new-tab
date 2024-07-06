@@ -40,7 +40,7 @@ async function setActiveTabAsShortcut() {
 	localStorage.clear();
 	await browser.storage.local.set(save);
 	await browser.browserAction.setIcon({
-		path:'success.svg',
+		path:'assets/icons/success.svg',
 	});
 	is_tab_saved = true;
 }
@@ -56,7 +56,7 @@ async function resetIcon(){
 	}
 	if (is_tab_saved) {
 		await browser.browserAction.setIcon({
-			path:'icon.svg',
+			path:'assets/icons/icon.svg',
 		});
 		is_tab_saved = false;
 	}
