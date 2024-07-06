@@ -7,6 +7,7 @@ interface save{
 	shortcuts:shortcut[];
 	shortcut_shape:string;
 	shortcut_width:string;
+	shortcut_min_width:string;
 	shortcut_v_align:string;
 	shortcut_size:string;
 	shortcut_transition:string;
@@ -143,6 +144,9 @@ async function configure_shortcut_settings(){
 	shortcut_shape_settings.addEventListener('change', async(event)=>{
 		const input = event.target as HTMLInputElement;
 		switch (true) {
+            case 'shortcut_min_width' == input.id:
+                save.shortcut_min_width = input.value;
+                break;
             case 'shortcut_borderless' == input.id:
                 save.shortcut_borderless = input.checked;
                 break;
@@ -166,11 +170,14 @@ async function configure_shortcut_settings(){
     const elements = [...selects, ...inputs];
 	for (const inp of elements) {
 		switch (inp.id) {
+            case 'shortcut_min_width':
+                (inp as HTMLInputElement).value = save.shortcut_min_width ?? 'mw-0';
+                break;
             case 'autoshort':
-                (inp as HTMLInputElement).checked = save.is_autoshort_enabled;
+                (inp as HTMLInputElement).checked = save.is_autoshort_enabled ?? false;
                 break;
             case 'shortcut_borderless':
-                (inp as HTMLInputElement).checked = save.shortcut_borderless;
+                (inp as HTMLInputElement).checked = save.shortcut_borderless ?? false;
                 break;
 			case 'shortcut_transition':
 				inp.value = save.shortcut_transition ?? 'glow';
@@ -1385,6 +1392,13 @@ function translate() : void {
 			"de": "Versteckt",
 			"es": "Oculto"
 		},
+		{
+			"name": "shortcut-min-width",
+            "tr": "Min. Genişlik",
+            "en": "Min. Width",
+            "de": "Min. Breite",
+            "es": "Ancho mín."
+        },
 	];
 
 	const lang = ["en", "tr", "es", "de"].find(lang => navigator.language.startsWith(lang)) || "en";
@@ -1396,7 +1410,7 @@ function translate() : void {
 				(element as HTMLInputElement).placeholder = translation;
 			}
 		}
-		else if(["base-currency-label", "crypto-currencies", "national-currencies", "shortcut-shape", "shortcut-size", "shortcut-transition", "shortcut-width", "shortcut-v-align", "shortcut-h-align", "color-label"].includes(name)){
+		else if(["shortcut-min-width", "base-currency-label", "crypto-currencies", "national-currencies", "shortcut-shape", "shortcut-size", "shortcut-transition", "shortcut-width", "shortcut-v-align", "shortcut-h-align", "color-label"].includes(name)){
 			for (const element of document.getElementsByName(name)){
 				(element as HTMLOptGroupElement).label = translation;
 			}

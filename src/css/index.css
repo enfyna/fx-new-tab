@@ -100,6 +100,32 @@ a:hover {
     color: #000 !important;
 }
 
+/* Min width for shortcuts */
+
+.mw-0 {
+    min-width: 0;
+}
+
+.mw-1 {
+    min-width: 32px;
+}
+
+.mw-2 {
+    min-width: 48px;
+}
+
+.mw-3 {
+    min-width: 64px;
+}
+
+.mw-4 {
+    min-width: 96px;
+}
+
+.mw-5 {
+    min-width: 128px;
+}
+
 /* Clock */
 
 .clock {

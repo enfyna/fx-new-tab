@@ -9,6 +9,7 @@ interface save{
 	shortcuts:shortcut[];
 	shortcut_shape:string;
 	shortcut_width:string;
+	shortcut_min_width:string;
 	shortcut_v_align:string;
 	shortcut_size:string;
 	shortcut_transition:string;
@@ -153,6 +154,7 @@ async function configure_shortcuts(){
 	base_shortcut.classList.add(
         save.shortcut_width ?? 'col-3',
         save.shortcut_size ?? 'p-2',
+        save.shortcut_min_width ?? null,
     );
 
     const base_div = base_shortcut.firstChild as HTMLDivElement;
