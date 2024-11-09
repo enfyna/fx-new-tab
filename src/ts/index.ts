@@ -115,7 +115,7 @@ To optimize loading times through caching, consider the following steps:\n\
 1) Compress high-resolution background images to reduce their size.\n\
 2) Remove unnecessary shortcuts if you have an excessive number of them.\n\
 3) Increase the localStorage storage limit by adjusting the value of \"dom.storage.default_quota\" in about:config. Please note: Increasing the localStorage storage limit using \"dom.storage.default_quota\" in about:config will affect all websites. Be cautious when adjusting this setting."\
-		');
+        ');
         localStorage.clear();
     }
 }
@@ -123,9 +123,9 @@ To optimize loading times through caching, consider the following steps:\n\
 /// Background
 function set_background() {
     document.body.style.cssText += `
-		background-image: ${save.bg_img ?? 'none'};
-		background-color: ${save.bg_color ?? '#033633'};
-	`;
+        background-image: ${save.bg_img ?? 'none'};
+        background-color: ${save.bg_color ?? '#033633'};
+    `;
 }
 
 /// Shortcuts
@@ -253,9 +253,9 @@ async function find_user_sites() {
     });
 
     if (shortcuts.length == 0) {
-        // If the user's browsing history contains 
+        // If the user's browsing history contains
         // no shortcuts, add the repo URL.
-        // This ensures that when a user installs the addon 
+        // This ensures that when a user installs the addon
         // for the first time, the main page is not empty.
         const shortcut: shortcut = {
             name: 'Github Repo',

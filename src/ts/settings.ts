@@ -186,7 +186,8 @@ async function configure_shortcut_settings() {
                 inp.value = save.shortcut_size ?? 'p-2';
                 break;
             case 'shortcut_width':
-                const ch1 = width_opt_group.cloneNode(true);
+                const ch1 = width_opt_group.cloneNode(true) as HTMLOptGroupElement;
+                ch1.hidden = false;
                 inp.appendChild(ch1);
                 inp.value = save.shortcut_width ?? 'col-3';
                 break;
@@ -197,7 +198,8 @@ async function configure_shortcut_settings() {
                 inp.value = save.shortcut_container_h_align ?? 'justify-content-center';
                 break;
             case 'shortcut_container_width':
-                const ch2 = width_opt_group.cloneNode(true);
+                const ch2 = width_opt_group.cloneNode(true) as HTMLOptGroupElement;
+                ch2.hidden = false;
                 inp.appendChild(ch2);
                 inp.value = save.shortcut_container_width ?? 'col-6';
                 break;
@@ -917,13 +919,6 @@ function translate(): void {
             "es": "Ajustes",
         },
         {
-            "name": "delete-link",
-            "tr": "Kısayollarını sürükleyerek yerini değiştirebilirsin.",
-            "en": "You can drag a shortcut to change its place.",
-            "de": "Du kannst eine Verknüpfung ziehen, um ihren Platz zu ändern.",
-            "es": "Puedes arrastrar un acceso directo para cambiar su ubicación.",
-        },
-        {
             "name": "image-link",
             "tr": "Kısayol ikonunu resim dosyası yükleyerek ayarlayabilirsin.",
             "en": "Set a custom link icon by uploading an image file.",
@@ -1190,11 +1185,18 @@ function translate(): void {
             "es": "Resplandor"
         },
         {
+            "name": "fallback-default-icon-info",
+            "tr": "Bu işlem, temel bir yedek simgeyi kısayol simgesi olarak ayarlar. Bu seçeneği, simge API pikselli bir simge döndürürse kullanabilirsiniz.",
+            "en": "This will set a basic fallback icon as the shortcut icon. You can use this if the icon API returns a pixelated icon.",
+            "de": "Hiermit wird ein einfaches Ersatzsymbol als Verknüpfungssymbol festgelegt. Sie können dies verwenden, wenn das Symbol-API ein pixeliges Symbol zurückgibt.",
+            "es": "Esto establecerá un icono básico de respaldo como el icono de acceso directo. Puede utilizar esto si la API de iconos devuelve un icono pixelado.",
+        },
+        {
             "name": "reset-default-icon-info",
-            "tr": "Yenile: Bu işlem mevcut kısayol simgesini silecek ve ana sayfayı açtığınızda simge API'sından bir simge almaya çalışacak.\nVarsayılan: Bu işlem, temel bir yedek simgeyi kısayol simgesi olarak ayarlar. Bu seçeneği, simge API pikselli bir simge döndürürse kullanabilirsiniz.",
-            "en": "Reset: This will delete the current shortcut icon and when you open the main page will try to fetch a icon from the icon API.\nDefault: This will set a basic fallback icon as the shortcut icon. You can use this if the icon API returns a pixelated icon.",
-            "de": "Zurücksetzen: Dies löscht das aktuelle Verknüpfungssymbol, und wenn Sie die Hauptseite öffnen, wird versucht, ein Symbol vom Symbol-API abzurufen.\nStandard: Hiermit wird ein einfaches Ersatzsymbol als Verknüpfungssymbol festgelegt. Sie können dies verwenden, wenn das Symbol-API ein pixeliges Symbol zurückgibt.",
-            "es": "Restablecer: Esto eliminará el icono de acceso directo actual y, al abrir la página principal, intentará obtener un icono de la API de iconos.\nPredeterminado: Esto establecerá un icono básico de respaldo como el icono de acceso directo. Puede utilizar esto si la API de iconos devuelve un icono pixelado.",
+            "tr": "Bu işlem mevcut kısayol simgesini silecek ve ana sayfayı açtığınızda simge API'sından bir simge almaya çalışacak.",
+            "en": "This will delete the current shortcut icon and when you open the main page will try to fetch a icon from the icon API.",
+            "de": "Dies löscht das aktuelle Verknüpfungssymbol, und wenn Sie die Hauptseite öffnen, wird versucht, ein Symbol vom Symbol-API abzurufen.",
+            "es": "Esto eliminará el icono de acceso directo actual y, al abrir la página principal, intentará obtener un icono de la API de iconos.",
         },
         {
             "name": "rate-update-info",
@@ -1279,34 +1281,6 @@ function translate(): void {
             "en": "Currencies",
             "de": "Währungen",
             "es": "Monedas"
-        },
-        {
-            "name": "link-label",
-            "tr": "Link",
-            "en": "URL",
-            "de": "URL",
-            "es": "URL",
-        },
-        {
-            "name": "name-label",
-            "tr": "İsim",
-            "en": "Name",
-            "de": "Name",
-            "es": "Nombre",
-        },
-        {
-            "name": "github-repo-info",
-            "tr": "Herhangi bir hata ile karşılaşırsanız veya yeni bir özellik isterseniz, buradan yeni bir issue açabilirsiniz:",
-            "en": "If you encounter any issues or have a feature request, you can open a new issue at:",
-            "de": "Wenn Sie auf einen Fehler gestoßen sind oder ein neues Feature wünschen, können Sie hier eine neue Issue öffnen:",
-            "es": "Si has encontrado algún error o deseas una nueva función, puedes abrir un issue aquí:",
-        },
-        {
-            "name": "theme-info",
-            "tr": "Temaları şuradan indirebilirsiniz: ",
-            "en": "You can download themes from: ",
-            "de": "Sie können Themen herunterladen von: ",
-            "es": "Puedes descargar temas de: "
         },
         {
             "name": "national-currencies",
