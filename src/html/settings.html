@@ -1,95 +1,110 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
+
 <head>
     <title>Settings</title>
     <link rel="icon" type="image/x-icon" href="assets/icons/icon.svg">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<link rel="stylesheet" href="css/colors.css">
-	<script src="js/settings.js" defer></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/colors.css">
+    <script src="js/settings.js" defer></script>
 </head>
 
 <svg xmlns="http://www.w3.org/2000/svg" hidden="true">
-	<!-- Icons  -->
-	<symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
-		<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
-	</symbol>
-	<symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
-		<path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-	</symbol>
+    <!-- Icons  -->
+    <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path
+            d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+    </symbol>
+    <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path
+            d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+    </symbol>
     <symbol id="trash-fill" fill="currentColor" viewBox="0 0 16 16">
-        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
-        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+        <path
+            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+        <path
+            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
     </symbol>
     <symbol id="reset-fill" fill="currentColor" viewBox="0 0 16 16">
-        <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
-        <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>      
+        <path
+            d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z" />
+        <path fill-rule="evenodd"
+            d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z" />
     </symbol>
     <symbol id="plus-fill" fill="currentColor" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+        <path fill-rule="evenodd"
+            d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
     </symbol>
     <symbol id="plus-square-fill" fill="currentColor" viewBox="0 0 16 16">
-        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
+        <path
+            d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
     </symbol>
     <symbol id="fallback-fill" fill="currentColor" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
+        <path fill-rule="evenodd"
+            d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z" />
     </symbol>
     <symbol id="dots-horizontal" fill="currentColor" viewBox="0 0 16 16">
-        <path d="M2 8a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+        <path
+            d="M2 8a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
     </symbol>
     <symbol id="download" fill="currentColor" viewBox="0 0 16 16">
-        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
-        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+        <path
+            d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
+        <path
+            d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
     </symbol>
     <symbol id="upload" fill="currentColor" viewBox="0 0 16 16">
-        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
-        <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z"/>
+        <path
+            d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
+        <path
+            d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z" />
     </symbol>
 </svg>
 
 <optgroup id="national-currencies" name="national-currencies" hidden>
-	<option value="USD">USD</option>
-	<option value="EUR">EUR</option>
-	<option value="TRY">TRY</option>
-	<option value="AED">AED</option>
-	<option value="AUD">AUD</option>
-	<option value="BHD">BHD</option>
-	<option value="BRL">BRL</option>
-	<option value="CAD">CAD</option>
-	<option value="CHF">CHF</option>
-	<option value="CNY">CNY</option>
-	<option value="CZK">CZK</option>
-	<option value="DKK">DKK</option>
-	<option value="GBP">GBP</option>
-	<option value="HKD">HKD</option>
-	<option value="IDR">IDR</option>
-	<option value="INR">INR</option>
-	<option value="JPY">JPY</option>
-	<option value="KRW">KRW</option>
-	<option value="MXN">MXN</option>
-	<option value="NOK">NOK</option>
-	<option value="NZD">NZD</option>
-	<option value="PHP">PHP</option>
-	<option value="PLN">PLN</option>
-	<option value="RUB">RUB</option>
-	<option value="SAR">SAR</option>
-	<option value="SEK">SEK</option>
-	<option value="SGD">SGD</option>
-	<option value="THB">THB</option>
-	<option value="TWD">TWD</option>
-	<option value="ZAR">ZAR</option>
+    <option value="USD">USD</option>
+    <option value="EUR">EUR</option>
+    <option value="TRY">TRY</option>
+    <option value="AED">AED</option>
+    <option value="AUD">AUD</option>
+    <option value="BHD">BHD</option>
+    <option value="BRL">BRL</option>
+    <option value="CAD">CAD</option>
+    <option value="CHF">CHF</option>
+    <option value="CNY">CNY</option>
+    <option value="CZK">CZK</option>
+    <option value="DKK">DKK</option>
+    <option value="GBP">GBP</option>
+    <option value="HKD">HKD</option>
+    <option value="IDR">IDR</option>
+    <option value="INR">INR</option>
+    <option value="JPY">JPY</option>
+    <option value="KRW">KRW</option>
+    <option value="MXN">MXN</option>
+    <option value="NOK">NOK</option>
+    <option value="NZD">NZD</option>
+    <option value="PHP">PHP</option>
+    <option value="PLN">PLN</option>
+    <option value="RUB">RUB</option>
+    <option value="SAR">SAR</option>
+    <option value="SEK">SEK</option>
+    <option value="SGD">SGD</option>
+    <option value="THB">THB</option>
+    <option value="TWD">TWD</option>
+    <option value="ZAR">ZAR</option>
 </optgroup>
 
 <optgroup id="crypto-currencies" name="crypto-currencies" hidden>
-	<option value="BTC">BTC</option>
-	<option value="USDT">USDT</option>
-	<option value="ETH">ETH</option>
-	<option value="BNB">BNB</option>
-	<option value="XRP">XRP</option>
-	<option value="DOGE">DOGE</option>
-	<option value="SOL">SOL</option>
-	<option value="LTC">LTC</option>
+    <option value="BTC">BTC</option>
+    <option value="USDT">USDT</option>
+    <option value="ETH">ETH</option>
+    <option value="BNB">BNB</option>
+    <option value="XRP">XRP</option>
+    <option value="DOGE">DOGE</option>
+    <option value="SOL">SOL</option>
+    <option value="LTC">LTC</option>
 </optgroup>
 
 <optgroup id="colors" name="color-label" hidden>
@@ -136,305 +151,342 @@
 
 <div class="container-fluid bg-black">
 
-<!-- Settings text -->
-<div class="row m-0">
-    <div class="col-lg-3 d-flex justify-content-center align-items-center">
-        <h1 class="text-white m-0 mt-3" name="settings"></h1>
-    </div>
-    <div class="col-lg-9 alert alert-success m-0 mt-3">
-        <div class="row flex-column d-flex justify-content-center align-items-center text-center">
-            <div class="col flex-row d-flex justify-content-center">
-                <svg width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
-                <div name="github-repo-info"></div>
-            </div>
-            <a class="col" href="https://github.com/enfyna/fx-new-tab/issues">https://github.com/enfyna/fx-new-tab/issues</a>
+    <!-- Settings text -->
+    <div class="row m-0">
+        <div class="col-lg-3 d-flex justify-content-center align-items-center">
+            <h1 class="text-white m-0 mt-3" name="settings"></h1>
         </div>
-    </div>
-    <div class="col-lg-12 alert alert-success m-0 mt-3">
-        <div class="row flex-column d-flex justify-content-center align-items-center text-center">
-            <div class="col flex-row d-flex justify-content-center">
-                <svg width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
-                <div name="theme-info"></div>&nbsp;
-            </div>
-            <a href="https://github.com/enfyna/fx-new-tab?tab=readme-ov-file#themes">https://github.com/enfyna/fx-new-tab?tab=readme-ov-file#themes</a>
-        </div>
-    </div>
-</div>
-<hr class="border-2 border-primary">
-<!-- Shortcut settings -->
-<div id="shortcut_shape_settings">
-    <!-- Shortcut Container settings -->
-    <div class="row bg-success rounded m-0 mb-1 d-flex flex-row align-items-center">
-        <div class="col-lg-4 my-1 text-black fw-bold" name="shortcut-container-settings"></div>
-        <div class="col-lg-2 my-1">
-            <select class="form-select" id="shortcut_container_width">
-            </select>
-        </div>
-        <div class="col-lg-2 my-1">
-            <select class="form-select" id="shortcut_container_h_align">
-                <optgroup name="shortcut-h-align">
-                    <option value="justify-content-start" name="left"></option>
-                    <option value="justify-content-center" name="center"></option>
-                    <option value="justify-content-end" name="right"></option>
-                </optgroup>
-            </select>
-        </div>
-        <div class="col-lg-2 my-1">
-            <select class="form-select" id="shortcut_v_align">
-                <optgroup name="shortcut-v-align">
-                    <option value="align-items-start" name="top"></option>
-                    <option value="align-items-center" name="center"></option>
-                    <option value="align-items-end" name="bottom"></option>
-                </optgroup>
-            </select>
-        </div>
-        <div class="col-lg-2 my-1">
-            <div class="form-check form-switch my-1">
-                <input class="form-check-input" type="checkbox" id="autoshort">
-                <label class="form-check-label fw-bold text-white" for="autoshort" name="autoshort">Enable Autoshort</label>
-            </div>
-        </div>
-    </div>
-    <!-- Shortcut Shape settings -->
-    <div class="row bg-warning rounded m-0 mb-1 d-flex flex-row align-items-center">
-        <div class="col-lg-3 my-1 fw-bold text-black" name="shortcut-settings"></div>
-        <div class="col-lg-2 my-1">
-            <div class="form-check form-switch my-1">
-                <input class="form-check-input" type="checkbox" id="shortcut_borderless">
-                <label class="form-check-label fw-bold text-black" for="shortcut_borderless" name="shortcut-borderless">Borderless</label>
-            </div>
-        </div>
-        <div class="col-lg-1 my-1">
-            <select class="form-select" id="shortcut_shape">
-                <optgroup name="shortcut-shape">
-                    <option value="rounded-0">◻</option>
-                    <option value="rounded-1">1</option>
-                    <option value="rounded-2">2</option>
-                    <option value="rounded-3">3</option>
-                    <option value="rounded-4">4</option>
-                    <option value="rounded-circle">◯</option>
-                </optgroup>
-            </select>
-        </div>
-        <div class="col-lg-2 my-1">
-            <select class="form-select" id="shortcut_transition">
-                <optgroup name="shortcut-transition">
-                    <option value="glow" name="glow"></option>
-                    <option value="spin" name="spin"></option>
-                    <option value="rotate" name="rotate"></option>
-                    <option value="move_down" name="move_down"></option>
-                    <option value="move_up" name="move_up"></option>
-                    <option value="scale_down" name="scale_down"></option>
-                    <option value="scale_up" name="scale_up"></option>
-                    <option value="none" name="none"></option>
-                </optgroup>
-            </select>
-        </div>
-        <div class="col-lg-2 my-1">
-            <select class="form-select" id="shortcut_size">
-                <optgroup name="shortcut-size">
-                    <option value="p-0">5</option>
-                    <option value="p-1">4</option>
-                    <option value="p-2">3</option>
-                    <option value="p-3">2</option>
-                    <option value="p-4">1</option>
-                </optgroup>
-            </select>
-        </div>
-        <div class="col-lg-1 my-1">
-            <select class="form-select" id="shortcut_width"> 
-            </select>
-        </div>
-        <div class="col-lg-1 my-1">
-            <select class="form-select" id="shortcut_min_width"> 
-                <optgroup name="shortcut-min-width">
-                    <option value="mw-0">0</option>
-                    <option value="mw-1">32px</option>
-                    <option value="mw-2">48px</option>
-                    <option value="mw-3">64px</option>
-                    <option value="mw-4">96px</option>
-                    <option value="mw-5">128px</option>
-                </optgroup>
-            </select>
-        </div>
-    </div>
-    <!-- Shortcut Color settings -->
-    <div class="row bg-primary rounded m-0 mb-1 d-flex flex-row align-items-center">
-        <div class="col-lg-10 my-1 fw-bold text-black" name="shortcut-color-settings"></div>
-        <div class="col-lg-1 my-1">
-            <button class="btn btn-success border-dark w-100" type="button" id="add_shortcut_col_color">
-                <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#plus-fill"/></svg>
-            </button>
-        </div>
-        <div class="col-lg-1 my-1">
-            <button class="btn btn-danger border-dark w-100" type="button" id="remove_shortcut_col_color">
-                <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#trash-fill"/></svg>
-            </button>
-        </div>
-        <div class="col-lg-12">
-            <div class="row m-0" id="shortcut_color_container"></div>
-        </div>
-    </div>
-</div>
-<!-- Shortcut settings -->
-<div class="row flex-column m-0" id="shortcut-settings-container">
-    <div class="col rounded my-1" id="shortcut-setting" hidden>
-        <div class="row">
-            <div class="col-lg-1 my-1">
-                <button class="btn btn-danger border-dark w-100" type="button" id="remove_">
-                    <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#trash-fill"/></svg>
-                </button>
-            </div>
-            <div class="col-lg-3 my-1">
-                <div class="input-group">
-                    <span class="input-group-text" name="link-label"></span>
-                    <input type="text" class="form-control url" id="select_link_" list="suggestions">
+        <div class="col-lg-9 alert alert-success m-0 mt-3">
+            <div class="row flex-column d-flex justify-content-center align-items-center text-center">
+                <div class="col flex-row d-flex justify-content-center">
+                    <svg width="24" height="24" role="img">
+                        <use xlink:href="#info-fill" />
+                    </svg>
+                    <div name="github-repo-info"></div>
                 </div>
+                <a class="col"
+                    href="https://github.com/enfyna/fx-new-tab/issues">https://github.com/enfyna/fx-new-tab/issues</a>
             </div>
-            <div class="col-lg-3 my-1">
-                <div class="input-group">
-                    <span class="input-group-text" name="name-label"></span>
-                    <input type="text" class="form-control" id="select_name_">
+        </div>
+        <div class="col-lg-12 alert alert-success m-0 mt-3">
+            <div class="row flex-column d-flex justify-content-center align-items-center text-center">
+                <div class="col flex-row d-flex justify-content-center">
+                    <svg width="24" height="24" role="img">
+                        <use xlink:href="#info-fill" />
+                    </svg>
+                    <div name="theme-info"></div>&nbsp;
                 </div>
+                <a
+                    href="https://github.com/enfyna/fx-new-tab?tab=readme-ov-file#themes">https://github.com/enfyna/fx-new-tab?tab=readme-ov-file#themes</a>
+            </div>
+        </div>
+    </div>
+    <hr class="border-2 border-primary">
+    <!-- Shortcut settings -->
+    <div id="shortcut_shape_settings">
+        <!-- Shortcut Container settings -->
+        <div class="row bg-success rounded m-0 mb-1 d-flex flex-row align-items-center">
+            <div class="col-lg-4 my-1 text-black fw-bold" name="shortcut-container-settings"></div>
+            <div class="col-lg-2 my-1">
+                <select class="form-select" id="shortcut_container_width">
+                </select>
             </div>
             <div class="col-lg-2 my-1">
-                <input class="form-control" type="file" id="select_img_" accept=".jpg, .jpeg, .png, .gif"/>
+                <select class="form-select" id="shortcut_container_h_align">
+                    <optgroup name="shortcut-h-align">
+                        <option value="justify-content-start" name="left"></option>
+                        <option value="justify-content-center" name="center"></option>
+                        <option value="justify-content-end" name="right"></option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="col-lg-2 my-1">
+                <select class="form-select" id="shortcut_v_align">
+                    <optgroup name="shortcut-v-align">
+                        <option value="align-items-start" name="top"></option>
+                        <option value="align-items-center" name="center"></option>
+                        <option value="align-items-end" name="bottom"></option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="col-lg-2 my-1">
+                <div class="form-check form-switch my-1">
+                    <input class="form-check-input" type="checkbox" id="autoshort">
+                    <label class="form-check-label fw-bold text-white" for="autoshort" name="autoshort">Enable
+                        Autoshort</label>
+                </div>
+            </div>
+        </div>
+        <!-- Shortcut Shape settings -->
+        <div class="row bg-warning rounded m-0 mb-1 d-flex flex-row align-items-center">
+            <div class="col-lg-3 my-1 fw-bold text-black" name="shortcut-settings"></div>
+            <div class="col-lg-2 my-1">
+                <div class="form-check form-switch my-1">
+                    <input class="form-check-input" type="checkbox" id="shortcut_borderless">
+                    <label class="form-check-label fw-bold text-black" for="shortcut_borderless"
+                        name="shortcut-borderless">Borderless</label>
+                </div>
             </div>
             <div class="col-lg-1 my-1">
-                <button class="btn btn-primary border-dark w-100" type="button" id="set_back_">
-                    <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#fallback-fill"/></svg>
+                <select class="form-select" id="shortcut_shape">
+                    <optgroup name="shortcut-shape">
+                        <option value="rounded-0">◻</option>
+                        <option value="rounded-1">1</option>
+                        <option value="rounded-2">2</option>
+                        <option value="rounded-3">3</option>
+                        <option value="rounded-4">4</option>
+                        <option value="rounded-circle">◯</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="col-lg-2 my-1">
+                <select class="form-select" id="shortcut_transition">
+                    <optgroup name="shortcut-transition">
+                        <option value="glow" name="glow"></option>
+                        <option value="spin" name="spin"></option>
+                        <option value="rotate" name="rotate"></option>
+                        <option value="move_down" name="move_down"></option>
+                        <option value="move_up" name="move_up"></option>
+                        <option value="scale_down" name="scale_down"></option>
+                        <option value="scale_up" name="scale_up"></option>
+                        <option value="none" name="none"></option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="col-lg-2 my-1">
+                <select class="form-select" id="shortcut_size">
+                    <optgroup name="shortcut-size">
+                        <option value="p-0">5</option>
+                        <option value="p-1">4</option>
+                        <option value="p-2">3</option>
+                        <option value="p-3">2</option>
+                        <option value="p-4">1</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="col-lg-1 my-1">
+                <select class="form-select" id="shortcut_width">
+                </select>
+            </div>
+            <div class="col-lg-1 my-1">
+                <select class="form-select" id="shortcut_min_width">
+                    <optgroup name="shortcut-min-width">
+                        <option value="mw-0">0</option>
+                        <option value="mw-1">32px</option>
+                        <option value="mw-2">48px</option>
+                        <option value="mw-3">64px</option>
+                        <option value="mw-4">96px</option>
+                        <option value="mw-5">128px</option>
+                    </optgroup>
+                </select>
+            </div>
+        </div>
+        <!-- Shortcut Color settings -->
+        <div class="row bg-primary rounded m-0 mb-1 d-flex flex-row align-items-center">
+            <div class="col-lg-10 my-1 fw-bold text-black" name="shortcut-color-settings"></div>
+            <div class="col-lg-1 my-1">
+                <button class="btn btn-success border-dark w-100" type="button" id="add_shortcut_col_color">
+                    <svg class="pe-none" width="24" height="24" role="img">
+                        <use xlink:href="#plus-fill" />
+                    </svg>
                 </button>
             </div>
             <div class="col-lg-1 my-1">
-                <button class="btn btn-primary border-dark w-100" type="button" id="reset_img_">
-                    <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#reset-fill"/></svg>
+                <button class="btn btn-danger border-dark w-100" type="button" id="remove_shortcut_col_color">
+                    <svg class="pe-none" width="24" height="24" role="img">
+                        <use xlink:href="#trash-fill" />
+                    </svg>
                 </button>
             </div>
-            <div class="col-lg-1 my-1 text-center" draggable="true">
-                <svg width="24" height="24" role="img" class="h-100 text-white"><use xlink:href="#dots-horizontal"/></svg>
+            <div class="col-lg-12">
+                <div class="row m-0" id="shortcut_color_container"></div>
             </div>
         </div>
     </div>
-</div>
-<!-- Add Shortcut Button -->
-<div class="row rounded p-1 mx-0 my-1 mb-2 bg-primary">
-    <div class="col-12 text-center" id="add_shortcut_container">
-        <button type="button" id="add_shortcut_fill" class="btn btn-success border-dark w-25">
-            <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#plus-square-fill"/></svg>
-        </button>
-        <button type="button" id="add_shortcut" class="btn btn-success border-dark w-25">
-            <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#plus-fill"/></svg>
-        </button>
-    </div>
-</div>
-<!-- Link settings info -->
-<div class="row g-2">
-    <div class="col-lg-12">
-        <div class="alert alert-primary d-flex flex-row m-0" role="alert">
-            <svg width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
-            <div name="reset-default-icon-info"></div>
+    <!-- Shortcut settings -->
+    <div class="row flex-column m-0" id="shortcut-settings-container">
+        <div class="col rounded my-1" id="shortcut-setting" hidden>
+            <div class="row">
+                <div class="col-lg-1 my-1">
+                    <button class="btn btn-danger border-dark w-100" type="button" id="remove_">
+                        <svg class="pe-none" width="24" height="24" role="img">
+                            <use xlink:href="#trash-fill" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="col-lg-3 my-1">
+                    <div class="input-group">
+                        <span class="input-group-text" name="link-label"></span>
+                        <input type="text" class="form-control url" id="select_link_" list="suggestions">
+                    </div>
+                </div>
+                <div class="col-lg-3 my-1">
+                    <div class="input-group">
+                        <span class="input-group-text" name="name-label"></span>
+                        <input type="text" class="form-control" id="select_name_">
+                    </div>
+                </div>
+                <div class="col-lg-2 my-1">
+                    <input class="form-control" type="file" id="select_img_" accept=".jpg, .jpeg, .png, .gif" />
+                </div>
+                <div class="col-lg-1 my-1">
+                    <button class="btn btn-primary border-dark w-100" type="button" id="set_back_">
+                        <svg class="pe-none" width="24" height="24" role="img">
+                            <use xlink:href="#fallback-fill" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="col-lg-1 my-1">
+                    <button class="btn btn-primary border-dark w-100" type="button" id="reset_img_">
+                        <svg class="pe-none" width="24" height="24" role="img">
+                            <use xlink:href="#reset-fill" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="col-lg-1 my-1 text-center" draggable="true">
+                    <svg width="24" height="24" role="img" class="h-100 text-white">
+                        <use xlink:href="#dots-horizontal" />
+                    </svg>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="col-lg-6">
-        <div class="alert alert-primary d-flex flex-row m-0" role="alert">
-            <svg width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
-            <div name="delete-link"></div>
+    <!-- Add Shortcut Button -->
+    <div class="row rounded p-1 mx-0 my-1 mb-2 bg-primary">
+        <div class="col-12 text-center" id="add_shortcut_container">
+            <button type="button" id="add_shortcut_fill" class="btn btn-success border-dark w-25">
+                <svg class="pe-none" width="24" height="24" role="img">
+                    <use xlink:href="#plus-square-fill" />
+                </svg>
+            </button>
+            <button type="button" id="add_shortcut" class="btn btn-success border-dark w-25">
+                <svg class="pe-none" width="24" height="24" role="img">
+                    <use xlink:href="#plus-fill" />
+                </svg>
+            </button>
         </div>
     </div>
-    <div class="col-lg-6">
-        <div class="alert alert-primary d-flex flex-row m-0" role="alert">
-            <svg width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
-            <div name="image-link"></div>
+    <!-- Link settings info -->
+    <div class="row g-2">
+        <div class="col-lg-12">
+            <div class="alert alert-primary d-flex flex-row m-0" role="alert">
+                <svg width="24" height="24" role="img">
+                    <use xlink:href="#info-fill" />
+                </svg>
+                <div name="reset-default-icon-info"></div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="alert alert-primary d-flex flex-row m-0" role="alert">
+                <svg width="24" height="24" role="img">
+                    <use xlink:href="#info-fill" />
+                </svg>
+                <div name="delete-link"></div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="alert alert-primary d-flex flex-row m-0" role="alert">
+                <svg width="24" height="24" role="img">
+                    <use xlink:href="#info-fill" />
+                </svg>
+                <div name="image-link"></div>
+            </div>
         </div>
     </div>
-</div>
-<hr class="border-2 border-primary">
-<!-- Hide Settings Button  -->
-<div class="row bg-dark text-white rounded m-0 mb-2 d-flex flex-row align-items-center">
-    <div class="col-lg-3 my-1">
-        <div class="form-check form-switch my-1">
-            <input class="form-check-input" type="checkbox" id="hide_settings_button">
-            <label class="form-check-label fw-bold" for="hide_settings_button" name="hide-settings-button"></label>
+    <hr class="border-2 border-primary">
+    <!-- Hide Settings Button  -->
+    <div class="row bg-dark text-white rounded m-0 mb-2 d-flex flex-row align-items-center">
+        <div class="col-lg-3 my-1">
+            <div class="form-check form-switch my-1">
+                <input class="form-check-input" type="checkbox" id="hide_settings_button">
+                <label class="form-check-label fw-bold" for="hide_settings_button"
+                    name="hide-settings-button"></label>
+            </div>
         </div>
     </div>
-</div>
-<!-- Background settings -->
-<div class="row bg-success rounded m-0 mb-2 d-flex flex-row align-items-center">
-    <div class="col-lg-4 fw-bold text-white my-1" name="bg-settings"></div>
-    <div class="col-lg-4 my-1">
-        <div class="input-group">
-            <span class="input-group-text" name="bg-fallback-color-label"></span>
-            <input type="color" class="form-control form-control-color" id="bg_color">
+    <!-- Background settings -->
+    <div class="row bg-success rounded m-0 mb-2 d-flex flex-row align-items-center">
+        <div class="col-lg-4 fw-bold text-white my-1" name="bg-settings"></div>
+        <div class="col-lg-4 my-1">
+            <div class="input-group">
+                <span class="input-group-text" name="bg-fallback-color-label"></span>
+                <input type="color" class="form-control form-control-color" id="bg_color">
+            </div>
+        </div>
+        <div class="col-lg-3 my-1">
+            <input class="form-control" type="file" id="select_bg" accept=".jpg, .jpeg, .png, .gif" />
+        </div>
+        <div class="col-lg-1 my-1">
+            <button type="button" class="btn btn-danger border-dark w-100" id="delete_bg">
+                <svg class="pe-none" width="24" height="24" role="img">
+                    <use xlink:href="#trash-fill" />
+                </svg>
+            </button>
         </div>
     </div>
-    <div class="col-lg-3 my-1">
-        <input class="form-control" type="file" id="select_bg" accept=".jpg, .jpeg, .png, .gif"/>
-    </div>
-    <div class="col-lg-1 my-1">
-        <button type="button" class="btn btn-danger border-dark w-100" id="delete_bg">
-            <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#trash-fill"/></svg>
-        </button>
-    </div>
-</div>
-<div class="row g-2">
-    <div class="col-lg-12">
-        <div class="alert alert-primary d-flex flex-row m-0" role="alert">
-            <svg width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
-            <div name="bg-img-upload-info"></div>
+    <div class="row g-2">
+        <div class="col-lg-12">
+            <div class="alert alert-primary d-flex flex-row m-0" role="alert">
+                <svg width="24" height="24" role="img">
+                    <use xlink:href="#info-fill" />
+                </svg>
+                <div name="bg-img-upload-info"></div>
+            </div>
         </div>
     </div>
-</div>
-<hr class="border-2 border-primary">
-<!-- Firefox Watermark Settings  -->
-<div class="row bg-warning rounded m-0 mb-2 d-flex flex-row align-items-center">
-    <div class="col-lg-3 my-1">
-        <div class="form-check form-switch my-1">
-            <input class="form-check-input" type="checkbox" id="enable_firefox_watermark">
-            <label class="form-check-label fw-bold text-black" for="enable_firefox_watermark" name="enable-firefox-label"></label>
+    <hr class="border-2 border-primary">
+    <!-- Firefox Watermark Settings  -->
+    <div class="row bg-warning rounded m-0 mb-2 d-flex flex-row align-items-center">
+        <div class="col-lg-3 my-1">
+            <div class="form-check form-switch my-1">
+                <input class="form-check-input" type="checkbox" id="enable_firefox_watermark">
+                <label class="form-check-label fw-bold text-black" for="enable_firefox_watermark"
+                    name="enable-firefox-label"></label>
+            </div>
+        </div>
+        <div class="col"></div>
+        <div class="col-lg-2 my-1">
+            <select class="form-select" id="firefox_color">
+            </select>
         </div>
     </div>
-    <div class="col"></div>
-    <div class="col-lg-2 my-1">
-        <select class="form-select" id="firefox_color">
-        </select>
-    </div>
-</div>
-<!-- Clock preview -->
-<div class="row d-flex container-fluid justify-content-center">
-    <div class="row m-0 mb-2 d-flex flex-row align-items-center col-md-4">
-        <h1 id="clock_preview" class="color-text" style="font-size: calc(1.375rem + 1.5vw * 2.5) !important;text-align: center;white-space: nowrap;">
-        </h1>
-    </div>
-</div>
-<!-- Clock Settings  -->
-<div class="row bg-navyblue text-white rounded m-0 mb-2 d-flex flex-row align-items-center" id="clock_settings">
-    <div class="col-lg-5 my-1">
-        <div class="form-check form-switch my-1">
-            <input class="form-check-input" type="checkbox" id="enable_clock">
-            <label class="form-check-label fw-bold" for="enable_clock" name="enable-clock-label"></label>
+    <!-- Clock preview -->
+    <div class="row d-flex container-fluid justify-content-center">
+        <div class="row m-0 mb-2 d-flex flex-row align-items-center col-md-4">
+            <h1 id="clock_preview" class="color-text"
+                style="font-size: calc(1.375rem + 1.5vw * 2.5) !important;text-align: center;white-space: nowrap;">
+            </h1>
         </div>
     </div>
-    <div class="col-lg-2 my-1">
-        <select class="form-select" name="" id="clock_font">
-            <optgroup label="Font">
-                <option value="monospace">Monospace</option>
-                <option value="sans">Sans</option>
-                <option value="Arial">Arial</option>
-                <option value="Times New Roman">Times New Roman</option>
-            </optgroup>
-        </select>
-    </div>
-    <div class="col-lg-1 my-1">
-        <select class="form-select" id="clock_time_format">
-            <!-- <optgroup name="clock-time-format-label"> -->
+    <!-- Clock Settings  -->
+    <div class="row bg-navyblue text-white rounded m-0 mb-2 d-flex flex-row align-items-center" id="clock_settings">
+        <div class="col-lg-5 my-1">
+            <div class="form-check form-switch my-1">
+                <input class="form-check-input" type="checkbox" id="enable_clock">
+                <label class="form-check-label fw-bold" for="enable_clock" name="enable-clock-label"></label>
+            </div>
+        </div>
+        <div class="col-lg-2 my-1">
+            <select class="form-select" name="" id="clock_font">
+                <optgroup label="Font">
+                    <option value="monospace">Monospace</option>
+                    <option value="sans">Sans</option>
+                    <option value="Arial">Arial</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                </optgroup>
+            </select>
+        </div>
+        <div class="col-lg-1 my-1">
+            <select class="form-select" id="clock_time_format">
+                <!-- <optgroup name="clock-time-format-label"> -->
                 <option value="true">12</option>
                 <option value="false">24</option>
-            <!-- </optgroup> -->
-        </select>
-    </div>
-    <div class="col-lg-2 my-1">
-        <select class="form-select" id="clock_format">
-            <!-- <optgroup name="clock-format-label"> -->
+                <!-- </optgroup> -->
+            </select>
+        </div>
+        <div class="col-lg-2 my-1">
+            <select class="form-select" id="clock_format">
+                <!-- <optgroup name="clock-format-label"> -->
                 <option value="h:m">h:m</option>
                 <option value="h:m:s">h:m:s</option>
                 <option value="dd/mm">dd/mm</option>
@@ -445,161 +497,182 @@
                 <option value="h:m&ndd/mm">h:m \n dd/mm</option>
                 <option value="h:m&ndd/mm/yy">h:m \n dd/mm/yy</option>
                 <option value="h:m:s&ndd/mm/yy">h:m:s \n dd/mm/yy</option>
-            <!-- </optgroup> -->
-        </select>
-    </div>
-    <div class="col-lg-2 my-1">
-        <select class="form-select" id="clock_color">
-        </select>
-    </div>
-    <div class="col-lg-2 my-1">
-        <div class="form-check form-switch my-1">
-            <label class="form-check-label fw-bold" for="clock_dark_bg" name="clock-darkness-label"></label>
-            <input type="checkbox" class="form-check-input" id="clock_dark_bg">
+                <!-- </optgroup> -->
+            </select>
+        </div>
+        <div class="col-lg-2 my-1">
+            <select class="form-select" id="clock_color">
+            </select>
+        </div>
+        <div class="col-lg-2 my-1">
+            <div class="form-check form-switch my-1">
+                <label class="form-check-label fw-bold" for="clock_dark_bg" name="clock-darkness-label"></label>
+                <input type="checkbox" class="form-check-input" id="clock_dark_bg">
+            </div>
+        </div>
+        <div class="col-lg-2 my-1">
+            <div class="form-check form-switch my-1">
+                <label class="form-check-label fw-bold" for="clock_boldness" name="clock-boldness-label"></label>
+                <input type="checkbox" class="form-check-input" id="clock_boldness">
+            </div>
+        </div>
+        <div class="col-lg-2 my-1">
+            <label class="form-check-label fw-bold" for="clock_border_radius"
+                name="clock-border-radius-label"></label>
+            <div class="form-range">
+                <input type="range" class="form-range" min="0" max="75" step="1" id="clock_border_radius">
+            </div>
+        </div>
+        <div class="col-lg-2 my-1">
+            <label class="form-check-label fw-bold" for="clock_border_width"
+                name="clock-border-width-label"></label>
+            <div class="form-range">
+                <input type="range" class="form-range" min="0" max="10" step="1" id="clock_border_width">
+            </div>
+        </div>
+        <div class="col-lg-2 my-1">
+            <select class="form-select" id="clock_border_style">
+                <option value="hidden" name="clock_style_hidden"></option>
+                <option value="solid"> _____________ </option>
+                <option value="double"> ============= </option>
+                <option value="dashed"> &nbsp_ &nbsp_ &nbsp_ &nbsp_ &nbsp_ &nbsp_ &nbsp_ </option>
+                <option value="dotted"> • &nbsp&nbsp• &nbsp&nbsp• &nbsp&nbsp• &nbsp&nbsp• &nbsp&nbsp• &nbsp&nbsp•
+                </option>
+            </select>
+        </div>
+        <div class="col-lg-2 my-1">
+            <select class="form-select" id="clock_border_color">
+            </select>
         </div>
     </div>
-    <div class="col-lg-2 my-1">
-        <div class="form-check form-switch my-1">
-            <label class="form-check-label fw-bold" for="clock_boldness" name="clock-boldness-label"></label>
-            <input type="checkbox" class="form-check-input" id="clock_boldness">
+    <!-- Note Settings  -->
+    <div class="row bg-danger text-white rounded m-0 mb-2 d-flex flex-row align-items-center" id="note_settings">
+        <div class="col-lg-10 my-1">
+            <div class="form-check form-switch my-1">
+                <input class="form-check-input" type="checkbox" id="enable_notes">
+                <label class="form-check-label fw-bold" for="enable_notes" name="enable-notes-label"></label>
+            </div>
+        </div>
+        <div class="col-lg-1 my-1">
+            <button class="btn btn-success border-dark w-100" type="button" id="add_note">
+                <svg class="pe-none" width="24" height="24" role="img">
+                    <use xlink:href="#plus-fill" />
+                </svg>
+            </button>
+        </div>
+        <div class="col-lg-1 my-1">
+            <button class="btn btn-danger border-dark w-100" type="button" id="remove_note">
+                <svg class="pe-none" width="24" height="24" role="img">
+                    <use xlink:href="#trash-fill" />
+                </svg>
+            </button>
+        </div>
+        <div class="col-lg-12">
+            <div class="row m-0" id="note_color_container"></div>
         </div>
     </div>
-    <div class="col-lg-2 my-1">
-        <label class="form-check-label fw-bold" for="clock_border_radius" name="clock-border-radius-label"></label>
-        <div class="form-range">
-            <input type="range" class="form-range" min="0" max="75" step="1" id="clock_border_radius">
+    <!-- Currency API settings -->
+    <div class="row bg-success rounded m-0 mb-2 d-flex flex-row align-items-center" id="currency_setting">
+        <div class="col-lg-5 my-1">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="enable_api">
+                <label class="form-check-label fw-bold text-white" for="enable_api" name="enable-api-label"></label>
+            </div>
+        </div>
+        <div class="col-lg-1 my-1">
+            <select class="form-select" id="base_currency">
+                <optgroup name="base-currency-label"></optgroup>
+            </select>
+        </div>
+        <div class="col-lg-1 fw-bold text-center text-white my-1" name="currencies-label">
+        </div>
+        <div class="col-lg-1 my-1">
+            <select class="form-select" id="currency_option_0">
+            </select>
+        </div>
+        <div class="col-lg-1 my-1">
+            <select class="form-select" id="currency_option_1">
+            </select>
+        </div>
+        <div class="col-lg-1 my-1">
+            <select class="form-select" id="currency_option_2">
+            </select>
+        </div>
+        <div class="col-lg-2 my-1">
+            <select class="form-select" id="currency_container_color">
+            </select>
         </div>
     </div>
-    <div class="col-lg-2 my-1">
-        <label class="form-check-label fw-bold" for="clock_border_width" name="clock-border-width-label"></label>
-        <div class="form-range">
-            <input type="range" class="form-range" min="0" max="10" step="1" id="clock_border_width">
+    <!-- Currency API warnings -->
+    <div class="row g-2">
+        <div class="col-lg-6">
+            <div class="alert alert-warning d-flex flex-row m-0" role="alert">
+                <svg class="pe-none" width="24" height="24" role="img">
+                    <use xlink:href="#info-fill" />
+                </svg>
+                <div name="rate-update-info"></div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="alert alert-danger d-flex flex-row m-0" role="alert">
+                <svg class="pe-none" width="24" height="24" role="img">
+                    <use xlink:href="#exclamation-triangle-fill" />
+                </svg>
+                <div name="currency-api-refresh-warning"></div>
+            </div>
         </div>
     </div>
-    <div class="col-lg-2 my-1">
-        <select class="form-select" id="clock_border_style">
-            <option value="hidden" name="clock_style_hidden"></option>
-            <option value="solid" > _____________ </option>
-            <option value="double"> ============= </option>
-            <option value="dashed"> &nbsp_ &nbsp_ &nbsp_ &nbsp_ &nbsp_ &nbsp_ &nbsp_ </option>
-            <option value="dotted"> • &nbsp&nbsp• &nbsp&nbsp• &nbsp&nbsp• &nbsp&nbsp• &nbsp&nbsp• &nbsp&nbsp• </option>
-        </select>
-    </div>
-    <div class="col-lg-2 my-1">
-        <select class="form-select" id="clock_border_color">
-        </select>
-    </div>
-</div>
-<!-- Note Settings  -->
-<div class="row bg-danger text-white rounded m-0 mb-2 d-flex flex-row align-items-center" id="note_settings">
-    <div class="col-lg-10 my-1">
-        <div class="form-check form-switch my-1">
-            <input class="form-check-input" type="checkbox" id="enable_notes">
-            <label class="form-check-label fw-bold" for="enable_notes" name="enable-notes-label"></label>
+    <hr class="border-2 border-primary">
+    <!-- Save file import / export -->
+    <div class="row bg-primary text-white rounded m-0 my-2 d-flex flex-row align-items-center"
+        id="import_export_settings">
+        <div class="col-lg-10 my-1 fw-bold" name="import-export-settings"></div>
+        <div class="col-lg-1 my-1">
+            <button type="button" class="btn btn-success border-dark w-100 fw-bold" id="export-settings">
+                <svg class="pe-none" width="24" height="24" role="img">
+                    <use xlink:href="#download" />
+                </svg>
+            </button>
+        </div>
+        <div class="col-lg-1 my-1">
+            <button type="button" class="btn btn-warning border-dark w-100 fw-bold" id="import-settings">
+                <svg class="pe-none" width="24" height="24" role="img">
+                    <use xlink:href="#upload" />
+                </svg>
+            </button>
         </div>
     </div>
-    <div class="col-lg-1 my-1">
-        <button class="btn btn-success border-dark w-100" type="button" id="add_note">
-            <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#plus-fill"/></svg>
-        </button>
+    <hr class="border-2 border-primary">
+    <!-- Remove Settings Button Warning -->
+    <div class="alert alert-danger d-flex flex-row m-0" role="alert">
+        <svg class="pe-none" width="24" height="24" role="img">
+            <use xlink:href="#exclamation-triangle-fill" />
+        </svg>
+        <div name="remove-settings-button-info"></div>
     </div>
-    <div class="col-lg-1 my-1">
-        <button class="btn btn-danger border-dark w-100" type="button" id="remove_note">
-            <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#trash-fill"/></svg>
-        </button>
-    </div>
-    <div class="col-lg-12">
-        <div class="row m-0" id="note_color_container"></div>
-    </div>
-</div>
-<!-- Currency API settings -->
-<div class="row bg-success rounded m-0 mb-2 d-flex flex-row align-items-center" id="currency_setting">
-    <div class="col-lg-5 my-1">
-        <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="enable_api">
-            <label class="form-check-label fw-bold text-white" for="enable_api" name="enable-api-label"></label>
+    <!-- Remove Settings Button -->
+    <div class="row bg-danger text-white rounded m-0 my-2 d-flex flex-row align-items-center">
+        <div class="col-lg-11 my-1 fw-bold" name="remove-settings-button-label"></div>
+        <div class="col-lg-1 my-1">
+            <button type="button" class="btn btn-danger border-dark w-100 fw-bold" id="remove-settings-button">
+                <svg class="pe-none" width="24" height="24" role="img">
+                    <use xlink:href="#trash-fill" />
+                </svg>
+            </button>
         </div>
     </div>
-    <div class="col-lg-1 my-1">
-        <select class="form-select" id="base_currency">
-            <optgroup name="base-currency-label"></optgroup>
-        </select>
-    </div>
-    <div class="col-lg-1 fw-bold text-center text-white my-1" name="currencies-label">
-    </div>
-    <div class="col-lg-1 my-1">
-        <select class="form-select" id="currency_option_0">
-        </select>
-    </div>
-    <div class="col-lg-1 my-1">
-        <select class="form-select" id="currency_option_1">
-        </select>
-    </div>
-    <div class="col-lg-1 my-1">
-        <select class="form-select" id="currency_option_2">
-        </select>
-    </div>
-    <div class="col-lg-2 my-1">
-        <select class="form-select" id="currency_container_color">
-        </select>
-    </div>
-</div>
-<!-- Currency API warnings -->
-<div class="row g-2">
-    <div class="col-lg-6">
-        <div class="alert alert-warning d-flex flex-row m-0" role="alert">
-            <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#info-fill"/></svg>
-            <div name="rate-update-info"></div>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="alert alert-danger d-flex flex-row m-0" role="alert">
-            <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#exclamation-triangle-fill"/></svg>
-            <div name="currency-api-refresh-warning"></div>
-        </div>
-    </div>
-</div>
-<hr class="border-2 border-primary">
-<!-- Save file import / export -->
-<div class="row bg-primary text-white rounded m-0 my-2 d-flex flex-row align-items-center" id="import_export_settings">
-    <div class="col-lg-10 my-1 fw-bold" name="import-export-settings"></div>
-    <div class="col-lg-1 my-1">
-        <button type="button" class="btn btn-success border-dark w-100 fw-bold" id="export-settings">
-            <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#download"/></svg>
-        </button>
-    </div>
-    <div class="col-lg-1 my-1">
-        <button type="button" class="btn btn-warning border-dark w-100 fw-bold" id="import-settings">
-            <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#upload"/></svg>
-        </button>
-    </div>
-</div>
-<hr class="border-2 border-primary">
-<!-- Remove Settings Button Warning -->
-<div class="alert alert-danger d-flex flex-row m-0" role="alert">
-    <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#exclamation-triangle-fill"/></svg>
-    <div name="remove-settings-button-info"></div>
-</div>
-<!-- Remove Settings Button -->
-<div class="row bg-danger text-white rounded m-0 my-2 d-flex flex-row align-items-center">
-    <div class="col-lg-11 my-1 fw-bold" name="remove-settings-button-label"></div>
-    <div class="col-lg-1 my-1">
-        <button type="button" class="btn btn-danger border-dark w-100 fw-bold" id="remove-settings-button">
-            <svg class="pe-none" width="24" height="24" role="img"><use xlink:href="#trash-fill"/></svg>
-        </button>
-    </div>
-</div>
-<hr class="border-2 border-primary mt-5">
+    <hr class="border-2 border-primary mt-5">
 </div>
 <!-- Navbar -->
 <nav id="navbar" class="navbar fixed-bottom navbar-dark bg-black">
-	<div class="container-fluid justify-content-end">
+    <div class="container-fluid justify-content-end">
         <div id="save-info" name="save-info" class="fw-bold text-white" hidden></div>
         <button id="nav-button" class="navbar-toggler" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
-	</div>
+    </div>
 </nav>
 
 </body>
+
 </html>
