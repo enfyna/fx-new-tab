@@ -173,7 +173,6 @@ async function configure_shortcuts() {
     img.classList.add(save.shortcut_shape ?? 'rounded-3');
     base_div.classList.add(save.shortcut_shape ?? 'rounded-3');
 
-
     const colors = save.shortcut_col_colors ?? [
         'bg-primary', 'bg-danger', 'bg-success', 'bg-warning'
     ];
@@ -223,14 +222,14 @@ async function configure_shortcuts() {
         }, 1)
 
         function autoshort() {
-            let width = parseInt(save.shortcut_container_width.split('-')[1]) - 1
-            while (container.offsetHeight + 100 > screen.height && save.shortcut_container_width != 'col-1') {
-                let current_width = save.shortcut_container_width;
-                save.shortcut_container_width = 'col-' + width.toString()
-                width -= 1
-                container.classList.replace(current_width, save.shortcut_container_width)
+            let width = 12;
+            let start_width = save.shortcut_container_width;
+            for (var i = width; i > 1 && container.offsetHeight + 100 > screen.height; i--){
+                let current_width = 'col-' + i.toString();
+                container.classList.replace(start_width, current_width);
+                start_width = current_width;
             }
-            console.info("autoshort:", save.shortcut_container_width)
+            console.info("autoshort:", save.shortcut_container_width);
         }
     }
 }
