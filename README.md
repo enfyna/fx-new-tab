@@ -57,6 +57,7 @@ Enhance your new tab experience with our curated themes. Simply right click on t
 |------------|---------|-------------|----------|
 | Midnight Metropolis | ![Theme](https://github.com/enfyna/fx-new-tab/assets/91965312/a51ea16d-41bd-4e69-ba47-0b0da1c91063) | Moody cityscape with square app shortcuts. | [Download](https://raw.githubusercontent.com/enfyna/fx-new-tab/main/themes/MidnightMetropolis.json) |
 | Pixel Skyline | ![Theme](https://github.com/enfyna/fx-new-tab/assets/91965312/404d23ca-df98-4651-a72d-30fa18cc7aa8) | Retro skyline with circular app shortcuts. | [Download](https://github.com/enfyna/fx-new-tab/blob/main/themes/PixelSkyline.json) |
+| The Slap | ![Theme](https://github.com/user-attachments/assets/c5ba6fb9-60a4-4bb0-9203-0f5282055ade) | 👋💥👋💥👋💥👋💥👋💥 | [Download](https://github.com/enfyna/fx-new-tab/blob/main/themes/TheSlap.json) |
 
 
 ## Privacy
