@@ -104,6 +104,11 @@ async function get_save() {
     }
 }
 
+async function set_save() {
+    await browser.storage.local.set(save);
+    set_local_save();
+}
+
 function set_local_save() {
     try {
         localStorage.setItem('save', JSON.stringify(save));
@@ -177,6 +182,26 @@ async function configure_shortcuts() {
         'bg-primary', 'bg-danger', 'bg-success', 'bg-warning'
     ];
 
+    const contextMenu = document.getElementById('contextMenu');
+    contextMenu.addEventListener('click', () => {
+        const id = contextMenu.dataset.id;
+        const href = contextMenu.dataset.href;
+        for(var i = 0; i < save.shortcuts.length; i++){
+            const elm = container.children[i];
+            const sh = save.shortcuts[i];
+            if (elm.id == id && href == sh.link){
+                console.info('removed shortcut: ', (sh.link));
+                save.shortcuts.splice(i, 1);
+                container.children[i].remove();
+                set_save();
+                break;
+            }
+        }
+    });
+    document.addEventListener('click', () => {
+        contextMenu.style.display = 'none';
+    });
+
     for (let i = 0; i < save.shortcuts.length; i++) {
         const sh_data: shortcut = save.shortcuts[i];
         if (!sh_data || sh_data.link.length == 0)
@@ -184,6 +209,16 @@ async function configure_shortcuts() {
 
         const sh = base_shortcut.cloneNode(true) as HTMLAnchorElement;
         sh.href = sh_data.link;
+        sh.id = i.toString();
+
+        sh.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            contextMenu.dataset.id = sh.id;
+            contextMenu.dataset.href = sh.href;
+            contextMenu.style.top = `${e.pageY}px`;
+            contextMenu.style.left = `${e.pageX}px`;
+            contextMenu.style.display = 'block';
+        })
 
         const sh_div = sh.firstChild as HTMLDivElement;
 
@@ -581,6 +616,13 @@ function set_settings_button() {
 /// Translations
 function translate(): void {
     const translations = [
+        {
+            "name": "delete-option",
+            "tr": "Sil",
+            "en": "Delete",
+            "de": "Löschen",
+            "es": "Eliminar",
+        },
         {
             "name": "note-input",
             "tr": "Kısa bir not giriniz",

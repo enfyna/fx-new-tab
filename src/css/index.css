@@ -9,6 +9,28 @@ body {
     background-attachment: fixed !important;
 }
 
+.context-menu {
+    position: absolute;
+    color: black;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 0;
+    display: none;
+    z-index: 1000;
+    list-style: none;
+}
+
+.context-menu li {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.context-menu li:hover {
+    color: white;
+    background-color: #ff1818;
+    transition: ease;
+}
+
 /* fix shortcut transition animations overlapping with each other (glow, scale_up, ...) */
 a:hover {
     z-index: 999;
