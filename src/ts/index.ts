@@ -223,7 +223,7 @@ async function configure_shortcuts() {
         sh.addEventListener('contextmenu', (e) => {
             e.preventDefault();
             contextMenu.dataset.id = sh.id;
-            contextMenu.dataset.href = sh.href;
+            contextMenu.dataset.href = sh_data.link;
             contextMenu.style.top = `${e.pageY}px`;
             contextMenu.style.left = `${e.pageX}px`;
             contextMenu.style.display = 'block';
