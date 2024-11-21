@@ -17,6 +17,7 @@ interface save {
     shortcut_col_colors: string[];
     shortcut_container_h_align: string;
     shortcut_container_width: string;
+    shortcut_recently_deleted: string[];
 
     is_autoshort_enabled: boolean;
 
@@ -191,6 +192,14 @@ async function configure_shortcuts() {
             const sh = save.shortcuts[i];
             if (elm.id == id && href == sh.link){
                 console.info('removed shortcut: ', (sh.link));
+                if(sh.link.length > 0){
+                    if (!save.shortcut_recently_deleted)
+                        save.shortcut_recently_deleted = [];
+                    save.shortcut_recently_deleted.push(sh.link);
+                    if (save.shortcut_recently_deleted.length > 10){
+                        save.shortcut_recently_deleted.shift();
+                    }
+                }
                 save.shortcuts.splice(i, 1);
                 container.children[i].remove();
                 set_save();

@@ -15,6 +15,7 @@ interface save {
     shortcut_col_colors: string[];
     shortcut_container_h_align: string;
     shortcut_container_width: string;
+    shortcut_recently_deleted: string[];
 
     is_autoshort_enabled: boolean;
 
@@ -290,6 +291,9 @@ async function configure_shortcut_settings() {
             case 'add_shortcut_fill':
                 sh = topSites[random_recommend_idx++ % topSites.length];
                 break;
+            case 'recently_deleted_shortcut':
+                show_recently_deleted_shortcuts();
+                return;
             default:
                 return;
         }
@@ -383,6 +387,14 @@ function create_shortcut_setting(id: number, elm: HTMLDivElement): HTMLDivElemen
             case node.sh_remove:
                 for (let i = 0; i < save.shortcuts.length; i++) {
                     if (save.shortcuts[i] == shortcut) {
+                        if(shortcut.link.length > 0){
+                            if (!save.shortcut_recently_deleted)
+                                save.shortcut_recently_deleted = [];
+                            save.shortcut_recently_deleted.push(shortcut.link);
+                            if (save.shortcut_recently_deleted.length > 10){
+                                save.shortcut_recently_deleted.shift();
+                            }
+                        }
                         save.shortcuts.splice(i, 1);
                         break;
                     }
@@ -431,6 +443,21 @@ async function find_user_sites() {
         shortcuts.push(shortcut);
     });
     return shortcuts;
+}
+
+function show_recently_deleted_shortcuts(){
+    const lang = ["en", "tr", "es", "de"].find(lang => navigator.language.startsWith(lang)) || "en";
+    const translations = [
+        {
+            "en": "10 recently deleted shortcut links:",
+            "tr": "Silinen son 10 link:",
+            "es": "10 enlaces eliminados recientemente:",
+            "de": "10 kürzlich gelöschte Verknüpfungen:"
+        },
+    ]
+    alert(translations[0][lang] + "\n\n" +
+        (save.shortcut_recently_deleted ?? []).toReversed().join("\n")
+    );
 }
 
 /// Drag & Drop
@@ -812,7 +839,7 @@ function configure_import_export() {
                 fileInput.click();
                 fileInput.addEventListener('change', handleFileSelect);
 
-                function handleFileSelect(event) {
+                function handleFileSelect(event:any) {
                     const file = event.target.files[0];
 
                     if (!file) {

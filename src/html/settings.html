@@ -345,19 +345,26 @@
         </div>
     </div>
     <!-- Add Shortcut Button -->
-    <div class="row rounded p-1 mx-0 my-1 mb-2 bg-primary">
-        <div class="col-12 text-center" id="add_shortcut_container">
-            <button type="button" id="add_shortcut_fill" class="btn btn-success border-dark w-25">
-                <svg class="pe-none" width="24" height="24" role="img">
-                    <use xlink:href="#plus-square-fill" />
-                </svg>
-            </button>
-            <button type="button" id="add_shortcut" class="btn btn-success border-dark w-25">
-                <svg class="pe-none" width="24" height="24" role="img">
-                    <use xlink:href="#plus-fill" />
-                </svg>
-            </button>
-        </div>
+    <div class="rounded p-1 my-1 mb-2 bg-primary d-flex" id="add_shortcut_container">
+        <button type="button" id="add_shortcut_fill" class="btn btn-success border-dark col-lg-2">
+            <svg class="pe-none" width="24" height="24" role="img">
+                <use xlink:href="#plus-square-fill" />
+            </svg>
+        </button>
+        <button type="button" id="add_shortcut" class="btn btn-success border-dark col-lg-2 mx-1">
+            <svg class="pe-none" width="24" height="24" role="img">
+                <use xlink:href="#plus-fill" />
+            </svg>
+        </button>
+        <div class="flex-grow-1"></div>
+        <button type="button" id="recently_deleted_shortcut" class="btn btn-primary border-dark col-lg-2">
+            <svg class="pe-none" width="24" height="24" role="img">
+                <use xlink:href="#trash-fill" />
+            </svg>
+            <svg class="pe-none" width="24" height="24" role="img">
+                <use xlink:href="#reset-fill" />
+            </svg>
+        </button>
     </div>
     <!-- Link settings info -->
     <div class="row g-2">
