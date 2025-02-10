@@ -75,6 +75,7 @@ const start = Date.now();
 get_save().then(ready);
 
 function ready() {
+    document.title = browser.i18n.getMessage("extensionName");
     configure_shortcuts();
     set_background();
     if (is_currency_rates_enabled() || is_notes_enabled() || is_clock_enabled()) {
@@ -625,29 +626,12 @@ function set_settings_button() {
 /// Translations
 function translate(): void {
     const translations = [
-        {
-            "name": "delete-option",
-            "tr": "Sil",
-            "en": "Delete",
-            "de": "Löschen",
-            "es": "Eliminar",
-        },
-        {
-            "name": "note-input",
-            "tr": "Kısa bir not giriniz",
-            "en": "Enter a brief note",
-            "de": "Geben Sie eine kurze Notiz ein",
-            "es": "Ingresa una nota breve",
-        },
+        "delete-option",
+        "note-input",
     ];
 
-    const lang = ["en", "tr", "es", "de"].find(
-        lang => navigator.language.startsWith(lang)
-    ) || "en";
-
-    for (const dict of translations) {
-        const name: string = dict.name;
-        const translation: string = dict[lang];
+    for (const name of translations) {
+        const translation = browser.i18n.getMessage(name);
         if (name == "note-input") {
             for (const element of document.getElementsByName(name)) {
                 (element as HTMLInputElement).placeholder = translation;

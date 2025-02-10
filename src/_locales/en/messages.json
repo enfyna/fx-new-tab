@@ -1,0 +1,257 @@
+{
+  "extensionName": {
+    "message": "New Tab"
+  },
+  "extensionDescription": {
+    "message": "A new look for firefox homepage and the newtab page."
+  },
+  "add-shortcut": {
+    "message": "Add Shortcut"
+  },
+  "alert-not-empty-note": {
+    "message": "Note is not empty! Delete anyway?"
+  },
+  "aqua": {
+    "message": "Aqua"
+  },
+  "base-currency-label": {
+    "message": "Select base currency"
+  },
+  "bg-fallback-color-label": {
+    "message": "Background Color"
+  },
+  "bg-img-upload-info": {
+    "message": "You can upload an image file to change the background. \nNote: The larger the uploaded image, the slower it will load. So if the image loads too slowly, you can try compressing it."
+  },
+  "bg-settings": {
+    "message": "Background Settings"
+  },
+  "black": {
+    "message": "Black"
+  },
+  "blue": {
+    "message": "Blue"
+  },
+  "bottom": {
+    "message": "Bottom"
+  },
+  "center": {
+    "message": "Center"
+  },
+  "clock-boldness-label": {
+    "message": "Bold"
+  },
+  "clock-border-radius-label": {
+    "message": "Frame Radius"
+  },
+  "clock-border-width-label": {
+    "message": "Frame Thickness"
+  },
+  "clock-darkness-label": {
+    "message": "Darken"
+  },
+  "clock_style_hidden": {
+    "message": "Hidden"
+  },
+  "color-label": {
+    "message": "Color"
+  },
+  "crypto-currencies": {
+    "message": "Cryptocurrencies"
+  },
+  "currencies-label": {
+    "message": "Currencies"
+  },
+  "currency-api-refresh-warning": {
+    "message": "If the selected exchange rate does not update, try waiting a few seconds."
+  },
+  "dark": {
+    "message": "Dark"
+  },
+  "delete-option": {
+    "message": "Delete"
+  },
+  "enable-api-label": {
+    "message": "Show exchange rates"
+  },
+  "enable-clock-label": {
+    "message": "Enable clock"
+  },
+  "enable-firefox-label": {
+    "message": "Enable Firefox logo"
+  },
+  "enable-notes-label": {
+    "message": "Enable notes"
+  },
+  "fallback-default-icon-info": {
+    "message": "This sets a basic fallback icon as the shortcut icon. You can use this option if the icon API returns a pixelated icon."
+  },
+  "glow": {
+    "message": "Glow"
+  },
+  "gray": {
+    "message": "Gray"
+  },
+  "green": {
+    "message": "Green"
+  },
+  "hide-settings-button": {
+    "message": "Hide Settings Button"
+  },
+  "image-link": {
+    "message": "You can set the shortcut icon by uploading an image file."
+  },
+  "import-export-settings": {
+    "message": "Export / Import Settings"
+  },
+  "keep-currency-question": {
+    "message": "Keep current currencies?"
+  },
+  "keep-notes-question": {
+    "message": "Keep current notes?"
+  },
+  "keep-shortcuts-question": {
+    "message": "Keep current shortcuts?"
+  },
+  "label-autoshort": {
+    "message": "Auto. Shorten"
+  },
+  "language": {
+    "message": "English"
+  },
+  "last-deleted-ten-urls": {
+    "message": "Last 10 deleted links:"
+  },
+  "left": {
+    "message": "Left"
+  },
+  "lime": {
+    "message": "Lime Green"
+  },
+  "move_down": {
+    "message": "Move down"
+  },
+  "move_up": {
+    "message": "Move up"
+  },
+  "national-currencies": {
+    "message": "National Currencies"
+  },
+  "navyblue": {
+    "message": "Navy Blue"
+  },
+  "none": {
+    "message": "None"
+  },
+  "note-input": {
+    "message": "Enter a short note"
+  },
+  "opt-base-currency-label": {
+    "message": "Select base currency"
+  },
+  "opt-color-label": {
+    "message": "Color"
+  },
+  "opt-crypto-currencies": {
+    "message": "Cryptocurrencies"
+  },
+  "opt-national-currencies": {
+    "message": "National Currencies"
+  },
+  "opt-shortcut-h-align": {
+    "message": "Horizontal Alignment"
+  },
+  "opt-shortcut-min-width": {
+    "message": "Min. Width"
+  },
+  "opt-shortcut-shape": {
+    "message": "Shape"
+  },
+  "opt-shortcut-size": {
+    "message": "Size"
+  },
+  "opt-shortcut-transition": {
+    "message": "Transition Type"
+  },
+  "opt-shortcut-v-align": {
+    "message": "Vertical Alignment"
+  },
+  "opt-shortcut-width": {
+    "message": "Width"
+  },
+  "orange": {
+    "message": "Orange"
+  },
+  "rate-update-info": {
+    "message": "Exchange rates are updated daily."
+  },
+  "red": {
+    "message": "Red"
+  },
+  "remove-settings-button-info": {
+    "message": "This setting can be used for office or school computers. You can set some URLs or a background for work or school, and the user cannot change them. It also disables the toolbar action."
+  },
+  "remove-settings-button-label": {
+    "message": "Remove Settings Button from Homepage"
+  },
+  "reset-default-icon-info": {
+    "message": "This will delete the current shortcut icon and try to get an icon from the icon API when you open the homepage."
+  },
+  "right": {
+    "message": "Right"
+  },
+  "rotate": {
+    "message": "Rotate"
+  },
+  "save-info": {
+    "message": "Please wait..."
+  },
+  "scale_down": {
+    "message": "Scale down"
+  },
+  "scale_up": {
+    "message": "Scale up"
+  },
+  "scarletred": {
+    "message": "Scarlet Red"
+  },
+  "settings": {
+    "message": "Settings"
+  },
+  "shortcut": {
+    "message": "Save this page as a shortcut"
+  },
+  "shortcut-borderless": {
+    "message": "Borderless"
+  },
+  "shortcut-color-settings": {
+    "message": "Shortcut Column Colors"
+  },
+  "shortcut-container-settings": {
+    "message": "Shortcut Container Settings"
+  },
+  "shortcut-messageansition": {
+    "message": "Transition Type"
+  },
+  "shortcut-settings": {
+    "message": "Shortcut Settings"
+  },
+  "spin": {
+    "message": "Spin"
+  },
+  "top": {
+    "message": "Top"
+  },
+  "transparent": {
+    "message": "Transparent"
+  },
+  "violet": {
+    "message": "Violet"
+  },
+  "white": {
+    "message": "White"
+  },
+  "yellow": {
+    "message": "Yellow"
+  }
+}

@@ -1,0 +1,257 @@
+{
+  "extensionName": {
+    "message": "Nueva Pestaña"
+  },
+  "extensionDescription": {
+    "message": "Un nuevo aspecto para la página de inicio de Firefox y la página de nueva pestaña."
+  },
+  "add-shortcut": {
+    "message": "Agregar acceso directo"
+  },
+  "alert-not-empty-note": {
+    "message": "¡La nota no está vacía! ¿Eliminar de todos modos?"
+  },
+  "aqua": {
+    "message": "Aqua"
+  },
+  "base-currency-label": {
+    "message": "Seleccionar moneda base"
+  },
+  "bg-fallback-color-label": {
+    "message": "Color de fondo"
+  },
+  "bg-img-upload-info": {
+    "message": "Puedes subir un archivo de imagen para cambiar el fondo. \nNota: Cuanto más grande sea la imagen subida, más lento se cargará. Si la imagen se carga demasiado lento, puedes intentar comprimirla."
+  },
+  "bg-settings": {
+    "message": "Configuración de fondo"
+  },
+  "black": {
+    "message": "Negro"
+  },
+  "blue": {
+    "message": "Azul"
+  },
+  "bottom": {
+    "message": "Abajo"
+  },
+  "center": {
+    "message": "Centro"
+  },
+  "clock-boldness-label": {
+    "message": "Negrita"
+  },
+  "clock-border-radius-label": {
+    "message": "Radio del marco"
+  },
+  "clock-border-width-label": {
+    "message": "Grosor del marco"
+  },
+  "clock-darkness-label": {
+    "message": "Oscurecer"
+  },
+  "clock_style_hidden": {
+    "message": "Oculto"
+  },
+  "color-label": {
+    "message": "Color"
+  },
+  "crypto-currencies": {
+    "message": "Criptomonedas"
+  },
+  "currencies-label": {
+    "message": "Monedas"
+  },
+  "currency-api-refresh-warning": {
+    "message": "Si la tasa de cambio seleccionada no se actualiza, intenta esperar unos segundos."
+  },
+  "dark": {
+    "message": "Oscuro"
+  },
+  "delete-option": {
+    "message": "Eliminar"
+  },
+  "enable-api-label": {
+    "message": "Mostrar tasas de cambio"
+  },
+  "enable-clock-label": {
+    "message": "Activar reloj"
+  },
+  "enable-firefox-label": {
+    "message": "Activar logo de Firefox"
+  },
+  "enable-notes-label": {
+    "message": "Activar notas"
+  },
+  "fallback-default-icon-info": {
+    "message": "Esto establece un icono de respaldo básico como icono de acceso directo. Puedes usar esta opción si la API de iconos devuelve un icono pixelado."
+  },
+  "glow": {
+    "message": "Brillo"
+  },
+  "gray": {
+    "message": "Gris"
+  },
+  "green": {
+    "message": "Verde"
+  },
+  "hide-settings-button": {
+    "message": "Ocultar botón de configuración"
+  },
+  "image-link": {
+    "message": "Puedes establecer el icono de acceso directo subiendo un archivo de imagen."
+  },
+  "import-export-settings": {
+    "message": "Exportar / Importar configuraciones"
+  },
+  "keep-currency-question": {
+    "message": "¿Mantener las monedas actuales?"
+  },
+  "keep-notes-question": {
+    "message": "¿Mantener las notas actuales?"
+  },
+  "keep-shortcuts-question": {
+    "message": "¿Mantener los accesos directos actuales?"
+  },
+  "label-autoshort": {
+    "message": "Auto. Acortar"
+  },
+  "language": {
+    "message": "Español"
+  },
+  "last-deleted-ten-urls": {
+    "message": "Últimos 10 enlaces eliminados:"
+  },
+  "left": {
+    "message": "Izquierda"
+  },
+  "lime": {
+    "message": "Verde lima"
+  },
+  "move_down": {
+    "message": "Mover hacia abajo"
+  },
+  "move_up": {
+    "message": "Mover hacia arriba"
+  },
+  "national-currencies": {
+    "message": "Monedas nacionales"
+  },
+  "navyblue": {
+    "message": "Azul marino"
+  },
+  "none": {
+    "message": "Ninguno"
+  },
+  "note-input": {
+    "message": "Ingresa una nota breve"
+  },
+  "opt-base-currency-label": {
+    "message": "Seleccionar moneda base"
+  },
+  "opt-color-label": {
+    "message": "Color"
+  },
+  "opt-crypto-currencies": {
+    "message": "Criptomonedas"
+  },
+  "opt-national-currencies": {
+    "message": "Monedas nacionales"
+  },
+  "opt-shortcut-h-align": {
+    "message": "Alineación horizontal"
+  },
+  "opt-shortcut-min-width": {
+    "message": "Ancho mínimo"
+  },
+  "opt-shortcut-shape": {
+    "message": "Forma"
+  },
+  "opt-shortcut-size": {
+    "message": "Tamaño"
+  },
+  "opt-shortcut-transition": {
+    "message": "Tipo de transición"
+  },
+  "opt-shortcut-v-align": {
+    "message": "Alineación vertical"
+  },
+  "opt-shortcut-width": {
+    "message": "Ancho"
+  },
+  "orange": {
+    "message": "Naranja"
+  },
+  "rate-update-info": {
+    "message": "Las tasas de cambio se actualizan diariamente."
+  },
+  "red": {
+    "message": "Rojo"
+  },
+  "remove-settings-button-info": {
+    "message": "Esta configuración se puede usar para computadoras de oficina o escuela. Puedes establecer algunas URL o un fondo para el trabajo o la escuela, y el usuario no puede cambiarlos. También deshabilita la acción de la barra de herramientas."
+  },
+  "remove-settings-button-label": {
+    "message": "Eliminar botón de configuración de la página de inicio"
+  },
+  "reset-default-icon-info": {
+    "message": "Esto eliminará el icono de acceso directo actual e intentará obtener un icono de la API de iconos cuando abras la página de inicio."
+  },
+  "right": {
+    "message": "Derecha"
+  },
+  "rotate": {
+    "message": "Rotar"
+  },
+  "save-info": {
+    "message": "Por favor, espera..."
+  },
+  "scale_down": {
+    "message": "Reducir"
+  },
+  "scale_up": {
+    "message": "Ampliar"
+  },
+  "scarletred": {
+    "message": "Rojo escarlata"
+  },
+  "settings": {
+    "message": "Configuración"
+  },
+  "shortcut": {
+    "message": "Guardar esta página como acceso directo"
+  },
+  "shortcut-borderless": {
+    "message": "Sin borde"
+  },
+  "shortcut-color-settings": {
+    "message": "Colores de columna de acceso directo"
+  },
+  "shortcut-container-settings": {
+    "message": "Configuración de contenedor de acceso directo"
+  },
+  "shortcut-messageansition": {
+    "message": "Tipo de transición"
+  },
+  "shortcut-settings": {
+    "message": "Configuración de acceso directo"
+  },
+  "spin": {
+    "message": "Girar"
+  },
+  "top": {
+    "message": "Arriba"
+  },
+  "transparent": {
+    "message": "Transparente"
+  },
+  "violet": {
+    "message": "Violeta"
+  },
+  "white": {
+    "message": "Blanco"
+  },
+  "yellow": {
+    "message": "Amarillo"
+  }
+}

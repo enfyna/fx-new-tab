@@ -79,6 +79,7 @@ async function ready() {
     if (save.is_settings_disabled ?? false) {
         location.href = 'index.html';
     }
+    document.title = browser.i18n.getMessage("settings");
     translate();
     configure_shortcut_settings();
     configure_drag_and_drop();
@@ -387,11 +388,11 @@ function create_shortcut_setting(id: number, elm: HTMLDivElement): HTMLDivElemen
             case node.sh_remove:
                 for (let i = 0; i < save.shortcuts.length; i++) {
                     if (save.shortcuts[i] == shortcut) {
-                        if(shortcut.link.length > 0){
+                        if (shortcut.link.length > 0) {
                             if (!save.shortcut_recently_deleted)
                                 save.shortcut_recently_deleted = [];
                             save.shortcut_recently_deleted.push(shortcut.link);
-                            if (save.shortcut_recently_deleted.length > 10){
+                            if (save.shortcut_recently_deleted.length > 10) {
                                 save.shortcut_recently_deleted.shift();
                             }
                         }
@@ -445,18 +446,10 @@ async function find_user_sites() {
     return shortcuts;
 }
 
-function show_recently_deleted_shortcuts(){
-    const lang = ["en", "tr", "es", "de"].find(lang => navigator.language.startsWith(lang)) || "en";
-    const translations = [
-        {
-            "en": "10 recently deleted shortcut links:",
-            "tr": "Silinen son 10 link:",
-            "es": "10 enlaces eliminados recientemente:",
-            "de": "10 kürzlich gelöschte Verknüpfungen:"
-        },
-    ]
-    alert(translations[0][lang] + "\n\n" +
-        (save.shortcut_recently_deleted ?? []).toReversed().join("\n")
+function show_recently_deleted_shortcuts() {
+    const translation = browser.i18n.getMessage("last-deleted-ten-urls");
+    alert(translation + "\n\n"
+        + (save.shortcut_recently_deleted ?? []).toReversed().join("\n")
     );
 }
 
@@ -553,16 +546,11 @@ function configure_note_settings() {
     }
 
     function remove_note() {
+        const translation = browser.i18n.getMessage("alert-not-empty-note");
         if (notes.length == 0)
             return;
-        const lang = ["en", "tr", "es", "de"].find(lang => navigator.language.startsWith(lang)) || "en";
-        const translation = {
-            "tr": "Not boş değil! Yine de silinsin mi?",
-            "en": "Note is not empty! Remove anyway?",
-            "de": "Notiz ist nicht leer! Trotzdem entfernen?",
-            "es": "La nota no está vacía. ¿Eliminar de todos modos?"
-        };
-        if (notes[notes.length - 1].note.length > 0 && !confirm(translation[lang])) {
+        if (notes[notes.length - 1].note.length > 0
+            && !confirm(translation)) {
             return;
         }
         notes.pop();
@@ -730,8 +718,8 @@ function configure_clock_settings() {
 
 /// Currencies
 function configure_currency_settings() {
-    const national_node = document.getElementById("national-currencies") as HTMLOptGroupElement;
-    const crypto_node = document.getElementById("crypto-currencies") as HTMLOptGroupElement;
+    const national_node = document.getElementById("opt-national-currencies") as HTMLOptGroupElement;
+    const crypto_node = document.getElementById("opt-crypto-currencies") as HTMLOptGroupElement;
 
     const national = national_node.cloneNode(true) as HTMLOptGroupElement;
     const crypto = crypto_node.cloneNode(true) as HTMLOptGroupElement;
@@ -838,71 +826,11 @@ function configure_import_export() {
                 fileInput.type = "file";
                 fileInput.click();
                 fileInput.addEventListener('change', handleFileSelect);
-
-                function handleFileSelect(event:any) {
-                    const file = event.target.files[0];
-
-                    if (!file) {
-                        console.error('No file selected');
-                        return;
-                    }
-
-                    const reader = new FileReader();
-
-                    reader.onload = async (e) => {
-                        try {
-                            const jsonData = JSON.parse(e.target.result as string);
-
-                            const lang = ["en", "tr", "es", "de"].find(lang => navigator.language.startsWith(lang)) || "en";
-                            const translations = [
-                                {
-                                    "en": "Keep current shortcuts?",
-                                    "tr": "Mevcut kısayolları koru?",
-                                    "es": "¿Mantener los accesos directos actuales?",
-                                    "de": "Aktuelle Verknüpfungen beibehalten?"
-                                },
-                                {
-                                    "en": "Keep current notes?",
-                                    "tr": "Mevcut notları koru?",
-                                    "es": "¿Mantener las notas actuales?",
-                                    "de": "Aktuelle Notizen beibehalten?"
-                                },
-                                {
-                                    "en": "Keep current currencies?",
-                                    "tr": "Mevcut para birimlerini koru?",
-                                    "es": "¿Mantener las monedas actuales?",
-                                    "de": "Aktuelle Währungen beibehalten?"
-                                }
-                            ]
-                            let save_sh = confirm(translations[0][lang]);
-                            let save_nt = confirm(translations[1][lang]);
-                            let save_cr = confirm(translations[2][lang]);
-                            let sh = save.shortcuts;
-                            let nt = save.notes;
-                            let cr = save.currencies;
-
-                            await browser.storage.local.clear();
-                            localStorage.clear();
-                            save = jsonData;
-
-                            if (save_sh) save.shortcuts = sh;
-                            if (save_nt) save.notes = nt;
-                            if (save_cr) save.currencies = cr;
-
-                            await set_save();
-                            location.href = "index.html";
-                        }
-                        catch (error) {
-                            console.error('Error parsing JSON: ', error);
-                        }
-                        fileInput.remove();
-                    };
-                    reader.readAsText(file);
-                }
                 break;
             }
             case "export-settings": {
-                const data = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(save, null, 2));
+                const data = "data:text/json;charset=utf-8," 
+                    + encodeURIComponent(JSON.stringify(save, null, 2));
 
                 const a = document.createElement('a');
                 a.href = data;
@@ -915,6 +843,48 @@ function configure_import_export() {
             }
         }
     });
+}
+
+function handleFileSelect(event: any) {
+    const file = event.target.files[0];
+
+    if (!file) {
+        console.error('No file selected');
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = async (e) => {
+        let jsonData: any;
+
+        try {
+            jsonData = JSON.parse(e.target.result as string);
+        }
+        catch (error) {
+            console.error(error);
+            return;
+        }
+
+        let save_sh = confirm(browser.i18n.getMessage("keep-shortcuts-question"));
+        let save_nt = confirm(browser.i18n.getMessage("keep-notes-question"));
+        let save_cr = confirm(browser.i18n.getMessage("keep-currency-question"));
+        let sh = save.shortcuts;
+        let nt = save.notes;
+        let cr = save.currencies;
+
+        await browser.storage.local.clear();
+        localStorage.clear();
+        save = jsonData;
+
+        if (save_sh) save.shortcuts = sh;
+        if (save_nt) save.notes = nt;
+        if (save_cr) save.currencies = cr;
+
+        await set_save();
+        location.href = "index.html";
+    };
+    reader.readAsText(file);
 }
 
 /// Nav Button
@@ -930,499 +900,60 @@ function configure_home_button() {
         removeButton.innerText = countdown.toString();
     });
     document.getElementById('nav-button').addEventListener('click', () => {
-        if (!saving)
-            location.href = 'index.html';
+        if (!saving) location.href = 'index.html';
     });
 }
 
 /// Translations
 function translate(): void {
     const translations = [
-        {
-            "name": "settings",
-            "tr": "Ayarlar",
-            "en": "Settings",
-            "de": "Einstellungen",
-            "es": "Ajustes",
-        },
-        {
-            "name": "image-link",
-            "tr": "Kısayol ikonunu resim dosyası yükleyerek ayarlayabilirsin.",
-            "en": "Set a custom link icon by uploading an image file.",
-            "de": "Legen Sie ein benutzerdefiniertes Verknüpfungssymbol fest, indem Sie eine Bilddatei hochladen.",
-            "es": "Establece un ícono de enlace personalizado subiendo un archivo de imagen.",
-        },
-        {
-            "name": "shortcut-settings",
-            "tr": "Kısayol Ayarları",
-            "en": "Shortcut Settings",
-            "de": "Verknüpfungseinstellungen",
-            "es": "Configuración de Accesos Directos"
-        },
-        {
-            "name": "shortcut-size",
-            "tr": "Boyut",
-            "en": "Size",
-            "de": "Größe",
-            "es": "Tamaño"
-        },
-        {
-            "name": "shortcut-container-settings",
-            "tr": "Kısayol Konteyner Ayarları",
-            "en": "Shortcut Container Settings",
-            "de": "Verknüpfungscontainer-Einstellungen",
-            "es": "Configuración del contenedor de accesos directos"
-        },
-        {
-            "name": "shortcut-color-settings",
-            "tr": "Kısayol Sütun Renkleri",
-            "en": "Shortcut Column Colors",
-            "de": "Verknüpfungsspaltenfarben",
-            "es": "Colores de Columnas de Acceso Directo"
-        },
-        {
-            "name": "shortcut-v-align",
-            "tr": "Dikey Hizalanma",
-            "en": "Vertical Alignment",
-            "de": "Vertikale Ausrichtung",
-            "es": "Alineación vertical"
-        },
-        {
-            "name": "shortcut-h-align",
-            "tr": "Yatay Hizalanma",
-            "en": "Horizontal Alignment",
-            "de": "Horizontale Ausrichtung",
-            "es": "Alineación horizontal"
-        },
-        {
-            "name": "shortcut-width",
-            "tr": "Genişlik",
-            "en": "Width",
-            "de": "Breite",
-            "es": "Ancho"
-        },
-        {
-            "name": "shortcut-shape",
-            "tr": "Şekil",
-            "en": "Shape",
-            "de": "Form",
-            "es": "Forma"
-        },
-        {
-            "name": "blue",
-            "tr": "Mavi",
-            "en": "Blue",
-            "de": "Blau",
-            "es": "Azul"
-        },
-        {
-            "name": "red",
-            "tr": "Kırmızı",
-            "en": "Red",
-            "de": "Rot",
-            "es": "Rojo"
-        },
-        {
-            "name": "green",
-            "tr": "Yeşil",
-            "en": "Green",
-            "de": "Grün",
-            "es": "Verde"
-        },
-        {
-            "name": "yellow",
-            "tr": "Sarı",
-            "en": "Yellow",
-            "de": "Gelb",
-            "es": "Amarillo"
-        },
-        {
-            "name": "black",
-            "tr": "Siyah",
-            "en": "Black",
-            "de": "Schwarz",
-            "es": "Negro"
-        },
-        {
-            "name": "dark",
-            "tr": "Koyu",
-            "en": "Dark",
-            "de": "Dunkel",
-            "es": "Oscuro"
-        },
-        {
-            "name": "white",
-            "tr": "Beyaz",
-            "en": "White",
-            "de": "Weiß",
-            "es": "Blanco"
-        },
-        {
-            "name": "gray",
-            "tr": "Gri",
-            "en": "Gray",
-            "de": "Grau",
-            "es": "Gris"
-        },
-        {
-            "name": "lime",
-            "tr": "Limon Yeşili",
-            "en": "Lime",
-            "de": "Limettengrün",
-            "es": "Verde Lima"
-        },
-        {
-            "name": "orange",
-            "tr": "Turuncu",
-            "en": "Orange",
-            "de": "Orange",
-            "es": "Naranja"
-        },
-        {
-            "name": "violet",
-            "tr": "Menekşe",
-            "en": "Violet",
-            "de": "Violett",
-            "es": "Violeta"
-        },
-        {
-            "name": "scarletred",
-            "tr": "Alaca Kırmızı",
-            "en": "Scarlet Red",
-            "de": "Scharlachrot",
-            "es": "Rojo Escarlata"
-        },
-        {
-            "name": "aqua",
-            "tr": "Aqua",
-            "en": "Aqua",
-            "de": "Aqua",
-            "es": "Aqua"
-        },
-        {
-            "name": "navyblue",
-            "tr": "Lacivert",
-            "en": "Navy Blue",
-            "de": "Marineblau",
-            "es": "Azul Marino"
-        },
-        {
-            "name": "transparent",
-            "tr": "Saydam",
-            "en": "Transparent",
-            "de": "Durchsichtig",
-            "es": "Transparente"
-        },
-        {
-            "name": "center",
-            "tr": "Orta",
-            "en": "Center",
-            "de": "Mitte",
-            "es": "Centro"
-        },
-        {
-            "name": "top",
-            "tr": "Üst",
-            "en": "Top",
-            "de": "Oben",
-            "es": "Arriba"
-        },
-        {
-            "name": "bottom",
-            "tr": "Alt",
-            "en": "Bottom",
-            "de": "Unten",
-            "es": "Abajo"
-        },
-        {
-            "name": "left",
-            "tr": "Sol",
-            "en": "Left",
-            "de": "Links",
-            "es": "Izquierda"
-        },
-        {
-            "name": "right",
-            "tr": "Sağ",
-            "en": "Right",
-            "de": "Rechts",
-            "es": "Derecha"
-        },
-        {
-            "name": "shortcut-transition",
-            "tr": "Geçiş Türü",
-            "en": "Transition Type",
-            "de": "Übergangstyp",
-            "es": "Tipo de Transición"
-        },
-        {
-            "name": "none",
-            "tr": "Hiçbiri",
-            "en": "None",
-            "de": "Keiner",
-            "es": "Ninguno"
-        },
-        {
-            "name": "move_down",
-            "tr": "Aşağı hareket et",
-            "en": "Move down",
-            "de": "Nach unten bewegen",
-            "es": "Mover hacia abajo"
-        },
-        {
-            "name": "move_up",
-            "tr": "Yukarı hareket et",
-            "en": "Move up",
-            "de": "Nach oben bewegen",
-            "es": "Mover hacia arriba"
-        },
-        {
-            "name": "scale_down",
-            "tr": "Küçült",
-            "en": "Scale down",
-            "de": "Verkleinern",
-            "es": "Reducir tamaño"
-        },
-        {
-            "name": "scale_up",
-            "tr": "Büyüt",
-            "en": "Scale up",
-            "de": "Vergrößern",
-            "es": "Aumentar tamaño"
-        },
-        {
-            "name": "spin",
-            "tr": "Döndür",
-            "en": "Spin",
-            "de": "Drehen",
-            "es": "Girar"
-        },
-        {
-            "name": "rotate",
-            "tr": "Çevir",
-            "en": "Rotate",
-            "de": "Rotieren",
-            "es": "Rotar"
-        },
-        {
-            "name": "glow",
-            "tr": "Parla",
-            "en": "Glow",
-            "de": "Leuchten",
-            "es": "Resplandor"
-        },
-        {
-            "name": "fallback-default-icon-info",
-            "tr": "Bu işlem, temel bir yedek simgeyi kısayol simgesi olarak ayarlar. Bu seçeneği, simge API pikselli bir simge döndürürse kullanabilirsiniz.",
-            "en": "This will set a basic fallback icon as the shortcut icon. You can use this if the icon API returns a pixelated icon.",
-            "de": "Hiermit wird ein einfaches Ersatzsymbol als Verknüpfungssymbol festgelegt. Sie können dies verwenden, wenn das Symbol-API ein pixeliges Symbol zurückgibt.",
-            "es": "Esto establecerá un icono básico de respaldo como el icono de acceso directo. Puede utilizar esto si la API de iconos devuelve un icono pixelado.",
-        },
-        {
-            "name": "reset-default-icon-info",
-            "tr": "Bu işlem mevcut kısayol simgesini silecek ve ana sayfayı açtığınızda simge API'sından bir simge almaya çalışacak.",
-            "en": "This will delete the current shortcut icon and when you open the main page will try to fetch a icon from the icon API.",
-            "de": "Dies löscht das aktuelle Verknüpfungssymbol, und wenn Sie die Hauptseite öffnen, wird versucht, ein Symbol vom Symbol-API abzurufen.",
-            "es": "Esto eliminará el icono de acceso directo actual y, al abrir la página principal, intentará obtener un icono de la API de iconos.",
-        },
-        {
-            "name": "rate-update-info",
-            "tr": "Döviz değerleri günlük yenilenir.",
-            "en": "Currency rates update daily.",
-            "de": "Währungskurse werden täglich aktualisiert.",
-            "es": "Los tipos de cambio de divisas se actualizan diariamente.",
-        },
-        {
-            "name": "enable-api-label",
-            "tr": "Kur bilgilerini göster",
-            "en": "Enable currency rates",
-            "de": "Währungskurse aktivieren",
-            "es": "Habilitar tasas de cambio de divisas",
-        },
-        {
-            "name": "enable-clock-label",
-            "tr": "Saati etkinleştir",
-            "en": "Enable clock",
-            "de": "Uhr aktivieren",
-            "es": "Habilitar reloj",
-        },
-        {
-            "name": "enable-firefox-label",
-            "tr": "Firefox logosunu etkinleştir",
-            "en": "Enable firefox icon",
-            "de": "Firefox logo aktivieren",
-            "es": "Habilitar icono de Firefox",
-        },
-        {
-            "name": "color-label",
-            "tr": "Renk",
-            "en": "Color",
-            "de": "Farbe",
-            "es": "Color",
-        },
-        {
-            "name": "enable-notes-label",
-            "tr": "Notları etkinleştir",
-            "en": "Enable notes",
-            "de": "Notizen aktivieren",
-            "es": "Habilitar notas",
-        },
-        {
-            "name": "bg-settings",
-            "tr": "Arkaplan Ayarları",
-            "en": "Background Settings",
-            "de": "Hintergrund Einstellungen",
-            "es": "Configuración de fondo",
-        },
-        {
-            "name": "bg-fallback-color-label",
-            "tr": "Arkaplan Rengi",
-            "en": "Background Color",
-            "de": "Hintergrund Farbe",
-            "es": "Color de fondo",
-        },
-        {
-            "name": "bg-img-upload-info",
-            "tr": "Arka planı değiştirmek için bir resim dosyası yükleyebilirsiniz. \nNot: Yüklenen resim ne kadar büyükse o kadar yavaş açılır. Bu yüzden eğer resim çok yavaş yüklenirse, resmi sıkıştırmayı deneyebilirsiniz.",
-            "en": "You can upload a image file to change the background.\nNote : The larger the uploaded image, the slower it loads. Therefore, if the image loads very slowly, you can try compressing the image.",
-            "de": "Sie können eine Bilddatei hochladen, um den Hintergrund zu ändern. \nHinweis: Je größer das hochgeladene Bild ist, desto langsamer lädt es. Daher können Sie, wenn das Bild sehr langsam lädt, versuchen, das Bild zu komprimieren.",
-            "es": "Puedes subir un archivo de imagen para cambiar el fondo. \nNota: Cuanto más grande sea la imagen cargada, más lento se carga. Por lo tanto, si la imagen se carga muy lentamente, puedes intentar comprimir la imagen.",
-        },
-        {
-            "name": "currency-api-refresh-warning",
-            "tr": "Eğer seçtiğiniz kur güncellenmezse bir kaç saniye beklemeyi deneyin.",
-            "en": "If currency types do not update, try waiting a few seconds.",
-            "de": "Wenn sich die Währungskurse nicht aktualisieren, versuchen Sie es nach einigen Sekunden erneut.",
-            "es": "Si las tasas de cambio de divisas no se actualizan, intente esperar unos segundos.",
-        },
-        {
-            "name": "base-currency-label",
-            "tr": "Ana para birimini seç",
-            "en": "Select base currency",
-            "de": "Wählen Sie die Basiswährung",
-            "es": "Selecciona la moneda base",
-        },
-        {
-            "name": "currencies-label",
-            "tr": "Para birimleri",
-            "en": "Currencies",
-            "de": "Währungen",
-            "es": "Monedas"
-        },
-        {
-            "name": "national-currencies",
-            "tr": "Ulusal para birimleri",
-            "en": "National currencies",
-            "de": "Nationale Währungen",
-            "es": "Monedas nacionales",
-        },
-        {
-            "name": "crypto-currencies",
-            "tr": "Kripto para birimleri",
-            "en": "Cryptocurrencies",
-            "de": "Kryptowährungen",
-            "es": "Criptomonedas",
-        },
-        {
-            "name": "hide-settings-button",
-            "tr": "Ayarlar Butonunu Gizle",
-            "en": "Hide Settings Button",
-            "de": "Einstellungsbutton verbergen",
-            "es": "Ocultar botón de configuración"
-        },
-        {
-            "name": "remove-settings-button-info",
-            "tr": "Bu ayar ofis veya okul bilgisayarları için kullanılabilir. Çalışma veya okula ait bazı URL'leri veya bir arkaplanı ayarlayabilir ve kullanıcı bunları değiştiremez. Ayrıca araç çubuğu eylemini devre dışı bırakır.",
-            "en": "This setting could be used for office or school computers. You can set up some work or school related URLs or a background, and the user will not be able to change it. This will also disable the toolbar action.",
-            "de": "Diese Einstellung kann für Büro- oder Schulcomputer verwendet werden. Sie können einige Arbeits- oder schulbezogene URLs oder einen Hintergrund einrichten, den der Benutzer nicht ändern kann. Dadurch wird auch die Symbolleistenaktion deaktiviert.",
-            "es": "Esta configuración se puede utilizar para computadoras de oficina o escuela. Puede establecer algunas URL o un fondo relacionados con el trabajo o la escuela, y el usuario no podrá cambiarlo. Esto también desactivará la acción de la barra de herramientas."
-        },
-        {
-            "name": "remove-settings-button-label",
-            "tr": "Ana Sayfadaki Ayarlar Butonunu Kaldır",
-            "en": "Remove Settings Button From Main Page",
-            "de": "Einstellungsbutton von der Hauptseite entfernen",
-            "es": "Eliminar botón de configuración de la página principal"
-        },
-        {
-            "name": "import-export-settings",
-            "tr": "Ayarları Dışa Aktar / İçe Aktar",
-            "en": "Export / Import Settings",
-            "de": "Einstellungen exportieren / importieren",
-            "es": "Exportar / Importar Configuraciones"
-        },
-        {
-            "name": "save-info",
-            "tr": "Lütfen bekleyiniz...",
-            "en": "Please Wait...",
-            "de": "Bitte Warten...",
-            "es": "Por favor, espere...",
-        },
-        {
-            "name": "clock-boldness-label",
-            "tr": "Kalın",
-            "en": "Bold",
-            "de": "Fett",
-            "es": "Negrita"
-        },
-        {
-            "name": "clock-border-width-label",
-            "tr": "Çerçeve Kalınlığı",
-            "en": "Border Width",
-            "de": "Rahmenbreite",
-            "es": "Ancho del Borde"
-        },
-        {
-            "name": "clock-border-radius-label",
-            "tr": "Çerçeve Yarıçapı",
-            "en": "Border Radius",
-            "de": "Rahmenradius",
-            "es": "Radio del Borde"
-        },
-        {
-            "name": 'clock-darkness-label',
-            "tr": "Karart",
-            "en": "Darken",
-            "de": "Verdunkeln",
-            "es": "Oscurecer"
-        },
-        {
-            "name": "clock_style_hidden",
-            "tr": "Gizli",
-            "en": "Hidden",
-            "de": "Versteckt",
-            "es": "Oculto"
-        },
-        {
-            "name": "shortcut-min-width",
-            "tr": "Min. Genişlik",
-            "en": "Min. Width",
-            "de": "Min. Breite",
-            "es": "Ancho mín."
-        },
+        "settings",                     "glow",
+        "image-link",                   "fallback-default-icon-info",
+        "shortcut-settings",            "reset-default-icon-info",
+        "shortcut-container-settings",  "rate-update-info",
+        "shortcut-color-settings",      "enable-api-label",
+        "blue",                         "enable-clock-label",
+        "red",                          "enable-firefox-label",
+        "green",                        "enable-notes-label",
+        "yellow",                       "bg-settings",
+        "black",                        "bg-fallback-color-label",
+        "dark",                         "bg-img-upload-info",
+        "white",                        "currency-api-refresh-warning",
+        "gray",                         "currencies-label",
+        "lime",                         "hide-settings-button",
+        "orange",                       "remove-settings-button-info",
+        "violet",                       "remove-settings-button-label",
+        "scarletred",                   "import-export-settings",
+        "aqua",                         "save-info",
+        "navyblue",                     "clock-boldness-label",
+        "transparent",                  "clock-border-width-label",
+        "center",                       "clock-border-radius-label",
+        "top",                          "clock-darkness-label",
+        "bottom",                       "label-autoshort",
+        "left",                         "shortcut-borderless",
+        "right",                        "clock_style_hidden",
+        "spin",                         "none",
+        "rotate",                       "move_down",
+        "scale_down",                   "move_up",
+        "scale_up",
+
+        "opt-shortcut-v-align",         "opt-shortcut-shape",
+        "opt-shortcut-h-align",         "opt-base-currency-label",
+        "opt-color-label",              "opt-national-currencies",
+        "opt-shortcut-width",           "opt-crypto-currencies",
+        "opt-shortcut-transition",      "opt-shortcut-min-width",
+        "opt-shortcut-size",
     ];
 
-    const lang = ["en", "tr", "es", "de"].find(lang => navigator.language.startsWith(lang)) || "en";
-    for (const dict of translations) {
-        const name = dict.name;
-        const translation = dict[lang];
-        if (name == "note-input") {
-            for (const element of document.getElementsByName(name)) {
-                (element as HTMLInputElement).placeholder = translation;
-            }
-        }
-        else if (["shortcut-min-width", "base-currency-label", "crypto-currencies", "national-currencies", "shortcut-shape", "shortcut-size", "shortcut-transition", "shortcut-width", "shortcut-v-align", "shortcut-h-align", "color-label"].includes(name)) {
-            for (const element of document.getElementsByName(name)) {
+    for (const message of translations) {
+        const translation = browser.i18n.getMessage(message);
+        if (message.startsWith("opt-")) {
+            for (const element of document.getElementsByName(message)) {
                 (element as HTMLOptGroupElement).label = translation;
             }
         }
-        else if (["delete-bg-button", "set-default-button"].includes(name)) {
-            for (const element of document.getElementsByName(name)) {
-                (element as HTMLInputElement).value = translation;
-            }
-        }
         else {
-            for (const element of document.getElementsByName(name)) {
+            for (const element of document.getElementsByName(message)) {
                 element.innerText = translation;
             }
         }

@@ -2,25 +2,6 @@ export = {};
 
 let is_tab_saved: boolean = false;
 
-async function translate() {
-    const translations = {
-        "tr": "Bu sayfayı kısayol olarak kaydet",
-        "de": "Diese Seite als Verknüpfung speichern",
-        "en": "Save this page as a shortcut",
-        "es": "Guardar esta página como acceso directo"
-    };
-
-    const lang = ["en", "tr", "es", "de"].find(
-        lang => navigator.language.startsWith(lang)
-    ) || "en";
-
-    await browser.browserAction.setTitle({
-        title: translations[lang]
-    });
-}
-
-translate();
-
 async function setActiveTabAsShortcut() {
     const currentTab: browser.tabs.Tab = (await browser.tabs.query({
         active: true,

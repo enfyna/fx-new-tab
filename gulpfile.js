@@ -43,6 +43,7 @@ function minifyCSS(css) {
 }
 
 function minifyBootstrapCSS() {
+    console.log('bootstrap/bootstrap.css')
     return gulp.src('bootstrap/bootstrap.css')
         .pipe(purify(['src/html/settings.html', 'src/html/index.html'], {
             whitelist: [
@@ -80,34 +81,43 @@ function minifyJSON(json) {
         .pipe(gulp.dest('./build'));
 }
 
-const minifyHTML_Task = gulp.series(
-    () => minifyHTML('src/html/index.html'),
-    () => minifyHTML('src/html/settings.html'),
+function minifyLang(json) {
+    console.log(json)
+    return gulp.src(json)
+        .pipe(jsonMin())
+        .pipe(gulp.dest('./build/_locales'));
+}
+
+const task_html = gulp.series(
+    () => minifyHTML('src/html/*'),
 );
 
-const minifyCSS_Task = gulp.series(
-    minifyBootstrapCSS,
+const task_js = gulp.series(
+    () => minifyJS('build/js/*'),
+);
+
+const task_css = gulp.series(
+    () => minifyBootstrapCSS(),
     () => minifyCSS('src/css/index.css'),
     () => minifyCSS('src/css/colors.css'),
 );
-const minifyJS_Task = gulp.series(
-    () => minifyJS('build/js/index.js'),
-    () => minifyJS('build/js/settings.js'),
-    () => minifyJS('build/js/background.js'),
-);
-const minifyMisc_Task = gulp.series(
+
+const task_misc = gulp.series(
     () => minifyJSON('./manifest.json'),
+    () => minifyLang('./src/_locales/*/*'),
     () => minifySVGIcons('./src/assets/icons/*'),
 );
-const minifyFull_Task = gulp.series(
-    minifyHTML_Task,
-    minifyCSS_Task,
-    minifyJS_Task,
-    minifyMisc_Task,
+
+const task_full = gulp.series(
+    task_html,
+    task_css,
+    task_js,
+    task_misc,
 );
 
-exports.minifyHTML = minifyHTML_Task;
-exports.minifyCSS = minifyCSS_Task;
-exports.minifyJS = minifyJS_Task;
-exports.minifyMisc = minifyMisc_Task;
-exports.minifyFull = minifyFull_Task;
+exports.js = task_js;
+exports.css = task_css;
+exports.html = task_html;
+exports.misc = task_misc;
+exports.full = task_full;
+exports.default = exports.full;

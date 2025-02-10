@@ -1,0 +1,257 @@
+{
+  "extensionName": {
+    "message": "Neuer Tab"
+  },
+  "extensionDescription": {
+    "message": "Ein neues Design für die Firefox-Startseite und die Neuer-Tab-Seite."
+  },
+  "add-shortcut": {
+    "message": "Verknüpfung hinzufügen"
+  },
+  "alert-not-empty-note": {
+    "message": "Notiz ist nicht leer! Trotzdem löschen?"
+  },
+  "aqua": {
+    "message": "Aqua"
+  },
+  "base-currency-label": {
+    "message": "Basiswährung auswählen"
+  },
+  "bg-fallback-color-label": {
+    "message": "Hintergrundfarbe"
+  },
+  "bg-img-upload-info": {
+    "message": "Sie können eine Bilddatei hochladen, um den Hintergrund zu ändern. \nHinweis: Je größer das hochgeladene Bild, desto langsamer wird es geladen. Wenn das Bild zu langsam geladen wird, können Sie versuchen, es zu komprimieren."
+  },
+  "bg-settings": {
+    "message": "Hintergrundeinstellungen"
+  },
+  "black": {
+    "message": "Schwarz"
+  },
+  "blue": {
+    "message": "Blau"
+  },
+  "bottom": {
+    "message": "Unten"
+  },
+  "center": {
+    "message": "Mitte"
+  },
+  "clock-boldness-label": {
+    "message": "Fett"
+  },
+  "clock-border-radius-label": {
+    "message": "Rahmenradius"
+  },
+  "clock-border-width-label": {
+    "message": "Rahmendicke"
+  },
+  "clock-darkness-label": {
+    "message": "Abdunkeln"
+  },
+  "clock_style_hidden": {
+    "message": "Versteckt"
+  },
+  "color-label": {
+    "message": "Farbe"
+  },
+  "crypto-currencies": {
+    "message": "Kryptowährungen"
+  },
+  "currencies-label": {
+    "message": "Währungen"
+  },
+  "currency-api-refresh-warning": {
+    "message": "Wenn sich der ausgewählte Wechselkurs nicht aktualisiert, warten Sie einige Sekunden."
+  },
+  "dark": {
+    "message": "Dunkel"
+  },
+  "delete-option": {
+    "message": "Löschen"
+  },
+  "enable-api-label": {
+    "message": "Wechselkurse anzeigen"
+  },
+  "enable-clock-label": {
+    "message": "Uhr aktivieren"
+  },
+  "enable-firefox-label": {
+    "message": "Firefox-Logo aktivieren"
+  },
+  "enable-notes-label": {
+    "message": "Notizen aktivieren"
+  },
+  "fallback-default-icon-info": {
+    "message": "Dies setzt ein einfaches Fallback-Symbol als Verknüpfungssymbol. Sie können diese Option verwenden, wenn die Symbol-API ein pixeliges Symbol zurückgibt."
+  },
+  "glow": {
+    "message": "Leuchten"
+  },
+  "gray": {
+    "message": "Grau"
+  },
+  "green": {
+    "message": "Grün"
+  },
+  "hide-settings-button": {
+    "message": "Einstellungsbutton ausblenden"
+  },
+  "image-link": {
+    "message": "Sie können das Verknüpfungssymbol durch Hochladen einer Bilddatei festlegen."
+  },
+  "import-export-settings": {
+    "message": "Einstellungen exportieren / importieren"
+  },
+  "keep-currency-question": {
+    "message": "Aktuelle Währungen behalten?"
+  },
+  "keep-notes-question": {
+    "message": "Aktuelle Notizen behalten?"
+  },
+  "keep-shortcuts-question": {
+    "message": "Aktuelle Verknüpfungen behalten?"
+  },
+  "label-autoshort": {
+    "message": "Auto. Kürzen"
+  },
+  "language": {
+    "message": "Deutsch"
+  },
+  "last-deleted-ten-urls": {
+    "message": "Letzte 10 gelöschte Links:"
+  },
+  "left": {
+    "message": "Links"
+  },
+  "lime": {
+    "message": "Limettengrün"
+  },
+  "move_down": {
+    "message": "Nach unten bewegen"
+  },
+  "move_up": {
+    "message": "Nach oben bewegen"
+  },
+  "national-currencies": {
+    "message": "Nationale Währungen"
+  },
+  "navyblue": {
+    "message": "Marineblau"
+  },
+  "none": {
+    "message": "Keine"
+  },
+  "note-input": {
+    "message": "Geben Sie eine kurze Notiz ein"
+  },
+  "opt-base-currency-label": {
+    "message": "Basiswährung auswählen"
+  },
+  "opt-color-label": {
+    "message": "Farbe"
+  },
+  "opt-crypto-currencies": {
+    "message": "Kryptowährungen"
+  },
+  "opt-national-currencies": {
+    "message": "Nationale Währungen"
+  },
+  "opt-shortcut-h-align": {
+    "message": "Horizontale Ausrichtung"
+  },
+  "opt-shortcut-min-width": {
+    "message": "Min. Breite"
+  },
+  "opt-shortcut-shape": {
+    "message": "Form"
+  },
+  "opt-shortcut-size": {
+    "message": "Größe"
+  },
+  "opt-shortcut-transition": {
+    "message": "Übergangstyp"
+  },
+  "opt-shortcut-v-align": {
+    "message": "Vertikale Ausrichtung"
+  },
+  "opt-shortcut-width": {
+    "message": "Breite"
+  },
+  "orange": {
+    "message": "Orange"
+  },
+  "rate-update-info": {
+    "message": "Wechselkurse werden täglich aktualisiert."
+  },
+  "red": {
+    "message": "Rot"
+  },
+  "remove-settings-button-info": {
+    "message": "Diese Einstellung kann für Büro- oder Schulcomputer verwendet werden. Sie können einige URLs oder einen Hintergrund für die Arbeit oder Schule festlegen, und der Benutzer kann sie nicht ändern. Es deaktiviert auch die Symbolleistenaktion."
+  },
+  "remove-settings-button-label": {
+    "message": "Einstellungsbutton von der Startseite entfernen"
+  },
+  "reset-default-icon-info": {
+    "message": "Dadurch wird das aktuelle Verknüpfungssymbol gelöscht und versucht, ein Symbol von der Symbol-API zu erhalten, wenn Sie die Startseite öffnen."
+  },
+  "right": {
+    "message": "Rechts"
+  },
+  "rotate": {
+    "message": "Drehen"
+  },
+  "save-info": {
+    "message": "Bitte warten..."
+  },
+  "scale_down": {
+    "message": "Verkleinern"
+  },
+  "scale_up": {
+    "message": "Vergrößern"
+  },
+  "scarletred": {
+    "message": "Scharlachrot"
+  },
+  "settings": {
+    "message": "Einstellungen"
+  },
+  "shortcut": {
+    "message": "Diese Seite als Verknüpfung speichern"
+  },
+  "shortcut-borderless": {
+    "message": "Rahmenlos"
+  },
+  "shortcut-color-settings": {
+    "message": "Verknüpfungsspaltenfarben"
+  },
+  "shortcut-container-settings": {
+    "message": "Verknüpfungscontainereinstellungen"
+  },
+  "shortcut-messageansition": {
+    "message": "Übergangstyp"
+  },
+  "shortcut-settings": {
+    "message": "Verknüpfungseinstellungen"
+  },
+  "spin": {
+    "message": "Drehen"
+  },
+  "top": {
+    "message": "Oben"
+  },
+  "transparent": {
+    "message": "Transparent"
+  },
+  "violet": {
+    "message": "Violett"
+  },
+  "white": {
+    "message": "Weiß"
+  },
+  "yellow": {
+    "message": "Gelb"
+  }
+}

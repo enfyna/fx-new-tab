@@ -5,7 +5,7 @@
   "author": "enfyna",
   "license": "BSD-2-Clause",
   "scripts": {
-    "build": "tsc -p src/ts/tsconfig.json && npx gulp minifyFull"
+    "build": "tsc -p src/ts/tsconfig.json && npx gulp"
   },
   "devDependencies": {
     "@types/firefox-webext-browser": "^111.0.1",

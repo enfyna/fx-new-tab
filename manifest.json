@@ -1,8 +1,9 @@
 {
   "manifest_version": 2,
   "version": "1.13.3",
-  "name": "New Tab",
-  "description":"A new look for firefox homepage and the newtab page.",
+  "name": "__MSG_extensionName__",
+  "description":"__MSG_extensionDescription__",
+  "default_locale": "en",
   "icons": {
     "48": "assets/icons/icon.svg",
     "96": "assets/icons/icon.svg",
@@ -21,7 +22,7 @@
   },
   "browser_action": {
     "default_icon": "assets/icons/icon.svg",
-    "default_title": "Add shortcut"
+    "default_title": "__MSG_shortcut__"
   },
   "background": {
     "scripts": ["js/background.js"]

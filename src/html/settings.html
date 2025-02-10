@@ -71,7 +71,7 @@
     </symbol>
 </svg>
 
-<optgroup hidden id="national-currencies" name="national-currencies" hidden>
+<optgroup hidden id="opt-national-currencies" name="opt-national-currencies" hidden>
     <option value="USD">USD</option>
     <option value="EUR">EUR</option>
     <option value="TRY">TRY</option>
@@ -104,7 +104,7 @@
     <option value="ZAR">ZAR</option>
 </optgroup>
 
-<optgroup hidden id="crypto-currencies" name="crypto-currencies" hidden>
+<optgroup hidden id="opt-crypto-currencies" name="opt-crypto-currencies" hidden>
     <option value="BTC">BTC</option>
     <option value="USDT">USDT</option>
     <option value="ETH">ETH</option>
@@ -115,7 +115,7 @@
     <option value="LTC">LTC</option>
 </optgroup>
 
-<optgroup hidden id="colors" name="color-label" hidden>
+<optgroup hidden id="colors" name="opt-color-label" hidden>
     <option name="blue" value="primary"></option>
     <option name="navyblue" value="navyblue"></option>
     <option name="aqua" value="aqua"></option>
@@ -133,7 +133,7 @@
     <option name="transparent" value="transparent"></option>
 </optgroup>
 
-<optgroup hidden id="shortcut-width-opt" name="shortcut-width">
+<optgroup hidden id="shortcut-width-opt" name="opt-shortcut-width">
     <option value="twenty_w">5%</option>
     <option value="fifteen_w">6.6%</option>
     <option value="col-1">8.3%</option>
@@ -187,7 +187,7 @@
             </div>
             <div class="col-md-6 col-lg-2 my-1">
                 <select class="form-select" id="shortcut_container_h_align">
-                    <optgroup name="shortcut-h-align">
+                    <optgroup name="opt-shortcut-h-align">
                         <option value="justify-content-start" name="left"></option>
                         <option value="justify-content-center" name="center"></option>
                         <option value="justify-content-end" name="right"></option>
@@ -196,7 +196,7 @@
             </div>
             <div class="col-md-6 col-lg-2 my-1">
                 <select class="form-select" id="shortcut_v_align">
-                    <optgroup name="shortcut-v-align">
+                    <optgroup name="opt-shortcut-v-align">
                         <option value="align-items-start" name="top"></option>
                         <option value="align-items-center" name="center"></option>
                         <option value="align-items-end" name="bottom"></option>
@@ -206,8 +206,7 @@
             <div class="col-lg-2 my-1">
                 <div class="form-check form-switch my-1">
                     <input class="form-check-input" type="checkbox" id="autoshort">
-                    <label class="form-check-label fw-bold text-white" for="autoshort" name="autoshort">Enable
-                        Autoshort</label>
+                    <label class="form-check-label fw-bold text-black" for="autoshort" name="label-autoshort"></label>
                 </div>
             </div>
         </div>
@@ -218,12 +217,12 @@
                 <div class="form-check form-switch my-1">
                     <input class="form-check-input" type="checkbox" id="shortcut_borderless">
                     <label class="form-check-label fw-bold text-black" for="shortcut_borderless"
-                        name="shortcut-borderless">Borderless</label>
+                        name="shortcut-borderless"></label>
                 </div>
             </div>
             <div class="col-md-6 col-lg-1 my-1">
                 <select class="form-select" id="shortcut_shape">
-                    <optgroup name="shortcut-shape">
+                    <optgroup name="opt-shortcut-shape">
                         <option value="rounded-0">◻</option>
                         <option value="rounded-1">1</option>
                         <option value="rounded-2">2</option>
@@ -235,7 +234,7 @@
             </div>
             <div class="col-md-6 col-lg-2 my-1">
                 <select class="form-select" id="shortcut_transition">
-                    <optgroup name="shortcut-transition">
+                    <optgroup name="opt-shortcut-transition">
                         <option value="glow" name="glow"></option>
                         <option value="spin" name="spin"></option>
                         <option value="rotate" name="rotate"></option>
@@ -249,7 +248,7 @@
             </div>
             <div class="col-md-6 col-lg-2 my-1">
                 <select class="form-select" id="shortcut_size">
-                    <optgroup name="shortcut-size">
+                    <optgroup name="opt-shortcut-size">
                         <option value="p-0">5</option>
                         <option value="p-1">4</option>
                         <option value="p-2">3</option>
@@ -264,7 +263,7 @@
             </div>
             <div class="col-lg-1 my-1">
                 <select class="form-select" id="shortcut_min_width">
-                    <optgroup name="shortcut-min-width">
+                    <optgroup name="opt-shortcut-min-width">
                         <option value="mw-0">0</option>
                         <option value="mw-1">32px</option>
                         <option value="mw-2">48px</option>
@@ -581,7 +580,7 @@
         </div>
         <div class="col-lg-1 my-1">
             <select class="form-select" id="base_currency">
-                <optgroup name="base-currency-label"></optgroup>
+                <optgroup name="opt-base-currency-label"></optgroup>
             </select>
         </div>
         <div class="col-lg-1 fw-bold text-center text-white my-1" name="currencies-label">

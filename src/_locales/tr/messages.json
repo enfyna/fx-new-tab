@@ -1,0 +1,257 @@
+{
+  "extensionName": {
+    "message": "Yeni Sekme"
+  },
+  "extensionDescription": {
+    "message": "Firefox ana sayfası ve yeni sekme sayfası için yeni bir görünüm."
+  },
+  "add-shortcut": {
+    "message": "Kısayol Ekle"
+  },
+  "alert-not-empty-note": {
+    "message": "Not boş değil! Yine de silinsin mi?"
+  },
+  "aqua": {
+    "message": "Aqua"
+  },
+  "base-currency-label": {
+    "message": "Temel para birimini sec"
+  },
+  "bg-fallback-color-label": {
+    "message": "Arkaplan Rengi"
+  },
+  "bg-img-upload-info": {
+    "message": "Arka planı değiştirmek için bir resim dosyası yükleyebilirsiniz. \nNot: Yüklenen resim ne kadar büyükse o kadar yavaş açılır. Bu yüzden eğer resim çok yavaş yüklenirse, resmi sıkıştırmayı deneyebilirsiniz."
+  },
+  "bg-settings": {
+    "message": "Arkaplan Ayarları"
+  },
+  "black": {
+    "message": "Siyah"
+  },
+  "blue": {
+    "message": "Mavi"
+  },
+  "bottom": {
+    "message": "Alt"
+  },
+  "center": {
+    "message": "Orta"
+  },
+  "clock-boldness-label": {
+    "message": "Kalın"
+  },
+  "clock-border-radius-label": {
+    "message": "Çerçeve Yarıçapı"
+  },
+  "clock-border-width-label": {
+    "message": "Çerçeve Kalınlığı"
+  },
+  "clock-darkness-label": {
+    "message": "Karart"
+  },
+  "clock_style_hidden": {
+    "message": "Gizli"
+  },
+  "color-label": {
+    "message": "Renk"
+  },
+  "crypto-currencies": {
+    "message": "Kripto birimleri"
+  },
+  "currencies-label": {
+    "message": "Para birimleri"
+  },
+  "currency-api-refresh-warning": {
+    "message": "Eğer seçtiğiniz kur güncellenmezse bir kaç saniye beklemeyi deneyin."
+  },
+  "dark": {
+    "message": "Koyu"
+  },
+  "delete-option": {
+    "message": "Sil"
+  },
+  "enable-api-label": {
+    "message": "Kur bilgilerini göster"
+  },
+  "enable-clock-label": {
+    "message": "Saati etkinleştir"
+  },
+  "enable-firefox-label": {
+    "message": "Firefox logosunu etkinleştir"
+  },
+  "enable-notes-label": {
+    "message": "Notları etkinleştir"
+  },
+  "fallback-default-icon-info": {
+    "message": "Bu işlem, temel bir yedek simgeyi kısayol simgesi olarak ayarlar. Bu seçeneği, simge API pikselli bir simge döndürürse kullanabilirsiniz."
+  },
+  "glow": {
+    "message": "Parla"
+  },
+  "gray": {
+    "message": "Gri"
+  },
+  "green": {
+    "message": "Yeşil"
+  },
+  "hide-settings-button": {
+    "message": "Ayarlar Butonunu Gizle"
+  },
+  "image-link": {
+    "message": "Kısayol ikonunu resim dosyası yükleyerek ayarlayabilirsin."
+  },
+  "import-export-settings": {
+    "message": "Ayarları Dışa Aktar / İçe Aktar"
+  },
+  "keep-currency-question": {
+    "message": "Mevcut para birimlerini koru?"
+  },
+  "keep-notes-question": {
+    "message": "Mevcut notları koru?"
+  },
+  "keep-shortcuts-question": {
+    "message": "Mevcut kısayolları koru?"
+  },
+  "label-autoshort": {
+    "message": "Oto. Daraltma"
+  },
+  "language": {
+    "message": "Turkce"
+  },
+  "last-deleted-ten-urls": {
+    "message": "Silinen son 10 link:"
+  },
+  "left": {
+    "message": "Sol"
+  },
+  "lime": {
+    "message": "Limon Yeşili"
+  },
+  "move_down": {
+    "message": "Aşağı hareket et"
+  },
+  "move_up": {
+    "message": "Yukarı hareket et"
+  },
+  "national-currencies": {
+    "message": "Para birimleri"
+  },
+  "navyblue": {
+    "message": "Lacivert"
+  },
+  "none": {
+    "message": "Hiçbiri"
+  },
+  "note-input": {
+    "message": "Kısa bir not giriniz"
+  },
+  "opt-base-currency-label": {
+    "message": "Ana para birimini seç"
+  },
+  "opt-color-label": {
+    "message": "Renk"
+  },
+  "opt-crypto-currencies": {
+    "message": "Kripto para birimleri"
+  },
+  "opt-national-currencies": {
+    "message": "Ulusal para birimleri"
+  },
+  "opt-shortcut-h-align": {
+    "message": "Yatay Hizalanma"
+  },
+  "opt-shortcut-min-width": {
+    "message": "Min. Genişlik"
+  },
+  "opt-shortcut-shape": {
+    "message": "Şekil"
+  },
+  "opt-shortcut-size": {
+    "message": "Boyut"
+  },
+  "opt-shortcut-transition": {
+    "message": "Geçiş Türü"
+  },
+  "opt-shortcut-v-align": {
+    "message": "Dikey Hizalanma"
+  },
+  "opt-shortcut-width": {
+    "message": "Genişlik"
+  },
+  "orange": {
+    "message": "Turuncu"
+  },
+  "rate-update-info": {
+    "message": "Döviz değerleri günlük yenilenir."
+  },
+  "red": {
+    "message": "Kırmızı"
+  },
+  "remove-settings-button-info": {
+    "message": "Bu ayar ofis veya okul bilgisayarları için kullanılabilir. Çalışma veya okula ait bazı URL'leri veya bir arkaplanı ayarlayabilir ve kullanıcı bunları değiştiremez. Ayrıca araç çubuğu eylemini devre dışı bırakır."
+  },
+  "remove-settings-button-label": {
+    "message": "Ana Sayfadaki Ayarlar Butonunu Kaldır"
+  },
+  "reset-default-icon-info": {
+    "message": "Bu işlem mevcut kısayol simgesini silecek ve ana sayfayı açtığınızda simge API'sından bir simge almaya çalışacak."
+  },
+  "right": {
+    "message": "Sağ"
+  },
+  "rotate": {
+    "message": "Çevir"
+  },
+  "save-info": {
+    "message": "Lütfen bekleyiniz..."
+  },
+  "scale_down": {
+    "message": "Küçült"
+  },
+  "scale_up": {
+    "message": "Büyüt"
+  },
+  "scarletred": {
+    "message": "Alaca Kırmızı"
+  },
+  "settings": {
+    "message": "Ayarlar"
+  },
+  "shortcut": {
+    "message": "Bu sayfayı kısayol olarak kaydet"
+  },
+  "shortcut-borderless": {
+    "message": "Çerçevesiz"
+  },
+  "shortcut-color-settings": {
+    "message": "Kısayol Sütun Renkleri"
+  },
+  "shortcut-container-settings": {
+    "message": "Kısayol Konteyner Ayarları"
+  },
+  "shortcut-messageansition": {
+    "message": "Geçiş Türü"
+  },
+  "shortcut-settings": {
+    "message": "Kısayol Ayarları"
+  },
+  "spin": {
+    "message": "Döndür"
+  },
+  "top": {
+    "message": "Üst"
+  },
+  "transparent": {
+    "message": "Saydam"
+  },
+  "violet": {
+    "message": "Menekşe"
+  },
+  "white": {
+    "message": "Beyaz"
+  },
+  "yellow": {
+    "message": "Sarı"
+  }
+}
