@@ -60,11 +60,15 @@ Enhance your new tab experience with our curated themes. Simply right click on t
 | The Slap | ![Theme](https://github.com/user-attachments/assets/c5ba6fb9-60a4-4bb0-9203-0f5282055ade) | 👋💥👋💥👋💥👋💥👋💥 | [Download](https://github.com/enfyna/fx-new-tab/blob/main/themes/TheSlap.json) |
 
 
-## Privacy
+# Develop
+
+For development and translation guidelines, check out the [Wiki](https://github.com/enfyna/fx-new-tab/wiki).
+
+# Privacy
 
 We respect your privacy. This extension does not collect or store any personal data. Shortcuts added via the toolbar action and all settings are stored locally in your browser.
 
-## License
+# License
 
 This project is licensed under the BSD 2-Clause License - see the [LICENSE](https://github.com/enfyna/fx-new-tab/blob/main/LICENSE) file for details.
 
