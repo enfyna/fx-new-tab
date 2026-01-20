@@ -4,6 +4,11 @@
   "name": "__MSG_extensionName__",
   "description":"__MSG_extensionDescription__",
   "default_locale": "en",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{3afde4e1-9644-4436-8e1f-80edab2b02b4}"
+    }
+  },
   "icons": {
     "48": "assets/icons/icon.svg",
     "96": "assets/icons/icon.svg",
