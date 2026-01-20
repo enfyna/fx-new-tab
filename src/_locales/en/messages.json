@@ -253,5 +253,23 @@
   },
   "yellow": {
     "message": "Yellow"
+  },
+  "sync-settings": {
+    "message": "Firefox Sync Settings"
+  },
+  "sync-to-cloud-success": {
+    "message": "Settings saved to Firefox Sync successfully!"
+  },
+  "sync-to-cloud-warning": {
+    "message": "Are you sure you want to save the current settings to cloud? Note: Background image will not be saved!"
+  },
+  "sync-load-warning": {
+    "message": "If you continue, your current save will be overwritten by the sync. Export your current save if you don't want to lose it!"
+  },
+  "sync-no-data": {
+    "message": "No synced settings found."
+  },
+  "sync-error": {
+    "message": "An error occurred while syncing settings."
   }
 }

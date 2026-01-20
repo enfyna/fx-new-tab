@@ -843,6 +843,67 @@ function configure_import_export() {
             }
         }
     });
+
+    const sync_parent = document.getElementById('sync_settings') as HTMLDivElement;
+    sync_parent.addEventListener('click', async (event) => {
+        const target = event.target as HTMLElement;
+        switch (target.id) {
+            case "sync-to-cloud": {
+                await sync_to_cloud();
+                break;
+            }
+            case "load-from-cloud": {
+                await load_from_cloud();
+                break;
+            }
+        }
+    });
+}
+
+async function sync_to_cloud() {
+    const warning = browser.i18n.getMessage("sync-to-cloud-warning");
+    if (!confirm(warning)) {
+        return;
+    }
+
+    try {
+        const sync_save = JSON.parse(JSON.stringify(save)) as save;
+        sync_save.bg_img = '';
+        sync_save.shortcuts = sync_save.shortcuts.map(sh => ({
+            name: sh.name,
+            link: sh.link,
+            img: ''
+        }));
+
+        await browser.storage.sync.set(sync_save);
+        alert(browser.i18n.getMessage("sync-to-cloud-success"));
+    } catch (error) {
+        console.error('Sync to cloud failed:', error);
+        alert(browser.i18n.getMessage("sync-error"));
+    }
+}
+
+async function load_from_cloud() {
+    const warning = browser.i18n.getMessage("sync-load-warning");
+    if (!confirm(warning)) {
+        return;
+    }
+
+    try {
+        const sync_data = await browser.storage.sync.get(null) as save;
+
+        if (!sync_data || Object.keys(sync_data).length === 0) {
+            alert(browser.i18n.getMessage("sync-no-data"));
+            return;
+        }
+
+        save = sync_data;
+        await set_save();
+        location.href = "index.html";
+    } catch (error) {
+        console.error('Load from cloud failed:', error);
+        alert(browser.i18n.getMessage("sync-error"));
+    }
 }
 
 function handleFileSelect(event: any) {
@@ -943,6 +1004,8 @@ function translate(): void {
         "opt-shortcut-width",           "opt-crypto-currencies",
         "opt-shortcut-transition",      "opt-shortcut-min-width",
         "opt-shortcut-size",
+
+        "sync-settings",
     ];
 
     for (const message of translations) {

@@ -253,5 +253,23 @@
   },
   "yellow": {
     "message": "Amarillo"
+  },
+  "sync-settings": {
+    "message": "Configuración de Firefox Sync"
+  },
+  "sync-to-cloud-success": {
+    "message": "¡Configuración guardada en Firefox Sync exitosamente!"
+  },
+  "sync-to-cloud-warning": {
+    "message": "¿Estás seguro de que quieres guardar la configuración actual en la nube? Nota: ¡La imagen de fondo no se guardará!"
+  },
+  "sync-load-warning": {
+    "message": "Si continúas, tu configuración actual será sobrescrita por la sincronización. ¡Exporta tu configuración actual si no quieres perderla!"
+  },
+  "sync-no-data": {
+    "message": "No se encontró configuración sincronizada."
+  },
+  "sync-error": {
+    "message": "Ocurrió un error al sincronizar la configuración."
   }
 }

@@ -253,5 +253,23 @@
   },
   "yellow": {
     "message": "Sarı"
+  },
+  "sync-settings": {
+    "message": "Firefox Sync Ayarları"
+  },
+  "sync-to-cloud-success": {
+    "message": "Ayarlar Firefox Sync'e başarıyla kaydedildi!"
+  },
+  "sync-to-cloud-warning": {
+    "message": "Mevcut ayarları buluta kaydetmek istediğinizden emin misiniz? Not: Arka plan resmi kaydedilmeyecek!"
+  },
+  "sync-load-warning": {
+    "message": "Devam ederseniz mevcut kayıtlarınız senkronizasyonla değiştirilecek. Kaybetmek istemiyorsanız mevcut kayıtlarınızı dışa aktarın!"
+  },
+  "sync-no-data": {
+    "message": "Senkronize edilmiş ayar bulunamadı."
+  },
+  "sync-error": {
+    "message": "Ayarlar senkronize edilirken bir hata oluştu."
   }
 }
