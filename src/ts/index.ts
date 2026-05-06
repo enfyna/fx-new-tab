@@ -441,7 +441,7 @@ function configure_notes() {
             if (event.type == 'click') return;
             if (event instanceof KeyboardEvent && event.key != 'Enter') return;
             elm.hidden = true;
-            const index = elm.id.slice(node.nt_input.length);
+            const index = parseInt(elm.id.slice(node.nt_input.length));
             const button = document.getElementById(node.nt_note + index) as HTMLButtonElement;
             const new_note = (elm as HTMLInputElement).value.trim();
             button.innerText = new_note;
