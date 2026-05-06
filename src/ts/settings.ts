@@ -9,7 +9,8 @@ interface save {
     shortcut_width: string;
     shortcut_min_width: string;
     shortcut_v_align: string;
-    shortcut_size: string;
+    container_gutter_x: string;
+    container_gutter_y: string;
     shortcut_transition: string;
     shortcut_borderless: boolean;
     shortcut_col_colors: string[];
@@ -204,8 +205,11 @@ async function configure_shortcut_settings() {
             case 'shortcut_transition':
                 inp.value = save.shortcut_transition ?? 'glow';
                 break;
-            case 'shortcut_size':
-                inp.value = save.shortcut_size ?? 'p-2';
+            case 'container_gutter_x':
+                inp.value = save.container_gutter_x ?? 'gx-3';
+                break;
+            case 'container_gutter_y':
+                inp.value = save.container_gutter_y ?? 'gy-3';
                 break;
             case 'shortcut_width':
                 const ch1 = width_opt_group.cloneNode(true) as HTMLOptGroupElement;
@@ -220,6 +224,7 @@ async function configure_shortcut_settings() {
                 inp.value = save.shortcut_container_width ?? 'col-6';
                 break;
             default:
+                if (inp.id.startsWith("align")) break;
                 inp.value = save[inp.id] ?? (inp as HTMLSelectElement).options[0].value;
                 break;
         }
@@ -984,7 +989,7 @@ function translate(): void {
         "opt-color-label",              "opt-national-currencies",
         "opt-shortcut-width",           "opt-crypto-currencies",
         "opt-shortcut-transition",      "opt-shortcut-min-width",
-        "opt-shortcut-size",
+        "opt-container-gutter-x",       "opt-container-gutter-y",
 
         "sync-settings",
     ];

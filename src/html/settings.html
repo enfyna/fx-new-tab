@@ -307,7 +307,36 @@
                                                 class="text-success fw-bold"></label>
                                         </div>
                                     </div>
-                                    <div class="col-6"> </div>
+                                    <div class="col-6">
+                                        <div class="form-floating">
+                                            <select class="form-select bg-dark text-white border-success"
+                                                id="container_gutter_x">
+                                                <optgroup name="opt-container-gutter-x">
+                                                    <option value="gx-0">0</option>
+                                                    <option value="gx-1">1</option>
+                                                    <option value="gx-2">2</option>
+                                                    <option value="gx-3">3</option>
+                                                    <option value="gx-4">4</option>
+                                                    <option value="gx-5">5</option>
+                                                </optgroup>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mt-3">
+                                        <div class="form-floating">
+                                            <select class="form-select bg-dark text-white border-success"
+                                                id="container_gutter_y">
+                                                <optgroup name="opt-container-gutter-y">
+                                                    <option value="gy-0">0</option>
+                                                    <option value="gy-1">1</option>
+                                                    <option value="gy-2">2</option>
+                                                    <option value="gy-3">3</option>
+                                                    <option value="gy-4">4</option>
+                                                    <option value="gy-5">5</option>
+                                                </optgroup>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="col-6 d-flex align-items-center">
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" id="autoshort">
@@ -324,23 +353,8 @@
                             <div class="card-header bg-warning text-black fw-bold" name="shortcut-settings"></div>
                             <div class="card-body">
                                 <div class="row g-3 align-items-center">
-                                    <div class="col-4 col-lg-2">
-                                        <div class="form-floating">
-                                            <select class="form-select bg-dark text-white border-warning"
-                                                id="shortcut_size">
-                                                <optgroup name="opt-shortcut-size">
-                                                    <option value="p-0">5</option>
-                                                    <option value="p-1">4</option>
-                                                    <option value="p-2">3</option>
-                                                    <option value="p-3">2</option>
-                                                    <option value="p-4">1</option>
-                                                </optgroup>
-                                            </select>
-                                            <label for="shortcut_size" name="opt-shortcut-size"
-                                                class="text-warning fw-bold"></label>
-                                        </div>
-                                    </div>
-                                    <div class="col-4 col-lg-2">
+
+                                    <div class="col-6">
                                         <div class="form-floating">
                                             <select class="form-select bg-dark text-white border-warning"
                                                 id="shortcut_width"></select>
@@ -348,7 +362,7 @@
                                                 class="text-warning fw-bold"></label>
                                         </div>
                                     </div>
-                                    <div class="col-4 col-lg-2">
+                                    <div class="col-6">
                                         <div class="form-floating">
                                             <select class="form-select bg-dark text-white border-warning"
                                                 id="shortcut_min_width">
@@ -365,7 +379,7 @@
                                                 class="text-warning fw-bold"></label>
                                         </div>
                                     </div>
-                                    <div class="col-6 col-lg-2">
+                                    <div class="col-6">
                                         <div class="form-floating">
                                             <select class="form-select bg-dark text-white border-warning"
                                                 id="shortcut_shape">
@@ -401,8 +415,8 @@
                                                 class="text-warning fw-bold"></label>
                                         </div>
                                     </div>
-                                    <div class="col-6 mt-4 px-4">
-                                        <div class="form-check form-switch fs-5">
+                                    <div class="col-6">
+                                        <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox"
                                                 id="shortcut_borderless">
                                             <label class="form-check-label text-white" for="shortcut_borderless"

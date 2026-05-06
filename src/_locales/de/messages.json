@@ -167,8 +167,8 @@
   "opt-shortcut-shape": {
     "message": "Form"
   },
-  "opt-shortcut-size": {
-    "message": "Größe"
+  "opt-container-gutter-x": {
+    "message": "Horizontaler Abstand"
   },
   "opt-shortcut-transition": {
     "message": "Übergangstyp"
@@ -271,5 +271,8 @@
   },
   "sync-error": {
     "message": "Beim Synchronisieren der Einstellungen ist ein Fehler aufgetreten."
+  },
+  "opt-container-gutter-y": {
+    "message": "Vertikaler Abstand"
   }
 }

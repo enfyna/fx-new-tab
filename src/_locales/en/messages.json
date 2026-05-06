@@ -167,8 +167,8 @@
   "opt-shortcut-shape": {
     "message": "Shape"
   },
-  "opt-shortcut-size": {
-    "message": "Size"
+  "opt-container-gutter-x": {
+    "message": "Horizontal Spacing"
   },
   "opt-shortcut-transition": {
     "message": "Transition Type"
@@ -271,5 +271,8 @@
   },
   "sync-error": {
     "message": "An error occurred while syncing settings."
+  },
+  "opt-container-gutter-y": {
+    "message": "Vertical Spacing"
   }
 }

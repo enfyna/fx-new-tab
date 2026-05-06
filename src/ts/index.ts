@@ -11,7 +11,9 @@ interface save {
     shortcut_width: string;
     shortcut_min_width: string;
     shortcut_v_align: string;
-    shortcut_size: string;
+    shortcut_size?: string;
+    container_gutter_x: string;
+    container_gutter_y: string;
     shortcut_transition: string;
     shortcut_borderless: boolean;
     shortcut_col_colors: string[];
@@ -148,10 +150,21 @@ async function configure_shortcuts() {
     const container_h_align = save.shortcut_container_h_align ?? 'justify-content-center';
     const container_v_align = save.shortcut_v_align ?? 'align-items-center';
 
+    // backwards compatibility with for 1.14 and before
+    if (save.shortcut_size != null && save.shortcut_size.length == 3) {
+        const size = save.shortcut_size.split("-").at(-1);
+        save.container_gutter_x = `gx-${size}`;
+        save.container_gutter_y = `gy-${size}`;
+        save.shortcut_size = undefined;
+        await set_save();
+    }
+
     const container = document.getElementById('ShortcutContainer') as HTMLDivElement;
     container.classList.add(
         save.shortcut_container_width ?? 'col-6',
         container_h_align, container_v_align,
+        save.container_gutter_x ?? 'gx-3',
+        save.container_gutter_y ?? 'gy-3',
     );
     container.parentElement.classList.add(
         container_h_align, container_v_align,
@@ -160,7 +173,6 @@ async function configure_shortcuts() {
     const base_shortcut = container.firstChild as HTMLAnchorElement;
     base_shortcut.classList.add(
         save.shortcut_width ?? 'col-3',
-        save.shortcut_size ?? 'p-2',
         save.shortcut_min_width ?? null,
     );
 
@@ -188,16 +200,16 @@ async function configure_shortcuts() {
     contextMenu.addEventListener('click', () => {
         const id = contextMenu.dataset.id;
         const href = contextMenu.dataset.href;
-        for(var i = 0; i < save.shortcuts.length; i++){
+        for (var i = 0; i < save.shortcuts.length; i++) {
             const elm = container.children[i];
             const sh = save.shortcuts[i];
-            if (elm.id == id && href == sh.link){
+            if (elm.id == id && href == sh.link) {
                 console.info('removed shortcut: ', (sh.link));
-                if(sh.link.length > 0){
+                if (sh.link.length > 0) {
                     if (!save.shortcut_recently_deleted)
                         save.shortcut_recently_deleted = [];
                     save.shortcut_recently_deleted.push(sh.link);
-                    if (save.shortcut_recently_deleted.length > 10){
+                    if (save.shortcut_recently_deleted.length > 10) {
                         save.shortcut_recently_deleted.shift();
                     }
                 }
@@ -269,7 +281,7 @@ async function configure_shortcuts() {
         function autoshort() {
             let width = 12;
             let start_width = save.shortcut_container_width;
-            for (var i = width; i > 1 && container.offsetHeight + 100 > screen.height; i--){
+            for (var i = width; i > 1 && container.offsetHeight + 100 > screen.height; i--) {
                 let current_width = 'col-' + i.toString();
                 container.classList.replace(start_width, current_width);
                 start_width = current_width;

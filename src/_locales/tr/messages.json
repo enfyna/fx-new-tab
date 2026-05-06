@@ -167,8 +167,8 @@
   "opt-shortcut-shape": {
     "message": "Şekil"
   },
-  "opt-shortcut-size": {
-    "message": "Boyut"
+  "opt-container-gutter-x": {
+    "message": "Yatay Boşluk"
   },
   "opt-shortcut-transition": {
     "message": "Geçiş Türü"
@@ -271,5 +271,8 @@
   },
   "sync-error": {
     "message": "Ayarlar senkronize edilirken bir hata oluştu."
+  },
+  "opt-container-gutter-y": {
+    "message": "Dikey Boşluk"
   }
 }

@@ -167,8 +167,8 @@
   "opt-shortcut-shape": {
     "message": "Forma"
   },
-  "opt-shortcut-size": {
-    "message": "Tamaño"
+  "opt-container-gutter-x": {
+    "message": "Espaciado horizontal"
   },
   "opt-shortcut-transition": {
     "message": "Tipo de transición"
@@ -271,5 +271,8 @@
   },
   "sync-error": {
     "message": "Ocurrió un error al sincronizar la configuración."
+  },
+  "opt-container-gutter-y": {
+    "message": "Espaciado vertical"
   }
 }
