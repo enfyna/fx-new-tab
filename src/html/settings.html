@@ -161,33 +161,56 @@
 
 <body class="bg-black">
 
-<div class="container">
 
-    <!-- Settings text -->
-    <div class="row m-0">
-        <div class="d-flex m-0 mt-3 justify-content-between align-items-center">
-            <h1 class="text-white" name="settings"></h1>
-            <a class="text-decoration-none" href="https://github.com/enfyna/fx-new-tab">
-                <div class="alert alert-success p-2 mb-0">
-                    <svg width="36" height="36" role="img">
-                        <use xlink:href="#github" />
-                    </svg>
-                    <svg width="24" height="24" role="img">
-                        <use xlink:href="#arrow-right" />
-                    </svg>
-                </div>
-            </a>
+<div class="container-fluid min-vh-100 p-0 m-0">
+    <div class="container p-0">
+        <!-- Settings text -->
+        <div class="row m-0">
+            <div class="d-flex m-0 mt-3 justify-content-between align-items-center">
+                <h1 class="text-white" name="settings"></h1>
+                <a class="text-decoration-none" href="https://github.com/enfyna/fx-new-tab">
+                    <div class="alert alert-success p-2 mb-0">
+                        <svg width="36" height="36" role="img">
+                            <use xlink:href="#github" />
+                        </svg>
+                        <svg width="24" height="24" role="img">
+                            <use xlink:href="#arrow-right" />
+                        </svg>
+                    </div>
+                </a>
+            </div>
         </div>
-    </div>
-    <hr class="border-2 border-primary">
-    
-    <!-- Window previewer -->
-    <div id="preview-wrapper" class="position-fixed" style="bottom: 20px; left: 20px; width: 30vw; z-index: 1050;">
-        <div id="preview-container" class="rounded position-relative overflow-hidden p-0 m-0 bg-dark border border-primary">
-            <iframe id="preview-iframe" src="index.html" class="position-absolute border-0" style="transform-origin: top left;"></iframe>
-        </div>
+        <!-- <hr class="border-2 border-primary mx-0 mt-3 mb-1"> -->
     </div>
 
+    <div class="row m-0 p-0 w-100 container mx-auto">
+        <!-- Left Column: Iframe preview -->
+        <div class="col-lg-5 my-4">
+            <div id="preview-container" class="rounded overflow-hidden border border-3 border-primary">
+                <iframe id="preview-iframe" src="index.html" style="transform-origin: top left;"></iframe>
+            </div>
+        </div>
+
+        <!-- Right Column: Settings Tabs -->
+        <div class="col-lg-7">
+        <ul class="nav nav-tabs border-primary border-bottom border-2 mb-3" id="settingsTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active bg-transparent text-white border-0 border-bottom border-primary border-3" id="shortcuts-tab" data-bs-toggle="tab" data-bs-target="#tab-shortcuts" type="button" role="tab">Shortcuts</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link bg-transparent text-secondary border-0" id="appearance-tab" data-bs-toggle="tab" data-bs-target="#tab-appearance" type="button" role="tab">Appearance</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link bg-transparent text-secondary border-0" id="widgets-tab" data-bs-toggle="tab" data-bs-target="#tab-widgets" type="button" role="tab">Widgets</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link bg-transparent text-secondary border-0" id="advanced-tab" data-bs-toggle="tab" data-bs-target="#tab-advanced" type="button" role="tab">Advanced</button>
+            </li>
+        </ul>
+
+
+        <div class="tab-content pb-5" id="settingsTabContent">
+            <div class="tab-pane d-block" id="tab-shortcuts" role="tabpanel" tabindex="0">
     <!-- Shortcut settings -->
     <div id="shortcut_shape_settings">
         <!-- Shortcut Container settings -->
@@ -288,22 +311,22 @@
         </div>
         <!-- Shortcut Color settings -->
         <div class="row bg-primary rounded m-0 mb-1 d-flex flex-row align-items-center">
-            <div class="col-lg-10 my-1 fw-bold text-black" name="shortcut-color-settings"></div>
-            <div class="col-md-6 col-lg-1 my-1">
+            <div class="col-8 my-1 fw-bold text-black" name="shortcut-color-settings"></div>
+            <div class="col-2 my-1">
                 <button class="btn btn-success border-dark w-100" type="button" id="add_shortcut_col_color">
                     <svg class="pe-none" width="24" height="24" role="img">
                         <use xlink:href="#plus-fill" />
                     </svg>
                 </button>
             </div>
-            <div class="col-md-6 col-lg-1 my-1">
+            <div class="col-2 my-1">
                 <button class="btn btn-danger border-dark w-100" type="button" id="remove_shortcut_col_color">
                     <svg class="pe-none" width="24" height="24" role="img">
                         <use xlink:href="#trash-fill" />
                     </svg>
                 </button>
             </div>
-            <div class="col-lg-12">
+            <div class="col-12">
                 <div class="row m-0" id="shortcut_color_container"></div>
             </div>
         </div>
@@ -403,11 +426,28 @@
                 <div name="image-link"></div>
             </div>
         </div>
+        <hr class="border-2 border-primary opacity-100">
     </div>
-    <hr class="border-2 border-primary">
+            </div>
+            <div class="tab-pane d-none" id="tab-appearance" role="tabpanel" tabindex="1">
+    <!-- Firefox Watermark Settings  -->
+    <div class="row bg-warning rounded m-0 mb-2 d-flex flex-row align-items-center">
+        <div class="col-6 my-1">
+            <div class="form-check form-switch my-1">
+                <input class="form-check-input" type="checkbox" id="enable_firefox_watermark">
+                <label class="form-check-label fw-bold text-black" for="enable_firefox_watermark"
+                    name="enable-firefox-label"></label>
+            </div>
+        </div>
+        <div class="col"></div>
+        <div class="col-4">
+            <select class="form-select" id="firefox_color">
+            </select>
+        </div>
+    </div>
     <!-- Hide Settings Button  -->
     <div class="row bg-dark text-white rounded m-0 mb-2 d-flex flex-row align-items-center">
-        <div class="col-lg-3 my-1">
+        <div class="col-lg-6 my-1">
             <div class="form-check form-switch my-1">
                 <input class="form-check-input" type="checkbox" id="hide_settings_button">
                 <label class="form-check-label fw-bold" for="hide_settings_button"
@@ -417,17 +457,17 @@
     </div>
     <!-- Background settings -->
     <div class="row bg-success rounded m-0 mb-2 d-flex flex-row align-items-center">
-        <div class="col-lg-4 fw-bold text-white my-1" name="bg-settings"></div>
-        <div class="col-lg-4 my-1">
+        <div class="col-6 fw-bold text-white my-1" name="bg-settings"></div>
+        <div class="col-6 my-1">
             <div class="input-group">
                 <span class="input-group-text" name="bg-fallback-color-label"></span>
                 <input type="color" class="form-control form-control-color" id="bg_color">
             </div>
         </div>
-        <div class="col-md-6 col-lg-3 my-1">
+        <div class="col-6 my-1">
             <input class="form-control" type="file" id="select_bg" accept=".jpg, .jpeg, .png, .gif" />
         </div>
-        <div class="col-md-6 col-lg-1 my-1">
+        <div class="col-6 my-1">
             <button type="button" class="btn btn-danger border-dark w-100" id="delete_bg">
                 <svg class="pe-none" width="24" height="24" role="img">
                     <use xlink:href="#trash-fill" />
@@ -445,23 +485,9 @@
             </div>
         </div>
     </div>
-    <hr class="border-2 border-primary">
-    <!-- Firefox Watermark Settings  -->
-    <div class="row bg-warning rounded m-0 mb-2 d-flex flex-row align-items-center">
-        <div class="col-lg-3 my-1">
-            <div class="form-check form-switch my-1">
-                <input class="form-check-input" type="checkbox" id="enable_firefox_watermark">
-                <label class="form-check-label fw-bold text-black" for="enable_firefox_watermark"
-                    name="enable-firefox-label"></label>
-            </div>
-        </div>
-        <div class="col"></div>
-        <div class="col-lg-2 my-1">
-            <select class="form-select" id="firefox_color">
-            </select>
-        </div>
+    <hr class="border-2 border-primary opacity-100">
     </div>
-    </div>
+    <div class="tab-pane d-none" id="tab-widgets" role="tabpanel" tabindex="2">
     <!-- Clock Settings  -->
     <div class="row bg-navyblue text-white rounded m-0 mb-2 d-flex flex-row align-items-center" id="clock_settings">
         <div class="col-lg-5 my-1">
@@ -551,20 +577,20 @@
     </div>
     <!-- Note Settings  -->
     <div class="row bg-danger text-white rounded m-0 mb-2 d-flex flex-row align-items-center" id="note_settings">
-        <div class="col-lg-10 my-1">
+        <div class="col-6 my-1">
             <div class="form-check form-switch my-1">
                 <input class="form-check-input" type="checkbox" id="enable_notes">
                 <label class="form-check-label fw-bold" for="enable_notes" name="enable-notes-label"></label>
             </div>
         </div>
-        <div class="col-md-6 col-lg-1 my-1">
+        <div class="col-3 my-1">
             <button class="btn btn-success border-dark w-100" type="button" id="add_note">
                 <svg class="pe-none" width="24" height="24" role="img">
                     <use xlink:href="#plus-fill" />
                 </svg>
             </button>
         </div>
-        <div class="col-md-6 col-lg-1 my-1">
+        <div class="col-3 my-1">
             <button class="btn btn-danger border-dark w-100" type="button" id="remove_note">
                 <svg class="pe-none" width="24" height="24" role="img">
                     <use xlink:href="#trash-fill" />
@@ -577,33 +603,33 @@
     </div>
     <!-- Currency API settings -->
     <div class="row bg-success rounded m-0 mb-2 d-flex flex-row align-items-center" id="currency_setting">
-        <div class="col-lg-5 my-1">
+        <div class="col-6 my-1">
             <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" id="enable_api">
                 <label class="form-check-label fw-bold text-white" for="enable_api" name="enable-api-label"></label>
             </div>
         </div>
-        <div class="col-lg-1 my-1">
+        <div class="col my-1">
             <select class="form-select" id="base_currency">
                 <optgroup name="opt-base-currency-label"></optgroup>
             </select>
         </div>
-        <div class="col-lg-1 fw-bold text-center text-white my-1" name="currencies-label">
+        <div class="col-2 fw-bold text-center text-white my-1" name="currencies-label">
         </div>
-        <div class="col-md-4 col-lg-1 my-1">
+        <div class="col-2 my-1">
+            <select class="form-select" id="currency_container_color">
+            </select>
+        </div>
+        <div class="col-4 my-1">
             <select class="form-select" id="currency_option_0">
             </select>
         </div>
-        <div class="col-md-4 col-lg-1 my-1">
+        <div class="col-4 my-1">
             <select class="form-select" id="currency_option_1">
             </select>
         </div>
-        <div class="col-md-4 col-lg-1 my-1">
+        <div class="col-4 my-1">
             <select class="form-select" id="currency_option_2">
-            </select>
-        </div>
-        <div class="col-lg-2 my-1">
-            <select class="form-select" id="currency_container_color">
             </select>
         </div>
     </div>
@@ -626,19 +652,21 @@
             </div>
         </div>
     </div>
-    <hr class="border-2 border-primary">
+    <hr class="border-2 border-primary opacity-100">
+            </div>
+            <div class="tab-pane d-none" id="tab-advanced" role="tabpanel" tabindex="3">
     <!-- Save file import / export -->
     <div class="row bg-primary text-white rounded m-0 my-2 d-flex flex-row align-items-center"
         id="import_export_settings">
-        <div class="col-lg-10 my-1 fw-bold" name="import-export-settings"></div>
-        <div class="col-md-6 col-lg-1 my-1">
+        <div class="col-6 my-1 fw-bold" name="import-export-settings"></div>
+        <div class="col-3 my-1">
             <button type="button" class="btn btn-success border-dark w-100 fw-bold" id="export-settings">
                 <svg class="pe-none" width="24" height="24" role="img">
                     <use xlink:href="#download" />
                 </svg>
             </button>
         </div>
-        <div class="col-md-6 col-lg-1 my-1">
+        <div class="col-3 my-1">
             <button type="button" class="btn btn-warning border-dark w-100 fw-bold" id="import-settings">
                 <svg class="pe-none" width="24" height="24" role="img">
                     <use xlink:href="#upload" />
@@ -649,8 +677,8 @@
     <!-- Firefox Sync settings -->
     <div class="row bg-orange text-white rounded m-0 my-2 d-flex flex-row align-items-center"
         id="sync_settings">
-        <div class="col-lg-10 my-1 fw-bold" name="sync-settings"></div>
-        <div class="col-md-6 col-lg-1 my-1">
+        <div class="col-6 fw-bold" name="sync-settings"></div>
+        <div class="col-3 my-1">
             <button type="button" class="btn btn-success border-dark w-100 fw-bold" id="load-from-cloud">
                 <svg class="pe-none" width="15" height="15" role="img">
                     <use xlink:href="#firefox" />
@@ -660,7 +688,7 @@
                 </svg>
             </button>
         </div>
-        <div class="col-md-6 col-lg-1 my-1">
+        <div class="col-3 my-1">
             <button type="button" class="btn btn-warning border-dark w-100 fw-bold" id="sync-to-cloud">
                 <svg class="pe-none" width="15" height="15" role="img">
                     <use xlink:href="#firefox" />
@@ -681,8 +709,8 @@
     </div>
     <!-- Remove Settings Button -->
     <div class="row bg-danger text-white rounded m-0 my-2 d-flex flex-row align-items-center">
-        <div class="col-lg-11 my-1 fw-bold" name="remove-settings-button-label"></div>
-        <div class="col-lg-1 my-1">
+        <div class="col-9 my-1 fw-bold" name="remove-settings-button-label"></div>
+        <div class="col-3 my-1">
             <button type="button" class="btn btn-danger border-dark w-100 fw-bold" id="remove-settings-button">
                 <svg class="pe-none" width="24" height="24" role="img">
                     <use xlink:href="#trash-fill" />
@@ -690,10 +718,13 @@
             </button>
         </div>
     </div>
-    <hr class="border-2 border-primary mt-5">
-</div>
+    <hr class="border-2 border-primary mt-5 opacity-100">
+            </div>
+        </div>
 
-<hr style="height: 20vh;">
+        </div>
+    </div>
+</div>
 
 <!-- Navbar -->
 <nav id="navbar" class="navbar fixed-bottom navbar-dark bg-black">

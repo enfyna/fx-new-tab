@@ -1014,3 +1014,25 @@ function update_preview() {
 window.addEventListener('resize', () => {
     update_preview();
 });
+
+// Tab Toggle Logic
+document.querySelectorAll('button[data-bs-toggle="tab"]').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+        const targetBtn = e.currentTarget as HTMLElement;
+        const targetId = targetBtn.getAttribute('data-bs-target');
+        if (!targetId) return;
+
+        // Deactivate all
+        document.querySelectorAll('button[data-bs-toggle="tab"]').forEach(n => {
+            n.classList.remove('active', 'text-white', 'border-bottom', 'border-primary', 'border-3');
+            n.classList.add('text-secondary');
+        });
+        document.querySelectorAll('.tab-pane').forEach(p => { p.classList.remove('d-block'); p.classList.add('d-none'); });
+
+        // Activate clicked
+        targetBtn.classList.add('active', 'text-white', 'border-bottom', 'border-primary', 'border-3');
+        targetBtn.classList.remove('text-secondary');
+        
+        document.querySelector(targetId)?.classList.remove('d-none'); document.querySelector(targetId)?.classList.add('d-block');
+    });
+});
