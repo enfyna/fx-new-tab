@@ -624,38 +624,6 @@ function configure_nav_settings() {
 
 /// Clock
 function configure_clock_settings() {
-    function configure_clock() {
-        const clock = document.getElementById('clock_preview') as HTMLHeadingElement;
-        clock.classList.remove(...clock.classList);
-
-        const bg_color = save.clock_color ?? 'bg-white';
-        const bd_color = save.clock_border_color ?? 'bd-white';
-        clock.classList.add("clock", bd_color, bg_color);
-
-        clock.style.fontFamily = save.clock_font ?? "monospace";
-        clock.style.fontWeight = save.clock_boldness ?? "bold";
-
-        clock.style.borderStyle = save.clock_border_style ?? "hidden";
-        clock.style.borderRadius = (save.clock_border_radius ?? "0") + "px";
-        clock.style.borderWidth = (save.clock_border_width ?? "0") + "px";
-
-        const clock_format = save.clock_format ?? 'h:m';
-        const time_format = save.clock_time_format ?? false; // 12 or 24 hour time format
-
-        const date = new Date();
-        const hour = date.getHours();
-
-        clock.innerText = clock_format
-            .replace('yy', date.getFullYear().toString().slice(2, 4))
-            .replace('mm', (date.getMonth() + 1).toString().padStart(2, '0'))
-            .replace('dd', date.getDate().toString().padStart(2, '0'))
-            .replace('h', (!time_format || hour <= 12 ? hour : hour - 12).toString().padStart(2, '0'))
-            .replace('m', date.getMinutes().toString().padStart(2, '0'))
-            .replace('s', date.getSeconds().toString().padStart(2, '0'))
-            .replace('&n', '\n');
-    }
-    configure_clock();
-
     const settings = document.getElementById('clock_settings') as HTMLDivElement;
     settings.querySelectorAll('select , input').forEach(elm => {
         switch (elm.id) {
@@ -714,7 +682,6 @@ function configure_clock_settings() {
                 break;
         }
         await set_save();
-        configure_clock();
     });
 }
 
