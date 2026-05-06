@@ -592,97 +592,99 @@
                 </div>
                 <div class="tab-pane d-none" id="tab-widgets" role="tabpanel" tabindex="2">
                     <!-- Clock Settings  -->
-                    <div class="row bg-navyblue text-white rounded m-0 mb-2 d-flex flex-row align-items-center"
-                        id="clock_settings">
-                        <div class="col-lg-5 my-1">
-                            <div class="form-check form-switch my-1">
+                    <div class="card bg-dark border-primary mb-3 shadow-sm" id="clock_settings">
+                        <div class="card-header bg-primary text-white fw-bold d-flex justify-content-start align-items-center">
+                            <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" id="enable_clock">
-                                <label class="form-check-label fw-bold" for="enable_clock"
-                                    name="enable-clock-label"></label>
                             </div>
+                            <span name="enable-clock-label"></span>
                         </div>
-                        <div class="col-md-6 col-lg-2 my-1">
-                            <select class="form-select" name="" id="clock_font">
-                                <optgroup label="Font">
-                                    <option value="monospace">Monospace</option>
-                                    <option value="sans">Sans</option>
-                                    <option value="Arial">Arial</option>
-                                    <option value="Times New Roman">Times New Roman</option>
-                                </optgroup>
-                            </select>
-                        </div>
-                        <div class="col-md-3 col-lg-1 my-1">
-                            <select class="form-select" id="clock_time_format">
-                                <!-- <optgroup name="clock-time-format-label"> -->
-                                <option value="true">12</option>
-                                <option value="false">24</option>
-                                <!-- </optgroup> -->
-                            </select>
-                        </div>
-                        <div class="col-md-3 col-lg-2 my-1">
-                            <select class="form-select" id="clock_format">
-                                <!-- <optgroup name="clock-format-label"> -->
-                                <option value="h:m">h:m</option>
-                                <option value="h:m:s">h:m:s</option>
-                                <option value="dd/mm">dd/mm</option>
-                                <option value="dd/mm/yy">dd/mm/yy</option>
-                                <option value="dd/mm&nh:m">dd/mm \n h:m</option>
-                                <option value="dd/mm&nh:m:s">dd/mm \n h:m:s</option>
-                                <option value="dd/mm/yy&nh:m:s">dd/mm/yy \n h:m:s</option>
-                                <option value="h:m&ndd/mm">h:m \n dd/mm</option>
-                                <option value="h:m&ndd/mm/yy">h:m \n dd/mm/yy</option>
-                                <option value="h:m:s&ndd/mm/yy">h:m:s \n dd/mm/yy</option>
-                                <!-- </optgroup> -->
-                            </select>
-                        </div>
-                        <div class="col-lg-2 my-1">
-                            <select class="form-select" id="clock_color">
-                            </select>
-                        </div>
-                        <div class="col-md-6 col-lg-2 my-1">
-                            <div class="form-check form-switch my-1">
-                                <label class="form-check-label fw-bold" for="clock_dark_bg"
-                                    name="clock-darkness-label"></label>
-                                <input type="checkbox" class="form-check-input" id="clock_dark_bg">
+                        <div class="card-body">
+                            <div class="row g-3 align-items-center">
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-floating">
+                                        <select class="form-select bg-dark text-white border-primary" id="clock_font">
+                                            <optgroup label="Font">
+                                                <option value="monospace">Monospace</option>
+                                                <option value="sans">Sans</option>
+                                                <option value="Arial">Arial</option>
+                                                <option value="Times New Roman">Times New Roman</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-floating">
+                                        <select class="form-select bg-dark text-white border-primary" id="clock_time_format">
+                                            <option value="true">12</option>
+                                            <option value="false">24</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-floating">
+                                        <select class="form-select bg-dark text-white border-primary" id="clock_format">
+                                            <option value="h:m">h:m</option>
+                                            <option value="h:m:s">h:m:s</option>
+                                            <option value="dd/mm">dd/mm</option>
+                                            <option value="dd/mm/yy">dd/mm/yy</option>
+                                            <option value="dd/mm&nh:m">dd/mm \n h:m</option>
+                                            <option value="dd/mm&nh:m:s">dd/mm \n h:m:s</option>
+                                            <option value="dd/mm/yy&nh:m:s">dd/mm/yy \n h:m:s</option>
+                                            <option value="h:m&ndd/mm">h:m \n dd/mm</option>
+                                            <option value="h:m&ndd/mm/yy">h:m \n dd/mm/yy</option>
+                                            <option value="h:m:s&ndd/mm/yy">h:m:s \n dd/mm/yy</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-floating">
+                                        <select class="form-select bg-dark text-white border-primary" id="clock_color">
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <!-- Second row of inputs -->
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-floating">
+                                        <select class="form-select bg-dark text-white border-primary" id="clock_border_style">
+                                            <option value="hidden" name="clock_style_hidden"></option>
+                                            <option value="solid"> _____________ </option>
+                                            <option value="double"> ============= </option>
+                                            <option value="dashed"> &nbsp_ &nbsp_ &nbsp_ &nbsp_ &nbsp_ &nbsp_ &nbsp_ </option>
+                                            <option value="dotted"> • &nbsp&nbsp• &nbsp&nbsp• &nbsp&nbsp• &nbsp&nbsp• &nbsp&nbsp• &nbsp&nbsp• </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-floating">
+                                        <select class="form-select bg-dark text-white border-primary" id="clock_border_color">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3 d-flex flex-column justify-content-center px-4">
+                                    <label class="form-label text-primary fw-bold mb-0" for="clock_border_width" name="clock-border-width-label"></label>
+                                    <input type="range" class="form-range" min="0" max="10" step="1" id="clock_border_width">
+                                </div>
+                                <div class="col-sm-6 col-md-3 d-flex flex-column justify-content-center px-4">
+                                    <label class="form-label text-primary fw-bold mb-0" for="clock_border_radius" name="clock-border-radius-label"></label>
+                                    <input type="range" class="form-range" min="0" max="75" step="1" id="clock_border_radius">
+                                </div>
+
+                                <!-- Third row toggles -->
+                                <div class="col-sm-6 col-md-3 d-flex align-items-center">
+                                    <div class="form-check form-switch w-100 pt-2">
+                                        <input type="checkbox" class="form-check-input" id="clock_dark_bg">
+                                        <label class="form-check-label text-white" for="clock_dark_bg" name="clock-darkness-label" style="margin-left: 10px;"></label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3 d-flex align-items-center">
+                                    <div class="form-check form-switch w-100 pt-2">
+                                        <input type="checkbox" class="form-check-input" id="clock_boldness">
+                                        <label class="form-check-label text-white" for="clock_boldness" name="clock-boldness-label" style="margin-left: 10px;"></label>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 col-lg-2 my-1">
-                            <div class="form-check form-switch my-1">
-                                <label class="form-check-label fw-bold" for="clock_boldness"
-                                    name="clock-boldness-label"></label>
-                                <input type="checkbox" class="form-check-input" id="clock_boldness">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-2 my-1">
-                            <label class="form-check-label fw-bold" for="clock_border_radius"
-                                name="clock-border-radius-label"></label>
-                            <div class="form-range">
-                                <input type="range" class="form-range" min="0" max="75" step="1"
-                                    id="clock_border_radius">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-2 my-1">
-                            <label class="form-check-label fw-bold" for="clock_border_width"
-                                name="clock-border-width-label"></label>
-                            <div class="form-range">
-                                <input type="range" class="form-range" min="0" max="10" step="1"
-                                    id="clock_border_width">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-2 my-1">
-                            <select class="form-select" id="clock_border_style">
-                                <option value="hidden" name="clock_style_hidden"></option>
-                                <option value="solid"> _____________ </option>
-                                <option value="double"> ============= </option>
-                                <option value="dashed"> &nbsp_ &nbsp_ &nbsp_ &nbsp_ &nbsp_ &nbsp_ &nbsp_ </option>
-                                <option value="dotted"> • &nbsp&nbsp• &nbsp&nbsp• &nbsp&nbsp• &nbsp&nbsp•
-                                    &nbsp&nbsp• &nbsp&nbsp•
-                                </option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 col-lg-2 my-1">
-                            <select class="form-select" id="clock_border_color">
-                            </select>
                         </div>
                     </div>
                     <!-- Note Settings  -->
