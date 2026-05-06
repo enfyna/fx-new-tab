@@ -180,6 +180,14 @@
         </div>
     </div>
     <hr class="border-2 border-primary">
+    
+    <!-- Window previewer -->
+    <div id="preview-wrapper" class="position-fixed" style="bottom: 20px; left: 20px; width: 30vw; z-index: 1050;">
+        <div id="preview-container" class="rounded position-relative overflow-hidden p-0 m-0 bg-dark border border-primary">
+            <iframe id="preview-iframe" src="index.html" class="position-absolute border-0" style="transform-origin: top left;"></iframe>
+        </div>
+    </div>
+
     <!-- Shortcut settings -->
     <div id="shortcut_shape_settings">
         <!-- Shortcut Container settings -->
@@ -691,6 +699,9 @@
     </div>
     <hr class="border-2 border-primary mt-5">
 </div>
+
+<hr style="height: 20vh;">
+
 <!-- Navbar -->
 <nav id="navbar" class="navbar fixed-bottom navbar-dark bg-black">
     <div class="container-fluid justify-content-end">

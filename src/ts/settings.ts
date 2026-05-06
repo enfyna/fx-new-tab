@@ -91,6 +91,7 @@ async function ready() {
     configure_import_export();
     configure_nav_settings();
     configure_home_button();
+    update_preview();
 }
 
 /// Save
@@ -106,6 +107,7 @@ async function set_save() {
     await browser.storage.local.set(save);
     saving = false;
     save_info.hidden = true;
+    update_preview();
 }
 
 /// Background
@@ -1022,3 +1024,26 @@ function translate(): void {
         }
     }
 }
+
+function update_preview() {
+    const iframe = document.getElementById('preview-iframe') as HTMLIFrameElement;
+    const container = document.getElementById('preview-container') as HTMLDivElement;
+    if (iframe && container) {
+        const sw = window.screen.width;
+        const sh = window.screen.height;
+        const scale = container.clientWidth / sw;
+        
+        iframe.style.width = sw + 'px';
+        iframe.style.height = sh + 'px';
+        iframe.style.transform = `scale(${scale})`;
+        container.style.height = (sh * scale) + 'px';
+
+        if (iframe.contentWindow) {
+            iframe.contentWindow.location.reload();
+        }
+    }
+}
+
+window.addEventListener('resize', () => {
+    update_preview();
+});
