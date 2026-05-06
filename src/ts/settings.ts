@@ -172,6 +172,24 @@ async function configure_shortcut_settings() {
     const selects = shortcut_shape_settings.getElementsByTagName('select');
     const inputs = shortcut_shape_settings.getElementsByTagName('input');
     const elements = [...selects, ...inputs];
+
+    const alignDots = document.querySelectorAll('.align-dot');
+    alignDots.forEach(dot => {
+        let doti = dot as HTMLInputElement;
+        if (save.shortcut_container_h_align == doti.dataset.h!
+            && save.shortcut_v_align == doti.dataset.v!) {
+            doti.checked = true;
+        }
+        doti.addEventListener('change', async (e) => {
+            const target = e.target as HTMLInputElement;
+            if (target.checked) {
+                save.shortcut_container_h_align = target.dataset.h!;
+                save.shortcut_v_align = target.dataset.v!;
+                await set_save();
+            }
+        });
+    });
+
     for (const inp of elements) {
         switch (inp.id) {
             case 'shortcut_min_width':
@@ -194,12 +212,6 @@ async function configure_shortcut_settings() {
                 ch1.hidden = false;
                 inp.appendChild(ch1);
                 inp.value = save.shortcut_width ?? 'col-3';
-                break;
-            case 'shortcut_v_align':
-                inp.value = save.shortcut_v_align ?? 'align-items-center';
-                break;
-            case 'shortcut_container_h_align':
-                inp.value = save.shortcut_container_h_align ?? 'justify-content-center';
                 break;
             case 'shortcut_container_width':
                 const ch2 = width_opt_group.cloneNode(true) as HTMLOptGroupElement;
