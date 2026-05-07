@@ -14,7 +14,7 @@
     "gulp-cli": "^2.3.0",
     "gulp-htmlmin": "^5.0.1",
     "gulp-json-minify": "^1.2.3",
-    "gulp-purifycss": "^0.2.0",
+    "gulp-purgecss": "^8.0.0",
     "gulp-replace": "^1.1.4",
     "gulp-terser": "^2.1.0",
     "gulp-svgmin": "^4.1.0",

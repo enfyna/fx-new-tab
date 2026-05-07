@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const htmlmin = require('gulp-htmlmin');
 const terser = require('gulp-terser');
-const purify = require('gulp-purifycss');
+const purgecss = require('gulp-purgecss');
 const cleanCSS = require('gulp-clean-css');
 const replace = require('gulp-replace');
 const jsonMin = require('gulp-json-minify');
@@ -45,8 +45,17 @@ function minifyCSS(css) {
 function minifyBootstrapCSS() {
     console.log('bootstrap/bootstrap.css')
     return gulp.src('bootstrap/bootstrap.css')
-        .pipe(purify(['src/html/settings.html', 'src/html/index.html'], {
-            whitelist: [
+        .pipe(purgecss({
+            content: ['src/html/*.html', 'src/ts/*.ts'],
+            safelist: [
+                /^bg-/,
+                /^text-/,
+                /^border-/,
+                /^col-/,
+                /^align-/,
+                /^p-/,
+                /^m-/,
+                /^d-/,
                 'bg-black',
                 'rounded-circle',
                 'border-0',
