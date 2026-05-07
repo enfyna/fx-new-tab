@@ -520,7 +520,7 @@
                     <div class="row g-2">
                         <div class="col-lg-12">
                             <div class="alert alert-primary d-flex flex-row m-0" role="alert">
-                                <svg width="24" height="24" role="img">
+                                <svg class="mx-2" width="24" height="24" role="img">
                                     <use xlink:href="#fallback-fill" />
                                 </svg>
                                 <div name="fallback-default-icon-info"></div>
@@ -528,7 +528,7 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="alert alert-primary d-flex flex-row m-0" role="alert">
-                                <svg width="24" height="24" role="img">
+                                <svg class="mx-2" width="24" height="24" role="img">
                                     <use xlink:href="#reset-fill" />
                                 </svg>
                                 <div name="reset-default-icon-info"></div>
@@ -536,7 +536,7 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="alert alert-primary d-flex flex-row m-0" role="alert">
-                                <svg width="24" height="24" role="img">
+                                <svg class="mx-2" width="24" height="24" role="img">
                                     <use xlink:href="#info-fill" />
                                 </svg>
                                 <div name="image-link"></div>
@@ -732,55 +732,49 @@
                     <!-- Currency API settings -->
                     <div class="row bg-success rounded m-0 mb-2 d-flex flex-row align-items-center"
                         id="currency_setting">
-                        <div class="col-6 my-1">
+                        <div class="col-9 my-1">
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" id="enable_api">
                                 <label class="form-check-label fw-bold text-white" for="enable_api"
                                     name="enable-api-label"></label>
                             </div>
                         </div>
-                        <div class="col my-1">
+                        <!-- <div class="col-2 fw-bold text-center text-white my-1" name="currencies-label">
+                        </div> -->
+                        <div class="col-3 my-1">
+                            <select class="form-select" id="currency_container_color">
+                            </select>
+                        </div>
+                        <div class="col-3 my-1">
                             <select class="form-select" id="base_currency">
                                 <optgroup name="opt-base-currency-label"></optgroup>
                             </select>
                         </div>
-                        <div class="col-2 fw-bold text-center text-white my-1" name="currencies-label">
-                        </div>
-                        <div class="col-2 my-1">
-                            <select class="form-select" id="currency_container_color">
-                            </select>
-                        </div>
-                        <div class="col-4 my-1">
+                        <div class="col-3 my-1">
                             <select class="form-select" id="currency_option_0">
                             </select>
                         </div>
-                        <div class="col-4 my-1">
+                        <div class="col-3 my-1">
                             <select class="form-select" id="currency_option_1">
                             </select>
                         </div>
-                        <div class="col-4 my-1">
+                        <div class="col-3 my-1">
                             <select class="form-select" id="currency_option_2">
                             </select>
                         </div>
                     </div>
                     <!-- Currency API warnings -->
-                    <div class="row g-2">
-                        <div class="col-lg-6">
-                            <div class="alert alert-warning d-flex flex-row m-0" role="alert">
-                                <svg class="pe-none" width="24" height="24" role="img">
-                                    <use xlink:href="#info-fill" />
-                                </svg>
-                                <div name="rate-update-info"></div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="alert alert-danger d-flex flex-row m-0" role="alert">
-                                <svg class="pe-none" width="24" height="24" role="img">
-                                    <use xlink:href="#exclamation-triangle-fill" />
-                                </svg>
-                                <div name="currency-api-refresh-warning"></div>
-                            </div>
-                        </div>
+                    <div class="alert alert-warning d-flex flex-row m-0 mt-1" role="alert">
+                        <svg class="pe-none mx-2" width="24" height="24" role="img">
+                            <use xlink:href="#info-fill" />
+                        </svg>
+                        <div name="rate-update-info"></div>
+                    </div>
+                    <div class="alert alert-danger d-flex flex-row m-0 mt-1" role="alert">
+                        <svg class="pe-none mx-2" width="24" height="24" role="img">
+                            <use xlink:href="#exclamation-triangle-fill" />
+                        </svg>
+                        <div name="currency-api-refresh-warning"></div>
                     </div>
                     <hr class="border-2 border-primary opacity-100">
                 </div>
@@ -836,7 +830,7 @@
                     <hr class="border-2 border-primary">
                     <!-- Remove Settings Button Warning -->
                     <div class="alert alert-danger d-flex flex-row m-0" role="alert">
-                        <svg class="pe-none" width="24" height="24" role="img">
+                        <svg class="pe-none mx-2" width="24" height="24" role="img">
                             <use xlink:href="#exclamation-triangle-fill" />
                         </svg>
                         <div name="remove-settings-button-info"></div>
@@ -853,7 +847,7 @@
                             </button>
                         </div>
                     </div>
-                    <hr class="border-2 border-primary mt-5 opacity-100">
+                    <hr class="border-2 border-primary opacity-100">
                 </div>
             </div>
 
