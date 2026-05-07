@@ -292,5 +292,8 @@
   },
   "announcement-ps-games": {
     "message": "PS: Ich entwickle Spiele für Android, bitte schau sie dir an unter: "
+  },
+  "sync-save-warning": {
+    "message": "Firefox Sync garantiert nicht, dass Speicherdateien sicher erhalten bleiben. Um sicherzustellen, dass Ihre Speicherdaten sicher sind, laden Sie ein lokales Backup herunter."
   }
 }

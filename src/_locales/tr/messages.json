@@ -292,5 +292,8 @@
   },
   "announcement-ps-games": {
     "message": "Not: Android için oyunlar geliştiriyorum, lütfen şu adresten göz atın: "
+  },
+  "sync-save-warning": {
+    "message": "Firefox Sync'in kayıt dosyalarını güvenli bir şekilde koruma garantisi yoktur. Kayıt verilerinizin güvende olduğundan emin olmak için yerel bir yedek indirin."
   }
 }

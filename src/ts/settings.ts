@@ -989,7 +989,7 @@ function translate(): void {
         "announcement-feature-freeze",  "announcement-ps-games",
 
         "tab-shortcuts", "tab-background", "tab-widgets", "tab-advanced",
-        "sync-settings",
+        "sync-settings", "sync-save-warning",
     ];
 
     for (const message of translations) {
