@@ -158,6 +158,12 @@ async function configure_shortcut_settings() {
             case 'autoshort' == input.id:
                 save.is_autoshort_enabled = input.checked;
                 break;
+            case input.id.startsWith('align-'):
+                if (input.checked) {
+                    save.shortcut_container_h_align = input.dataset.h!;
+                    save.shortcut_v_align = input.dataset.v!;
+                }
+                break
             case input.id.startsWith('shortcut_col_color'):
                 colors[input.id.split('_')[3]] = 'bg-' + input.value.trim();
                 save.shortcut_col_colors = colors;
@@ -174,24 +180,14 @@ async function configure_shortcut_settings() {
     const inputs = shortcut_shape_settings.getElementsByTagName('input');
     const elements = [...selects, ...inputs];
 
-    const alignDots = document.querySelectorAll('.align-dot');
-    alignDots.forEach(dot => {
-        let doti = dot as HTMLInputElement;
-        if (save.shortcut_container_h_align == doti.dataset.h!
-            && save.shortcut_v_align == doti.dataset.v!) {
-            doti.checked = true;
-        }
-        doti.addEventListener('change', async (e) => {
-            const target = e.target as HTMLInputElement;
-            if (target.checked) {
-                save.shortcut_container_h_align = target.dataset.h!;
-                save.shortcut_v_align = target.dataset.v!;
-                await set_save();
-            }
-        });
-    });
-
     for (const inp of elements) {
+        if (inp.id.startsWith("align-")) {
+            if (save.shortcut_container_h_align == inp.dataset.h!
+                && save.shortcut_v_align == inp.dataset.v!) {
+                (inp as HTMLInputElement).checked = true;
+            }
+            continue;
+        }
         switch (inp.id) {
             case 'shortcut_min_width':
                 (inp as HTMLInputElement).value = save.shortcut_min_width ?? 'mw-0';
@@ -224,7 +220,6 @@ async function configure_shortcut_settings() {
                 inp.value = save.shortcut_container_width ?? 'col-6';
                 break;
             default:
-                if (inp.id.startsWith("align")) break;
                 inp.value = save[inp.id] ?? (inp as HTMLSelectElement).options[0].value;
                 break;
         }
