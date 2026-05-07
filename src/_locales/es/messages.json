@@ -286,5 +286,11 @@
   },
   "tab-advanced": {
     "message": "Avanzado"
+  },
+  "announcement-feature-freeze": {
+    "message": "¡Hola! Espero que estés teniendo un buen día. Este proyecto está congelado en cuanto a nuevas funciones y no añadiré nada nuevo. Pero sigo usándolo y si surge un nuevo error, publicaré un parche. Si tienes más preguntas, no dudes en abrir un issue en Github o enviarme un correo electrónico. Gracias por tu comprensión."
+  },
+  "announcement-ps-games": {
+    "message": "PD: Estoy desarrollando juegos para Android, por favor échales un vistazo en: "
   }
 }

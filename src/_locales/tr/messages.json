@@ -286,5 +286,11 @@
   },
   "tab-advanced": {
     "message": "Gelişmiş"
+  },
+  "announcement-feature-freeze": {
+    "message": "Merhaba! Umarım harika bir gün geçiriyorsunuzdur! Bu proje özellik dondurma aşamasında ve artık yeni şeyler eklemeyeceğim. Ancak hala bunu kullanıyorum ve yeni bir hata ortaya çıkarsa bir düzeltme yayınlayacağım. Başka sorularınız varsa bir github issue açmaktan veya bana doğrudan e-posta göndermekten çekinmeyin. Anlayışınız için teşekkürler."
+  },
+  "announcement-ps-games": {
+    "message": "Not: Android için oyunlar geliştiriyorum, lütfen şu adresten göz atın: "
   }
 }

@@ -183,8 +183,20 @@
     <div class="row m-0 p-0 w-100 container mx-auto">
         <!-- Left Column: Iframe preview -->
         <div class="col-lg-5 my-4">
-            <div id="preview-container" class="rounded sticky-top overflow-hidden border border-3 border-primary">
-                <iframe id="preview-iframe" src="index.html" style="transform-origin: top left;"></iframe>
+            <div class="sticky-top">
+                <div id="preview-container" class="rounded overflow-hidden border border-3 border-primary">
+                    <iframe id="preview-iframe" src="index.html" style="transform-origin: top left;"></iframe>
+                </div>
+                <div class="alert alert-primary container text-center m-0 mt-2" role="alert">
+                    <svg class="mx-auto row" width="24" height="24" role="img">
+                        <use xlink:href="#info-fill" />
+                    </svg>
+                    <div class="row mt-2" name="announcement-feature-freeze"></div>
+                </div>
+                <div class="alert alert-success container text-center m-0 mt-2" role="alert">
+                    <div name="announcement-ps-games"></div>
+                    <a href="https://play.google.com/store/apps/dev?id=6422571617133303284">Google Play</a>
+                </div>
             </div>
         </div>
 
@@ -855,10 +867,10 @@
 </div>
 
 <!-- Navbar -->
-<nav id="navbar" class="navbar fixed-bottom navbar-dark bg-black">
+<nav id="navbar" class="navbar fixed-bottom navbar-dark pe-none">
     <div class="container-fluid justify-content-end">
         <div id="save-info" name="save-info" class="fw-bold text-white" hidden></div>
-        <button id="nav-button" class="navbar-toggler" type="button">
+        <button id="nav-button" class="navbar-toggler pe-auto" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>

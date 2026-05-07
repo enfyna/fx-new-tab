@@ -286,5 +286,11 @@
   },
   "tab-advanced": {
     "message": "Erweitert"
+  },
+  "announcement-feature-freeze": {
+    "message": "Hallo! Ich hoffe, du hast einen schönen Tag! Dieses Projekt befindet sich im Feature-Freeze und ich werde keine neuen Funktionen mehr veröffentlichen. Aber ich benutze es immer noch und wenn ein neuer Fehler auftritt, werde ich ihn beheben. Wenn du weitere Fragen hast, kannst du gerne ein Github-Issue eröffnen oder mich direkt per E-Mail kontaktieren. Danke für dein Verständnis."
+  },
+  "announcement-ps-games": {
+    "message": "PS: Ich entwickle Spiele für Android, bitte schau sie dir an unter: "
   }
 }

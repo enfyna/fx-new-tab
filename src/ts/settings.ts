@@ -991,6 +991,8 @@ function translate(): void {
         "opt-shortcut-transition",      "opt-shortcut-min-width",
         "opt-container-gutter-x",       "opt-container-gutter-y",
 
+        "announcement-feature-freeze",  "announcement-ps-games",
+
         "tab-shortcuts", "tab-background", "tab-widgets", "tab-advanced",
         "sync-settings",
     ];

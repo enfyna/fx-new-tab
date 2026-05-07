@@ -286,5 +286,11 @@
   },
   "tab-advanced": {
     "message": "Advanced"
+  },
+  "announcement-feature-freeze": {
+    "message": "Hi! I hope you are having a great day! This project is in feature-freeze and I will not be adding new things anymore. But I still use this and if a new bug emerges I will push a fix for it. If you have any more questions feel free to open a github issue or email me directly. Thanks for your understanding."
+  },
+  "announcement-ps-games": {
+    "message": "PS: I am developing games for android please check them out at: "
   }
 }
