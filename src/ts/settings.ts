@@ -991,6 +991,7 @@ function translate(): void {
         "opt-shortcut-transition",      "opt-shortcut-min-width",
         "opt-container-gutter-x",       "opt-container-gutter-y",
 
+        "tab-shortcuts", "tab-background", "tab-widgets", "tab-advanced",
         "sync-settings",
     ];
 

@@ -274,5 +274,17 @@
   },
   "opt-container-gutter-y": {
     "message": "Dikey Boşluk"
+  },
+  "tab-shortcuts": {
+    "message": "Kısayollar"
+  },
+  "tab-background": {
+    "message": "Arkaplan"
+  },
+  "tab-widgets": {
+    "message": "Widgetlar"
+  },
+  "tab-advanced": {
+    "message": "Gelişmiş"
   }
 }

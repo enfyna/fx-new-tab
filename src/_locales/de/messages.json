@@ -274,5 +274,17 @@
   },
   "opt-container-gutter-y": {
     "message": "Vertikaler Abstand"
+  },
+  "tab-shortcuts": {
+    "message": "Verknüpfungen"
+  },
+  "tab-background": {
+    "message": "Hintergrund"
+  },
+  "tab-widgets": {
+    "message": "Widgets"
+  },
+  "tab-advanced": {
+    "message": "Erweitert"
   }
 }

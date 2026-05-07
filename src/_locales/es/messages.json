@@ -274,5 +274,17 @@
   },
   "opt-container-gutter-y": {
     "message": "Espaciado vertical"
+  },
+  "tab-shortcuts": {
+    "message": "Accesos directos"
+  },
+  "tab-background": {
+    "message": "Fondo"
+  },
+  "tab-widgets": {
+    "message": "Widgets"
+  },
+  "tab-advanced": {
+    "message": "Avanzado"
   }
 }

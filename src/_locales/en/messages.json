@@ -274,5 +274,17 @@
   },
   "opt-container-gutter-y": {
     "message": "Vertical Spacing"
+  },
+  "tab-shortcuts": {
+    "message": "Shortcuts"
+  },
+  "tab-background": {
+    "message": "Background"
+  },
+  "tab-widgets": {
+    "message": "Widgets"
+  },
+  "tab-advanced": {
+    "message": "Advanced"
   }
 }
